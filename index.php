@@ -22,7 +22,7 @@ $patient = mysqli_fetch_array($qsqlpatient);
                             <h2>Welcome <?php echo '' . $_SESSION['firstname']; ?></h2>
                         </div>
                         
-
+                        
                         
                         </div>
                     </div>

@@ -17,6 +17,8 @@
         $security_question = $_POST['security_question'];
         $security_answer = $_POST['security_answer'];
         $password = substr($_POST['lname'], 0, 2) . mt_rand(111111, 999999);
+        $date = date("Y-m-d");
+
 
         $studentid = "";
         $strs = explode(" ", $_POST['fname']);
@@ -77,7 +79,7 @@
             else
             {
                 
-                $sql = "INSERT INTO patient(fname,lname,lrn_number,grade_level,strand,section,guardian_name,address,contact,studentid,password,security_question,security_answer,gender,dob) values('$_POST[fname]','$_POST[lname]','$_POST[lrn_number]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[security_question]','$_POST[security_answer]','$_POST[gender]','$_POST[dateofbirth]')";
+                $sql = "INSERT INTO patient(date,fname,lname,lrn_number,grade_level,strand,section,guardian_name,address,contact,studentid,password,security_question,security_answer,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[lrn_number]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[security_question]','$_POST[security_answer]','$_POST[gender]','$_POST[dateofbirth]')";
 
                 if($qsql = mysqli_query($conn,$sql))
                 {
