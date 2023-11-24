@@ -65,7 +65,7 @@ $row_manage = mysqli_fetch_array($result_manage);
                         </div>
                     -->
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-c-lite-green update-card">
+                        <div style = "background-color: #3498db">
                                 <div class="card-block">
                                     <div class="row align-items-end">
                                         <div class="col-8">
@@ -87,7 +87,7 @@ $row_manage = mysqli_fetch_array($result_manage);
                         </div>
 
                         <div class="col-xl-3 col-md-6">
-                            <div class="card bg-c-yellow update-card">
+                        <div style = "background-color: #3498db">
                                 <div class="card-block">
                                     <div class="row align-items-end">
                                         <div class="col-8">

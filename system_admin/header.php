@@ -61,9 +61,9 @@ if ($_SESSION['user'] == 'tbl_admin') {
 <div id="pcoded" class="pcoded">
   <div class="pcoded-overlay-box"></div>
   <div class="pcoded-container navbar-wrapper">
-    <nav class="navbar header-navbar pcoded-header" style="background-color: #263238; color: white">
+    <nav class="navbar header-navbar pcoded-header" style="background-color: #3498db; color: white">
       <div class="navbar-wrapper">
-        <div class="navbar-logo" style="background-color: #263238;">
+        <div class="navbar-logo" style="background-color: #3498db;">
           <a class="mobile-options">
             <i class="feather icon-more-horizontal"></i>
           </a>

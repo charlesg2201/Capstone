@@ -92,7 +92,7 @@ $fname = $_SESSION[ "firstname" ];
         <select name="AssessmentType" id="ExamName" class="form-control" required>
             <option value="">-- Select One --</option>
             <?php
-            $examNames = ["Psychological", "Health"];
+            $examNames = ["Physical", "Health"];
             foreach ($examNames as $name) {
                 $selected = isset($_GET['editid']) && $rsedit['ExamName'] == $name ? 'selected' : '';
                 echo "<option value=\"$name\" $selected>$name</option>";

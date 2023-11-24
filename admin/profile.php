@@ -83,7 +83,7 @@ if($_SESSION['user'] == 'tbl_admin_user'){
 
                                             <label class="col-sm-2 col-form-label">Employee Number</label>
                                             <div class="col-sm-4">
-                                                <input type="text" class="form-control" id="employee_number" name="employee_number" value="<?php echo $employee_number; ?>" placeholder="">
+                                                <input type="text" class="form-control" id="employee_number" name="employee_number" value="<?php echo $employee_number; ?>" placeholder="" minlength="10" maxlength="10">
                                                 <span class="messages"></span>
                                             </div>
                                         </div>
