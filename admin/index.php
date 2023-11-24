@@ -111,8 +111,21 @@ $row_manage = mysqli_fetch_array($result_manage);
                                 <div class="card-block">
                                     <div class="row align-items-end">
                                         <div class="col-8">
-                                            <h5 class="text-white m-b-0">Physical Assessment</h5>
-                                            <a class="small text-blue stretched-link" href="#">View Details</a>
+                                        <h5 id="currentDate" class="text-white m-b-0" style="font-size: 1.25rem;"></h5>
+
+<script>
+    // Function to format the date as "Month Day, Year"
+    function formatDate(date) {
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+
+    // Get the current date
+    const currentDate = new Date();
+
+    // Display the formatted current date in the HTML element with the id "currentDate"
+    document.getElementById('currentDate').textContent = ` ${formatDate(currentDate)}`;
+</script>
                                         </div>
                                         <div class="col-4 text-right">
                                             <canvas id="update-chart-2" height="60"></canvas>
@@ -127,8 +140,26 @@ $row_manage = mysqli_fetch_array($result_manage);
                                 <div class="card-block">
                                     <div class="row align-items-end">
                                         <div class="col-8">
-                                            <h5 class="text-white m-b-0">Health Assessment</h5>
-                                            <a class="small text-blue stretched-link" href="#">View Details</a>
+                    <p id="currentTime" class="text-white" style="font-size: 1.20rem;"></p>
+                    <script>
+    // Function to format the time as "Hour:Minute:Second AM/PM"
+    function formatTime(time) {
+      const options = { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+      return time.toLocaleTimeString('en-US', options);
+    }
+
+    // Function to update the time every second
+    function updateTime() {
+      const currentTime = new Date();
+      document.getElementById('currentTime').textContent = ` ${formatTime(currentTime)}`;
+    }
+
+    // Initial display of time
+    updateTime();
+
+    // Update the time every second
+    setInterval(updateTime, 1000);
+  </script>
                                         </div>
                                         <div class="col-4 text-right">
                                             <canvas id="update-chart-3" height="60"></canvas>

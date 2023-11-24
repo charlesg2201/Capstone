@@ -8,13 +8,14 @@
 <div class="pcoded-main-container">
 <div class="pcoded-wrapper">
 <nav class="pcoded-navbar" >
-<div class="text-center" style="background-color: #263238">
+<div class="text-center" style="background-color: #3498db">
+<br>
 <img class="profile-img" src="uploadImage/Logo/<?php echo $logo; ?>" style="width: 40%; border-radius: 50%">
 </div>
-<div class="pcoded-inner-navbar main-menu" style="background-color: #263238">
-    
+<div class="pcoded-inner-navbar main-menu" style="background-color: #3498db">
+    <br>
 <?php if(($_SESSION['user'] == 'patient')){ ?>
-<div style="text-align: center;" class="pcoded-navigatio-lavel">Patient</div>
+<div style="text-align: center; color: white">Student</div>
 <?php } ?>
 <ul class="pcoded-item pcoded-left-item">
 <li class="">
