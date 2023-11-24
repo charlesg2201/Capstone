@@ -84,7 +84,7 @@ if ($_SESSION['user'] == 'tbl_admin_user') {
 
                     <span>
                       <?php
-                      echo ($_SESSION['user'] == 'tbl_admin_user' ? "Admin " : "") . $_SESSION['firstname'];
+                      echo ($_SESSION['user'] == 'tbl_admin_user' ? " " : "") . $_SESSION['firstname'];
                       ?>
                     </span>
                       <i class="feather icon-chevron-down"></i>

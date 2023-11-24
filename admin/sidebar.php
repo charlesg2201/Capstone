@@ -82,7 +82,7 @@
     <?php } ?>
         <li class="">
             <a href="view-patient.php">
-                <span class="pcoded-mtext">Patient Record</span>
+                <span class="pcoded-mtext">Student Record</span>
             </a>
         </li>
     </ul>

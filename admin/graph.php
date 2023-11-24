@@ -103,7 +103,7 @@ const config = {
       },
       title: {
         display: true,
-        text: 'Number of Assessed Students',
+        text: 'Admissions',
         font: {
           size: 18,
           weight: 'bold',

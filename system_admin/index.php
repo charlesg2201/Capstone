@@ -98,7 +98,7 @@ $row_manage = mysqli_fetch_array($result_manage);
                                                 echo mysqli_num_rows($qsql);
                                                 ?>
                                             </h4>
-                                            <h6 class="text-white m-b-0">Performing System Admin</h6>
+                                            <h6 class="text-white m-b-0">Performing System Administrator</h6>
                                         </div>
                                         <div class="col-4 text-right">
                                             <canvas id="update-chart-3" height="60"></canvas>

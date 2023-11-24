@@ -33,7 +33,7 @@ if ($_SESSION['user'] == 'tbl_admin') {
 
     
   <?php if(($_SESSION['user'] == 'tbl_admin')){ ?>
-<div style="text-align: center;" class="pcoded-navigatio-lavel">System Admin</div>
+<div style="text-align: center;" class="pcoded-navigatio-lavel">System Administrator</div>
 <?php } ?>
 <?php if(($_SESSION['user'] == 'patient')){ ?>
 <div class="pcoded-navigatio-lavel">Patient</div>
