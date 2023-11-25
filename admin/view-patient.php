@@ -61,23 +61,10 @@ if(isset($_GET['delid']))
               <div class="page-header-title">
                 <div class="d-inline">
                   <h2>Student  Record</h2>
+                  <br>
                 </div>
               </div>
             </div>
-            <div class="col-lg-4">
-              <!--<div class="page-header-breadcrumb">
-                <ul class="breadcrumb-title">
-                  <li class="breadcrumb-item">
-                    <a href="index.php"> <i class="feather icon-home"></i> </a>
-                  </li>
-        
-                  <li class="breadcrumb-item">
-                    <a href="view-patient.php">Patient</a>
-                  </li>
-                </ul>-->
-              </div>
-            </div>
-          </div>
         </div>
 
         <div class="page-body">
@@ -95,8 +82,8 @@ if(isset($_GET['delid']))
                       <th>Section</th>
                       <th>Gender</th>
                       <th>Date of Birth</th>
-                      <th>Guardian</th>
-                      <th>Guardian's Contact Number</th>
+                      <th>Gurdian</th>
+                      <th>Gurdian's Contact Number</th>
                       <th>Action</th>
                     </tr>
                   </thead>
