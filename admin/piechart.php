@@ -15,6 +15,7 @@
             background: transparent; /* Set the background of the container to transparent */
         }
         .center-block { display: block; margin-left: auto; margin-right: auto; }
+        
     </style>
 </head>
 <body>
@@ -74,7 +75,8 @@ if ($query === false) {
                 dataLabels: {
                     enabled: false
                 },
-                showInLegend: true
+                showInLegend: true,
+                size: '48%' // Adjusted size to match the bar chart
             }
         },
         series: [{
