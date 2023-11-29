@@ -122,7 +122,6 @@ if (isset($_GET['editid'])) {
 
 <div class="page-wrapper">
 <h2>Add System Administrator</h2>
-<div class="page-header">
 <div class="row align-items-end">
 <div class="col-lg-8">
 <div class="page-header-title">
@@ -258,12 +257,12 @@ if (isset($_GET['editid'])) {
     <div class="form-group row">
             <label class="col-sm-2 col-form-label">Security Question</label>
                 <div class="col-sm-4">
-                <select name="security_question" id="security_question" class="form-control" required="">
+                    <select name="security_question" id="security_question" class="form-control" required="">
                         <option value="">-- Select One -- </option>
-                        <option value="What is your fathers name?" <?php if(isset($_GET['editid']))
-                            { if($rsedit['security_question'] == 'What is your fathers name?') { echo 'selected'; } } ?>>What is your fathers name?</option>
-                        <option value="What is your birth month?" <?php if(isset($_GET['editid']))
-                            { if($rsedit['security_question'] == 'What is your birth month?') { echo 'selected'; } } ?>>What is your birth month?</option>
+                        <option value="Male" <?php if(isset($_GET['editid']))
+                            { if($rsedit['security_question'] == 'Male') { echo 'selected'; } } ?>>Male</option>
+                        <option value="Female" <?php if(isset($_GET['editid']))
+                            { if($rsedit['security_question'] == 'Female') { echo 'selected'; } } ?>>Female</option>
                     </select>
                 </div>
             <label class="col-sm-2 col-form-label">Security Answer</label>
