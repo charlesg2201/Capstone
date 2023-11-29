@@ -74,8 +74,11 @@ if(isset($_GET['editid']))
         $rsedit = mysqli_fetch_array($qsql);
 
     }
+
+
 ?>
-    ?>
+
+    
     <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
     <div class="pcoded-content">
