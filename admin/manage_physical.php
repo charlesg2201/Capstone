@@ -21,7 +21,6 @@
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                   <thead>
                     <tr>
-                      <th style="width: 30px;">Number</th>
                       <th>Questions</th>
                       <th style="width: 30px;">Question Type</th>
                       <th style="width: 30px;">Action</th>
@@ -34,7 +33,6 @@
                       while($rs = mysqli_fetch_array($qsql))
                       {
                         echo "<tr>
-                        <td style='text-align: center;'>$rs[question_id]</td>
                           <td>$rs[questions]<br>
                           <td>$rs[question_type]<br>
                           <td align=''>";
