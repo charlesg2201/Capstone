@@ -21,26 +21,33 @@
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                   <thead>
                     <tr>
-                      <th>Number</th>
+                      <th style="width: 30px;">Number</th>
                       <th>Questions</th>
-                      <th>Choices</th>
+                      <th style="width: 30px;">Question Type</th>
+                      <th style="width: 30px;">Action</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php
-                      $sql = "SELECT * FROM tbl_physical where select_all='1'";
+                      $sql = "SELECT * FROM tbl_physical where select_all='0'";
                       $qsql = mysqli_query($conn, $sql);
                       while($rs = mysqli_fetch_array($qsql))
                       {
                         echo "<tr>
-                          <td>$rs[question_id]</td> 
+                        <td style='text-align: center;'>$rs[question_id]</td>
                           <td>$rs[questions]<br>
-                        
+                          <td>$rs[question_type]<br>
                           <td align=''>";
 
                        
 
-                        echo "</td></tr>";
+                          if(isset($_SESSION['userid']))
+                          {
+                            echo "<a href='addquestion.php?editid=$rs[question_id]' class='btn btn-primary'>Edit</a>
+                            <a href='' class='btn btn-success'>Delete</a>";
+                          }
+  
+                          echo "</td></tr>";
                       }
                     ?>
                   </tbody>
@@ -52,10 +59,8 @@
                 <?php
                      if(isset($_SESSION['userid']))
                      {
-                       echo "<a href='addquestion.php' class='btn btn-primary'>Add</a>
-                             <a href='' class='btn btn-primary'>Edit</a>
-                             <a href='' class='btn btn-primary'>View</a>
-                             <a href='' class='btn btn-primary'>Delete</a>";
+                       echo "<a href='addquestion.php' class='btn btn-primary'>Add Question</a>
+                             <a href='' class='btn btn-primary'>View All</a>";
 
                        //<!--<a href='patientreport.php?patientid=$rs[patientid]' class='btn btn-success'>View Report</a>";
                      }   
@@ -75,5 +80,3 @@
    
 </body>
 </html>
-
-
