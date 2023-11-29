@@ -7,19 +7,19 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <title>Document</title>
   <style>
-    body {
+   body {
       font-family: 'Arial', sans-serif;
-      background-color: #f4f4f4;
     }
 
     #myChartContainer {
-  width: 80%; /* Use 100% width to fill the entire container */
-  max-width: 500; /* Set a maximum width to prevent the graph from becoming too wide */
-  margin: 10px auto;
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  overflow: hidden; /* Ensure that the graph doesn't overflow its container */
+      width: 48%; 
+      max-width: 500px; 
+      margin: 40px 0; 
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+      float: left; 
 }
   </style>
 </head>
