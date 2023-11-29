@@ -44,7 +44,7 @@
                           if(isset($_SESSION['userid']))
                           {
                             echo "<a href='addquestion.php?editid=$rs[question_id]' class='btn btn-primary'>Edit</a>
-                            <a href='' class='btn btn-success'>Delete</a>";
+                            <a href='deletequestion.php?deleteid=$rs[question_id]' class='btn btn-success'>Delete</a>";
                           }
   
                           echo "</td></tr>";
