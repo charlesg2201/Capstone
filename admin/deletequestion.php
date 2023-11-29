@@ -9,7 +9,7 @@ include('connect.php');
 if(isset($_GET['deleteid'])) {
     $deleteId = $_GET['deleteid'];
 
-    // Perform the delete operation in the database
+    // Perform the delete operation in the databaseasdsadsdsa
     $deleteQuery = "DELETE FROM tbl_physical WHERE question_id = $deleteId";
     $result = mysqli_query($conn, $deleteQuery);
 
