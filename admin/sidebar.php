@@ -108,11 +108,6 @@
                 <span class="pcoded-mtext">Manage Assessment</span>
             </a>
         </li>
-        <li class="">
-            <a href="examDetails.php">
-                <span class="pcoded-mtext">Assessment Result</span>
-            </a>
-        </li>
     </ul>
 </li>
 
