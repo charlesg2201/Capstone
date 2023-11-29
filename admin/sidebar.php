@@ -24,13 +24,13 @@
 <div class="pcoded-main-container">
     <div class="pcoded-wrapper">
         <nav class="pcoded-navbar" >
-            <div class="d-flex justify-content-center align-items-center" style="background-color: #3498db ; height: 150px;">
+            <div class="d-flex justify-content-center align-items-center" style="background-color: #0a4b78 ; height: 150px;">
                 <div style="width: 130px; height: 130px; overflow: hidden; border-radius: 50%;">
                     <img class="profile-img" src="<?php echo $profile_image ?>" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" alt="Profile Image">
                 </div>
             </div>
 
-<div class="pcoded-inner-navbar main-menu" style="background-color: #3498db ">
+<div class="pcoded-inner-navbar main-menu" style="background-color: #0a4b78 ">
     
   <?php if(($_SESSION['user'] == 'tbl_admin_user')){ ?>
 <div style="text-align: center; color: white" >Clinic Coordinator</div>
