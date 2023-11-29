@@ -134,7 +134,7 @@ $row_manage = mysqli_fetch_array($result_manage);
     //  ];
   ?>
  
-     // Convert PHP data to JavaScript variables
+     // Convert PHP data to JavaScript variablesasdsadsdsda
      var patientData = <?php echo json_encode($patientRecords); ?>;
  
      // Extract labels and data from the PHP array
