@@ -14,23 +14,13 @@ if(isset($_GET['deleteid'])) {
     $result = mysqli_query($conn, $deleteQuery);
 
     if($result) {
-        
-        ?>
-                        <div class="popup popup--icon -success js_success-popup popup--visible">
-                            <div class="popup__background"></div>
-                            <div class="popup__content">
-                                <h3 class="popup__content__title">Success</h3>
-                                <p>Record deleted successfully.</p>
-                                <?php echo "<script>setTimeout(\"location.href = 'manage_physical.php';\",1500);</script>"; ?>
-                            </div>
-                        </div>
-        <?php
+        echo "Record deleted successfully.";
     } else {
         echo "Error deleting record: " . mysqli_error($conn);
     }
 }
 
 // Redirect back to the page with the table
-
+header("manage_physical.php"); // Replace "yourpage.php" with the actual filename of your page
 exit();
 ?>
