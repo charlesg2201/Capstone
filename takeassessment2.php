@@ -96,14 +96,13 @@ include('connect.php');
 
 				if (isset($_POST['submit'])) {
 					$Ex_id = $exid;
-					$sEno = $sEno;
-					$tempsname = $name;
-					$tempq1 = $_POST['Q1'];
-					$tempq2 = $_POST['Q2'];
-					$tempq3 = $_POST['Q3'];
-					$tempq4 = $_POST['Q4'];
-					$tempq5 = $_POST['Q5'];
-					$sql = "INSERT INTO `tbl_assessment_result`(ExamID, Senrl, Sname, Ans1, Ans2, Ans3, Ans4, Ans5) VALUES ($Ex_id,'$sEno','$tempsname','$tempq1','$tempq2','$tempq3','$tempq4','$tempq5')";
+					
+					$q1 = $_POST['Q1'];
+					$q2 = $_POST['Q2'];
+					$q3 = $_POST['Q3'];
+					$q4 = $_POST['Q4'];
+					$q5 = $_POST['Q5'];
+					$sql = "INSERT INTO `tbl_assessment_result`(ExamID, Ans1, Ans2, Ans3, Ans4, Ans5) VALUES ($Ex_id,'$q1','$q2','$q3','$q4','$q5')";
 					if ($qsql = mysqli_query($conn, $sql)) {
 					?>
 					<div class="popup popup--icon -success js_success-popup popup--visible">
@@ -114,7 +113,7 @@ include('connect.php');
 							</h3>
 							<p>Assessment Have Submitted!</p>
 							<p>
-								<?php echo "<script>setTimeout(\"location.href = 'index.php';\",1500);</script>"; ?>
+								<?php echo "<script>setTimeout(\"location.href = 'takeassessment2.php';\",1500);</script>"; ?>
 							</p>
 						</div>
 					</div>
