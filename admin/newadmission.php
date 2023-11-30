@@ -117,13 +117,8 @@ if(isset($_GET['editid']))
 
         <label class="col-sm-2 col-form-label">Remarks</label>
         <div class="col-sm-4">
-            <select name="remarks" id="remarks" class="form-control" required="">
-                <option value="">-- Select One -- </option>
-                <option value="Assess" <?php if(isset($_GET['editid']))
-                    { if($rsedit['remarks'] == 'Assess') { echo 'selected'; } } ?>>Assess</option>
-                <option value="Sent Home" <?php if(isset($_GET['editid']))
-                    { if($rsedit['remarks'] == 'Sent Home') { echo 'selected'; } } ?>>Sent Home</option>
-            </select>
+                <input type="text" class="form-control" name="remarks" id="remarks" required=""  value="" >
+                <span class="messages"></span>
         </div>
 
         
