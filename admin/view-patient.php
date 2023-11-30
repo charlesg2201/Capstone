@@ -82,8 +82,8 @@ if(isset($_GET['delid']))
                       <th>Section</th>
                       <th>Gender</th>
                       <th>Date of Birth</th>
-                      <th>Gurdian</th>
-                      <th>Gurdian's Contact Number</th>
+                      <th>Guardian</th>
+                      <th>Guardian's Contact Number</th>
                       <th>Action</th>
                     </tr>
                   </thead>
