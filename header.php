@@ -51,9 +51,9 @@ while ($row = mysqli_fetch_array($query)) {
 <div id="pcoded" class="pcoded">
   <div class="pcoded-overlay-box"></div>
   <div class="pcoded-container navbar-wrapper">
-    <nav class="navbar header-navbar pcoded-header" style="background-color: #3498db; color: white">
+    <nav class="navbar header-navbar pcoded-header" style="background-color: #f5f5f5; color: #404e67">
       <div class="navbar-wrapper">
-        <div class="navbar-logo" style="background-color: #3498db;">
+        <div class="navbar-logo" style="background-color:#0a4b78;">
           <a class="mobile-options">
             <i class="feather icon-more-horizontal"></i>
           </a>
