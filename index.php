@@ -29,12 +29,23 @@ $row_manage = mysqli_fetch_array($result_manage);
 
                         
                         <?php } else if ($_SESSION['user'] == 'patient') { ?>
-                        <div class="col-xl-3 col-md-6">
-                            <div style = "background-color: #3498db">
-                                <div class="card-block">
-                                    <div class="row align-items-end">
+                            <div class="col-xl-4 col-md-6">             
+                                <div class="card border-primary" style="border-width: 3px; padding: 5px;"> 
+                                    <div class="card-body">
+                                        <div class="row align-items-end">
                                         <div class="col-8">
-                                        <h5 id="currentDate" class="text-white m-b-0" style="font-size: 1.25rem;"></h5>
+                                                <h4 class="text-dark">
+                                                <h5 id="currentDate" class="text-dark m-b-0" style="font-size: 1.25rem;"></h5>
+                                                </div>
+                                            <div class="col-4 text-right">
+                                                <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-calendar"></i></span>
+                                            <div class="col-4 text-right">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                        
 
 <script>
     // Function to format the date as "Month Day, Year"
@@ -49,21 +60,23 @@ $row_manage = mysqli_fetch_array($result_manage);
     // Display the formatted current date in the HTML element with the id "currentDate"
     document.getElementById('currentDate').textContent = ` ${formatDate(currentDate)}`;
 </script>
+                    </div>                       
+                        <div class="col-xl-4 col-md-6">             
+                                <div class="card border-primary" style="border-width: 3px; padding: 5px;"> 
+                                    <div class="card-body">
+                                        <div class="row align-items-end">
+                                        <div class="col-8">
+                                                <h4 class="text-dark">
+                             <p id="currentTime" class="text-dark" style="font-size: 1.20rem;"></p>
                                         </div>
-                                        <div class="col-4 text-right">
-                                            <canvas id="update-chart-2" height="60"></canvas>
+                                            <div class="col-4 text-right">
+                                                <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-clock"></i></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6">
-                            <div style = "background-color: #3498db">
-                                <div class="card-block">
-                                    <div class="row align-items-end">
-                                        <div class="col-8">
-                    <p id="currentTime" class="text-white" style="font-size: 1.20rem;"></p>
+                                        
                     <script>
     // Function to format the time as "Hour:Minute:Second AM/PM"
     function formatTime(time) {
