@@ -108,7 +108,7 @@ if(isset($_GET['delid']))
                         if(isset($_SESSION['userid']))
                         {
                           echo "<a href='patient.php?editid=$rs[patientid]' class='btn btn-primary'>Update</a>
-                          <a href='patientreport.php?patientid=$rs[patientid]' class='btn btn-success'>View Report</a>";
+                          <a href='patientreport.php?patientid=$rs[patientid]' class='btn btn-success'>View Record</a>";
                         }
 
                         echo "</td></tr>";
