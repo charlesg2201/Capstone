@@ -124,7 +124,7 @@
         </li>
         
         <li class="">
-            <a href="examDetails.php">
+            <a href="assessment_result.php">
                 <span class="pcoded-mtext">Assessment Results</span>
             </a>
         </li>
