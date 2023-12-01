@@ -60,7 +60,7 @@ if(isset($_GET['delid']))
             <div class="col-lg-8">
               <div class="page-header-title">
                 <div class="d-inline">
-                  <h2>Student  Record</h2>
+                  <h2>Student Record</h2>
                   <br>
                 </div>
               </div>
