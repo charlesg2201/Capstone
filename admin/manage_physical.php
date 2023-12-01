@@ -23,6 +23,7 @@
                     <tr>
                       <th>Questions</th>
                       <th style="width: 30px;">Question Type</th>
+                      <th style="width: 30px;">Choices</th>
                       <th style="width: 30px;">Action</th>
                     </tr>
                   </thead>
@@ -35,6 +36,7 @@
                         echo "<tr>
                           <td>$rs[questions]<br>
                           <td>$rs[question_type]<br>
+                          <td>$rs[choices]<br>
                           <td align=''>";
 
                        
@@ -58,7 +60,7 @@
                      if(isset($_SESSION['userid']))
                      {
                        echo "<a href='addquestion.php' class='btn btn-primary'>Add Question</a>
-                             <a href='' class='btn btn-primary'>View All</a>";
+                             <a href='viewall.php' class='btn btn-primary'>View All</a>";
 
                        //<!--<a href='patientreport.php?patientid=$rs[patientid]' class='btn btn-success'>View Report</a>";
                      }   
