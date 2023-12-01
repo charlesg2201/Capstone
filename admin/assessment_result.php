@@ -47,17 +47,18 @@
             <div class="card-block">
               <div class="table-responsive dt-responsive">
                 <table id="dom-jqry" class="table table-striped table-bordered nowrap">
-				
+                <table id="dom-jqry" class='table table-striped table-bordered nowrap'>
 			<?php 
-				
-				include('connect.php');
 				$sql = "SELECT a.*, p.lrn_number, p.fname, p.lname
 						FROM tbl_assessment_result a
 						JOIN patient p ON a.delete_status = p.delete_status";
 				$rs = mysqli_query($conn, $sql);
+        
 				//echo "<h4 class='page-header'>Assessment Result</h4>";
-				echo "<table class='table table-striped' style='width:100%'>
+				echo "
+        
 				<tr>
+        <thead>
 					<th>LRN ID</th>
 					<th>Name</th>
 					<th>Assessment Type</th>
@@ -67,8 +68,8 @@
 					<th></th>
 					<th></th>
 						
-							
-				</tr>";
+				</tr>
+          </thead>";
 				while($row=mysqli_fetch_array($rs))
 				{
 				?>
@@ -105,8 +106,6 @@
 				<td>
 					<?PHP echo $row['Ans5'];?>
 				</td>
-				<!--<td><a href="examDetails.php?deleteid=<?php echo $row['ExamID']; ?>"> <input type="button" Value="Delete"  class="btn btn-danger btn-sm"  data-toggle="modal" data-target="#myModal"></a>
-				</td>-->
 				
 			</tr>
 			<?php
