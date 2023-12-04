@@ -1,19 +1,16 @@
-<?php date_default_timezone_set("Asia/Manila"); ?>
-<?php require_once('check_login.php');?>
-<?php include('head.php');?>
-<?php include('header.php');?>
-<?php include('sidebar.php');?>
-<?php include('connect.php');
-
-if(isset($_POST['btnsubmit']))
-
-?>
-    
+<title>Patient</title>
 <?php
-if(isset($_GET['id']))
-{ ?>
+require_once('check_login.php');
+include('head.php');
+include('header.php');
+include('sidebar.php');
+include('connect.php');
 
-<?php } ?>
+$sqlpatient = "SELECT * FROM patient WHERE patientid='$_SESSION[patientid]'";
+$qsqlpatient = mysqli_query($conn, $sqlpatient);
+$patient = mysqli_fetch_array($qsqlpatient);
+?>
+
 <div class="pcoded-content">
 <div class="pcoded-inner-content">
 
@@ -45,12 +42,8 @@ if(isset($_GET['id']))
 <div class="card-block">
   <div class="row">
       <div class="col-lg-12">
-          <!-- Nav tabs -->
-          <ul class="nav nav-tabs md-tabs b-none" role="tablist">
-
-            <?php if(($_SESSION['user'] == 'tbl_admin') || ($_SESSION['user'] == 'tbl_admin_user')){ ?>
-
-              <li class="nav-item">
+                        <ul class="nav nav-tabs md-tabs b-none" role="tablist">
+                        <li class="nav-item">
                   <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Patient Profile</a>
                   <div class="slide"></div>
               </li>
@@ -62,95 +55,79 @@ if(isset($_GET['id']))
                   <a class="nav-link" data-toggle="tab" href="#appointment" role="tab">Admission Record</a>
                   <div class="slide"></div>
               </li>
-            
-      
+                        </ul>
 
-              <?php } ?>
-
-              <?php if($_SESSION['user'] == 'tbl_admin') { ?>
-
-                
-
-              <?php } ?>
-
-          </ul>
-          <!-- Tab panes -->
-        
-          <div class="tab-content card-block">
-              <div class="tab-pane active col-5" id="profile" role="tabpanel">
-                  <p class="m-0">
-                  <?php
-                    $sqlpatient = "SELECT * FROM patient where patientid='$_GET[patientid]'";
-                    $qsqlpatient = mysqli_query($conn,$sqlpatient);
-                    $rspatient=mysqli_fetch_array($qsqlpatient);
-                  ?>
-
-                  <div class="table-responsive dt-responsive">
-                    <table id="dom-jqry" class="table table-hover">
-                      <tbody>
-                      <tr>
-                          <th>LRN Number :</th>
-                          <td>&nbsp;<?php echo $rspatient['lrn_number']; ?></td>
-                              </tr>
-                          <th>First Name :</th>
-                          <td>&nbsp;<?php echo $rspatient['fname']; ?></td>
-                              </tr>
-                              <tr>
-                          <th>Last Name :</th>
-                          <td>&nbsp;<?php echo $rspatient['lname']; ?></td>
-                              </tr>
-                              <tr>
-                          <th>Middle Name :</th>
-                          <td>&nbsp;<?php echo $rspatient['mname']; ?></td>
-                              </tr>
-                              <tr>
-                          <th>Contact Number :</th>
-                          <td>&nbsp;<?php echo $rspatient['contact_number']; ?></td>
-                              </tr>
-                              <tr>
-                          <th>Email Address:</th>
-                          <td>&nbsp;<?php echo $rspatient['email']; ?></td>
-                              </tr>
-                              <tr>
-                          <th>Strand :</th>
-                          <td>&nbsp;<?php echo $rspatient['strand']; ?></td>
-                              </tr>
-                              <tr>
-                          <th>Grade Level :</th>
-                          <td>&nbsp;<?php echo $rspatient['grade_level']; ?></td>
-                              </tr>
-                              <tr>
-                          <th>Section :</th>
-                          <td>&nbsp;<?php echo $rspatient['section']; ?></td>
-                              </tr>
-                              <tr>
-                          <th>Guardian Name :</th>
-                          <td>&nbsp;<?php echo $rspatient['guardian_name']; ?></td>
-                              </tr>
-                              <tr>
-                          <th>Guardian's Contact Number :</th>
-                          <td>&nbsp;<?php echo $rspatient['contact']; ?></td>
-                        </tr>
+                        <div class="tab-content card-block">
+    <div class="tab-pane active" id="profile" role="tabpanel">
+        <div class="row">
+            <div class="col-md-6">
+                <table class="table table-hover">
+                    <tr>
+                        <th>LRN Number :</th>
+                        <td>&nbsp;<?php echo $patient['lrn_number']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>First Name :</th>
+                        <td>&nbsp;<?php echo $patient['fname']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Last Name :</th>
+                        <td>&nbsp;<?php echo $patient['lname']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Middle Name :</th>
+                        <td>&nbsp;<?php echo $patient['mname']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Contact Number:</th>
+                        <td>&nbsp;<?php echo $patient['contact_number']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Email Address :</th>
+                        <td>&nbsp;<?php echo $patient['email']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Date of Birth:</th>
+                        <td>&nbsp;<?php echo $patient['dob']; ?></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-md-6 justify-content-md-end">
+                <table class="table table-hover">
+                    <tr>
+                        <th>Gender :</th>
+                        <td>&nbsp;<?php echo $patient['gender'];?></td>
+                    </tr>
                         <tr>
-                          <th>Address :</th>
-                          <td>&nbsp;<?php echo $rspatient['address']; ?></td>
-                          </tr>
+                        <th>Strand :</th>
+                        <td>&nbsp;<?php echo $patient['strand']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Grade Level:</th>
+                        <td>&nbsp;<?php echo $patient['grade_level']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Section :</th>
+                        <td>&nbsp;<?php echo $patient['section']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Address :</th>
+                        <td>&nbsp;<?php echo $patient['address']; ?></td>
+                    </tr>
+                    <tr>
+                        <th>Guardian :</th>
+                        <td>&nbsp;<?php echo $patient['guardian_name']; ?></td>
+                    </tr>
                         <tr>
-                          <th>Gender :</th>
-                          <td>&nbsp;<?php echo $rspatient['gender']; ?></td>
-                          </tr>
-                        <tr>
-                          <th>Date Of Birth : </th>
-                          <td>&nbsp;<?php echo $rspatient['dob']; ?></td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-
-                  </p>
-              </div>
-
-              <div class="tab-pane col-4" id="security" role="tabpanel">
+                        <th>Guardian's Contact Number :</th>
+                        <td>&nbsp;<?php echo $patient['contact']; ?></td>
+                    </tr>
+                    
+                </table>
+                        </div>
+                     </div>
+                 </div>
+                <div class="tab-pane col-4" id="security" role="tabpanel">
                   <p class="m-0">
                   <?php
                     $sqlpatient = "SELECT * FROM patient where patientid='$_GET[patientid]'";
@@ -234,4 +211,19 @@ if(isset($_GET['id']))
 </div>
 </div>
 <?php include('footer.php');?>
+            </div>
+        </div>
+    </div>
+</div>
 
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include('footer.php'); ?>
