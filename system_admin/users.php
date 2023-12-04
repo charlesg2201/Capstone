@@ -126,13 +126,11 @@ if (isset($_GET['editid'])) {
 
 <div class="page-wrapper">
 <h2>Add Clinic Coordinator</h2>
-<div class="page-header">
 <div class="row align-items-end">
 <div class="col-lg-8">
 <div class="page-header-title">
 <div class="d-inline">
 
-<!-- <span>Lorem ipsum dolor sit <code>amet</code>, consectetur adipisicing elit</span> -->
 </div>
 </div>
 </div>
