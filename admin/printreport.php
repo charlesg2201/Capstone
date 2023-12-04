@@ -51,6 +51,8 @@
                                         <tr>
                                             <th>LRN Number</th>
                                             <th>Name</th>
+                                            <th>Contact Number</th>
+                                            <th>Email Address</th>
                                             <th>Strand</th>
                                             <th>Grade Level</th>
                                             <th>Section</th>
@@ -69,7 +71,9 @@
                                         {
                                             echo "<tr>
                                                 <td>$rs[lrn_number]</td> 
-                                                <td>$rs[fname] $rs[lname]</td>
+                                                <td>$rs[fname] $rs[mname] $rs[lname]</td>
+                                                <td>$rs[contact_number]</td> 
+                                                <td>$rs[email]</td> 
                                                 <td>$rs[strand]</td> 
                                                 <td>$rs[grade_level]</td> 
                                                 <td>$rs[section]</td> 
