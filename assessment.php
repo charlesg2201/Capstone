@@ -42,7 +42,8 @@ $fname = $_SESSION[ "firstname" ];
 					<a href="physical.php"> <button type="submit" class="btn btn-primary">Take</button></a>
                     <br>
                     <br>
-                    <a href="takeassessment2.php?exid=<?php echo $row['ExamID']; ?>"> <button type="submit" class="btn btn-primary">Take</button></a>
+					<a href="health.php"> <button type="submit" class="btn btn-primary">Take</button></a>
+                    <!-- <a href="takeassessment2.php?exid=<?php echo $row['ExamID']; ?>"> <button type="submit" class="btn btn-primary">Take</button></a> -->
 				</td>
 			</tr>
 			<?php

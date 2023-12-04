@@ -15,7 +15,7 @@
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><h1>Physical Assessment</h1></div>
+                        <div class="card-header"><h1>Health Assessment</h1></div>
                         <div class="card-block">
                             <div class="table-responsive dt-responsive">
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
@@ -29,7 +29,7 @@
                   </thead>
                   <tbody>
                     <?php
-                      $sql = "SELECT * FROM tbl_physical where select_all='0'";
+                      $sql = "SELECT * FROM tbl_health where select_all='0'";
                       $qsql = mysqli_query($conn, $sql);
                       while($rs = mysqli_fetch_array($qsql))
                       {
@@ -43,8 +43,8 @@
 
                           if(isset($_SESSION['userid']))
                           {
-                            echo "<a href='addquestion_p.php?editid=$rs[question_id]' class='btn btn-primary'>Edit</a>
-                            <a href='deletequestion_p.php?deleteid=$rs[question_id]' class='btn btn-success'>Delete</a>";
+                            echo "<a href='addquestion_h.php?editid=$rs[question_id]' class='btn btn-primary'>Edit</a>
+                            <a href='deletequestion_h.php?deleteid=$rs[question_id]' class='btn btn-success'>Delete</a>";
                           }
   
                           echo "</td></tr>";
@@ -59,8 +59,8 @@
                 <?php
                      if(isset($_SESSION['userid']))
                      {
-                       echo "<a href='addquestion_p.php' class='btn btn-primary'>Add Question</a>
-                             <a href='viewall_p.php' class='btn btn-primary'>View All</a>";
+                       echo "<a href='addquestion_h.php' class='btn btn-primary'>Add Question</a>
+                             <a href='viewall_h.php' class='btn btn-primary'>View All</a>";
 
                        //<!--<a href='patientreport.php?patientid=$rs[patientid]' class='btn btn-success'>View Report</a>";
                      }   

@@ -134,6 +134,26 @@
 <li class="pcoded-hasmenu">
 <a href="javascript:void(0)">
         <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+        <span class="pcoded-mtext">Health Assessment</span>
+    </a>
+    <ul class="pcoded-submenu">
+        <li class="">
+            <a href="manage_health.php">
+                <span class="pcoded-mtext">Manage Assessment</span>
+            </a>
+        </li>
+        
+        <li class="">
+            <a href="health_result.php">
+                <span class="pcoded-mtext">Assessment Results</span>
+            </a>
+        </li>
+    </ul>
+</li>
+
+<li class="pcoded-hasmenu">
+<a href="javascript:void(0)">
+        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
         <span class="pcoded-mtext">Print Report</span>
     </a>
     <ul class="pcoded-submenu">
