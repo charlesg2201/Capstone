@@ -26,27 +26,14 @@
     <?php include('connect.php');?>
 
     <div class="pcoded-content">
-  <div class="pcoded-inner-content">
-    <div class="main-body">
-      <div class="page-wrapper">
-        <div class="page-header">
-          <div class="row align-items-end">
-            <div class="col-lg-8">
-              <div class="page-header-title">
-                <div class="d-inline">
-                  <h2>Student Records</h2>
-                  <br>
-                </div>
-              </div>
-            </div>
-        </div>
-    
-        <div class="page-body">
-          <div class="card">
-            <div class="card-header"></div>
-            <div class="card-block">
-              <div class="table-responsive dt-responsive">
-                <table id="dom-jqry" class="table table-striped table-bordered nowrap">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header"><h1>Student Records</h1></div>
+                        <div class="card-block">
+                            <div class="table-responsive dt-responsive">
+                            <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                                     <thead>
                                         <tr>
                                             <th>LRN Number</th>

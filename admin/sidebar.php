@@ -87,29 +87,7 @@
         </li>
     </ul>
 </li>
-<?php } ?>
-
-<?php if($_SESSION['user'] == 'tbl_admin_user') { ?>
-<li class="pcoded-hasmenu">
-<a href="javascript:void(0)">
-        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
-        <span class="pcoded-mtext">Assessment</span>
-    </a>
-    <ul class="pcoded-submenu">
-    <?php if($_SESSION['user'] == 'tbl_admin_user') { ?>
-        <li class="">
-            <a href="addassessment.php">
-                <span class="pcoded-mtext">Add Assessment</span>
-            </a>
-        </li>
-    <?php } ?>
-        <li class="">
-            <a href="manageassessment.php">
-                <span class="pcoded-mtext">Manage Assessment</span>
-            </a>
-        </li>
-    </ul>
-</li>
+        
 
 <li class="pcoded-hasmenu">
 <a href="javascript:void(0)">
