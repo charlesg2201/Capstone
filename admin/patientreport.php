@@ -1,15 +1,19 @@
-<title>Patient</title>
-<?php
-require_once('check_login.php');
-include('head.php');
-include('header.php');
-include('sidebar.php');
-include('connect.php');
+<?php date_default_timezone_set("Asia/Manila"); ?>
+<?php require_once('check_login.php');?>
+<?php include('head.php');?>
+<?php include('header.php');?>
+<?php include('sidebar.php');?>
+<?php include('connect.php');
 
-$sqlpatient = "SELECT * FROM patient WHERE patientid='$_SESSION[patientid]'";
-$qsqlpatient = mysqli_query($conn, $sqlpatient);
-$patient = mysqli_fetch_array($qsqlpatient);
+if(isset($_POST['btnsubmit']))
+
 ?>
+    
+<?php
+if(isset($_GET['id']))
+{ ?>
+
+<?php } ?>
 
 <div class="pcoded-content">
 <div class="pcoded-inner-content">
@@ -61,34 +65,41 @@ $patient = mysqli_fetch_array($qsqlpatient);
     <div class="tab-pane active" id="profile" role="tabpanel">
         <div class="row">
             <div class="col-md-6">
+			 <p class="m-0">
+                  <?php
+                    $sqlpatient = "SELECT * FROM patient where patientid='$_GET[patientid]'";
+                    $qsqlpatient = mysqli_query($conn,$sqlpatient);
+                    $rspatient=mysqli_fetch_array($qsqlpatient);
+                  ?>
+
                 <table class="table table-hover">
                     <tr>
                         <th>LRN Number :</th>
-                        <td>&nbsp;<?php echo $patient['lrn_number']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['lrn_number']; ?></td>
                     </tr>
                     <tr>
                         <th>First Name :</th>
-                        <td>&nbsp;<?php echo $patient['fname']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['fname']; ?></td>
                     </tr>
                     <tr>
                         <th>Last Name :</th>
-                        <td>&nbsp;<?php echo $patient['lname']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['lname']; ?></td>
                     </tr>
                     <tr>
                         <th>Middle Name :</th>
-                        <td>&nbsp;<?php echo $patient['mname']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['mname']; ?></td>
                     </tr>
                     <tr>
                         <th>Contact Number:</th>
-                        <td>&nbsp;<?php echo $patient['contact_number']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['contact_number']; ?></td>
                     </tr>
                     <tr>
                         <th>Email Address :</th>
-                        <td>&nbsp;<?php echo $patient['email']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['email']; ?></td>
                     </tr>
                     <tr>
                         <th>Date of Birth:</th>
-                        <td>&nbsp;<?php echo $patient['dob']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['dob']; ?></td>
                     </tr>
                 </table>
             </div>
@@ -96,31 +107,31 @@ $patient = mysqli_fetch_array($qsqlpatient);
                 <table class="table table-hover">
                     <tr>
                         <th>Gender :</th>
-                        <td>&nbsp;<?php echo $patient['gender'];?></td>
+                        <td>&nbsp;<?php echo $rspatient['gender'];?></td>
                     </tr>
                         <tr>
                         <th>Strand :</th>
-                        <td>&nbsp;<?php echo $patient['strand']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['strand']; ?></td>
                     </tr>
                     <tr>
                         <th>Grade Level:</th>
-                        <td>&nbsp;<?php echo $patient['grade_level']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['grade_level']; ?></td>
                     </tr>
                     <tr>
                         <th>Section :</th>
-                        <td>&nbsp;<?php echo $patient['section']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['section']; ?></td>
                     </tr>
                     <tr>
                         <th>Address :</th>
-                        <td>&nbsp;<?php echo $patient['address']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['address']; ?></td>
                     </tr>
                     <tr>
                         <th>Guardian :</th>
-                        <td>&nbsp;<?php echo $patient['guardian_name']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['guardian_name']; ?></td>
                     </tr>
                         <tr>
                         <th>Guardian's Contact Number :</th>
-                        <td>&nbsp;<?php echo $patient['contact']; ?></td>
+                        <td>&nbsp;<?php echo $rspatient['contact']; ?></td>
                     </tr>
                     
                 </table>
