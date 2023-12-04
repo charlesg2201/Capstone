@@ -15,20 +15,26 @@
         $section = $_POST['section'];
         $gender = $_POST['gender'];
         $address = $_POST['address'];
-        $security_question = $_POST['security_question'];
-        $security_answer = $_POST['security_answer'];
-        $password = substr($_POST['lname'], 0, 2) . mt_rand(111111, 999999);
-        $date = date("Y-m-d");
+        $dob= $_POST['dateofbirth'];
+        // $security_question = $_POST['security_question'];
+        // $security_answer = $_POST['security_answer'];
+        //$password = substr($_POST['lname'], 0, 2) . mt_rand(111111, 999999);
+        $date = date("m-d-Y");
+        // Generate student ID
+        $studentid = strtolower($fname . $lname);
+
+        // Use the date of birth as the password
+        $password = date("mdY", strtotime($dob));
 
 
-        $studentid = "";
-        $strs = explode(" ", $_POST['fname']);
-        foreach ($strs as $str) {
-            $studentid .= $str[0];
-        }
+        // $studentid = "";
+        // $strs = explode(" ", $_POST['fname']);
+        // foreach ($strs as $str) {
+        //     $studentid .= $str[0];
+        // }
     
-        $fullname = $studentid . str_replace(' ', '', $_POST['lname']);
-        $studentid = strtolower(mysqli_real_escape_string($conn, $fullname));
+        // $fullname = $studentid . str_replace(' ', '', $_POST['lname']);
+        // $studentid = strtolower(mysqli_real_escape_string($conn, $fullname));
 
         $checkDuplicateQuery = "SELECT COUNT(*) FROM patient WHERE lrn_number = '$lrn_number'";
         $result = mysqli_query($conn, $checkDuplicateQuery);
@@ -117,41 +123,15 @@
 
     ?>
     <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
-
     <div class="pcoded-content">
-    <div class="pcoded-inner-content">
-
-    <div class="main-body">
-    <div class="page-wrapper">
-
-    <div class="page-header">
-    <div class="row align-items-end">
-    <div class="col-lg-8">
-    <div class="page-header-title">
-    <div class="d-inline">
-    <h4>Add Student</h4>
-
-    </div>
-    </div>
-    </div>
-
-    </div>
-    </div>
-
-
-    <div class="page-body">
-    <div class="row">
-    <div class="col-sm-12">
-
-    <div class="card">
-        
-    <div class="card-header">
-    <!-- <h5>Basic Inputs Validation</h5>
-    <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span> -->
-    </div>
-    
-    <div class="card-block">
-        <h5>Student Details</h5>
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header"><h1>Student Details</h1></div>
+                        <div class="card-block">
+                            <div class="table-responsive dt-responsive">
+                            <table id="dom-jqry" class="table table-striped table-bordered nowrap">
     <div class="form-group row">
             <label class="col-sm-2"></label>
             <div class="col-sm-4">
@@ -275,7 +255,7 @@
             <div class="form-group row">
             <label class="col-sm-2 col-form-label">Date of Birth</label>
             <div class="col-sm-4">
-                <input class="form-control" type="date" name="dateofbirth" max="<?php echo date("Y-m-d"); ?>"
+                <input class="form-control" type="date" name="dateofbirth" max="<?php echo date("m-d-Y"); ?>"
                             id="dateofbirth" value="<?php echo $rsedit['dob']; ?>" />
             </div>
             <label class="col-sm-2 col-form-label">Address</label>
@@ -314,7 +294,7 @@
                         </script>
         </div>
        
-        <h5>Security Details</h5>
+        <!-- <h5>Security Details</h5>
         <hr>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Security Question</label>
@@ -334,18 +314,11 @@
                     <input class="form-control" type="text" name="security_answer" id="security_answer" 
                     value="<?php if(isset($_GET['editid'])) { echo $rsedit['security_answer']; } ?>" />
                 </div>
-        </div>                          
+        </div>                           -->
 
 
 
-        <div class="form-group row">
-            
-        </div>
-        
-
-        <div class="form-group row">
-            
-        </div>
+       
         
     <?php
      ?>
