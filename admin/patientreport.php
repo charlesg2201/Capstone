@@ -41,6 +41,7 @@ if(isset($_GET['id']))
 <!-- <h5>DOM/Jquery</h5>
 <span>Events assigned to the table can be exceptionally useful for user interaction, however you must be aware that DataTables will add and remove rows from the DOM as they are needed (i.e. when paging only the visible elements are actually available in the DOM). As such, this can lead to the odd hiccup when working with events.</span> -->
 </div>
+<div class="card">
 <div class="card-block">
   <div class="row">
       <div class="col-lg-12">
@@ -55,7 +56,7 @@ if(isset($_GET['id']))
               </li>
               <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#security" role="tab">Security Details</a>
-                  <div class=""></div>
+                  <div class="slide"></div>
               </li>
               <li class="nav-item">
                   <a class="nav-link" data-toggle="tab" href="#appointment" role="tab">Admission Record</a>
@@ -74,7 +75,7 @@ if(isset($_GET['id']))
 
           </ul>
           <!-- Tab panes -->
-
+        
           <div class="tab-content card-block">
               <div class="tab-pane active col-5" id="profile" role="tabpanel">
                   <p class="m-0">
@@ -97,6 +98,18 @@ if(isset($_GET['id']))
                               <tr>
                           <th>Last Name :</th>
                           <td>&nbsp;<?php echo $rspatient['lname']; ?></td>
+                              </tr>
+                              <tr>
+                          <th>Middle Name :</th>
+                          <td>&nbsp;<?php echo $rspatient['mname']; ?></td>
+                              </tr>
+                              <tr>
+                          <th>Contact Number :</th>
+                          <td>&nbsp;<?php echo $rspatient['contact_number']; ?></td>
+                              </tr>
+                              <tr>
+                          <th>Email Address:</th>
+                          <td>&nbsp;<?php echo $rspatient['email']; ?></td>
                               </tr>
                               <tr>
                           <th>Strand :</th>
