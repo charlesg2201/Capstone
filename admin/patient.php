@@ -7,6 +7,7 @@
     {
         $fname = $_POST['fname'];
         $lname = $_POST['lname'];
+        $mname = $_POST['mname'];
         $lrn_number = $_POST['lrn_number'];
         $contact = $_POST['contact'];
         $strand = $_POST['strand'];
@@ -52,7 +53,7 @@
         }else{
             if(isset($_GET['editid']))
             {
-                $sql ="UPDATE patient SET lrn_number='$_POST[lrn_number]',fname='$_POST[fname]',lname='$_POST[lname]',strand='$_POST[strand]',guardian_name='$_POST[guardian_name]',address='$_POST[address]',contact='$_POST[contact]',gender='$_POST[gender]',dob='$_POST[dateofbirth]',grade_level='$_POST[grade_level]',section='$_POST[section]' WHERE patientid='$_GET[editid]'";
+                $sql ="UPDATE patient SET lrn_number='$_POST[lrn_number]',fname='$_POST[fname]',lname='$_POST[lname]',mname='$_POST[mname]',contact_number='$_POST[contact_number]',email='$_POST[email]',strand='$_POST[strand]',guardian_name='$_POST[guardian_name]',address='$_POST[address]',contact='$_POST[contact]',gender='$_POST[gender]',dob='$_POST[dateofbirth]',grade_level='$_POST[grade_level]',section='$_POST[section]' WHERE patientid='$_GET[editid]'";
                 if($qsql = mysqli_query($conn,$sql))
                 {
         ?>
@@ -79,7 +80,7 @@
             else
             {
                 
-                $sql = "INSERT INTO patient(date,fname,lname,lrn_number,grade_level,strand,section,guardian_name,address,contact,studentid,password,security_question,security_answer,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[lrn_number]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[security_question]','$_POST[security_answer]','$_POST[gender]','$_POST[dateofbirth]')";
+                $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,grade_level,strand,section,guardian_name,address,contact,studentid,password,security_question,security_answer,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[mname]','$_POST[lrn_number]','$_POST[contact_number]','$_POST[email]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[security_question]','$_POST[security_answer]','$_POST[gender]','$_POST[dateofbirth]')";
 
                 if($qsql = mysqli_query($conn,$sql))
                 {
@@ -168,12 +169,47 @@
         </div>
 
         <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Middle Name</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="mname" id="mname" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['lname']; } ?>" >
+                <span class="messages"></span>
+            </div>
             <label class="col-sm-2 col-form-label">LRN Number</label>
             <div class="col-sm-4">
                 <input class="form-control" type="text" name="lrn_number" id="lrn_number" 
                 value="<?php if(isset($_GET['editid'])) { echo $rsedit['lrn_number']; } ?>" />
             </div>
+        </div>
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Contact Number</label>
+        <div class="col-sm-4">
+                    <input class="form-control" type="text" name="contact_number" id="contact"
+                        value="<?php if(isset($_GET['editid'])) { echo $rsedit['contact']; } ?>"
+                        oninput="validateContactNumber()" required />
+                    <span class="messages"></span>
+                </div>
+                        <script>
+                            function validateContactNumber() {
+                                var contactField = document.getElementById("contact");
+                                var contactValue = contactField.value;
 
+                                // Use a regular expression to check for only numbers
+                                var regex = /^[0-9]+$/;
+
+                                if (!regex.test(contactValue)) {
+                                    alert("Please enter a valid contact number.");
+                                    contactField.value = "";
+                                }
+                            }
+                        </script>
+
+            <label class="col-sm-2 col-form-label">Email Address</label>
+            <div class="col-sm-4">
+                <input type="text" class="form-control" name="email" id="email" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['email']; } ?>" >
+                <span class="messages"></span>
+            </div>
+        </div>
+        <div class="form-group row">
             <label class="col-sm-2 col-form-label">Strand</label>
             <div class="col-sm-4">
                 <select name="strand" id="strand" class="form-control" required="">
@@ -188,9 +224,6 @@
                         { if($rsedit['strand'] == 'ICT') { echo 'selected'; } } ?>>ICT</option>
                 </select>
             </div>
-        </div>
-
-        <div class="form-group row">
             <label class="col-sm-2 col-form-label">Grade Level</label>
             <div class="col-sm-4">
                 <select name="grade_level" id="grade_level" class="form-control" required="">
@@ -201,15 +234,13 @@
                         { if($rsedit['grade_level'] == 'GRADE 12') { echo 'selected'; } } ?>>GRADE 12</option>
                 </select>
             </div>
-
+</div>
+            <div class="form-group row">
             <label class="col-sm-2 col-form-label">Section</label>
             <div class="col-sm-4">
                 <input class="form-control" type="text" name="section" id="section" 
                 value="<?php if(isset($_GET['editid'])) { echo $rsedit['section']; } ?>" />
             </div>
-        </div>
-
-        <div class="form-group row">
             <label class="col-sm-2 col-form-label">Gender</label>
             <div class="col-sm-4">
                 <select name="gender" id="gender" class="form-control" required="">
@@ -220,14 +251,18 @@
                         { if($rsedit['gender'] == 'Female') { echo 'selected'; } } ?>>Female</option>
                 </select>
             </div>
-
+</div>
+            <div class="form-group row">
             <label class="col-sm-2 col-form-label">Date of Birth</label>
             <div class="col-sm-4">
                 <input class="form-control" type="date" name="dateofbirth" max="<?php echo date("Y-m-d"); ?>"
                             id="dateofbirth" value="<?php echo $rsedit['dob']; ?>" />
             </div>
-        </div>
-
+            <label class="col-sm-2 col-form-label">Address</label>
+                <div class="col-sm-4">
+                    <textarea name="address" id="address" class="form-control"><?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
+                </div>
+</div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Guardian</label>
                 <div class="col-sm-4">
@@ -258,12 +293,7 @@
                             }
                         </script>
         </div>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Address</label>
-                <div class="col-sm-10">
-                    <textarea name="address" id="address" class="form-control"><?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
-                </div>
-        </div>
+       
         <h5>Security Details</h5>
         <hr>
         <div class="form-group row">
