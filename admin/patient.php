@@ -144,13 +144,33 @@
     <div class="col-sm-12">
 
     <div class="card">
+        
     <div class="card-header">
     <!-- <h5>Basic Inputs Validation</h5>
     <span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span> -->
     </div>
-
+    
     <div class="card-block">
         <h5>Student Details</h5>
+    <div class="form-group row">
+            <label class="col-sm-2"></label>
+            <div class="col-sm-4">
+
+                <span class="messages"></span>
+            </div>
+
+            <label class="col-sm-2 col-form-label"></label>
+            <div class="col-sm-4">
+                <select name="academic_year" id="academic_year" class="form-control" required="">
+                    <option value="GRADE 11" <?php if(isset($_GET['editid']))
+                        { if($rsedit['academic_year'] == '1st Semester 2023-2024') { echo 'selected'; } } ?>>1st Semester 2023-2024</option>
+                    <option value="GRADE 12" <?php if(isset($_GET['editid']))
+                        { if($rsedit['academic_year'] == '2nd Semester 2023-2024') { echo 'selected'; } } ?>>2nd Semester 2023-2024</option>
+                </select>
+            </div>
+        </div>
+
+
         <hr>
     <form id="main" method="post" action="" enctype="multipart/form-data">
 
