@@ -1,15 +1,3 @@
-<!-- <?php
-$userAnswers = array();
-
-date_default_timezone_set("Asia/Manila");
-require_once('check_login.php');
-include('head.php');
-include('header.php');
-include('sidebar.php');
-include('connect.php');
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,65 +14,79 @@ include('connect.php');
         .choice {
             margin-right: 20px;
         }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .lrn-number {
+            font-size: 18px;
+        }
     </style>
 </head>
 
 <body>
+    <?php date_default_timezone_set("Asia/Manila"); ?>
+    <?php require_once('check_login.php');?>
+    <?php include('head.php');?>
+    <?php include('header.php');?>
+    <?php include('sidebar.php');?>
+    <?php include('connect.php');?>
+
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><h1>Physical Assessment</h1></div>
+                        <div class="card-header"><h1>Physical Assessment Results</h1></div>
+                        <div class="lrn-number">
+                                <?php
+                                // Check if 'lrn_number' is set in the URL
+                                if (isset($_GET['lrn_number'])) {
+                                    $lrn_number = $_GET['lrn_number'];
+                                    echo "LRN Number: $lrn_number";
+                                } else {
+                                    echo "LRN number not provided in the URL.";
+                                }
+                                ?>
+                            </div>
                         <div class="card-block">
                             <div class="questions-container">
-                                <form method='post' action=''>
-                                    <?php
-                                    $sql = "SELECT * FROM tbl_physical WHERE select_all='0'";
-                                    $qsql = mysqli_query($conn, $sql);
-                                    $questionNumber = 1;
+                                <?php
+                                // Check if 'lrn_number' is set in the URL
+                                if (isset($_GET['lrn_number'])) {
+                                    $lrn_number = $_GET['lrn_number'];
 
-                                    while ($rs = mysqli_fetch_array($qsql)) {
-                                        echo "<div class='question'>
-                                            <strong>Question $questionNumber:</strong> $rs[questions]<br>";
+                                    // Fetch questions and answers from tbl_physical_results based on lrn_number
+                                    $sql = "SELECT pr.*, p.questions
+                                            FROM tbl_physical_results pr
+                                            JOIN tbl_physical p ON pr.question_id = p.question_id
+                                            WHERE pr.lrn_number = $lrn_number";
 
-                                        $questionKey = "question_$rs[question_id]";
-                                        if (!empty($rs['choices'])) {
-                                            $choices = explode(",", $rs['choices']);
-                                            echo "<div class='choices-container'>";
-                                            foreach ($choices as $choice) {
-                                                $checked = isset($_POST[$questionKey]) && $_POST[$questionKey] == $choice ? 'checked' : '';
-                                                echo "<div class='choice'>
-                                                    <input type='radio' name='$questionKey' value='$choice' $checked> $choice
-                                                </div>";
+                                    $result = $conn->query($sql);
+
+                                    if ($result) { // Check if the query was successful
+                                        if ($result->num_rows > 0) {
+                                            while ($row = $result->fetch_assoc()) {
+                                                echo "Question: " . $row['questions'] . "<br>";
+                                                echo "Answer: " . $row['answer'] . "<br>";
+                                                echo "<hr>";
                                             }
-                                            echo "</div>";
                                         } else {
-                                            $answer = isset($_POST[$questionKey]) ? $_POST[$questionKey] : '';
-                                            echo "<textarea class='form-control' name='essay_$questionKey' placeholder='Enter your essay response'>$answer</textarea>";
+                                            echo "No questions found for the provided LRN number.<br>";
                                         }
-
-                                        echo "<input type='hidden' name='question_id_$questionNumber' value='$rs[question_id]'>";
-                                        $questionNumber++;
+                                    } else {
+                                        echo "Error in the SQL query: " . $conn->error;
                                     }
-                                    ?>
-                                    <button type='submit' name='submit' class='btn btn-primary'>Submit</button>
-                                </form>
-                            </div>
-
-                            <?php
-                            if (isset($_POST['submit'])) {
-                                for ($i = 1; $i <= $questionNumber; $i++) {
-                                    $questionKey = "question_$i";
-                                    $essayKey = "essay_$questionKey";
-
-                                    if (isset($_POST[$questionKey]) || isset($_POST[$essayKey])) {
-                                        $answer = isset($_POST[$questionKey]) ? $_POST[$questionKey] : $_POST[$essayKey];
-                                        $userAnswers[$_SESSION['lrn_number']][$questionKey] = $answer;
-                                    }
+                                } else {
+                                    echo "LRN number not provided in the URL.";
                                 }
-                            }
-                            ?>
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -92,22 +94,8 @@ include('connect.php');
         </div>
     </div>
 
-    <div>
-        <h2>Selected Answers:</h2>
-        <?php
-        foreach ($userAnswers as $lrnNumber => $answers) {
-            echo "<div><h3>LRN Number: $lrnNumber</h3>";
-            echo "<ul>";
-            foreach ($answers as $questionKey => $answer) {
-                echo "<li><strong>$questionKey:</strong> $answer</li>";
-            }
-            echo "</ul></div>";
-        }
-        ?>
-    </div>
-
-    <?php include('footer.php'); ?>
+    <?php include('footer.php');?>
 
 </body>
 
-</html> -->
+</html>
