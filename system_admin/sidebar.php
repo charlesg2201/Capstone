@@ -87,6 +87,17 @@ if ($_SESSION['user'] == 'tbl_admin') {
     </ul>
     <?php }?>
 </li>
+
+<?php if($_SESSION['user'] == 'tbl_admin') { ?>
+<li class="pcoded-hasmenu">
+    <a href="strands.php">
+        <span class="pcoded-micon"><i class="feather icon-user-plus"></i></span>
+        <span class="pcoded-mtext">Strands</span>
+    </a>
+    
+    <?php }?>
+</li>
+
 <?php if(($_SESSION['user'] == 'tbl_admin') || ($_SESSION['user'] == 'users')) { ?>
 <li class="pcoded-hasmenu">
     <a href="backup.php">

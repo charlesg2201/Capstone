@@ -86,7 +86,7 @@
             else
             {
                 
-                $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,grade_level,strand,section,guardian_name,address,contact,studentid,password,security_question,security_answer,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[mname]','$_POST[lrn_number]','$_POST[contact_number]','$_POST[email]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[security_question]','$_POST[security_answer]','$_POST[gender]','$_POST[dateofbirth]')";
+                $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,grade_level,strand,section,guardian_name,address,contact,studentid,password,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[mname]','$_POST[lrn_number]','$_POST[contact_number]','$_POST[email]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[gender]','$_POST[dateofbirth]')";
 
                 if($qsql = mysqli_query($conn,$sql))
                 {
@@ -210,18 +210,20 @@
             </div>
         </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Strand</label>
+        <label class="col-sm-2 col-form-label">Strand</label>
             <div class="col-sm-4">
                 <select name="strand" id="strand" class="form-control" required="">
                     <option value="">-- Select One -- </option>
-                    <option value="STEM" <?php if(isset($_GET['editid']))
-                        { if($rsedit['strand'] == 'STEM') { echo 'selected'; } } ?>>STEM</option>
-                    <option value="ABM" <?php if(isset($_GET['editid']))
-                        { if($rsedit['strand'] == 'ABM') { echo 'selected'; } } ?>>ABM</option>
-                    <option value="HUMMS" <?php if(isset($_GET['editid']))
-                        { if($rsedit['strand'] == 'HUMMS') { echo 'selected'; } } ?>>HUMMS</option>
-                    <option value="ICT" <?php if(isset($_GET['editid']))
-                        { if($rsedit['strand'] == 'ICT') { echo 'selected'; } } ?>>ICT</option>
+                    <?php
+                    // Fetch strands from the database
+                    $sqlStrands = "SELECT * FROM tbl_strands WHERE delete_status='0'";
+                    $resultStrands = mysqli_query($conn, $sqlStrands);
+
+                    while ($rowStrand = mysqli_fetch_assoc($resultStrands)) {
+                        $selected = (isset($_GET['editid']) && $rsedit['strands'] == $rowStrand['strands']) ? 'selected' : '';
+                        echo "<option value='{$rowStrand['strands']}' $selected>{$rowStrand['strands']}</option>";
+                    }
+                    ?>
                 </select>
             </div>
             <label class="col-sm-2 col-form-label">Grade Level</label>
