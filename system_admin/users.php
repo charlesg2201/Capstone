@@ -125,26 +125,17 @@ if (isset($_GET['editid'])) {
 <div class="main-body">
 
 <div class="page-wrapper">
-<h2>Add Clinic Coordinator</h2>
+<legend>Add Clinic Coordinator</legend>
 <div class="row align-items-end">
 <div class="col-lg-8">
 <div class="page-header-title">
-<div class="d-inline">
 
-</div>
-</div>
-</div>
-<div class="page-header-breadcrumb">
-
-</div>
 </div>
 </div>
 </div>
 
 
-<div class="page-body">
-<div class="row">
-<div class="col-sm-12">
+
 
 <div class="card">
 <div class="card-header">
