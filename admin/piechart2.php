@@ -1,4 +1,5 @@
-<!doctype html>
+<!DOCTYPE html>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -6,23 +7,20 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="https://codingbirdsonline.com/wp-content/uploads/2019/12/cropped-coding-birds-favicon-2-1-192x192.png" type="image/x-icon">
     <script src="https://code.highcharts.com/highcharts.js"></script>
-   
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
     <script src="https://code.highcharts.com/modules/accessibility.js"></script>
     <title>How to create a dynamic pie chart - Coding Birds Online</title>
-    <style>
-        .container {
-            background: transparent; /* Set the background of the container to transparent */
-        }
-        .center-block { display: block; margin-left: auto; margin-right: auto; }
-    </style>
 </head>
 <body>
-<div class="container">
-    <center>
-        <div id="container"></div>
-    </center>
-</div>
+<style>
+    #container {
+        width: 100%;
+        height: 300px;
+        margin: -18px auto 10px;
+    }
+</style>
+
+<div id="container"></div>
 
 <?php
 $con = new mysqli('localhost', 'root', '', 'capstone_db');
@@ -31,11 +29,11 @@ if ($con->connect_error) {
 }
 
 $query = $con->query("
-    SELECT 
-      reasons,
-      COUNT(admission_id) as count
-    FROM tbl_admission
-    GROUP BY reasons
+SELECT 
+reasons,
+COUNT(admission_id) as count
+FROM tbl_admission
+GROUP BY reasons
 ");
 
 if ($query === false) {
@@ -51,13 +49,17 @@ if ($query === false) {
             plotBorderWidth: null,
             plotShadow: false,
             type: 'pie',
-            backgroundColor: 'rgba(0, 0, 0, 0)'
+            backgroundColor: 'rgba(0, 0, 0, 0)',
+            marginTop: -20, // Adjusted marginTop to align the title with the chart
+            marginBottom: 10,
+            marginLeft: -20, // Adjusted marginLeft to move the chart to the left
         },
         credits: {
             enabled: false
         },
         title: {
-            text: 'Reasons'
+            text: 'Reasons',
+            x: -20, // Adjusted x to move the title to the left
         },
         tooltip: {
             pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -74,8 +76,18 @@ if ($query === false) {
                 dataLabels: {
                     enabled: false
                 },
-                showInLegend: true
+                showInLegend: true,
+                size: '68%', // Adjusted size to make the pie chart smaller
             }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right', // Align the legend to the right
+            verticalAlign: 'middle', // Align the legend in the middle vertically
+            borderWidth: 0, // No border around the legend
+            floating: true,
+            x: 10, // Adjusted x to move the legend to the left
+            y: -10, // Adjusted y to control the vertical position of the legend
         },
         series: [{
             name: 'Percentage',

@@ -19,7 +19,7 @@
         // $security_question = $_POST['security_question'];
         // $security_answer = $_POST['security_answer'];
         //$password = substr($_POST['lname'], 0, 2) . mt_rand(111111, 999999);
-        $date = date("m-d-Y");
+        $date = date("Y-m-d");
         // Generate student ID
         $studentid = strtolower($fname . $lname);
 

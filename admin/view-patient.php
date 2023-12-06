@@ -64,15 +64,15 @@ if(isset($_GET['delid']))
                     <tr>
                       <th>LRN Number</th>
                       <th>Name</th>
-                      <th>Contact Number</th>
-                      <th>Email Address</th>
+                      <!-- <th>Contact Number</th> -->
+                      <!-- <th>Email Address</th> -->
                       <th>Strand</th>
                       <th>Grade Level</th>
                       <th>Section</th>
-                      <th>Gender</th>
-                      <th>Date of Birth</th>
-                      <th>Guardian</th>
-                      <th>Guardian's Contact Number</th>
+                      <!-- <th>Gender</th> -->
+                      <!-- <th>Date of Birth</th> -->
+                      <!-- <th>Guardian</th> -->
+                      <!-- <th>Guardian's Contact Number</th> -->
                       <th>Action</th>
                     </tr>
                   </thead>
@@ -85,15 +85,9 @@ if(isset($_GET['delid']))
                         echo "<tr>
                           <td>$rs[lrn_number]</td> 
                           <td>$rs[fname] $rs[mname] $rs[lname]<br></td>
-                          <td>$rs[contact_number]</td> 
-                          <td>$rs[email]</td> 
                           <td>$rs[strand]</td> 
                           <td>$rs[grade_level]</td> 
                           <td>$rs[section]</td> 
-                          <td>$rs[gender]</td> 
-                          <td>$rs[dob]</td> 
-                          <td>$rs[guardian_name]</td> 
-                          <td>$rs[contact]</td> 
                           <td align='center'>";
 
                         if(isset($_SESSION['userid']))

@@ -40,9 +40,9 @@ $monthData = array_fill_keys($allMonths, 0);
 
 $query = $con->query("
     SELECT 
-      MONTHNAME(admission_date) as monthname,
+      MONTHNAME(date) as monthname,
       COUNT(patientid) as patient_count
-    FROM tbl_admission
+    FROM patient
     GROUP BY monthname
 ");
 
@@ -103,7 +103,7 @@ const config = {
       },
       title: {
         display: true,
-        text: 'Number of Admisions',
+        text: 'Number of Students',
         font: {
           size: 18,
           weight: 'bold',
