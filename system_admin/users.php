@@ -120,29 +120,12 @@ if (isset($_GET['editid'])) {
 <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
 <div class="pcoded-content">
-<div class="pcoded-inner-content">
-
-<div class="main-body">
-
-<div class="page-wrapper">
-<legend>Add Clinic Coordinator</legend>
-<div class="row align-items-end">
-<div class="col-lg-8">
-<div class="page-header-title">
-
-</div>
-</div>
-</div>
-
-
-
-
-<div class="card">
-<div class="card-header">
-<!-- <h5>Basic Inputs Validation</h5>
-<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span> -->
-</div>
-<div class="card-block">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header"><legend>Add Clinic Coordinator</legend></div>
+                        <div class="card-block">
 <form id="main" method="post" action="" enctype="multipart/form-data">
     
     <h5>Personal Details</h5>
