@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once('check_login.php');
 include('head.php');
 include('header.php');
@@ -16,6 +15,7 @@ if(isset($_GET['deleteid'])) {
     if($result) {
         
         ?>
+        
                         <div class="popup popup--icon -success js_success-popup popup--visible">
                             <div class="popup__background"></div>
                             <div class="popup__content">
@@ -34,3 +34,15 @@ if(isset($_GET['deleteid'])) {
 
 exit();
 ?>
+
+    <script>
+      var addButtonTrigger = function addButtonTrigger(el) {
+  el.addEventListener('click', function () {
+    var popupEl = document.querySelector('.' + el.dataset.for);
+    popupEl.classList.toggle('popup--visible');
+  });
+};
+
+Array.from(document.querySelectorAll('button[data-for]')).
+forEach(addButtonTrigger);
+    </script>
