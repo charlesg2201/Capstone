@@ -32,7 +32,7 @@
     </a>
 </li>
 <li class="pcoded-hasmenu">
-    <a href="admissionrecord.php ">
+<a href="admissionrecord.php?patientid=<?php echo $_SESSION["patientid"]; ?>">
         <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
         <span class="pcoded-mtext">Admission Record</span>
     </a>
