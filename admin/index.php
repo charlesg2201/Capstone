@@ -67,12 +67,12 @@ $row_manage = mysqli_fetch_array($result_manage);
                             </div>
                         </div>
                         <iframe src="graph2.php" frameborder="0" width="70%" height="250" style="height: 260px; margin-top: -20px;"></iframe>
-                            <iframe src="piechart.php" frameborder="0" width="30%" height="250" style="height: 350px; margin-top: -10px;"></iframe>
-                            <iframe src="graph.php" frameborder="0" width="70%" height="250" style="height: 260px; margin-top: -86px;"></iframe>
+                            <iframe src="piechart.php" frameborder="0" width="30%" height="250" style="height: 350px; margin-top: -27px;"></iframe>
+                            <iframe src="graph.php" frameborder="0" width="70%" height="250" style="height: 260px; margin-top: -80px;"></iframe>
                         
                             
                     
-                            <iframe src="piechart2.php" frameborder="0" width="30%"height="250" style="height: 350px; margin-top: -80px;" ></iframe>
+                            <iframe src="piechart2.php" frameborder="0" width="30%"height="250" style="height: 350px; margin-top: -88px;" ></iframe>
                         
 
 

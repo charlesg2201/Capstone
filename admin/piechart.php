@@ -13,15 +13,27 @@
 </head>
 <body>
 <style>
-    #container {
-        width: 100%;
-        height: 300px;
-        margin: -18px auto 10px;
-    }
-</style>
+        .chart-container {
+            width: 100%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: #fff;
+           margin: 0;
+            height: 258px; /* Adjust the height as needed */
+        }
 
-<div id="container"></div>
+        #container {
+            height: 300px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
 
+<div class="chart-container">
+    <div id="container"></div>
+</div>
 <?php
 $con = new mysqli('localhost', 'root', '', 'capstone_db');
 if ($con->connect_error) {
