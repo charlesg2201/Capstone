@@ -10,11 +10,15 @@ $fname = $_SESSION[ "firstname" ];
 ?> 
 
 
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-lg-8 col-md-10" style="margin: 0 auto;">
-            <div class="sub-title">
-                <h2>Assessments</h2>
+<div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="card-header"><legend>Physical Assessment</legend></div>
+                        <div class="card-block">
+                            <div class="table-responsive dt-responsive">
+                            <table id="dom-jqry" class="table table-striped table-bordered nowrap">
 			<?php 
 
 				include('connect.php');
@@ -33,16 +37,9 @@ $fname = $_SESSION[ "firstname" ];
 			
 				<td>
 					<?PHP echo 'Physical'?>
-                    <br>
-                    <br>
-                    <br>
-                    <?PHP echo 'Health'?>
-				</td>
 				<td>
 					<a href="physical.php"> <button type="submit" class="btn btn-primary">Take</button></a>
-                    <br>
-                    <br>
-					<a href="health.php"> <button type="submit" class="btn btn-primary">Take</button></a>
+        
                     <!-- <a href="takeassessment2.php?exid=<?php echo $row['ExamID']; ?>"> <button type="submit" class="btn btn-primary">Take</button></a> -->
 				</td>
 			</tr>

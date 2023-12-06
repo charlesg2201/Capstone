@@ -128,7 +128,7 @@
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><h1>Student Details</h1></div>
+                        <div class="card-header"><legend>Student Details</legend></div>
                         <div class="card-block">
                             <div class="table-responsive dt-responsive">
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
