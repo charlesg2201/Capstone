@@ -121,19 +121,11 @@ if (isset($_GET['editid'])) {
 <div class="main-body">
 
 <div class="page-wrapper">
-<h2>Add System Administrator</h2>
+<legend>Add System Administrator</legend>
 <div class="row align-items-end">
 <div class="col-lg-8">
 <div class="page-header-title">
-<div class="d-inline">
 
-<!-- <span>Lorem ipsum dolor sit <code>amet</code>, consectetur adipisicing elit</span> -->
-</div>
-</div>
-</div>
-<div class="page-header-breadcrumb">
-
-</div>
 </div>
 </div>
 </div>
