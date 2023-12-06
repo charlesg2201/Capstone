@@ -15,13 +15,6 @@
             margin-right: 20px;
         }
 
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
 
         .lrn-number {
             font-size: 18px;
@@ -42,7 +35,8 @@
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><h1>Health Assessment Results</h1></div>
+                        <div class="card-header"><legend>Health Assessment Results</legend></div>
+                        <div class="card-block">
                         <div class="lrn-number">
                                 <?php
                                 // Check if 'lrn_number' is set in the URL
