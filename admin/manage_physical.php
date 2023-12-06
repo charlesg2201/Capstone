@@ -23,7 +23,6 @@
                     <tr>
                       <th>Questions</th>
                       <th style="width: 30px;">Question Type</th>
-                      <th style="width: 30px;">Choices</th>
                       <th style="width: 30px;">Action</th>
                     </tr>
                   </thead>
@@ -36,7 +35,6 @@
                         echo "<tr>
                           <td>$rs[questions]<br>
                           <td>$rs[question_type]<br>
-                          <td>$rs[choices]<br>
                           <td align=''>";
 
                        

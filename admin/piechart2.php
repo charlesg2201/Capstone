@@ -99,7 +99,7 @@ if ($query === false) {
             verticalAlign: 'middle', // Align the legend in the middle vertically
             borderWidth: 0, // No border around the legend
             floating: true,
-            x: -2, // Adjusted x to move the legend to the left
+            x: 12, // Adjusted x to move the legend to the left
             y: -10, // Adjusted y to control the vertical position of the legend
         },
         series: [{
