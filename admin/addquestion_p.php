@@ -92,7 +92,7 @@ if (isset($_POST['btn_submit'])) {
         <div class="main-body">
             <div class="page-body">
                 <div class="card">
-                    <div class="card-header"><h1>Physical Assessment</h1></div>
+                    <div class="card-header"><legend>Physical Assessment</legend></div>
                     <div class="card-block">
                         <hr>
                         <form id="main" method="post" action="" enctype="multipart/form-data">
