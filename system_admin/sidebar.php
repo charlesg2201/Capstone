@@ -98,6 +98,16 @@ if ($_SESSION['user'] == 'tbl_admin') {
     <?php }?>
 </li>
 
+<?php if($_SESSION['user'] == 'tbl_admin') { ?>
+<li class="pcoded-hasmenu">
+    <a href="academic_year.php">
+        <span class="pcoded-micon"><i class="feather icon-user-plus"></i></span>
+        <span class="pcoded-mtext">Academic Year</span>
+    </a>
+    
+    <?php }?>
+</li>
+
 <?php if(($_SESSION['user'] == 'tbl_admin') || ($_SESSION['user'] == 'users')) { ?>
 <li class="pcoded-hasmenu">
     <a href="backup.php">

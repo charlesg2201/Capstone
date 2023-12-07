@@ -86,7 +86,7 @@
             else
             {
                 
-                $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,grade_level,strand,section,guardian_name,address,contact,studentid,password,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[mname]','$_POST[lrn_number]','$_POST[contact_number]','$_POST[email]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[gender]','$_POST[dateofbirth]')";
+                $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,academic_year,grade_level,strand,section,guardian_name,address,contact,studentid,password,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[mname]','$_POST[lrn_number]','$_POST[contact_number]','$_POST[email]','$_POST[academic_year]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[gender]','$_POST[dateofbirth]')";
 
                 if($qsql = mysqli_query($conn,$sql))
                 {
@@ -132,6 +132,12 @@
                         <div class="card-block">
                             <div class="table-responsive dt-responsive">
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
+    
+
+
+        <hr>
+    <form id="main" method="post" action="" enctype="multipart/form-data">
+
     <div class="form-group row">
             <label class="col-sm-2"></label>
             <div class="col-sm-4">
@@ -139,20 +145,26 @@
                 <span class="messages"></span>
             </div>
 
-            <label class="col-sm-2 col-form-label"></label>
-            <div class="col-sm-4">
-                <select name="academic_year" id="academic_year" class="form-control" required="">
-                    <option value="GRADE 11" <?php if(isset($_GET['editid']))
-                        { if($rsedit['academic_year'] == '1st Semester 2023-2024') { echo 'selected'; } } ?>>1st Semester 2023-2024</option>
-                    <option value="GRADE 12" <?php if(isset($_GET['editid']))
-                        { if($rsedit['academic_year'] == '2nd Semester 2023-2024') { echo 'selected'; } } ?>>2nd Semester 2023-2024</option>
-                </select>
-            </div>
+            <label class="col-sm-2 col-form-label">Academic Year</label>
+<div class="col-sm-4">
+    <select name="academic_year" id="academic_year" class="form-control" required="">
+        <?php
+        // Fetch academic years from the database
+        $sqlAcademicYears = "SELECT * FROM tbl_academicyear WHERE delete_status='0'";
+        $resultAcademicYears = mysqli_query($conn, $sqlAcademicYears);
+
+        while ($rowAcademicYear = mysqli_fetch_assoc($resultAcademicYears)) {
+            $selected = (isset($_GET['editid']) && $rsedit['academic_year'] == $rowAcademicYear['academic_year']) ? 'selected' : '';
+            echo "<option value='{$rowAcademicYear['academic_year']}' $selected>{$rowAcademicYear['academic_year']}</option>";
+        }
+        ?>
+    </select>
+
+   
+</div>
+
+
         </div>
-
-
-        <hr>
-    <form id="main" method="post" action="" enctype="multipart/form-data">
 
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">First Name</label>
