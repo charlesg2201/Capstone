@@ -3,20 +3,39 @@
 
 <head>
     <style>
-        .question {
-            margin-bottom: 20px;
+         body {
+            font-family: Arial, sans-serif;
         }
 
-        .choices-container {
-            display: flex;
+        .question {
+    margin-bottom: 20px;
+    font-size: 18px;
+    word-wrap: break-word; /* Added this line to handle long words */
+    overflow-wrap: break-word; /* Added this line for additional browser support */
+}
+
+        
+
+        .question strong {
+            display: bold;
+            margin-bottom: 10px;
         }
 
         .choice {
-            margin-right: 20px;
+            margin-bottom: 10px;
+            margin-right: 30px;
+            font-size: 16px;
         }
+
+        .question textarea {
+    width: 100%;
+    height: 70px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-top: 10px !important; /* Added !important to ensure the margin takes effect */
+}
     </style>
 </head>
-
 <body>
     <?php date_default_timezone_set("Asia/Manila"); ?>
     <?php require_once('check_login.php');?>
@@ -30,7 +49,8 @@
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><legend>Health Assessment</legend></div>
+                    <div class="card-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold; margin: 20px 20px 0 20px;"><h1>Physical Assessment</h1></div>
+                        <br>
                         <div class="card-block">
                             <div class="questions-container">
                                 <form method='post' action=''>
