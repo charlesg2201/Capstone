@@ -25,51 +25,55 @@ $row_manage = mysqli_fetch_array($result_manage);
                     <div class="row">
                         <?php  if ($_SESSION['user'] == 'tbl_admin_user') { ?>
                             <div class="col-xl-4 col-md-6">             
-                                <div class="card border-primary" style="border-width: 3px; padding: 5px;"> 
+                                <div class="card border-primary" style="border-width: 3px; padding: 5px; background-color: #0a4b78;"> 
                                     <div class="card-body">
                                         <div class="row align-items-end">
                                             <div class="col-8">
-                                                <h4 class="text-dark">
+                                                <h4 style="white-space: nowrap; color: #ffffff; font-weight: 800;">
                                                     <?php
                                                     $sql = "SELECT * FROM patient WHERE delete_status='0'";
                                                     $qsql = mysqli_query($conn, $sql);
                                                     echo mysqli_num_rows($qsql);
                                                     ?>
                                                 </h4>
-                                                <h6 class="text-dark m-b-0">Total Patients</h6>
+                                                <h4 style="white-space: nowrap; color: #ffffff; font-weight: 800;">Total Students</h4>
                                             </div>
                                             <div class="col-4 text-right">
-                                                <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-users"></i></span>
+                                                <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-users" style="color: #ffffff;"></i></span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-xl-4 col-md-6">             
+    <div class="card border-primary" style="border-width: 3px; padding: 5px; background-color: #0a4b78;">
+        <div class="card-body">
+            <div class="row align-items-end">
+                <div class="col-8">
+                    <h4 style="white-space: nowrap; color: #ffffff; font-weight: 800;">Physical Assessment</h4>
+                    <a class="small stretched-link" href="viewall_p.php" style="color: #ffffff; font-size: 15px;">View Details</a>
+
+                </div>
+                <div class="col-4 text-right">
+                    <span class="pcoded-micon" style="font-size: 3rem;">
+                        <i class="feather icon-file-text" style="color: #ffffff;"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
                         <div class="col-xl-4 col-md-6">             
-                            <div class="card border-primary" style="border-width: 3px; padding: 5px;"> 
+                            <div class="card border-primary" style="border-width: 3px; padding: 5px; background-color: #0a4b78;"> 
                                 <div class="card-body">
                                     <div class="row align-items-end">
                                         <div class="col-8">
-                                           <h6>Physical Assessment</h6>
-                                           <a class="small text-dark stretched-link" href="viewall_p.php">View Details</a>
+                                        <h4 style="white-space: nowrap; color: #ffffff; font-weight: 800;">Health Assessment</h4>
+                                        <a class="small stretched-link" href="viewall_h.php" style="color: #ffffff; font-size: 15px;">View Details</a>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-file-text"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-md-6">             
-                            <div class="card border-primary" style="border-width: 3px; padding: 5px;"> 
-                                <div class="card-body">
-                                    <div class="row align-items-end">
-                                        <div class="col-8">
-                                        <h6>Health Assessment</h6>
-                                           <a class="small text-dark stretched-link" href="viewall_h.php">View Details</a>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-file-text"></i></span>
+                                            <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-file-text" style="color: #ffffff;"></i></span>
                                         </div>
                                     </div>
                                 </div>
