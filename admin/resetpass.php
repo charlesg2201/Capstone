@@ -103,12 +103,12 @@ else {?>
 </div>
 <div class="form-group form-primary">
     <select name="security_question" id="security_question" class="form-control" required="">
-        <option value="">-- Select Security Question -- </option>
-        <option value="Male" <?php if(isset($_GET['editid']))
-            { if($rsedit['security_question'] == 'Male') { echo 'selected'; } } ?>>Male</option>
-        <option value="Female" <?php if(isset($_GET['editid']))
-            { if($rsedit['security_question'] == 'Female') { echo 'selected'; } } ?>>Female</option>
-    </select>
+    <option value="">-- Select One -- </option>
+                        <option value="What is your fathers name?" <?php if(isset($_GET['editid']))
+                            { if($rsedit['security_question'] == 'What is your fathers name?') { echo 'selected'; } } ?>>What is your fathers name?</option>
+                        <option value="What is your birth month?" <?php if(isset($_GET['editid']))
+                            { if($rsedit['security_question'] == 'What is your birth month?') { echo 'selected'; } } ?>>What is your birth month?</option>
+                    </select>
     <br>
     <input class="form-control" type="text" name="security_answer" id="security_answer" placeholder="Enter your security answer"
     value="<?php if(isset($_GET['editid'])) { echo $rsedit['security_answer']; } ?>" />
