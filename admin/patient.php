@@ -1,4 +1,19 @@
+<head>
+    <style>
+      
 
+        html, body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .pcoded-content {
+            height: 100vh;
+            overflow-y: hidden; /* Change this line */
+        }
+    </style>
+</head>
 <?php
 require_once('check_login.php');
 include('head.php');
@@ -108,7 +123,11 @@ if (isset($_GET['editid'])) {
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><legend>Student Details</legend></div>
+                    <div class="card-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold; margin: 20px 20px 0 20px;"><h1>Student Details</h1></div>
+                    <br>
+
+
+
                         <div class="card-block">
                             <div class="table-responsive dt-responsive">
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
