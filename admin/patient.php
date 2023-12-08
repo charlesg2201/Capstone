@@ -1,142 +1,156 @@
-<head>
-    <style>
-      
+<!DOCTYPE html>
+<html lang="en">
 
-        html, body {
-            height: 100%;
-            margin: 0;
-            overflow: hidden;
-        }
+<style>
+      .box-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px; /* Set your desired height */
+  background-color: #0a4b78;
+  color: white;
+  font-weight: bold;
+}
 
-        .pcoded-content {
-            height: 100vh;
-            overflow-y: hidden; /* Change this line */
-        }
-    </style>
-</head>
-<?php
-require_once('check_login.php');
-include('head.php');
-include('header.php');
-include('sidebar.php');
-include('connect.php');
+.box-header h4 {
+  margin: 0;
+}                  
+</style>
+<?php require_once('check_login.php');?>
+    <?php include('head.php');?>
+    <?php include('header.php');?>
+    <?php include('sidebar.php');?>
+    <?php include('connect.php');
+    if(isset($_POST['btn_submit']))
+    {
+        $fname = $_POST['fname'];
+        $lname = $_POST['lname'];
+        $mname = $_POST['mname'];
+        $lrn_number = $_POST['lrn_number'];
+        $contact = $_POST['contact'];
+        $strand = $_POST['strand'];
+        $grade_level = $_POST['grade_level'];
+        $section = $_POST['section'];
+        $gender = $_POST['gender'];
+        $address = $_POST['address'];
+        $dob= $_POST['dateofbirth'];
+        // $security_question = $_POST['security_question'];
+        // $security_answer = $_POST['security_answer'];
+        //$password = substr($_POST['lname'], 0, 2) . mt_rand(111111, 999999);
+        $date = date("Y-m-d");
+        // Generate student ID
+        $studentid = strtolower($fname . $lname);
 
-if (isset($_POST['btn_submit'])) {
-    $fname = $_POST['fname'];
-    $lname = $_POST['lname'];
-    $mname = $_POST['mname'];
-    $lrn_number = $_POST['lrn_number'];
-    $contact_number = $_POST['contact_number'];
-    $contact = $_POST['contact'];
-    $guardian_name = $_POST['guardian_name'];  // Added the missing field
-    $strand = $_POST['strand'];
-    $grade_level = $_POST['grade_level'];
-    $section = $_POST['section'];
-    $gender = $_POST['gender'];
-    $address = $_POST['address'];
-    $dob = $_POST['dateofbirth'];
-    $email = $_POST['email'];
-    $date = date("Y-m-d");
-    $studentid = strtolower($fname . $lname);
-    $password = date("mdY", strtotime($dob));
+        // Use the date of birth as the password
+        $password = date("mdY", strtotime($dob));
 
-    if (!isset($_GET['editid'])) { // Check if it's a new insertion
+
+        // $studentid = "";
+        // $strs = explode(" ", $_POST['fname']);
+        // foreach ($strs as $str) {
+        //     $studentid .= $str[0];
+        // }
+    
+        // $fullname = $studentid . str_replace(' ', '', $_POST['lname']);
+        // $studentid = strtolower(mysqli_real_escape_string($conn, $fullname));
+
         $checkDuplicateQuery = "SELECT COUNT(*) FROM patient WHERE lrn_number = '$lrn_number'";
         $result = mysqli_query($conn, $checkDuplicateQuery);
         $row = mysqli_fetch_row($result);
         $count = $row[0];
-
+    
         if ($count > 0) {
             ?>
-            <div class="popup popup--icon -error js_error-popup popup--visible">
+                <div class="popup popup--icon -error js_error-popup popup--visible">
                 <div class="popup__background"></div>
                 <div class="popup__content">
-                    <h3 class="popup__content__title">Error</h3>
-                    <p>The details you are trying to add already exist.</p>
-                    <p><a href="patient.php"><button class="button button--error" data-for="js_error-popup">Close</button></a></p>
+                    <h3 class="popup__content__title">
+                    Error 
+                    </h3>
+                    <p>The details you are trying to add already exists.</p>
+                    <p>
+                    <a href="patient.php"><button class="button button--error" data-for="js_error-popup">Close</button></a>
+                    </p>
                 </div>
-            </div>
+                </div>
             <?php
-            // You can add additional logic or redirection here if needed
-        } else {
-            $sql = "INSERT INTO patient(date, fname, lname, mname, lrn_number, contact_number, email, academic_year, grade_level, strand, section, guardian_name, contact, address, contact_number, studentid, password, gender, dob) 
-                    VALUES ('$date', '$fname', '$lname', '$mname', '$lrn_number', '$contact_number', '$email', '$academic_year', '$grade_level', '$strand', '$section', '$guardian_name', '$contact', '$address', '$contact_number', '$studentid', '$password', '$gender', '$dob')";
-
-            if ($qsql = mysqli_query($conn, $sql)) {
-                ?>
-                <div class="popup popup--icon -success js_success-popup popup--visible">
+        }else{
+            if(isset($_GET['editid']))
+            {
+                $sql ="UPDATE patient SET lrn_number='$_POST[lrn_number]',fname='$_POST[fname]',lname='$_POST[lname]',mname='$_POST[mname]',contact_number='$_POST[contact_number]',email='$_POST[email]',strand='$_POST[strand]',guardian_name='$_POST[guardian_name]',address='$_POST[address]',contact='$_POST[contact]',gender='$_POST[gender]',dob='$_POST[dateofbirth]',grade_level='$_POST[grade_level]',section='$_POST[section]' WHERE patientid='$_GET[editid]'";
+                if($qsql = mysqli_query($conn,$sql))
+                {
+        ?>
+                    <div class="popup popup--icon -success js_success-popup popup--visible">
                     <div class="popup__background"></div>
                     <div class="popup__content">
-                        <h3 class="popup__content__title">Success</h3>
-                        <p>Patient Record Inserted Successfully</p>
-                        <p><?php echo "<script>setTimeout(\"location.href = 'view-patient.php';\",1500);</script>"; ?></p>
+                        <h3 class="popup__content__title">
+                        Success
+                        </h3>
+                        <p>Patient Record Updated Successfully</p>
+                        <p>
+                        <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
+                        <?php echo "<script>setTimeout(\"location.href = 'view-patient.php';\",1500);</script>"; ?>
+                        </p>
                     </div>
-                </div>
-                <?php
-            } else {
-                echo mysqli_error($conn);
+                    </div>
+        <?php
+                }
+                else
+                {
+                    echo mysqli_error($conn);
+                }
+            }
+            else
+            {
+                
+                $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,grade_level,strand,section,guardian_name,address,contact,studentid,password,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[mname]','$_POST[lrn_number]','$_POST[contact_number]','$_POST[email]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[gender]','$_POST[dateofbirth]')";
+
+                if($qsql = mysqli_query($conn,$sql))
+                {
+        ?>
+                    <div class="popup popup--icon -success js_success-popup popup--visible">
+                    <div class="popup__background"></div>
+                    <div class="popup__content">
+                        <h3 class="popup__content__title">
+                        Success
+                        </h3>
+                        <p>Patient Record Inserted Successfully</p>
+                        <p>
+                        <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
+                        <?php echo "<script>setTimeout(\"location.href = 'view-patient.php';\",1500);</script>"; ?>
+                        </p>
+                    </div>
+                    </div>
+        <?php
+                }
+                else
+                {
+                    echo mysqli_error($conn);
+                }
             }
         }
-    } else { // Update an existing record
-        $sql = "UPDATE patient SET lrn_number='$lrn_number', fname='$fname', lname='$lname', mname='$mname', contact_number='$contact_number', email='$email', strand='$strand', guardian_name='$guardian_name',  contact='$contact', address='$address', contact='$contact', gender='$gender', dob='$dob', grade_level='$grade_level', section='$section' 
-                WHERE patientid='$_GET[editid]'";
+     }
+    if(isset($_GET['editid']))
+    {
+        $sql="SELECT * FROM patient WHERE patientid='$_GET[editid]' ";
+        $qsql = mysqli_query($conn,$sql);
+        $rsedit = mysqli_fetch_array($qsql);
 
-        if ($qsql = mysqli_query($conn, $sql)) {
-            ?>
-            <div class="popup popup--icon -success js_success-popup popup--visible">
-                <div class="popup__background"></div>
-                <div class="popup__content">
-                    <h3 class="popup__content__title">Success</h3>
-                    <p>Patient Record Updated Successfully</p>
-                    <p><?php echo "<script>setTimeout(\"location.href = 'view-patient.php';\",1500);</script>"; ?></p>
-                </div>
-            </div>
-            <?php
-        } else {
-            echo mysqli_error($conn);
-        }
-    }
-}
-
-if (isset($_GET['editid'])) {
-    $sql = "SELECT * FROM patient WHERE patientid='$_GET[editid]' ";
-    $qsql = mysqli_query($conn, $sql);
-    $rsedit = mysqli_fetch_array($qsql);
-}
-?>
- <style>
-    html, body {
-        height: 100%;
-        margin: 0;
-        overflow: hidden;
     }
 
-    .pcoded-content {
-        height: 100vh;
-        overflow-y: hidden; /* Change this line */
-    }
-</style>
-
+    ?>
+	
     <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold; margin: 20px 20px 0 20px;"><h1>Student Details</h1></div>
-                    <br>
-
-
-
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Student Details</h4></div>
                         <div class="card-block">
-                            <div class="table-responsive dt-responsive">
+                          
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
-    
-
-
-        
-    <form id="main" method="post" action="" enctype="multipart/form-data">
-
     <div class="form-group row">
             <label class="col-sm-2"></label>
             <div class="col-sm-4">
@@ -361,5 +375,5 @@ if (isset($_GET['editid'])) {
     </div>
     </div>
     </div>
-
+</html>
     <?php include('footer.php');?>
