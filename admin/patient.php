@@ -123,7 +123,7 @@ if (isset($_GET['editid'])) {
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                    <div class="card-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold; margin: 20px 20px 0 20px;"><h1>Student Details</h1></div>
+                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold; margin: 20px 20px 0 20px;"><h1>Student Details</h1></div>
                     <br>
 
 
