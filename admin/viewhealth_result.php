@@ -35,7 +35,7 @@
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                    <div class="box-header" style="background-color: #0a4b78; text-align: center; font-family: 'Calibri', sans-serif;"><h4 style="color: #ffffff;">Health Assessment Results</h4></div>
+                        <div class="card-header"><legend>Health Assessment Results</legend></div>
                         <div class="card-block">
                         <div class="lrn-number">
                                 <?php
@@ -66,8 +66,8 @@
                                     if ($result) { // Check if the query was successful
                                         if ($result->num_rows > 0) {
                                             while ($row = $result->fetch_assoc()) {
-                                                echo "<b>Question: </b>" . $row['questions'] . "<br>";
-                                                echo "<b>Answer:</b> " . $row['answer'] . "<br>";
+                                                echo "Question: " . $row['questions'] . "<br>";
+                                                echo "Answer: " . $row['answer'] . "<br>";
                                                 echo "<hr>";
                                             }
                                         } else {
