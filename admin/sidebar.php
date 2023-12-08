@@ -87,6 +87,15 @@
         </li>
     </ul>
 </li>
+
+<li class="pcoded">
+    <a href="admissionrecord.php?delete_status=0">
+        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+        <span class="pcoded-mtext">Admission Record</span>
+    </a>
+</li>
+
+
         
 
 <li class="pcoded-hasmenu">
