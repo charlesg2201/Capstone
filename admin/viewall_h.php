@@ -3,17 +3,37 @@
 
 <head>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+       
+
         .question {
-            margin-bottom: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-size: 18px; /* Adjust this value to increase or decrease the font size of the questions */
+}
+
+        .question strong {
+            display: bold;
+            margin-bottom: 10px;
         }
 
-        .choices-container {
-            display: flex;
-        }
-
+        
         .choice {
-            margin-right: 20px;
+            margin-bottom: 10px;
+            margin-right: 30px;
+            font-size: 16px;
         }
+
+        .question textarea {
+    width: 100%;
+    height: 70px;
+    padding: 5px;
+    box-sizing: border-box;
+    margin-top: 20px !important; /* Added !important to ensure the margin takes effect */
+}
     </style>
 </head>
 
