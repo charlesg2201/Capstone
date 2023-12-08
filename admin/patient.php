@@ -10,7 +10,7 @@ if (isset($_POST['btn_submit'])) {
     $lname = $_POST['lname'];
     $mname = $_POST['mname'];
     $lrn_number = $_POST['lrn_number'];
-    $contact = $_POST['contact'];
+    $contact = $_POST['contact'];  // Added the missing field
     $strand = $_POST['strand'];
     $grade_level = $_POST['grade_level'];
     $section = $_POST['section'];
@@ -40,28 +40,8 @@ if (isset($_POST['btn_submit'])) {
                 </div>
             </div>
             <?php
-        }
-    } else {
-        if (isset($_GET['editid'])) {
-            $sql = "UPDATE patient SET lrn_number='$_POST[lrn_number]',fname='$_POST[fname]',lname='$_POST[lname]',mname='$_POST[mname]',contact_number='$_POST[contact_number]',email='$_POST[email]',strand='$_POST[strand]',guardian_name='$_POST[guardian_name]',address='$_POST[address]',contact='$_POST[contact]',gender='$_POST[gender]',dob='$_POST[dateofbirth]',grade_level='$_POST[grade_level]',section='$_POST[section]' WHERE patientid='$_GET[editid]'";
-            if ($qsql = mysqli_query($conn, $sql)) {
-                ?>
-                <div class="popup popup--icon -success js_success-popup popup--visible">
-                    <div class="popup__background"></div>
-                    <div class="popup__content">
-                        <h3 class="popup__content__title">Success</h3>
-                        <p>Patient Record Updated Successfully</p>
-                        <p>
-                            <?php echo "<script>setTimeout(\"location.href = 'view-patient.php';\",1500);</script>"; ?>
-                        </p>
-                    </div>
-                </div>
-                <?php
-            } else {
-                echo mysqli_error($conn);
-            }
         } else {
-            $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,academic_year,grade_level,strand,section,guardian_name,address,contact,studentid,password,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[mname]','$_POST[lrn_number]','$_POST[contact_number]','$_POST[email]','$_POST[academic_year]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[gender]','$_POST[dateofbirth]')";
+            $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,academic_year,grade_level,strand,section,guardian_name,address,contact,studentid,password,gender,dob) values('$date','$fname','$lname','$mname','$lrn_number','$contact','$_POST[email]','$_POST[academic_year]','$grade_level','$strand','$section','$_POST[guardian_name]','$address','$contact','$studentid','$password','$gender','$dob')";
             if ($qsql = mysqli_query($conn, $sql)) {
                 ?>
                 <div class="popup popup--icon -success js_success-popup popup--visible">
