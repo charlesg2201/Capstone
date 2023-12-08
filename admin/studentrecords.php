@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Print Report</title>
+    <title>Student List</title>
     <script type="text/javascript" charset="utf8" src="..\jquery.min.js"></script>
     <script type="text/javascript" charset="utf8" src="..\jquery.slimscroll.min.js"></script>
     <link rel="stylesheet" type="text/css" href="..\DataTables/datatables.min.css">
@@ -30,7 +30,7 @@
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><legend>Student Records</legend></div>
+                        <div class="card-header"><legend>Student List</legend></div>
                         <div class="card-block">
                             <div class="table-responsive dt-responsive">
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
@@ -93,7 +93,7 @@
 
     <script>
         $(window).on('load', function() {
-            // Check if DataTable is already initialized
+            // Check if DataTable is already initializedasdsa
             if (!$.fn.DataTable.isDataTable('#dom-jqry')) {
                 // If not initialized, initialize DataTable
                 $('#dom-jqry').DataTable({

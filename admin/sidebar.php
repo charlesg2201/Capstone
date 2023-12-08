@@ -88,12 +88,7 @@
     </ul>
 </li>
 
-<li class="pcoded">
-    <a href="admissionrecord.php?delete_status=0">
-        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
-        <span class="pcoded-mtext">Admission Record</span>
-    </a>
-</li>
+
 
 
         
@@ -145,8 +140,13 @@
     </a>
     <ul class="pcoded-submenu">
         <li class="">
-            <a href="printreport.php">
+            <a href="studentrecords.php">
                 <span class="pcoded-mtext">Student List</span>
+            </a>
+        </li>
+        <li class="">
+        <a href="admissionrecord.php?delete_status=0">
+                <span class="pcoded-mtext">Admission Record</span>
             </a>
         </li>
         
