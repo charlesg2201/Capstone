@@ -9,7 +9,8 @@ if (isset($_POST['submit'])) {
     $fname = $_POST['firstname'];
     $lname = $_POST['lastname'];
     $contact = $_POST['contact'];
-    $username = $_POST['username'];
+    $username = strtolower($fname . $lname);
+    $password = strtolower($fname);
     $gender = $_POST['gender'];
     $address = $_POST['address'];
     $employee_number = $_POST['employee_number'];
@@ -57,7 +58,7 @@ if (isset($_POST['submit'])) {
         <?php
     } else {
         if (isset($_GET['editid'])) {
-            $sql = "UPDATE tbl_admin_user SET profile_photo='$profilePhoto', firstname='$fname', lastname='$lname', contact='$contact', username='$username', gender='$gender', employee_number='$employee_number'  address='$address' WHERE userid='$_GET[editid]'";
+            $sql = "UPDATE tbl_admin_user SET profile_photo='$profilePhoto', firstname='$fname', lastname='$lname', contact='$contact', username='$username', gender='$gender', employee_number='$employee_number', address='$address' WHERE userid='$_GET[editid]'";
             if ($qsql = mysqli_query($conn, $sql)) {
                 // Display success message 
                 ?>
@@ -77,14 +78,8 @@ if (isset($_POST['submit'])) {
 <?php
             }
         } else {
-            // Insert new user record
-            $passw = hash('sha256', $_POST['password']);
-            function createSalt() {
-                return '2123293dsj2hu2nikhiljdsd';
-            }
-            $salt = createSalt();
-            $pass = hash('sha256', $salt . $passw);
-            $sql = "INSERT INTO `tbl_admin_user` (`profile_photo`, `firstname`, `lastname`, `contact`, `username`, `password`,`security_question`,`security_answer`, `gender`, `employee_number`, `address`) VALUES ('$profilePhoto', '$fname', '$lname', '$contact', '$username', '$pass', '$security_question', '$security_answer', '$gender', '$employee_number', '$address')";
+            
+            $sql = "INSERT INTO `tbl_admin_user` (`profile_photo`, `firstname`, `lastname`, `contact`, `username`, `password`,`security_question`,`security_answer`, `gender`, `employee_number`, `address`) VALUES ('$profilePhoto', '$fname', '$lname', '$contact', '$username', '$password', '$security_question', '$security_answer', '$gender', '$employee_number', '$address')";
             if ($qsql = mysqli_query($conn, $sql)) {
                 // Display success message
                 ?>
@@ -209,31 +204,12 @@ if (isset($_GET['editid'])) {
     </div>
     <h5>Security Details</h5>
     <hr>
-    <div class="form-group row">
+    
             <?php 
         if(!isset($_GET['editid']))
         {
         ?>
-                <label class="col-sm-2 col-form-label">Username</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" name="username" id="username"
-                                value="<?php if(isset($_GET['editid'])) { echo $rsedit['username']; } ?>" />
-                    <span class="messages"></span>
-                </div>
-        </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-4">
-            <input class="form-control" type="password" name="password" id="password"/>
-            <span class="messages"></span>
-        </div>
-
-        <label class="col-sm-2 col-form-label">Confirm Password</label>
-        <div class="col-sm-4">
-            <input class="form-control" type="password" name="cnfirmpassword" id="cnfirmpassword"/>
-            <span class="messages" id="confirm-pw" style="color: red;"></span>
-        </div>
-    </div>
+               
 
     <div class="form-group row">
             <label class="col-sm-2 col-form-label">Security Question</label>
@@ -275,20 +251,6 @@ if (isset($_GET['editid'])) {
 
 <?php include('footer.php');?>
 
-<script type="text/javascript">
-    $('#main').keyup(function(){
-        $('#confirm-pw').html('');
-    });
 
-    $('#cnfirmpassword').change(function(){
-        if($('#cnfirmpassword').val() != $('#password').val()){
-            $('#confirm-pw').html('Password Not Match');
-        }
-    });
-
-    $('#password').change(function(){
-        if($('#cnfirmpassword').val() != $('#password').val()){
-            $('#confirm-pw').html('Password Not Match');
-        }
-    });
+    
 </script>
