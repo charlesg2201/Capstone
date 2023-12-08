@@ -115,6 +115,19 @@ if (isset($_GET['editid'])) {
         height: 100vh;
         overflow-y: hidden; /* Change this line */
     }
+    .box-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px; /* Set your desired height */
+  background-color: #0a4b78;
+  color: white;
+  font-weight: bold;
+}
+
+.box-header h4 {
+  margin: 0;
+}
 </style>
 
     <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
@@ -123,7 +136,7 @@ if (isset($_GET['editid'])) {
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold; margin: 20px 20px 0 20px;"><h1>Student Details</h1></div>
+                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Student Details</h4></div>
                     <br>
 
 

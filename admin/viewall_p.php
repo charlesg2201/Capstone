@@ -14,6 +14,19 @@
         .choice {
             margin-right: 20px;
         }
+        .box-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px; /* Set your desired height */
+        background-color: #0a4b78;
+        color: white;
+        font-weight: bold;
+        }
+
+        .box-header h4 {
+        margin: 0;
+        }                  
     </style>
 </head>
 
@@ -30,8 +43,7 @@
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                    <div class="card">
-                    <div class="card-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold; margin: 20px 20px 0 20px;"><h1>Physical Assessment</h1></div>
+                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Physical Assessment Results</h4></div>
                     <br>
                         <div class="card-block">
                             <div class="questions-container">

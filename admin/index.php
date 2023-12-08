@@ -51,10 +51,10 @@ $row_manage = mysqli_fetch_array($result_manage);
                                     <div class="row align-items-end">
                                         <div class="col-8">
                                            <h6>Physical Assessment</h6>
-                                           <a class="small text-dark stretched-link" href="#">View Details</a>
+                                           <a class="small text-dark stretched-link" href="viewall_p.php">View Details</a>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-user"></i></span>
+                                            <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-file-text"></i></span>
                                         </div>
                                     </div>
                                 </div>
@@ -66,10 +66,10 @@ $row_manage = mysqli_fetch_array($result_manage);
                                     <div class="row align-items-end">
                                         <div class="col-8">
                                         <h6>Health Assessment</h6>
-                                           <a class="small text-dark stretched-link" href="#">View Details</a>
+                                           <a class="small text-dark stretched-link" href="viewall_h.php">View Details</a>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-user"></i></span>
+                                            <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-file-text"></i></span>
                                         </div>
                                     </div>
                                 </div>

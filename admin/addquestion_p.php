@@ -86,13 +86,27 @@ if (isset($_POST['btn_submit'])) {
 ?>
 
 <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
+<style>
+        .box-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px; /* Set your desired height */
+        background-color: #0a4b78;
+        color: white;
+        font-weight: bold;
+        }
 
+        .box-header h4 {
+        margin: 0;
+        }                  
+    </style>
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
         <div class="main-body">
             <div class="page-body">
                 <div class="card">
-                    <div class="card-header"><legend>Physical Assessment</legend></div>
+                <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Physical Assessment</h4></div>
                     <div class="card-block">
                         <hr>
                         <form id="main" method="post" action="" enctype="multipart/form-data">
