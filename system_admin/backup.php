@@ -1,3 +1,99 @@
+<?php
+if (isset($_POST['btn_backup'])) {
+    // Database connection parameters
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "capstone_db";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    // Get the current database name
+    $result_db = $conn->query("SELECT DATABASE()");
+    $row_db = $result_db->fetch_row();
+    $database_name = $row_db[0];
+
+    // Output SQL dump to a single file
+    $filename = $database_name . '_backup_' . date('Y-m-d_H-i-s') . '.sql';
+    $file = fopen($filename, 'w');
+
+    // Output header information
+    fwrite($file, "-- phpMyAdmin SQL Dump\n");
+    fwrite($file, "-- version 4.8.5\n");
+    fwrite($file, "-- https://www.phpmyadmin.net/\n");
+    fwrite($file, "--\n");
+    // Add more header information as needed
+
+    fwrite($file, "\nSET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";\n");
+    fwrite($file, "SET AUTOCOMMIT = 0;\n");
+    fwrite($file, "START TRANSACTION;\n");
+    fwrite($file, "SET time_zone = \"+00:00\";\n\n");
+
+    // Loop through all tables and backup each one
+    $tables = array();
+    $result = $conn->query("SHOW TABLES");
+    while ($row = $result->fetch_row()) {
+        $tables[] = $row[0];
+    }
+
+    foreach ($tables as $table) {
+        // Output table structure
+        $result_structure = $conn->query("SHOW CREATE TABLE $table");
+        $row_structure = $result_structure->fetch_assoc();
+        fwrite($file, "--\n-- Table structure for table `$table`\n--\n\n");
+        fwrite($file, $row_structure['Create Table'] . ";\n\n");
+
+        // Output table data
+        $result_data = $conn->query("SELECT * FROM $table");
+        if ($result_data->num_rows > 0) {
+            fwrite($file, "--\n-- Dumping data for table `$table`\n--\n\n");
+            while ($row_data = $result_data->fetch_assoc()) {
+                $keys = implode('`, `', array_keys($row_data));
+                $values = implode("', '", array_values($row_data));
+                fwrite($file, "INSERT INTO `$table` (`$keys`) VALUES ('$values');\n");
+            }
+            fwrite($file, "\n");
+        } else {
+            echo "No data found in the table $table.<br>";
+        }
+    }
+
+    // Output footer information
+    fwrite($file, "COMMIT;\n");
+    fwrite($file, "\n/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;\n");
+    fwrite($file, "/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;\n");
+    fwrite($file, "/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;\n");
+    fwrite($file, "/*!40101 SET NAMES utf8mb4 */;\n");
+
+    // Close the connection and the file
+    $conn->close();
+    fclose($file);
+
+    // Send appropriate headers for file download
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename=' . basename($filename));
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($filename));
+
+    // Output the file contents
+    readfile($filename);
+
+    // Delete the file after sending
+    unlink($filename);
+
+    exit; // Stop further execution
+}
+?>
+
 <!DOCTYPE html>
 <title>System Admin</title>
 <html lang="en">
@@ -7,77 +103,8 @@
 <?php include('sidebar.php');?>
 <?php include('connect.php');?>
 <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
-<?php date_default_timezone_set('Asia/Kolkata');
- $current_date = date('Y-m-d');
-
-if(isset($_POST["btn_web"]))
-{
-  extract($_POST);
-  if($_FILES['logo']['name']!=''){
-      $file_name = $_FILES['logo']['name'];
-      $file_type = $_FILES['logo']['type'];
-      $file_size = $_FILES['logo']['size'];
-      $file_tem_loc = $_FILES['logo']['tmp_name'];
-      $file_store = "uploadImage/Logo/".$file_name;
-
-      if (move_uploaded_file($file_tem_loc, $file_store)) {
-        echo "file uploaded successfully";
-      }
-  }
-  else{
-    $file_name=$_POST['old_image'];
-  }
-      $folder = "uploadImage/Logo/";
-
-      if (is_dir($folder))
-      {
-         if ($open = opendir($folder))
-
-          while (($logo=readdir($open)) !=false) {
-
-              if($logo=='.'|| $logo=="..") continue;
-
-              echo '<img src="uploadImage/Logo/'.$logo.'" width="100" height="100">';
-          }
-
-          closedir($open);
-        }
-  //UPDATE `manage_website` SET `id`=[value-1],`business_name`=[value-2],`business_email`=[value-3],`business_web`=[value-4],`portal_addr`=[value-5],`addr`=[value-6],`curr_sym`=[value-7],`curr_position`=[value-8],`front_end_en`=[value-9],`date_format`=[value-10],`def_tax`=[value-11],`logo`=[value-12] WHERE 1
-  // $q1="UPDATE `manage_website` SET `business_name`='$business_name',`business_email`='$business_email',`business_web`='$business_web',`portal_addr`='$portal_addr' ,`addr`= '$addr',`curr_sym`= '$curr_sym',`curr_position`='$curr_position',`front_end_en`='$front_end_en' , `date_format` = '$date_format', `def_tax` = '$def_tax', `logo` = '$file_name'";
-  if ($conn->query($q1) === TRUE) {
-
-      $_SESSION['success']='Record Successfully Updated';
-      ?>
-      <script type="text/javascript">
-        window.location = "setting.php";
-      </script>
-      <?php
-
-} else {
-
-      $_SESSION['error']='Something Went Wrong';
-}
-  ?>
-  <script>
-  //window.location = "sms_config.php";
-  </script>
-  <?php
-}
-
-?>
 
 
-
-<?php
-$que="select * from manage_website";
-$query=$conn->query($que);
-while($row=mysqli_fetch_array($query))
-{
-  //print_r($row);
-  extract($row);
-  $logo = $row['logo'];
-}
-?>
  <div class="pcoded-content">
 <div class="pcoded-inner-content">
 
@@ -126,7 +153,9 @@ while($row=mysqli_fetch_array($query))
                 <div class="border p-3">
                     <h5><span class="outlined-text">Backup</span></h5>
                     <div class="form-group mt-2">
-                        <button type="submit" name="btn_submit" class="btn btn-primary">Backup</button>
+                        <form method="post" action="">
+                           <button type="submit" name="btn_backup" class="btn btn-primary">Backup</button>
+                         </form>
                     </div>
                 </div>
             </div>
