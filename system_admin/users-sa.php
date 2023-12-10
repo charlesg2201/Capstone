@@ -15,12 +15,10 @@ if (isset($_POST['submit'])) {
     $employee_number = $_POST['employee_number'];
     $security_question = $_POST['security_question'];
     $security_answer = $_POST['security_answer'];
-    $date = $_POST['date'];
-   
+    $date = date("Y-m-d");
 
-    // Profile photo upload
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'profile_photos/'; // Create this directory
+        $uploadDir = 'profile_photos/';
         $uploadedFileName = $uploadDir . uniqid() . '_' . $_FILES['profile_photo']['name'];
 
         if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $uploadedFileName)) {
@@ -30,73 +28,69 @@ if (isset($_POST['submit'])) {
             exit;
         }
     }
-//
-    $checkDuplicateQuery = "SELECT COUNT(*) FROM tbl_admin WHERE employee_number = '$employee_number'";
-    $result = mysqli_query($conn, $checkDuplicateQuery);
-    $row = mysqli_fetch_row($result);
-    $count = $row[0];
 
-    if ($count > 0) {
-        ?>
-			<div class="popup popup--icon -error js_error-popup popup--visible">
-			<div class="popup__background"></div>
-			<div class="popup__content">
-				<h3 class="popup__content__title">
-				Error 
-				</h3>
-				<p>The details you are trying to add already exists.</p>
-				<p>
-				<a href="users-sa.php"><button class="button button--error" data-for="js_error-popup">Close</button></a>
-				</p>
-			</div>
-			</div>
-        <?php
-    } else {
-        if (isset($_GET['editid'])) {
-            $sql = "UPDATE tbl_admin SET profile_photo='$profilePhoto', firstname='$fname', lname='$lname', contact='$contact', gender='$gender', employee_number='$employee_number' ,addr='$addr' WHERE id='$_GET[editid]'";
-            if ($qsql = mysqli_query($conn, $sql)) {
-                // Display success message
-                ?>
+    if (isset($_GET['editid'])) {
+        $sql = "UPDATE tbl_admin SET profile_photo='$profilePhoto', firstname='$fname', lname='$lname', contact='$contact', gender='$gender', employee_number='$employee_number', addr='$addr' WHERE id='$_GET[editid]'";
+        if ($qsql = mysqli_query($conn, $sql)) {
+?>
             <div class="popup popup--icon -success js_success-popup popup--visible">
-              <div class="popup__background"></div>
-              <div class="popup__content">
-                <h3 class="popup__content__title">
-                  Success 
-                </h3>
-                <p>User Record Updated Successfully</p>
-                <p>
-                 <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
-                 <?php echo "<script>setTimeout(\"location.href = 'view-user-sa.php';\",1500);</script>"; ?>
-                </p>
-              </div>
+                <div class="popup__background"></div>
+                <div class="popup__content">
+                    <h3 class="popup__content__title">
+                        Success
+                    </h3>
+                    <p>User Record Updated Successfully</p>
+                    <p>
+                        <?php echo "<script>setTimeout(\"location.href = 'view-user-sa.php';\",1500);</script>"; ?>
+                    </p>
+                </div>
             </div>
 <?php
-            }
+        }
+    } else {
+        $checkDuplicateQuery = "SELECT COUNT(*) FROM tbl_admin WHERE employee_number = '$employee_number'";
+        $result = mysqli_query($conn, $checkDuplicateQuery);
+        $row = mysqli_fetch_row($result);
+        $count = $row[0];
+
+        if ($count > 0) {
+?>
+            <div class="popup popup--icon -error js_error-popup popup--visible">
+                <div class="popup__background"></div>
+                <div class="popup__content">
+                    <h3 class="popup__content__title">
+                        Error
+                    </h3>
+                    <p>The details you are trying to add already exist.</p>
+                    <p>
+                        <a href="users-sa.php"><button class="button button--error" data-for="js_error-popup">Close</button></a>
+                    </p>
+                </div>
+            </div>
+<?php
         } else {
-            // Insert new user record
             $passw = hash('sha256', $_POST['password']);
-            function createSalt() {
+            function createSalt()
+            {
                 return '2123293dsj2hu2nikhiljdsd';
             }
             $salt = createSalt();
             $pass = hash('sha256', $salt . $passw);
             $sql = "INSERT INTO `tbl_admin` (`profile_photo`, `firstname`, `lname`, `contact`, `username`, `password`, `security_question`, `security_answer`, `gender`, `employee_number`, `addr`, `date`) VALUES ('$profilePhoto', '$fname', '$lname', '$contact', '$username', '$pass', '$security_question', '$security_answer',  '$gender', '$employee_number', '$addr', '$date')";
             if ($qsql = mysqli_query($conn, $sql)) {
-                // Display success message
-                ?>
-            <div class="popup popup--icon -success js_success-popup popup--visible">
-              <div class="popup__background"></div>
-              <div class="popup__content">
-                <h3 class="popup__content__title">
-                  Success 
-                </h3>
-                <p>User Record Updated Successfully</p>
-                <p>
-                 <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
-                 <?php echo "<script>setTimeout(\"location.href = 'view-user-sa.php';\",1500);</script>"; ?>
-                </p>
-              </div>
-            </div>
+?>
+                <div class="popup popup--icon -success js_success-popup popup--visible">
+                    <div class="popup__background"></div>
+                    <div class="popup__content">
+                        <h3 class="popup__content__title">
+                            Success
+                        </h3>
+                        <p>User Record Updated Successfully</p>
+                        <p>
+                            <?php echo "<script>setTimeout(\"location.href = 'view-user-sa.php';\",1500);</script>"; ?>
+                        </p>
+                    </div>
+                </div>
 <?php
             } else {
                 echo mysqli_error($conn);
@@ -116,35 +110,45 @@ if (isset($_GET['editid'])) {
 <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
 <div class="pcoded-content">
-        <div class="pcoded-inner-content">
-            <div class="main-body">
-                <div class="page-body">
-                    <div class="card">
-                        <div class="card-header"><legend>Add System Administrator</legend></div>
-                        <div class="card-block">
-<form id="main" method="post" action="" enctype="multipart/form-data">
-    
-    <h5>Personal Details</h5>
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-body">
+                <div class="card">
+                    <div class="card-header"><legend>Add System Administrator</legend></div>
+                    <div class="card-block">
+                        <form id="main" method="post" action="" enctype="multipart/form-data">
+                        <h5>Personal Details</h5>
         <hr>
-        <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Date</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="date" name="date" max="<?php echo date("Y-m-d"); ?>"
-                            id="date" value="<?php echo $rsedit['date']; ?>" />
-            </div>
-        </div>
+        
         
         <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Profile Photo</label>
                         <div class="col-sm-4">
-                            <input type="file" id="profile_photo" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
+                            <input type="file" id="profile_photo" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder="" `required`=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
                         </div>
                     
                     <label class="col-sm-2 col-form-label">Employee Number</label>
             <div class="col-sm-4">
                 <input class="form-control" type="text" name="employee_number" id="employee_number" 
-                value="<?php if(isset($_GET['editid'])) { echo $rsedit['employee_number']; } ?>" />
-            </div>           
+                value="<?php if(isset($_GET['editid'])) { echo $rsedit['employee_number']; } ?>" 
+                oninput="validateEmployeeNumber()" required />
+        <span class="messages"></span>
+    </div>
+    <script>
+    function validateEmployeeNumber() {
+        var contactField = document.getElementById("employee_number");
+        var contactValue = contactField.value;
+
+        // Use a regular expression to check for only numbers
+        var regex = /^[0-9]+$/;
+
+        if (!regex.test(contactValue)) {
+            alert("Please enter a valid employee_number.");
+            contactField.value = "";
+        } 
+        
+    }
+</script>
         </div>
 
         <div class="form-group row">
@@ -171,7 +175,7 @@ if (isset($_GET['editid'])) {
         <span class="messages"></span>
     </div>
 
-<script>
+   <script>
     function validateContactNumber() {
         var contactField = document.getElementById("contact");
         var contactValue = contactField.value;
@@ -182,6 +186,9 @@ if (isset($_GET['editid'])) {
         if (!regex.test(contactValue)) {
             alert("Please enter a valid contact number.");
             contactField.value = "";
+        } else if (contactValue.length > 11) {
+            alert("Maximum length of contact number is 11 digits.");
+            contactField.value = contactValue.substring(0, 11); // Truncate to 11 digits
         }
     }
 </script>
@@ -230,7 +237,7 @@ if (isset($_GET['editid'])) {
     <div class="form-group row">
             <label class="col-sm-2 col-form-label">Security Question</label>
                 <div class="col-sm-4">
-                    <select name="security_question" id="security_question" class="form-control" required="">
+                    <select name="security_question" id="security_question" class="form-control">
                         <option value="">-- Select One -- </option>
                         <option value="Male" <?php if(isset($_GET['editid']))
                             { if($rsedit['security_question'] == 'Male') { echo 'selected'; } } ?>>Male</option>
@@ -253,33 +260,29 @@ if (isset($_GET['editid'])) {
             <button type="submit" name="submit" class="btn btn-primary m-b-0">Submit</button>
         </div>
     </div>
-
-</form>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php include('footer.php');?>
 
 <script type="text/javascript">
-    $('#main').keyup(function(){
+    $('#main').keyup(function () {
         $('#confirm-pw').html('');
     });
 
-    $('#cnfirmpassword').change(function(){
-        if($('#cnfirmpassword').val() != $('#password').val()){
+    $('#cnfirmpassword').change(function () {
+        if ($('#cnfirmpassword').val() != $('#password').val()) {
             $('#confirm-pw').html('Password Not Match');
         }
     });
 
-    $('#password').change(function(){
-        if($('#cnfirmpassword').val() != $('#password').val()){
+    $('#password').change(function () {
+        if ($('#cnfirmpassword').val() != $('#password').val()) {
             $('#confirm-pw').html('Password Not Match');
         }
     });

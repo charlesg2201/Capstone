@@ -5,7 +5,7 @@ include('header.php');
 include('sidebar.php');
 include('connect.php');
 
-if(isset($_POST["btn_update"])) {
+if(isset($_POST["btn_update"])) { // Change this condition to check for the "Update" button
     extract($_POST);
 
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
@@ -32,7 +32,8 @@ if(isset($_POST["btn_update"])) {
     }
 
     if($_SESSION['user'] == 'tbl_admin'){
-        $q1 = "UPDATE tbl_admin SET `employee_number`='$employee_number', `firstname`='$firstname', `username`='$username', `contact`='$contact' WHERE id = '".$_SESSION["id"]."'";
+        $q1 = "UPDATE tbl_admin SET `employee_number`='$employee_number', `firstname`='$firstname', `username`='$username', `contact`='$contact', `password`='$password' WHERE id = '".$_SESSION["id"]."'";
+
     }
 
     if ($conn->query($q1) === TRUE) {
@@ -76,41 +77,133 @@ if($_SESSION['user'] == 'tbl_admin'){
                                         <div class="form-group row"></div>
                                         <br>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Profile Photo</label>
-                                            <div class="col-sm-4">
-                                                <input type="file" id="photo-upload" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder=""   value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
-                                            </div>
+                        <label class="col-sm-2 col-form-label">Profile Photo</label>
+                        <div class="col-sm-4">
+                            <input type="file" id="profile_photo" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder=""   value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" readonly >
+                        </div>
+                    
+                    <label class="col-sm-2 col-form-label">Employee Number</label>
+            <div class="col-sm-4">
+            <input class="form-control" type="text" name="employee_number" id="employee_number" 
+    value="<?php echo $employee_number; ?>" 
+    oninput="validateEmployeeNumber()" required readonly />
+        <span class="messages"></span>
+    </div>
+    <script>
+    function validateEmployeeNumber() {
+        var contactField = document.getElementById("employee_number");
+        var contactValue = contactField.value;
 
-                                            <label class="col-sm-2 col-form-label">Employee Number</label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control" id="employee_number" name="employee_number" value="<?php echo $employee_number; ?>" placeholder="">
-                                                <span class="messages"></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Name</label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control" name="firstname" id="firstname" value="<?php echo $firstname; ?>"  placeholder="">
-                                                <span class="messages"></span>
-                                            </div>
+        // Use a regular expression to check for only numbers
+        var regex = /^[0-9]+$/;
 
-                                            <label class="col-sm-2 col-form-label">Contact</label>
-                                            <div class="col-sm-4">
-                                                <input type="tel" class="form-control" id="contact" name="contact" value="<?php echo $contact;?>" placeholder="" minlength="11" maxlength="11" pattern="^[0][1-9]\d{9}$|^[1-9]\d{9}$">
-                                                <span class="messages"></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Username</label>
-                                            <div class="col-sm-4">
-                                                <input type="email" class="form-control" id="username" name="username" value="<?php echo $username; ?>" placeholder="">
-                                                <span class="messages"></span>
-                                            </div>
-                                        </div>
+        if (!regex.test(contactValue)) {
+            alert("Please enter a valid employee_number.");
+            contactField.value = "";
+        } 
+        
+    }
+</script>
+        </div>
+
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-4">
+        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" required="" value="<?php echo $firstname; ?>" readonly>
+            <span class="messages"></span>
+        </div>
+        
+
+        <label class="col-sm-2 col-form-label">Last Name</label>
+        <div class="col-sm-4">
+        <input type="text" class="form-control" name="lname" id="lname" placeholder="" required="" value="<?php echo $lname; ?>" readonly>
+            <span class="messages"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Contact Number</label>
+    <div class="col-sm-4">
+    <input class="form-control" type="text" name="contact" id="contact" value="<?php echo $contact; ?>" oninput="validateContactNumber()" required readonly />
+        <span class="messages"></span>
+    </div>
+
+   <script>
+    function validateContactNumber() {
+        var contactField = document.getElementById("contact");
+        var contactValue = contactField.value;
+
+        // Use a regular expression to check for only numbers
+        var regex = /^[0-9]+$/;
+
+        if (!regex.test(contactValue)) {
+            alert("Please enter a valid contact number.");
+            contactField.value = "";
+        } else if (contactValue.length > 11) {
+            alert("Maximum length of contact number is 11 digits.");
+            contactField.value = contactValue.substring(0, 11); // Truncate to 11 digits
+        }
+    }
+</script>
+<label class="col-sm-2 col-form-label">Gender</label>
+        <div class="col-sm-4">
+        <input type="text" class="form-control" name="gender" id="gender" placeholder="" value="<?php echo $gender; ?>" readonly>
+            <span class="messages"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+        <textarea name="addr" id="addr" class="form-control" readonly><?php echo $addr; ?></textarea>
+        </div>
+    
+    </div>
+    <h5>Security Details</h5>
+    <hr>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Username</label>
+        <div class="col-sm-4">
+        <input class="form-control" type="text" name="username" id="username" value="<?php echo $username; ?>" readonly />
+            <span class="messages"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Password</label>
+        <div class="col-sm-4">
+        <input class="form-control" type="password" name="password" id="password" value="********" readonly />
+            <span class="messages"></span>
+        </div>
+
+        <label class="col-sm-2 col-form-label">Confirm Password</label>
+        <div class="col-sm-4">
+        <input class="form-control" type="password" name="cnfirmpassword" id="cnfirmpassword" value="********" readonly />
+            <span class="messages" id="confirm-pw" style="color: red;"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Security Question</label>
+                <div class="col-sm-4">
+                <input class="form-control" type="text" name="security_question" id="security_question" value="<?php echo $security_question; ?>" readonly />
+            <span class="messages"></span>
+    
+                </div>
+            <label class="col-sm-2 col-form-label">Security Answer</label>
+                <div class="col-sm-4">
+                <input class="form-control" type="text" name="security_answer" id="security_answer" value="<?php echo $security_answer; ?>" readonly />
+                </div>
+        </div> 
+<?php  ?>
+
                                         <div class="form-group row">
                                             <label class="col-sm-2"></label>
                                             <div class="col-sm-10">
-                                                <button type="submit" name="btn_update" class="btn btn-primary m-b-0">Update</button>
+                                           <!-- Edit Button -->
+<button type="button" name="btn_edit" id="editButton" class="btn btn-primary m-b-0">Edit</button>
+
+<!-- Update Button (Initially hidden) -->
+<button type="submit" name="btn_update" id="updateButton" class="btn btn-success m-b-0" style="display: none;">Update</button>
+
                                             </div>
                                         </div>
                                     </form>
@@ -158,6 +251,52 @@ if($_SESSION['user'] == 'tbl_admin'){
                                 Array.from(document.querySelectorAll('button[data-for]')).
                                 forEach(addButtonTrigger);
                             </script>
+                            <script>
+   document.addEventListener("DOMContentLoaded", function() {
+    // Function to remove readonly attribute from input fields
+    function makeFieldsEditable() {
+        var inputFields = document.querySelectorAll('input[readonly], textarea[readonly]');
+        inputFields.forEach(function(field) {
+            field.removeAttribute('readonly');
+        });
+
+        // Show the "Update" button and hide the "Edit" button
+        document.getElementById('updateButton').style.display = 'block';
+        document.getElementById('editButton').style.display = 'none';
+    }
+
+    // Add click event listener to the "Edit" button
+    var editButton = document.getElementById('editButton');
+    editButton.addEventListener('click', function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+        
+        // Call the function to make fields editable
+        makeFieldsEditable();
+    });
+});
+
+</script>
+
+<script type="text/javascript">
+    $('#main').keyup(function () {
+        $('#confirm-pw').html('');
+    });
+
+    $('#cnfirmpassword').change(function () {
+        if ($('#cnfirmpassword').val() != $('#password').val()) {
+            $('#confirm-pw').html('Password Not Match');
+        }
+    });
+
+    $('#password').change(function () {
+        if ($('#cnfirmpassword').val() != $('#password').val()) {
+            $('#confirm-pw').html('Password Not Match');
+        }
+    });
+</script>
+
+
                         </div>
                     </div>
                 </div>
@@ -165,3 +304,5 @@ if($_SESSION['user'] == 'tbl_admin'){
         </div>
     </div>
 </div>
+
+

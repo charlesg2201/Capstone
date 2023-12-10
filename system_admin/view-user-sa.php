@@ -72,7 +72,6 @@ if ($qsql) {
                 <td>&nbsp;$rs[addr]</td>
                 <td>&nbsp;$statusText</td>
                 <td>&nbsp;
-                    <a href='users-sa.php?editid=$rs[id]' class='btn btn-primary'>Update</a>
                     <a href='view-user-sa.php?id=$rs[id]' class='btn btn-danger'>$buttonText</a>
                 </td>
             </tr>";
