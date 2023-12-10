@@ -158,41 +158,7 @@ if($_SESSION['user'] == 'tbl_admin'){
         </div>
     
     </div>
-    <h5>Security Details</h5>
-    <hr>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Username</label>
-        <div class="col-sm-4">
-        <input class="form-control" type="text" name="username" id="username" value="<?php echo $username; ?>" readonly />
-            <span class="messages"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-4">
-        <input class="form-control" type="password" name="password" id="password" value="********" readonly />
-            <span class="messages"></span>
-        </div>
-
-        <label class="col-sm-2 col-form-label">Confirm Password</label>
-        <div class="col-sm-4">
-        <input class="form-control" type="password" name="cnfirmpassword" id="cnfirmpassword" value="********" readonly />
-            <span class="messages" id="confirm-pw" style="color: red;"></span>
-        </div>
-    </div>
-
-    <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Security Question</label>
-                <div class="col-sm-4">
-                <input class="form-control" type="text" name="security_question" id="security_question" value="<?php echo $security_question; ?>" readonly />
-            <span class="messages"></span>
-    
-                </div>
-            <label class="col-sm-2 col-form-label">Security Answer</label>
-                <div class="col-sm-4">
-                <input class="form-control" type="text" name="security_answer" id="security_answer" value="<?php echo $security_answer; ?>" readonly />
-                </div>
-        </div> 
+   
 <?php  ?>
 
                                         <div class="form-group row">

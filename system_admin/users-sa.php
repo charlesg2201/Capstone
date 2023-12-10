@@ -9,13 +9,12 @@ if (isset($_POST['submit'])) {
     $fname = $_POST['firstname'];
     $lname = $_POST['lname'];
     $contact = $_POST['contact'];
-    $username = $_POST['username'];
+    $employee_number = $_POST['employee_number'];
+    $username = $employee_number;
     $gender = $_POST['gender'];
     $addr = $_POST['addr'];
-    $employee_number = $_POST['employee_number'];
-    $security_question = $_POST['security_question'];
-    $security_answer = $_POST['security_answer'];
     $date = date("Y-m-d");
+    $password = strtolower($fname);
 
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = 'profile_photos/';
@@ -69,14 +68,8 @@ if (isset($_POST['submit'])) {
             </div>
 <?php
         } else {
-            $passw = hash('sha256', $_POST['password']);
-            function createSalt()
-            {
-                return '2123293dsj2hu2nikhiljdsd';
-            }
-            $salt = createSalt();
-            $pass = hash('sha256', $salt . $passw);
-            $sql = "INSERT INTO `tbl_admin` (`profile_photo`, `firstname`, `lname`, `contact`, `username`, `password`, `security_question`, `security_answer`, `gender`, `employee_number`, `addr`, `date`) VALUES ('$profilePhoto', '$fname', '$lname', '$contact', '$username', '$pass', '$security_question', '$security_answer',  '$gender', '$employee_number', '$addr', '$date')";
+           
+            $sql = "INSERT INTO `tbl_admin` (`profile_photo`, `firstname`, `lname`, `contact`, `username`, `password`, `gender`, `employee_number`, `addr`, `date`) VALUES ('$profilePhoto', '$fname', '$lname', '$contact', '$username', '$password',  '$gender', '$employee_number', '$addr', '$date')";
             if ($qsql = mysqli_query($conn, $sql)) {
 ?>
                 <div class="popup popup--icon -success js_success-popup popup--visible">
@@ -210,47 +203,7 @@ if (isset($_GET['editid'])) {
         </div>
     
     </div>
-    <h5>Security Details</h5>
-    <hr>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Username</label>
-        <div class="col-sm-4">
-            <input class="form-control" type="text" name="username" id="username"
-                    value="<?php if(isset($_GET['editid'])) { echo $rsedit['username']; } ?>" />
-            <span class="messages"></span>
-        </div>
-    </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-4">
-            <input class="form-control" type="password" name="password" id="password" required=""/>
-            <span class="messages"></span>
-        </div>
-
-        <label class="col-sm-2 col-form-label">Confirm Password</label>
-        <div class="col-sm-4">
-            <input class="form-control" type="password" name="cnfirmpassword" id="cnfirmpassword" required=""/>
-            <span class="messages" id="confirm-pw" style="color: red;"></span>
-        </div>
-    </div>
-
-    <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Security Question</label>
-                <div class="col-sm-4">
-                    <select name="security_question" id="security_question" class="form-control">
-                        <option value="">-- Select One -- </option>
-                        <option value="Male" <?php if(isset($_GET['editid']))
-                            { if($rsedit['security_question'] == 'Male') { echo 'selected'; } } ?>>Male</option>
-                        <option value="Female" <?php if(isset($_GET['editid']))
-                            { if($rsedit['security_question'] == 'Female') { echo 'selected'; } } ?>>Female</option>
-                    </select>
-                </div>
-            <label class="col-sm-2 col-form-label">Security Answer</label>
-                <div class="col-sm-4">
-                    <input class="form-control" type="text" name="security_answer" id="security_answer" 
-                    value="<?php if(isset($_GET['editid'])) { echo $rsedit['security_answer']; } ?>" />
-                </div>
-        </div> 
+   
 <?php  ?>
 
     
