@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 06, 2023 at 07:23 AM
+-- Generation Time: Dec 10, 2023 at 05:01 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -25,38 +25,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
---
-
-CREATE TABLE `admin` (
-  `id` int(11) NOT NULL,
-  `username` varchar(250) NOT NULL,
-  `password` varchar(100) NOT NULL,
-  `firstname` varchar(50) NOT NULL,
-  `lname` varchar(500) NOT NULL,
-  `gender` varchar(500) NOT NULL,
-  `dob` text NOT NULL,
-  `contact` text NOT NULL,
-  `addr` varchar(500) NOT NULL,
-  `notes` varchar(200) NOT NULL,
-  `image` varchar(2000) NOT NULL,
-  `created_on` date NOT NULL,
-  `updated_on` date NOT NULL,
-  `role_id` int(11) NOT NULL,
-  `last_login` date NOT NULL,
-  `delete_status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`id`, `username`, `password`, `firstname`, `lname`, `gender`, `dob`, `contact`, `addr`, `notes`, `image`, `created_on`, `updated_on`, `role_id`, `last_login`, `delete_status`) VALUES
-(2, 'jniel@cct.com', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Niel', 'admin', 'Male', '01-24-2001', '09922138761', 'Tagaytay City', '', 'user1.jpg', '2023-05-28', '0000-00-00', 0, '0000-00-00', 0);
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `manage_website`
 --
 
@@ -70,6 +38,10 @@ CREATE TABLE `manage_website` (
 --
 
 INSERT INTO `manage_website` (`id`, `logo`) VALUES
+(1, 'shslogo.png'),
+(1, 'shslogo.png'),
+(1, 'shslogo.png'),
+(1, 'shslogo.png'),
 (1, 'shslogo.png');
 
 -- --------------------------------------------------------
@@ -85,8 +57,9 @@ CREATE TABLE `patient` (
   `mname` varchar(100) NOT NULL,
   `lname` varchar(50) NOT NULL,
   `lrn_number` int(11) NOT NULL,
-  `contact_number` int(100) NOT NULL,
+  `contact_number` varchar(15) NOT NULL,
   `email` varchar(100) NOT NULL,
+  `academic_year` varchar(100) NOT NULL,
   `grade_level` varchar(100) NOT NULL,
   `strand` varchar(50) NOT NULL,
   `section` varchar(100) NOT NULL,
@@ -107,11 +80,34 @@ CREATE TABLE `patient` (
 -- Dumping data for table `patient`
 --
 
-INSERT INTO `patient` (`patientid`, `date`, `fname`, `mname`, `lname`, `lrn_number`, `contact_number`, `email`, `grade_level`, `strand`, `section`, `guardian_name`, `address`, `contact`, `studentid`, `password`, `security_question`, `security_answer`, `gender`, `dob`, `status`, `delete_status`) VALUES
-(49, '0000-00-00', 'Maevien', 'Magsino', 'Magsino', 20010300, 2147483647, 'maeviencolenixmagsino@gmail.com', 'GRADE 12', 'HE', 'Diamond', 'Rissa Magsino', 'San Jose, Tagaytay City', '09476304620', 'maevienmagsino', '07292000', '', '', 'Female', '2000-07-29', '', 0),
-(50, '0000-00-00', 'Charles', 'Javier ', 'Manzano', 20010310, 2147483647, 'charlesmanzano121517@gmail.com', 'GRADE 12', 'ICT', 'Sapphire', 'Rizza Manzano', 'Kaybagal Central, Tagaytay City', '09282282034', 'charlesmanzano', '02022001', '', '', 'Male', '2001-02-02', '', 0),
-(51, '0000-00-00', 'Paul', 'P', 'Mojica', 20010578, 2147483647, 'paul@cct.com', 'GRADE 11', 'ABM', 'Ruby', 'Patrick Mojica', 'Patutong Malaki, Tagaytay City', '09296161928', 'paulmojica', '05202003', '', '', 'Male', '2003-05-20', '', 0),
-(52, '0000-00-00', 'John', 'V', 'Macalalad', 20020815, 2147483647, 'john@cct.com', 'GRADE 12', 'HUMMS', 'Sapphire', 'Tigreal Macalalad', 'Nasugbu, Batangas', '09881388856', 'johnmacalalad', '10282002', '', '', 'Male', '2002-10-28', '', 0);
+INSERT INTO `patient` (`patientid`, `date`, `fname`, `mname`, `lname`, `lrn_number`, `contact_number`, `email`, `academic_year`, `grade_level`, `strand`, `section`, `guardian_name`, `address`, `contact`, `studentid`, `password`, `security_question`, `security_answer`, `gender`, `dob`, `status`, `delete_status`) VALUES
+(49, '2023-09-27', 'Maevien', 'Magsino', 'Magsino', 20010300, '2147483647', 'maeviencolenixmagsino@gmail.com', '', 'GRADE 12', 'ABM', 'Diamond', 'Rissa Magsino', 'San Jose, Tagaytay City', '09476304620', 'maevienmagsino', '07292000', '', '', 'Female', '2000-07-29', '', 0),
+(50, '2023-07-25', 'Charles', 'Javier ', 'Manzano', 20010310, '2147483647', 'charlesmanzano121517@gmail.com', '', 'GRADE 12', 'ICT', 'Sapphire', 'Rizza Manzano', 'Kaybagal Central, Tagaytay City', '09282282034', 'charlesmanzano', '02022001', '', '', 'Male', '2001-02-02', '', 0),
+(51, '2023-04-19', 'Paul', 'P', 'Mojica', 20010578, '2147483647', 'paul@cct.com', '', 'GRADE 11', 'ABM', 'Ruby', 'Patrick Mojica', 'Patutong Malaki, Tagaytay City', '09296161928', 'paulmojica', '05202003', '', '', 'Male', '2003-05-20', '', 0),
+(52, '2023-01-15', 'John', 'V', 'Macalalad', 20020815, '2147483647', 'john@cct.com', '', 'GRADE 12', 'HUMMS', 'Sapphire', 'Tigreal Macalalad', 'Nasugbu, Batangas', '09881388856', 'johnmacalalad', '10282002', '', '', 'Male', '2002-10-28', '', 0),
+(53, '2023-12-08', 'adwwad', 'dawdawd', 'dawdawd', 3413123, '12321321321', 'wadadwadwadaw', '2023-2024', 'GRADE 11', 'STEM', 'awdwdwad', 'awdwadwad', 'dawdwd', '12321313213', 'adwwaddawdawd', '10292021', '', '', 'Male', '2021-10-29', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_academicyear`
+--
+
+CREATE TABLE `tbl_academicyear` (
+  `id` int(11) NOT NULL,
+  `academic_year` varchar(100) NOT NULL,
+  `delete_status` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_academicyear`
+--
+
+INSERT INTO `tbl_academicyear` (`id`, `academic_year`, `delete_status`) VALUES
+(1, '2023-2024', 0),
+(2, '2024-2025', 0),
+(3, '2025-2026', 0),
+(5, '2026-2027', 0);
 
 -- --------------------------------------------------------
 
@@ -149,7 +145,8 @@ CREATE TABLE `tbl_admin` (
 
 INSERT INTO `tbl_admin` (`id`, `date`, `username`, `profile_photo`, `password`, `security_question`, `security_answer`, `employee_number`, `firstname`, `lname`, `gender`, `dob`, `contact`, `addr`, `notes`, `image`, `created_on`, `updated_on`, `role_id`, `last_login`, `delete_status`) VALUES
 (10, '2023-07-11', 'charles@cct.com', 'profile_photos/655ff73610240_image.jpg', 'admin', 'Female', 'nicole', 2312312, 'Charles', 'manzano', 'Male', '', '09282282034', 'sadasdasd', '', '', '0000-00-00', '0000-00-00', 0, '0000-00-00', 0),
-(11, '2023-11-24', 'paul@cct.com', 'profile_photos/65602c3517288_image.jpg', 'paul', 'What is your birth month?', 'july', 123456789, 'paul', 'mojica', 'Male', '', '09282282034', 'tagaytay city', '', '', '0000-00-00', '0000-00-00', 0, '0000-00-00', 0);
+(11, '2023-11-24', 'paul@cct.com', 'profile_photos/65602c3517288_image.jpg', 'paul', 'What is your birth month?', 'july', 123456789, 'paul', 'mojica', 'Male', '', '09282282034', 'tagaytay city', '', '', '0000-00-00', '0000-00-00', 0, '0000-00-00', 0),
+(12, '2023-12-08', 'charles@cct.com', 'profile_photos/6572e8f976eb0_image.jpg', 'aa7f019c326413d5b8bcad4314228bcd33ef557f5d81c7cc977f7728156f4357', 'Male', '123', 435435435, 'Charles', 'manzano', 'Male', '', '4324234', 'adsefeadfq', '', '', '0000-00-00', '0000-00-00', 0, '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -181,8 +178,8 @@ CREATE TABLE `tbl_admin_user` (
 --
 
 INSERT INTO `tbl_admin_user` (`userid`, `date`, `profile_photo`, `firstname`, `lastname`, `employee_number`, `contact`, `username`, `password`, `security_question`, `security_answer`, `gender`, `status`, `address`, `delete_status`, `image`) VALUES
-(25, '2023-01-01', 'profile_photos/65697a4e5e81c_377200974_306623155544054_8342356228559924084_n.jpg', 'Charles ', 'Manzano', 1232131231, '09476304620', 'admincharles@cct.com', 'admin', 'Male', 'charles', 'Male', '', 'Kaybagal Central, Tagaytay City', 0, ''),
-(26, '2023-05-05', '../admin/profile_photos/655d7de1f17c4_image.jpg', 'wqweqwe', 'ewqeqwe', 2323213, '12312312323', 'qweqwe', 'fa84fc5838e8419f67c52b6b9033601116de373ac36bd2eca7327718a9a37185', 'Male', 'asdasda', 'Male', '', 'qweqweqwe', 0, '');
+(25, '2023-01-01', 'profile_photos/65732f591930b_377200974_306623155544054_8342356228559924084_n.jpg', 'Charles ', 'Manzano', 2147483647, '09296161827', 'admincharles@cct.com', 'admin', 'Male', 'charles', 'Male', '', 'Kaybagal Central, Tagaytay City', 0, ''),
+(30, '0000-00-00', '../admin/profile_photos/6572e86c90417_image.jpg', 'maevien', 'magsino', 5435435, '43425345234', 'maevienmagsino', 'maevien', 'What is your birth month?', 'july', 'Male', '', 'sfsefsef', 0, '');
 
 -- --------------------------------------------------------
 
@@ -196,66 +193,18 @@ CREATE TABLE `tbl_admission` (
   `admission_date` date NOT NULL,
   `admission_time` time NOT NULL,
   `reasons` varchar(50) NOT NULL,
-  `remarks` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_assessment`
---
-
-CREATE TABLE `tbl_assessment` (
-  `ExamID` int(50) NOT NULL,
-  `ExamName` varchar(50) NOT NULL,
-  `Q1` varchar(10000) NOT NULL,
-  `Q2` varchar(10000) NOT NULL,
-  `Q3` varchar(10000) NOT NULL,
-  `Q4` varchar(10000) NOT NULL,
-  `Q5` varchar(10000) NOT NULL,
+  `remarks` varchar(50) NOT NULL,
   `delete_status` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `tbl_assessment`
+-- Dumping data for table `tbl_admission`
 --
 
-INSERT INTO `tbl_assessment` (`ExamID`, `ExamName`, `Q1`, `Q2`, `Q3`, `Q4`, `Q5`, `delete_status`) VALUES
-(1, 'Physical', 'qwewqewqewqe', 'asdsad', 'wadasd', 'ad', 'assdasd', 0),
-(2, 'Health', 'awdawdwa', 'dawdawdwad', 'awdawdwad', 'awdawd', 'awdawdwa', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_assessment_result`
---
-
-CREATE TABLE `tbl_assessment_result` (
-  `EAnsID` int(50) NOT NULL,
-  `ExamID` int(10) NOT NULL,
-  `Ans1` mediumtext NOT NULL,
-  `Ans2` mediumtext NOT NULL,
-  `Ans3` mediumtext NOT NULL,
-  `Ans4` mediumtext NOT NULL,
-  `Ans5` mediumtext NOT NULL,
-  `delete_status` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tbl_email_config`
---
-
-CREATE TABLE `tbl_email_config` (
-  `e_id` int(21) NOT NULL,
-  `name` varchar(500) NOT NULL,
-  `mail_driver_host` varchar(5000) NOT NULL,
-  `mail_port` int(50) NOT NULL,
-  `mail_username` varchar(50) NOT NULL,
-  `mail_password` varchar(30) NOT NULL,
-  `mail_encrypt` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `tbl_admission` (`admission_id`, `patientid`, `admission_date`, `admission_time`, `reasons`, `remarks`, `delete_status`) VALUES
+(1, 49, '2023-12-06', '15:08:00', 'Cough', 'Given medicine', 0),
+(2, 50, '2023-07-05', '19:31:00', 'Headache', 'Given Medicine', 0),
+(3, 49, '2023-12-08', '14:06:00', 'Cough', 'Given medicine', 0);
 
 -- --------------------------------------------------------
 
@@ -265,7 +214,7 @@ CREATE TABLE `tbl_email_config` (
 
 CREATE TABLE `tbl_health` (
   `question_id` int(11) NOT NULL,
-  `questions` varchar(100) NOT NULL,
+  `questions` varchar(1000) NOT NULL,
   `question_type` varchar(100) NOT NULL,
   `choices` varchar(100) NOT NULL,
   `select_all` int(11) NOT NULL
@@ -276,8 +225,13 @@ CREATE TABLE `tbl_health` (
 --
 
 INSERT INTO `tbl_health` (`question_id`, `questions`, `question_type`, `choices`, `select_all`) VALUES
-(1, 'asd?', 'Multiple Choice', 'aasdsad, bsadsadad', 0),
-(2, 'zxc?', 'Essay', '', 0);
+(3, 'How do you typically cope with stress?', 'Multiple Choice', 'A) Exercise, B) Talk to someone, C) Relaxation techniques, D) Avoidance', 0),
+(4, 'How often do you feel anxious or worried?', 'Multiple Choice', 'A) Never, B) Rarely, C) Sometimes, D) Often', 0),
+(5, 'Have you experienced a traumatic event (e. g., accident, violence, abuse) that continues to affect you emotionally?  If yes,why? (Briefly describe)', 'Essay', '', 0),
+(6, 'Have you been feeling unusually anxious or worried? If yes, how?', 'Essay', '', 0),
+(7, 'Have you ever had a panic attack which is a sudden and intense fear?', 'Multiple Choice', 'Yes, No', 0),
+(8, 'How often do you experience headaches while at school?', 'Essay', '', 0),
+(9, 'Do you sometimes feel overly tired or fatigued during the school week? Briefly describe.', 'Essay', '', 0);
 
 -- --------------------------------------------------------
 
@@ -298,10 +252,13 @@ CREATE TABLE `tbl_health_results` (
 --
 
 INSERT INTO `tbl_health_results` (`number`, `lrn_number`, `question_id`, `answer`, `delete_status`) VALUES
-(1, 987654321, 1, ' bsadsadad', 0),
-(2, 987654321, 2, 'asdsadsad', 0),
-(3, 20010300, 1, ' bsadsadad', 0),
-(4, 20010300, 2, 'fdfsfsdf', 0);
+(12, 20010310, 3, 'A) Exercise', 0),
+(13, 20010310, 4, ' B) Rarely', 0),
+(14, 20010310, 5, 'no', 0),
+(15, 20010310, 6, 'no', 0),
+(16, 20010310, 7, 'no', 0),
+(17, 20010310, 8, 'no', 0),
+(18, 20010310, 9, 'no', 0);
 
 -- --------------------------------------------------------
 
@@ -311,7 +268,7 @@ INSERT INTO `tbl_health_results` (`number`, `lrn_number`, `question_id`, `answer
 
 CREATE TABLE `tbl_physical` (
   `question_id` int(11) NOT NULL,
-  `questions` varchar(100) NOT NULL,
+  `questions` varchar(1000) NOT NULL,
   `question_type` varchar(100) NOT NULL,
   `choices` varchar(100) NOT NULL,
   `select_all` int(11) NOT NULL
@@ -322,11 +279,14 @@ CREATE TABLE `tbl_physical` (
 --
 
 INSERT INTO `tbl_physical` (`question_id`, `questions`, `question_type`, `choices`, `select_all`) VALUES
-(18, 'zxc?', 'Multiple Choice', 'a, b, c, d', 0),
-(23, 'ghd', 'Essay', '', 0),
-(24, 'iop?', 'Multiple Choice', 'a, b, c, d, e', 0),
-(25, 'NBMBNM', 'Essay', '', 0),
-(26, 'asd?', 'Multiple Choice', 'a, b, c', 0);
+(27, 'How many hours of sleep do you typically get on school nights?', 'Multiple Choice', 'A) 8 or more hours, B) 6-7 hours, C) 4-5 hours, D) Less than 4 hours', 0),
+(28, 'Have you ever engaged in restrictive eating or unhealthy dieting practices to control your weight? If yes why? (Briefly explain)', 'Essay', '', 0),
+(29, 'How often do you participate in physical activities or exercise outside of school?', 'Essay', '', 0),
+(30, 'Have you ever experienced difficulty in breathing during physical activities?', 'Multiple Choice', 'Yes, No', 0),
+(31, 'Have you ever had an allergic reaction to something such as food or medicines? If yes, state your allergies.', 'Essay', '', 0),
+(32, 'Have you experienced weight loss without trying? ', 'Multiple Choice', 'Yes, No', 0),
+(33, 'Have you noticed any changes in your appetite such as feeling full quickly or loss of appetite?', 'Multiple Choice', 'Yes, No', 0),
+(34, 'sadsadawdwadwadad', 'Essay', '', 0);
 
 -- --------------------------------------------------------
 
@@ -347,13 +307,13 @@ CREATE TABLE `tbl_physical_results` (
 --
 
 INSERT INTO `tbl_physical_results` (`number`, `lrn_number`, `question_id`, `answer`, `delete_status`) VALUES
-(17, 987654321, 18, 'a', 0),
-(18, 987654321, 23, 'asd', 0),
-(19, 20012330, 18, 'a', 0),
-(20, 20012330, 23, 'aaaaaaaaa', 0),
-(21, 111111111, 18, ' c', 0),
-(22, 111111111, 23, 'cccccccccc', 0),
-(23, 987654321, 24, ' c', 0);
+(41, 20010310, 27, 'A) 8 or more hours', 0),
+(42, 20010310, 28, 'no', 0),
+(43, 20010310, 29, 'no', 0),
+(44, 20010310, 30, 'no', 0),
+(45, 20010310, 31, 'no', 0),
+(46, 20010310, 32, 'no', 0),
+(47, 20010310, 33, 'no', 0);
 
 -- --------------------------------------------------------
 
@@ -415,21 +375,6 @@ INSERT INTO `tbl_psychological` (`ExamID`, `ExamName`, `Q1`, `Q2`, `Q3`, `Q4`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tbl_sms_config`
---
-
-CREATE TABLE `tbl_sms_config` (
-  `id` int(11) NOT NULL,
-  `sms_username` varchar(200) NOT NULL,
-  `sms_password` varchar(200) NOT NULL,
-  `sms_senderid` varchar(200) NOT NULL,
-  `created_at` date NOT NULL,
-  `delete_status` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tbl_strands`
 --
 
@@ -449,22 +394,6 @@ INSERT INTO `tbl_strands` (`id`, `strands`, `delete_status`) VALUES
 (5, 'HUMMS', 0),
 (6, 'ICT', 0),
 (7, 'HE', 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user`
---
-
-CREATE TABLE `user` (
-  `userid` int(11) NOT NULL,
-  `loginname` varchar(50) NOT NULL,
-  `password` varchar(10) NOT NULL,
-  `patientname` varchar(50) NOT NULL,
-  `mobileno` varchar(15) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `createddateandtime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -500,23 +429,17 @@ INSERT INTO `users` (`userid`, `firstname`, `lastname`, `contact`, `username`, `
 --
 
 --
--- Indexes for table `admin`
---
-ALTER TABLE `admin`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `manage_website`
---
-ALTER TABLE `manage_website`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `patient`
 --
 ALTER TABLE `patient`
   ADD PRIMARY KEY (`patientid`),
   ADD KEY `loginid` (`studentid`);
+
+--
+-- Indexes for table `tbl_academicyear`
+--
+ALTER TABLE `tbl_academicyear`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_admin`
@@ -535,25 +458,6 @@ ALTER TABLE `tbl_admin_user`
 --
 ALTER TABLE `tbl_admission`
   ADD PRIMARY KEY (`admission_id`);
-
---
--- Indexes for table `tbl_assessment`
---
-ALTER TABLE `tbl_assessment`
-  ADD PRIMARY KEY (`ExamID`),
-  ADD UNIQUE KEY `ExamName` (`ExamName`);
-
---
--- Indexes for table `tbl_assessment_result`
---
-ALTER TABLE `tbl_assessment_result`
-  ADD PRIMARY KEY (`EAnsID`);
-
---
--- Indexes for table `tbl_email_config`
---
-ALTER TABLE `tbl_email_config`
-  ADD PRIMARY KEY (`e_id`);
 
 --
 -- Indexes for table `tbl_health`
@@ -593,12 +497,6 @@ ALTER TABLE `tbl_psychological`
   ADD UNIQUE KEY `ExamName` (`ExamName`);
 
 --
--- Indexes for table `tbl_sms_config`
---
-ALTER TABLE `tbl_sms_config`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `tbl_strands`
 --
 ALTER TABLE `tbl_strands`
@@ -615,82 +513,58 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `admin`
---
-ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `manage_website`
---
-ALTER TABLE `manage_website`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
 -- AUTO_INCREMENT for table `patient`
 --
 ALTER TABLE `patient`
-  MODIFY `patientid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `patientid` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+
+--
+-- AUTO_INCREMENT for table `tbl_academicyear`
+--
+ALTER TABLE `tbl_academicyear`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin`
 --
 ALTER TABLE `tbl_admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tbl_admin_user`
 --
 ALTER TABLE `tbl_admin_user`
-  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `userid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `tbl_admission`
 --
 ALTER TABLE `tbl_admission`
-  MODIFY `admission_id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_assessment`
---
-ALTER TABLE `tbl_assessment`
-  MODIFY `ExamID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `tbl_assessment_result`
---
-ALTER TABLE `tbl_assessment_result`
-  MODIFY `EAnsID` int(50) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `tbl_email_config`
---
-ALTER TABLE `tbl_email_config`
-  MODIFY `e_id` int(21) NOT NULL AUTO_INCREMENT;
+  MODIFY `admission_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_health`
 --
 ALTER TABLE `tbl_health`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tbl_health_results`
 --
 ALTER TABLE `tbl_health_results`
-  MODIFY `number` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `number` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tbl_physical`
 --
 ALTER TABLE `tbl_physical`
-  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tbl_physical_results`
 --
 ALTER TABLE `tbl_physical_results`
-  MODIFY `number` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `number` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `tbl_profile`
@@ -703,12 +577,6 @@ ALTER TABLE `tbl_profile`
 --
 ALTER TABLE `tbl_psychological`
   MODIFY `ExamID` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
-
---
--- AUTO_INCREMENT for table `tbl_sms_config`
---
-ALTER TABLE `tbl_sms_config`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tbl_strands`
