@@ -32,7 +32,16 @@ if(isset($_POST["btn_update"])) { // Change this condition to check for the "Upd
     }
 
     if($_SESSION['user'] == 'tbl_admin'){
-        $q1 = "UPDATE tbl_admin SET `employee_number`='$employee_number', `firstname`='$firstname', `username`='$username', `contact`='$contact', `password`='$password' WHERE id = '".$_SESSION["id"]."'";
+        $q1 = "UPDATE tbl_admin SET 
+        `employee_number`='$employee_number', 
+        `username`='$employee_number', 
+        `firstname`='$firstname', 
+        `middlename`='$middlename', 
+        `lname`='$lname', 
+        `dob`='$dob', 
+        `contact`='$contact', 
+        `addr`='$addr' 
+        WHERE id = '".$_SESSION["id"]."'";
 
     }
 
@@ -51,11 +60,13 @@ if($_SESSION['user'] == 'tbl_admin'){
     while($row = mysqli_fetch_array($query)) {
         extract($row);
         $firstname = $row['firstname'];
-        $username = $row['username'];
+        $middlename = $row['middlename'];
+        $lname = $row['lname'];
         $contact = $row['contact'];
         $employee_number = $row['employee_number'];
         $addr = $row['addr'];
         $profilePhoto = $row['profile_photo'];
+        $dob = $row['dob'];
     }
 }
 ?>
@@ -114,9 +125,24 @@ if($_SESSION['user'] == 'tbl_admin'){
         </div>
         
 
+        <label class="col-sm-2 col-form-label">Middle Name</label>
+        <div class="col-sm-4">
+        <input type="text" class="form-control" name="middlename" id="middlename" placeholder="" required="" value="<?php echo $middlename; ?>" readonly>
+            <span class="messages"></span>
+        </div>
+    </div>
+
+    
+    <div class="form-group row">
         <label class="col-sm-2 col-form-label">Last Name</label>
         <div class="col-sm-4">
         <input type="text" class="form-control" name="lname" id="lname" placeholder="" required="" value="<?php echo $lname; ?>" readonly>
+            <span class="messages"></span>
+        </div>
+
+        <label class="col-sm-2 col-form-label">Date of Birth</label>
+        <div class="col-sm-4">
+        <input type="text" class="form-control" name="dob" id="dob" placeholder="" required="" value="<?php echo $dob; ?>" readonly>
             <span class="messages"></span>
         </div>
     </div>

@@ -7,14 +7,17 @@ include('connect.php');
 
 if (isset($_POST['submit'])) {
     $fname = $_POST['firstname'];
+    $middlename = $_POST['middlename'];
     $lname = $_POST['lname'];
+    $dob = $_POST['dob'];
     $contact = $_POST['contact'];
     $employee_number = $_POST['employee_number'];
     $username = $employee_number;
     $gender = $_POST['gender'];
     $addr = $_POST['addr'];
     $date = date("Y-m-d");
-    $password = strtolower($fname);
+    $password = date("mdY", strtotime($dob));
+    $profilePhoto = '';
 
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = 'profile_photos/';
@@ -29,7 +32,7 @@ if (isset($_POST['submit'])) {
     }
 
     if (isset($_GET['editid'])) {
-        $sql = "UPDATE tbl_admin SET profile_photo='$profilePhoto', firstname='$fname', lname='$lname', contact='$contact', gender='$gender', employee_number='$employee_number', addr='$addr' WHERE id='$_GET[editid]'";
+        $sql = "UPDATE tbl_admin SET profile_photo='$profilePhoto', firstname='$fname', middlename='$middlename', lname='$lname', dob='$dob', contact='$contact', gender='$gender', employee_number='$employee_number', addr='$addr' WHERE id='$_GET[editid]'";
         if ($qsql = mysqli_query($conn, $sql)) {
 ?>
             <div class="popup popup--icon -success js_success-popup popup--visible">
@@ -69,7 +72,7 @@ if (isset($_POST['submit'])) {
 <?php
         } else {
            
-            $sql = "INSERT INTO `tbl_admin` (`profile_photo`, `firstname`, `lname`, `contact`, `username`, `password`, `gender`, `employee_number`, `addr`, `date`) VALUES ('$profilePhoto', '$fname', '$lname', '$contact', '$username', '$password',  '$gender', '$employee_number', '$addr', '$date')";
+            $sql = "INSERT INTO `tbl_admin` (`profile_photo`, `firstname`, `middlename`, `lname`, `dob`, `contact`, `username`, `password`, `gender`, `employee_number`, `addr`, `date`) VALUES ('$profilePhoto', '$fname', '$middlename', '$lname', '$dob', '$contact', '$username', '$password',  '$gender', '$employee_number', '$addr', '$date')";
             if ($qsql = mysqli_query($conn, $sql)) {
 ?>
                 <div class="popup popup--icon -success js_success-popup popup--visible">
@@ -152,11 +155,25 @@ if (isset($_GET['editid'])) {
         </div>
         
 
+        <label class="col-sm-2 col-form-label">Middle Name </label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="middlename" id="middlename" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['middlename']; } ?>" >
+            <span class="messages"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
         <label class="col-sm-2 col-form-label">Last Name</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" name="lname" id="lname" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['lname']; } ?>" >
             <span class="messages"></span>
         </div>
+
+        <label class="col-sm-2 col-form-label">Date of Birth</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" name="dob" max="<?php echo date("m-d-Y"); ?>"
+                            id="dob" value="<?php echo $rsedit['dob']; ?>" />
+            </div>
     </div>
 
     <div class="form-group row">

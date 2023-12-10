@@ -50,12 +50,10 @@ if($_SESSION['user'] == 'tbl_admin'){
     $query = $conn->query($que);
     while($row = mysqli_fetch_array($query)) {
         extract($row);
-        $firstname = $row['firstname'];
         $username = $row['username'];
-        $contact = $row['contact'];
-        $employee_number = $row['employee_number'];
-        $addr = $row['addr'];
-        $profilePhoto = $row['profile_photo'];
+        $password = $row['password'];
+        $security_question = $row['security_question'];
+        $security_answer = $row['security_answer'];
     }
 }
 ?>
@@ -75,12 +73,12 @@ if($_SESSION['user'] == 'tbl_admin'){
     <h5>Security Details</h5>
     <hr>
     <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Username</label>
-        <div class="col-sm-4">
-        <input class="form-control" type="text" name="username" id="username" value="<?php echo $employee_number; ?>" readonly />
-            <span class="messages"></span>
-        </div>
+    <label class="col-sm-2 col-form-label">Username</label>
+    <div class="col-sm-4">
+        <input class="form-control" type="text" name="username" id="username" value="<?php echo $employee_number; ?>" readonly  />
+        <span class="messages"></span>
     </div>
+</div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Password</label>
         <div class="col-sm-4">
@@ -188,6 +186,29 @@ if($_SESSION['user'] == 'tbl_admin'){
         // Call the function to make fields editable
         makeFieldsEditable();
     });
+
+    function toggleUsernameField() {
+        var usernameField = document.getElementById('username');
+        
+        if (usernameField.hasAttribute('disabled')) {
+            // Enable the username field
+            usernameField.removeAttribute('disabled');
+        } else {
+            // Disable the username field
+            usernameField.setAttribute('disabled', 'true');
+        }
+    }
+
+    // Add click event listener to the "Edit" button
+    var editButton = document.getElementById('editButton');
+    editButton.addEventListener('click', function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+        
+        // Call the function to toggle the disabled attribute on the username field
+        toggleUsernameField();
+    });
+
 });
 
 </script>

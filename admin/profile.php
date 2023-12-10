@@ -103,7 +103,7 @@ if($_SESSION['user'] == 'tbl_admin_user'){
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Username</label>
                                             <div class="col-sm-4">
-                                                <input type="email" class="form-control" id="email" name="email" value="<?php echo $username; ?>" placeholder="">
+                                                <input type="text" class="form-control" id="email" name="email" value="<?php echo $username; ?>" placeholder="">
                                                 <span class="messages"></span>
                                             </div>
                                         </div>
