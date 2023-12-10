@@ -91,7 +91,7 @@ if ($_SESSION['user'] == 'tbl_admin') {
 <?php if($_SESSION['user'] == 'tbl_admin') { ?>
 <li class="pcoded-hasmenu">
     <a href="strands.php">
-        <span class="pcoded-micon"><i class="feather icon-user-plus"></i></span>
+        <span class="pcoded-micon"><i class="feather icon-plus"></i></span>
         <span class="pcoded-mtext">Strands</span>
     </a>
     
@@ -101,7 +101,7 @@ if ($_SESSION['user'] == 'tbl_admin') {
 <?php if($_SESSION['user'] == 'tbl_admin') { ?>
 <li class="pcoded-hasmenu">
     <a href="academic_year.php">
-        <span class="pcoded-micon"><i class="feather icon-user-plus"></i></span>
+        <span class="pcoded-micon"><i class="feather icon-plus"></i></span>
         <span class="pcoded-mtext">Academic Year</span>
     </a>
     

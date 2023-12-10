@@ -15,10 +15,10 @@
         }
 
         .question {
-    margin-bottom: 20px;
-    padding: 10px;
-    font-size: 18px; /* Adjust this value to increase or decrease the font size of the questions */
-}
+            margin-bottom: 20px;
+            padding: 10px;
+            font-size: 18px; /* Adjust this value to increase or decrease the font size of the questions */
+        }
 
         .question strong {
             display: bold;
@@ -34,12 +34,25 @@
         }
 
         .question textarea {
-    width: 100%;
-    height: 70px;
-    padding: 5px;
-    box-sizing: border-box;
-    margin-top: 20px !important; /* Added !important to ensure the margin takes effect */
-}
+            width: 100%;
+            height: 70px;
+            padding: 5px;
+            box-sizing: border-box;
+            margin-top: 20px !important; /* Added !important to ensure the margin takes effect */
+        }
+        .box-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px; /* Set your desired height */
+            background-color: #0a4b78;
+            color: white;
+            font-weight: bold;
+        }
+
+        .box-header h4 {
+            margin: 0;
+        }                  
     </style>
 </head>
 
@@ -57,7 +70,7 @@
                 <div class="page-body">
                     <div class="card">
                     <div class="card">
-                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: 800;"><h4>Health Assessment</h4></div>
+                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Health Assessment</h4></div>
                     <br>
                         <div class="card-block">
                             <div class="questions-container">
