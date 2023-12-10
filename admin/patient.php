@@ -149,7 +149,7 @@
                     <div class="card">
                         <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Student Details</h4></div>
                         <div class="card-block">
-                          
+                        <form id="main" method="post" action="" enctype="multipart/form-data">
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
     <div class="form-group row">
             <label class="col-sm-2"></label>
@@ -183,8 +183,24 @@
         <label class="col-sm-2 col-form-label">LRN Number</label>
             <div class="col-sm-4">
                 <input class="form-control" type="text" name="lrn_number" id="lrn_number" 
-                value="<?php if(isset($_GET['editid'])) { echo $rsedit['lrn_number']; } ?>" />
+                value="<?php if(isset($_GET['editid'])) { echo $rsedit['lrn_number']; } ?>"  oninput="validatelrnNumber()" required />
+                <span class="messages"></span>
             </div>
+            <script>
+    function validatelrnNumber() {
+        var contactField = document.getElementById("lrn_number");
+        var contactValue = contactField.value;
+
+        // Use a regular expression to check for only numbers
+        var regex = /^[0-9]+$/;
+
+        if (!regex.test(contactValue)) {
+            alert("Please enter a valid lrn_number.");
+            contactField.value = "";
+        } 
+        
+    }
+</script>
             <label class="col-sm-2 col-form-label">First Name</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="fname" id="fname" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['fname']; } ?>" >
