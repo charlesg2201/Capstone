@@ -24,61 +24,39 @@ $row_manage = mysqli_fetch_array($result_manage);
                 <div class="page-body">
                     <div class="row">
                         <?php  if ($_SESSION['user'] == 'tbl_admin_user') { ?>
-                            <div class="col-xl-4 col-md-6">             
-                                <div class="card border-primary" style="border-width: 3px; padding: 5px; background-color: #0a4b78;"> 
-                                    <div class="card-body">
-                                        <div class="row align-items-end">
-                                            <div class="col-8">
-                                                <h4 style="white-space: nowrap; color: #ffffff; font-weight: 800;">
-                                                    <?php
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card text-white mb-8" style="background-color: #135e96;">
+                                    <div class="card-body" style="font-size: 25px; font-weight: bold;"> <?php
                                                     $sql = "SELECT * FROM patient WHERE delete_status='0'";
                                                     $qsql = mysqli_query($conn, $sql);
                                                     echo mysqli_num_rows($qsql);
-                                                    ?>
-                                                </h4>
-                                                <h4 style="white-space: nowrap; color: #ffffff; font-weight: 800;">Total Students</h4>
-                                            </div>
-                                            <div class="col-4 text-right">
-                                                <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-users" style="color: #ffffff;"></i></span>
-                                            </div>
-                                        </div>
+                                                    ?></div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between" style="background-color: #0a4b78;">
+                                    <a class="small stretched-link" style="color: #ffffff; font-size: 15px;">Total Patients</a>
+                                        <div class="small text-white"><i class="feather icon-users" style="font-size: 24px;"></i></div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-4 col-md-6">             
-    <div class="card border-primary" style="border-width: 3px; padding: 5px; background-color: #0a4b78;">
-        <div class="card-body">
-            <div class="row align-items-end">
-                <div class="col-8">
-                    <h5 style="white-space: nowrap; color: #ffffff; font-weight: 800;">Physical Assessment</h5>
-                    <a class="small stretched-link" href="viewall_p.php" style="color: #ffffff; font-size: 15px;">View Details</a>
-
-                </div>
-                <div class="col-4 text-right">
-                    <span class="pcoded-micon" style="font-size: 3rem;">
-                        <i class="feather icon-file-text" style="color: #ffffff;"></i>
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-                        <div class="col-xl-4 col-md-6">             
-                            <div class="card border-primary" style="border-width: 3px; padding: 5px; background-color: #0a4b78;"> 
-                                <div class="card-body">
-                                    <div class="row align-items-end">
-                                        <div class="col-8">
-                                        <h4 style="white-space: nowrap; color: #ffffff; font-weight: 800;">Health Assessment</h4>
-                                        <a class="small stretched-link" href="viewall_h.php" style="color: #ffffff; font-size: 15px;">View Details</a>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-file-text" style="color: #ffffff;"></i></span>
-                                        </div>
+                        <div class="col-xl-4 col-md-6">
+                                <div class="card text-white mb-8" style="background-color: #135e96;">
+                                    <div class="card-body" style="font-size: 25px; font-weight: bold;">Physcial Assessment</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between" style="background-color: #0a4b78;">
+                                    <a class="small stretched-link" href="viewall_p.php" style="color: #ffffff; font-size: 12px;">View Assessment</a>
+                                        <div class="small text-white"><i class="feather icon-file-text" style="font-size: 24px;"></i></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+
+                    <div class="col-xl-4 col-md-6">
+                                <div class="card text-white mb-8" style="background-color: #135e96;">
+                                    <div class="card-body" style="font-size: 25px; font-weight: bold;">Health Assessment</div>
+                                    <div class="card-footer d-flex align-items-center justify-content-between" style="background-color: #0a4b78;">
+                                    <a class="small stretched-link" href="viewall_p.php" style="color: #ffffff; font-size: 12px;">View Assessment</a>
+                                        <div class="small text-white"><i class="feather icon-file-text" style="font-size: 24px;"></i></div>
+                                    </div>
+                                </div>
+                            </div>
+
                         <iframe src="graph2.php" frameborder="0" width="70%" height="250" style="height: 260px; margin-top: -20px;"></iframe>
                             <iframe src="piechart.php" frameborder="0" width="30%" height="250" style="height: 350px; margin-top: -27px;"></iframe>
                             <iframe src="graph.php" frameborder="0" width="70%" height="250" style="height: 260px; margin-top: -80px;"></iframe>
@@ -89,36 +67,8 @@ $row_manage = mysqli_fetch_array($result_manage);
                         
 
 
-                        <?php } else if ($_SESSION['user'] == 'patient') {
-
-                        $sqlpatient = "SELECT * FROM patient WHERE patientid='$_SESSION[patientid]' ";
-                        $qsqlpatient = mysqli_query($conn, $sqlpatient);
-                        $rspatient = mysqli_fetch_array($qsqlpatient);
-                        ?>
-                        <div class="row col-lg-12">
-                            <h3><b>Dashboard</b></h3>
-                        </div>
-
-                        <div class="card row col-lg-12">
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-lg-12">
-                                        <div class="sub-title">
-                                            <h2>Welcome <?php echo '' . $_SESSION['firstname']; ?>!</h2>
-                                        </div>
-                                        <ul class="nav nav-tabs md-tabs" role="tablist">
-                                            <li class="nav-item">
-                                                <a class="nav-link active" data-toggle="tab" href="#home3" role="tab">Admission Record</a>
-                                                <div class="slide"></div>
-                                            </li>
-                                        </ul>
-
-                                        
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
+                
                         <?php } ?>
 
                     </div>
