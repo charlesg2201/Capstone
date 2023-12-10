@@ -1,4 +1,34 @@
-<title>Patient</title>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .choices-container {
+            display: flex;
+        }
+
+        .choice {
+            margin-right: 20px;
+        }
+        .box-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px; /* Set your desired height */
+        background-color: #0a4b78;
+        color: white;
+        font-weight: bold;
+        }
+
+        .box-header h4 {
+        margin: 0;
+        }                  
+    </style>
+<title>Student</title>
 <?php require_once('check_login.php');?>
 <?php include('head.php');?>
 <?php include('header.php');?>
@@ -15,7 +45,7 @@ $fname = $_SESSION[ "firstname" ];
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><legend>Health Assessment</legend></div>
+                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Health Assessment</h4></div>
                         <div class="card-block">
                             <div class="table-responsive dt-responsive">
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">

@@ -3,145 +3,160 @@
 
 <head>
     <style>
-         body {
-            font-family: Arial, sans-serif;
+        .question {
+            margin-bottom: 20px;
         }
 
-        .question {
-    margin-bottom: 20px;
-    font-size: 18px;
-    word-wrap: break-word; /* Added this line to handle long words */
-    overflow-wrap: break-word; /* Added this line for additional browser support */
-}
-
-        
-
-        .question strong {
-            display: bold;
-            margin-bottom: 10px;
+        .choices-container {
+            display: flex;
         }
 
         .choice {
-            margin-bottom: 10px;
-            margin-right: 30px;
-            font-size: 16px;
+            margin-right: 20px;
+        }
+        .box-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px; /* Set your desired height */
+        background-color: #0a4b78;
+        color: white;
+        font-weight: bold;
         }
 
-        .question textarea {
-    width: 100%;
-    height: 70px;
-    padding: 5px;
-    box-sizing: border-box;
-    margin-top: 10px !important; /* Added !important to ensure the margin takes effect */
-}
+        .box-header h4 {
+        margin: 0;
+        }                  
     </style>
+   
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            <?php if (isset($_POST['submit'])) { ?>
+                $(".js_success-popup").addClass("popup--visible");
+                setTimeout(function () {
+                    location.href = 'physical.php';
+                }, 1500);
+            <?php } ?>
+        });
+    </script>
 </head>
 
 <body>
-    <?php date_default_timezone_set("Asia/Manila"); ?>
-    <?php require_once('check_login.php');?>
-    <?php include('head.php');?>
-    <?php include('header.php');?>
-    <?php include('sidebar.php');?>
-    <?php include('connect.php');?>
+    <?php
+    date_default_timezone_set("Asia/Manila");
+    require_once('check_login.php');
+    include('head.php');
+    include('header.php');
+    include('sidebar.php');
+    include('connect.php');
+    ?>
 
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                    <div class="card-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold; margin: 20px 20px 0 20px;"><h1>Physical Assessment</h1></div>
-                        <br>
+                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Physical Assessment</h4></div>
                         <div class="card-block">
                             <div class="questions-container">
                                 <form method='post' action=''>
-                                <?php
-                                $sql = "SELECT * FROM tbl_physical WHERE select_all='0'";
-                                $qsql = mysqli_query($conn, $sql);
-                                $questionNumber = 1;
-                                
-                                while ($rs = mysqli_fetch_array($qsql)) {
-                                    echo "<div class='question'>
-                                        <strong>Question $questionNumber:</strong> $rs[questions]<br>";
-                                
-                                    if (!empty($rs['choices'])) {
-                                        $choices = explode(",", $rs['choices']);
-                                        echo "<div class='choices-container'>";
-                                        foreach ($choices as $choice) {
-                                            echo "<div class='choice'>
-                                                <input type='radio' name='question_$rs[question_id]' value='$choice'> $choice
-                                            </div>";
+                                    <?php
+                                    $sql = "SELECT * FROM tbl_physical WHERE select_all='0'";
+                                    $qsql = mysqli_query($conn, $sql);
+                                    $questionNumber = 1;
+
+                                    while ($rs = mysqli_fetch_array($qsql)) {
+                                        echo "<div class='question'>
+                                            <strong>Question $questionNumber:</strong> $rs[questions]<br>";
+
+                                        if (!empty($rs['choices'])) {
+                                            $choices = explode(",", $rs['choices']);
+                                            echo "<div class='choices-container'>";
+                                            foreach ($choices as $choice) {
+                                                echo "<div class='choice'>
+                                                    <input type='radio' name='question_$rs[question_id]' value='$choice'> $choice
+                                                </div>";
+                                            }
+                                            echo "</div>";
+                                        } else {
+                                            echo "<textarea class='form-control' name='essay_question_$rs[question_id]' placeholder='Enter your essay response'></textarea>";
                                         }
-                                        echo "</div>";
-                                    } else {
-                                        echo "<textarea class='form-control' name='essay_question_$rs[question_id]' placeholder='Enter your essay response'></textarea>";
+
+                                        echo "<input type='hidden' name='question_id_$questionNumber' value='$rs[question_id]'>";
+                                        $questionNumber++;
                                     }
-                                
-                                    echo "<input type='hidden' name='question_id_$questionNumber' value='$rs[question_id]'>";
-                                    $questionNumber++;
-                                }
-                                ?>
-                                <br>
-                                <button type='submit' name='submit' class='btn btn-primary'>Submit</button>
+                                    ?>
+                                    <br>
+                                    <button type='submit' name='submit' class='btn btn-primary'>Submit</button>
                                 </form>
-                                </div>
-                                
-                                <?php
-                                if (isset($_POST['submit'])) {
-                                    for ($i = 1; $i <= $questionNumber; $i++) {
-                                        $question_id_key = "question_id_$i";
-                                
-                                        // Check if the question_id key is set in the $_POST array and not equal to 0
-                                        if (isset($_POST[$question_id_key]) && $_POST[$question_id_key] != 0) {
-                                            $question_id = mysqli_real_escape_string($conn, $_POST[$question_id_key]);
-                                
-                                            if (isset($_POST["question_$question_id"])) {
-                                                $answer = mysqli_real_escape_string($conn, $_POST["question_$question_id"]);
-                                            } elseif (isset($_POST["essay_question_$question_id"])) {
-                                                $answer = mysqli_real_escape_string($conn, $_POST["essay_question_$question_id"]);
-                                            } else {
-                                                $answer = "";
+                            </div>
+
+                            <?php
+                            if (isset($_POST['submit'])) {
+                                for ($i = 1; $i <= $questionNumber; $i++) {
+                                    $question_id_key = "question_id_$i";
+
+                                    if (isset($_POST[$question_id_key]) && $_POST[$question_id_key] != 0) {
+                                        $question_id = mysqli_real_escape_string($conn, $_POST[$question_id_key]);
+                                        $answer = '';
+
+                                        if (isset($_POST["question_$question_id"])) {
+                                            $answer = mysqli_real_escape_string($conn, $_POST["question_$question_id"]);
+                                        } elseif (isset($_POST["essay_question_$question_id"])) {
+                                            $answer = mysqli_real_escape_string($conn, $_POST["essay_question_$question_id"]);
+                                        }
+
+                                        $patientid = $_SESSION['patientid'];
+                                        $user_query = mysqli_query($conn, "SELECT lrn_number FROM patient WHERE patientid = '$patientid'");
+                                        $user_data = mysqli_fetch_assoc($user_query);
+                                        $lrn_number = $user_data['lrn_number'];
+
+                                        $check_sql = "SELECT * FROM tbl_physical_results WHERE question_id = '$question_id' AND lrn_number = '$lrn_number'";
+                                        $check_result = mysqli_query($conn, $check_sql);
+
+                                        if (mysqli_num_rows($check_result) > 0) {
+                                            $update_sql = "UPDATE tbl_physical_results SET answer = '$answer' WHERE question_id = '$question_id' AND lrn_number = '$lrn_number'";
+                                            $update_result = mysqli_query($conn, $update_sql);
+
+                                            if (!$update_result) {
+                                                echo mysqli_error($conn);
                                             }
-                                
-                                            $patientid = $_SESSION['patientid'];
-                                            $user_query = mysqli_query($conn, "SELECT lrn_number FROM patient WHERE patientid = '$patientid'");
-                                            $user_data = mysqli_fetch_assoc($user_query);
-                                            $lrn_number = $user_data['lrn_number'];
-                                
-                                            $check_sql = "SELECT * FROM tbl_physical_results WHERE question_id = '$question_id' AND lrn_number = '$lrn_number'";
-                                            $check_result = mysqli_query($conn, $check_sql);
-                                
-                                            if (mysqli_num_rows($check_result) > 0) {
-                                                $update_sql = "UPDATE tbl_physical_results SET answer = '$answer' WHERE question_id = '$question_id' AND lrn_number = '$lrn_number'";
-                                                if ($update_result = mysqli_query($conn, $update_sql)) {
-                                                    // Update successful
-                                                } else {
-                                                    // Update failed
-                                                    echo mysqli_error($conn);
-                                                }
-                                            } else {
-                                                $insert_sql = "INSERT INTO tbl_physical_results (question_id, answer, lrn_number) VALUES ('$question_id', '$answer', '$lrn_number')";
-                                                if ($insert_result = mysqli_query($conn, $insert_sql)) {
-                                                    // Insert successful
-                                                } else {
-                                                    // Insert failed
-                                                    echo mysqli_error($conn);
-                                                }
+                                        } else {
+                                            $sql = "INSERT INTO tbl_physical_results (question_id, answer, lrn_number) VALUES ('$question_id', '$answer', '$lrn_number')";
+                                            if ($qsql = mysqli_query($conn, $sql)) {
+                                                // Success popup logic
+                                                ?>
+                                                <div class="popup popup--icon -success js_success-popup popup--visible">
+                                                    <div class="popup__background"></div>
+                                                    <div class="popup__content">
+                                                        <h3 class="popup__content__title">
+                                                            Success
+                                                        </h3>
+                                                        <p>Assessment Have Submitted!</p>
+                                                        <p>
+                                                            <?php echo "<script>setTimeout(\"location.href = 'physical.php';\",1500);</script>"; ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            <?php
+                                                     } else {
+                                                     echo mysqli_error($conn);
+                                                 }
                                             }
                                         }
                                     }
                                 }
-                                ?>
-                                
-                                </div>
-                                </div>
-                                </div>
-                                </div>
-                                </div>
-                                </div>
-                                
-                                <?php include('footer.php');?>
-                                
-                                </body>
-                                
-                                </html>
+                            
+                            ?>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <?php include('footer.php'); ?>
+</body>
+
+</html>

@@ -1,3 +1,19 @@
+<!DOCTYPE html>
+<style>
+        .box-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px; /* Set your desired height */
+        background-color: #0a4b78;
+        color: white;
+        font-weight: bold;
+        }
+
+        .box-header h4 {
+        margin: 0;
+        }                  
+    </style>
 <?php
 date_default_timezone_set("Asia/Manila");
 require_once('check_login.php');
@@ -8,29 +24,14 @@ include('connect.php');
 ?>
 
 <div class="pcoded-content">
-    <div class="pcoded-inner-content">
-
-        <div class="main-body">
-            <div class="page-wrapper">
-
-                <div class="page-header">
-                    <div class="row align-items-end">
-                        <div class="col-lg-8">
-                            <div class="page-header-title">
-                                <div class="d-inline">
-                                    <h4>Patient Report</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="page-header-breadcrumb">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="card-block">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-body">
+                    <div class="card">
+                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Admission Record</h4></div>
+                    <br>
+                        <div class="card-block">
+       
                 <div class="row">
                     <div class="col-lg-12">
                         <!-- Nav tabs -->
@@ -88,3 +89,4 @@ include('connect.php');
 </div>
 
 <?php include('footer.php'); ?>
+</html>

@@ -41,14 +41,14 @@
 <?php if($_SESSION['user'] == 'patient') { ?>
 <li class="pcoded-hasmenu">
     <a href="physical_assessment.php ">
-        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+        <span class="pcoded-micon"><i class="feather icon-file-text"></i></span>
         <span class="pcoded-mtext">Physical Assessment</span>
     </a>
 </li>
 
 <li class="pcoded-hasmenu">
     <a href="health_assessment.php ">
-        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+        <span class="pcoded-micon"><i class="feather icon-file-text"></i></span>
         <span class="pcoded-mtext">Health Assessment</span>
     </a>
 </li>
