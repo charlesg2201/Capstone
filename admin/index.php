@@ -50,7 +50,7 @@ $row_manage = mysqli_fetch_array($result_manage);
         <div class="card-body">
             <div class="row align-items-end">
                 <div class="col-8">
-                    <h4 style="white-space: nowrap; color: #ffffff; font-weight: 800;">Physical Assessment</h4>
+                    <h5 style="white-space: nowrap; color: #ffffff; font-weight: 800;">Physical Assessment</h5>
                     <a class="small stretched-link" href="viewall_p.php" style="color: #ffffff; font-size: 15px;">View Details</a>
 
                 </div>
