@@ -14,8 +14,9 @@ if (isset($_POST['submit'])) {
     $gender = $_POST['gender'];
     $address = $_POST['address'];
     $employee_number = $_POST['employee_number'];
-    $security_question = $_POST['security_question'];
-    $security_answer = $_POST['security_answer'];
+    $date = date("Y-m-d");
+    // $security_question = $_POST['security_question'];
+    // $security_answer = $_POST['security_answer'];
 
     // Profile photo upload
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
@@ -34,52 +35,53 @@ if (isset($_POST['submit'])) {
             exit;
         }
     }
-    
 
-    $checkDuplicateQuery = "SELECT COUNT(*) FROM tbl_admin_user WHERE employee_number = '$employee_number'";
-    $result = mysqli_query($conn, $checkDuplicateQuery);
-    $row = mysqli_fetch_row($result);
-    $count = $row[0];
 
-    if ($count > 0) {
-        ?>
-			<div class="popup popup--icon -error js_error-popup popup--visible">
-			<div class="popup__background"></div>
-			<div class="popup__content">
-				<h3 class="popup__content__title">
-				Error 
-				</h3>
-				<p>The details you are trying to add already exists.</p>
-				<p>
-				<a href="users.php"><button class="button button--error" data-for="js_error-popup">Close</button></a>
-				</p>
-			</div>
-			</div>
-        <?php
+    if (isset($_GET['editid'])) {
+        $sql = "UPDATE tbl_admin_user SET firstname='$fname', lastname='$lname', contact='$contact', username='$username', gender='$gender', employee_number='$employee_number', address='$address' WHERE userid='$_GET[editid]'";
+        if ($qsql = mysqli_query($conn, $sql)) {
+            // Display success message 
+            ?>
+        <div class="popup popup--icon -success js_success-popup popup--visible">
+          <div class="popup__background"></div>
+          <div class="popup__content">
+            <h3 class="popup__content__title">
+              Success 
+            </h3>
+            <p>User Record Updated Successfully</p>
+            <p>
+             <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
+             <?php echo "<script>setTimeout(\"location.href = 'view-user.php';\",1500);</script>"; ?>
+            </p>
+          </div>
+        </div>
+
+     <?php
+        }   
+
     } else {
-        if (isset($_GET['editid'])) {
-            $sql = "UPDATE tbl_admin_user SET profile_photo='$profilePhoto', firstname='$fname', lastname='$lname', contact='$contact', username='$username', gender='$gender', employee_number='$employee_number', address='$address' WHERE userid='$_GET[editid]'";
-            if ($qsql = mysqli_query($conn, $sql)) {
-                // Display success message 
-                ?>
-            <div class="popup popup--icon -success js_success-popup popup--visible">
-              <div class="popup__background"></div>
-              <div class="popup__content">
-                <h3 class="popup__content__title">
-                  Success 
-                </h3>
-                <p>User Record Updated Successfully</p>
-                <p>
-                 <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
-                 <?php echo "<script>setTimeout(\"location.href = 'view-user.php';\",1500);</script>"; ?>
-                </p>
-              </div>
+        $checkDuplicateQuery = "SELECT COUNT(*) FROM tbl_admin WHERE employee_number = '$employee_number'";
+        $result = mysqli_query($conn, $checkDuplicateQuery);
+        $row = mysqli_fetch_row($result);
+        $count = $row[0];
+
+        if ($count > 0) {
+?>
+            <div class="popup popup--icon -error js_error-popup popup--visible">
+                <div class="popup__background"></div>
+                <div class="popup__content">
+                    <h3 class="popup__content__title">
+                        Error
+                    </h3>
+                    <p>The details you are trying to add already exist.</p>
+                    <p>
+                        <a href="users-sa.php"><button class="button button--error" data-for="js_error-popup">Close</button></a>
+                    </p>
+                </div>
             </div>
 <?php
-            }
-        } else {
-            
-            $sql = "INSERT INTO `tbl_admin_user` (`profile_photo`, `firstname`, `lastname`, `contact`, `username`, `password`,`security_question`,`security_answer`, `gender`, `employee_number`, `address`) VALUES ('$profilePhoto', '$fname', '$lname', '$contact', '$username', '$password', '$security_question', '$security_answer', '$gender', '$employee_number', '$address')";
+    } else {
+        $sql = "INSERT INTO `tbl_admin_user` (`profile_photo`, `firstname`, `lastname`, `contact`, `username`, `gender`, `employee_number`, `address`) VALUES ('$profilePhoto', '$fname', '$lname', '$contact', '$username', '$gender', '$employee_number', '$address')";
             if ($qsql = mysqli_query($conn, $sql)) {
                 // Display success message
                 ?>
@@ -125,26 +127,37 @@ if (isset($_GET['editid'])) {
     
     <h5>Personal Details</h5>
         <hr>
-        <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Date</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="date" name="date" max="<?php echo date("Y-m-d"); ?>"
-                            id="date" value="<?php echo $rsedit['date']; ?>" />
-            </div>
-        </div>
+        
 
         <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Profile Photo</label>
                         <div class="col-sm-4">
-                            <input type="file" id="photo-upload" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
+                            <input type="file" id="photo-upload" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder=""   value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
                         </div>
                     
                     <label class="col-sm-2 col-form-label">Employee Number</label>
             <div class="col-sm-4">
-                <input class="form-control" type="text" name="employee_number" id="employee_number" 
-                value="<?php if(isset($_GET['editid'])) { echo $rsedit['employee_number']; } ?>" />
+            <input class="form-control" type="text" name="employee_number" id="employee_number" 
+                value="<?php if(isset($_GET['editid'])) { echo $rsedit['employee_number']; } ?>" 
+                oninput="validateEmployeeNumber()" required />
+        <span class="messages"></span>
             </div>           
         </div>
+        <script>
+    function validateEmployeeNumber() {
+        var contactField = document.getElementById("employee_number");
+        var contactValue = contactField.value;
+
+        // Use a regular expression to check for only numbers
+        var regex = /^[0-9]+$/;
+
+        if (!regex.test(contactValue)) {
+            alert("Please enter a valid employee_number.");
+            contactField.value = "";
+        } 
+        
+    }
+</script>
 
         <div class="form-group row">
         <label class="col-sm-2 col-form-label">First Name</label>
@@ -170,7 +183,7 @@ if (isset($_GET['editid'])) {
         <span class="messages"></span>
     </div>
 
-<script>
+    <script>
     function validateContactNumber() {
         var contactField = document.getElementById("contact");
         var contactValue = contactField.value;
@@ -181,6 +194,9 @@ if (isset($_GET['editid'])) {
         if (!regex.test(contactValue)) {
             alert("Please enter a valid contact number.");
             contactField.value = "";
+        } else if (contactValue.length > 11) {
+            alert("Maximum length of contact number is 11 digits.");
+            contactField.value = contactValue.substring(0, 11); // Truncate to 11 digits
         }
     }
 </script>
@@ -198,11 +214,11 @@ if (isset($_GET['editid'])) {
     <div class="form-group row">
     <label class="col-sm-2 col-form-label">Address</label>
         <div class="col-sm-10">
-            <textarea name="address" id="address" class="form-control"><?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
+            <textarea name="address" id="address" class="form-control" required=""> <?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
         </div>
     
     </div>
-    <h5>Security Details</h5>
+    <!-- <h5>Security Details</h5>
     <hr>
     
             <?php 
@@ -228,7 +244,7 @@ if (isset($_GET['editid'])) {
                     value="<?php if(isset($_GET['editid'])) { echo $rsedit['security_answer']; } ?>" />
                 </div>
         </div>                 
-<?php } ?>
+<?php } ?> -->
 
     
     <div class="form-group row">
@@ -253,4 +269,4 @@ if (isset($_GET['editid'])) {
 
 
     
-</script>
+</>
