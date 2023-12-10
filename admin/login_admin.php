@@ -18,61 +18,77 @@
 
 
 <?php
-  include('connect.php');
-  extract($_POST);
-if(isset($_POST['btn_login']))
-{
-  
-//echo $pass;
-  
-  if($_POST['user'] == 'tbl_admin_user'){    
-    $sql = "SELECT * FROM tbl_admin_user WHERE username='" .$email . "' and password = '". $password."'";
-    $result = mysqli_query($conn,$sql);
-    $row  = mysqli_fetch_array($result);
-    //print_r($row);   a 
+include('connect.php');
+extract($_POST);
 
-    $_SESSION["userid"] = $row['userid'];
-     $_SESSION["id"] = $row['userid'];
-     $_SESSION["password"] = $row['password'];
-     $_SESSION["email"] = $row['username'];
-     $_SESSION["firstname"] = $row['firstname'];
-     $_SESSION["lastname"] = $row['lastname'];
-     $_SESSION['image'] = $row['image'];
-     $_SESSION['user'] = $_POST['user'];
-     
-     $count=mysqli_num_rows($result);
-     if($count==1 && isset($_SESSION["email"]) && isset($_SESSION["password"])) {
-        ?>
-         <div class="popup popup--icon -success js_success-popup popup--visible">
-          <div class="popup__background"></div>
-            <div class="popup__content">
-             <h3 class="popup__content__title">
-              Success 
-            </h3>
-            <p>Login Successfully</p>
-            <p>
-             <?php echo "<script>setTimeout(\"location.href = 'index.php';\",1500);</script>"; ?>
-            </p>
-          </div>
-        </div>
-     <?php
-     } else {
-     ?>
-     <div class="popup popup--icon -error js_error-popup popup--visible">
-      <div class="popup__background"></div>
-      <div class="popup__content">
-        <h3 class="popup__content__title">
-          Error 
-        </h3>
-        <p>Invalid Email or Password</p>
-        <p>
-          <a href="login_admin.php"><button class="button button--error" data-for="js_error-popup">Close</button></a>
-        </p>
-      </div>
-    </div>
-    <?php
-      }
-  }
+if (isset($_POST['btn_login'])) {
+    if ($_POST['user'] == 'tbl_admin_user') {
+        $sql = "SELECT * FROM tbl_admin_user WHERE username='" . $email . "' and password = '" . $password . "'";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result);
+
+        if ($row) {
+            if ($row['delete_status'] == 1) {
+                // Account is deactivated
+                ?>
+                <div class="popup popup--icon -error js_error-popup popup--visible">
+                    <div class="popup__background"></div>
+                    <div class="popup__content">
+                        <h3 class="popup__content__title">
+                            Error
+                        </h3>
+                        <p>Your account is deactivated.</p>
+                        <p>
+                            <a href="login_admin.php"><button class="button button--error"
+                                    data-for="js_error-popup">Close</button></a>
+                        </p>
+                    </div>
+                </div>
+                <?php
+            } else {
+                // Account is active, proceed with login
+                $_SESSION["userid"] = $row['userid'];
+                $_SESSION["id"] = $row['userid'];
+                $_SESSION["password"] = $row['password'];
+                $_SESSION["email"] = $row['username'];
+                $_SESSION["firstname"] = $row['firstname'];
+                $_SESSION["lastname"] = $row['lastname'];
+                $_SESSION['image'] = $row['image'];
+                $_SESSION['user'] = $_POST['user'];
+                ?>
+                <div class="popup popup--icon -success js_success-popup popup--visible">
+                    <div class="popup__background"></div>
+                    <div class="popup__content">
+                        <h3 class="popup__content__title">
+                            Success
+                        </h3>
+                        <p>Login Successfully</p>
+                        <p>
+                            <?php echo "<script>setTimeout(\"location.href = 'index.php';\",1500);</script>"; ?>
+                        </p>
+                    </div>
+                </div>
+                <?php
+            }
+        } else {
+            // Invalid Username or Password
+            ?>
+            <div class="popup popup--icon -error js_error-popup popup--visible">
+                <div class="popup__background"></div>
+                <div class="popup__content">
+                    <h3 class="popup__content__title">
+                        Error
+                    </h3>
+                    <p>Invalid Username or Password</p>
+                    <p>
+                        <a href="login_admin.php"><button class="button button--error"
+                                data-for="js_error-popup">Close</button></a>
+                    </p>
+                </div>
+            </div>
+            <?php
+        }
+    }
 }
 ?>
 

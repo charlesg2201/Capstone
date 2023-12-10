@@ -4,48 +4,23 @@
 <?php include('header.php');?>
 <?php include('sidebar.php');?>
 <?php include('connect.php');
-if(isset($_GET['id']))
-{
-  $sql ="UPDATE tbl_admin_user SET delete_status='1' WHERE userid='$_GET[id]'";
-  $qsql=mysqli_query($conn,$sql);
-  if(mysqli_affected_rows($conn) == 1)
-  {
-    ?>
-         <div class="popup popup--icon -success js_success-popup popup--visible">
-          <div class="popup__background"></div>
-          <div class="popup__content">
-            <h3 class="popup__content__title">
-              Success
-            </h3>
-            <p>Users record deleted successfully.</p>
-            <p>
-             <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
-             <?php echo "<script>setTimeout(\"location.href = 'view-user.php';\",1500);</script>"; ?>
-            </p>
-          </div>
-        </div>
-<?php
-  
+// Deactivation logic
+if (isset($_GET['id'])) {
+  $user_id = $_GET['id'];
+  $sql = "UPDATE tbl_admin_user SET delete_status = CASE WHEN delete_status = 0 THEN 1 ELSE 0 END WHERE userid='$user_id'";
+  $qsql = mysqli_query($conn, $sql);
+  if (mysqli_affected_rows($conn) == 1) {
+      // Deactivation success message and redirect
+      echo "<script>setTimeout(\"location.href = 'view-user.php';\",1500);</script>";
   }
 }
+
+// Display button text based on user's status
+function getButtonText($delete_status) {
+  return $delete_status ? 'Activate' : 'Deactivate';
+}
+
 ?>
-<?php
-if(isset($_GET['delid']))
-{ ?>
-<div class="popup popup--icon -question js_question-popup popup--visible">
-  <div class="popup__background"></div>
-  <div class="popup__content">
-    <h3 class="popup__content__title">
-      Sure
-    </h1>
-    <p>Are You Sure To Delete This Record?</p>
-    <p>
-      <a href="view-user.php?id=<?php echo $_GET['delid']; ?>" class="button button--success" data-for="js_success-popup">Yes</a>
-      <a href="view-user.php" class="button button--error" data-for="js_success-popup">No</a>
-    </p>
-  </div>
-</div>
-<?php } ?>
 <div class="pcoded-content">
         <div class="pcoded-inner-content">
             <div class="main-body">
@@ -70,27 +45,42 @@ if(isset($_GET['delid']))
 </thead>
 <tbody>
 <?php
-  $sql ="SELECT * FROM tbl_admin_user where delete_status='0'";
-  $qsql = mysqli_query($conn,$sql);
-  while($rs = mysqli_fetch_array($qsql))
-  {
+// ...
 
-    $sqldept = "SELECT * FROM tbl_admin_user WHERE userid='$rs[userid]'";
-    $qsqldept = mysqli_query($conn,$sqldept);
-    $rsdept = mysqli_fetch_array($qsqldept);
-    echo "<tr>
-    <td>&nbsp;$rs[employee_number]</td>
-    <td>&nbsp;$rs[firstname]</td>
-    <td>&nbsp;$rs[lastname]</td>
-    <td>&nbsp;$rs[contact]</td>
-    <td>&nbsp;$rs[username]</td>
-    <td>&nbsp;$rs[gender]</td>
-    <td>&nbsp;$rs[address]</td>
-    <td>$rs[status]</td>
-    <td>&nbsp;
-    <a href='users.php?editid=$rs[userid]' class='btn btn-primary'>Update</a></td>
-    </tr>";
-  }
+// Display text for the Status column
+function getStatusText($delete_status) {
+    return $delete_status ? 'Not Active' : 'Active';
+}
+
+// Ensure that $qsql is initialized before using it
+$qsql = mysqli_query($conn, "SELECT * FROM tbl_admin_user");
+
+if ($qsql) {
+    while ($rs = mysqli_fetch_array($qsql)) {
+        $buttonText = getButtonText($rs['delete_status']);
+        $statusText = getStatusText($rs['delete_status']);
+
+        echo "<tr>
+                <td>&nbsp;$rs[employee_number]</td>
+                <td>&nbsp;$rs[firstname]</td>
+                <td>&nbsp;$rs[lastname]</td>
+                <td>&nbsp;$rs[contact]</td>
+                <td>&nbsp;$rs[username]</td>
+                <td>&nbsp;$rs[gender]</td>
+                <td>&nbsp;$rs[address]</td>
+                <td>&nbsp;$statusText</td>
+                <td>&nbsp;
+                    <a href='users.php?editid=$rs[userid]' class='btn btn-primary'>Update</a>
+                    <a href='view-user.php?id=$rs[userid]' class='btn btn-danger'>$buttonText</a>
+                </td>
+            </tr>";
+    }
+} else {
+    // Handle the case where the query fails
+    echo "Error executing query: " . mysqli_error($conn);
+}
+
+// ...
 ?>
 </tbody>
 <tfoot>
@@ -116,45 +106,42 @@ if(isset($_GET['delid']))
 </div>
 </div>
 <?php include('footer.php');?>
-<?php if(!empty($_SESSION['success'])) {  ?>
+<?php if (!empty($_SESSION['success'])) { ?>
 <div class="popup popup--icon -success js_success-popup popup--visible">
-  <div class="popup__background"></div>
-  <div class="popup__content">
-    <h3 class="popup__content__title">
-      Success
-    </h1>
-    <p><?php echo $_SESSION['success']; ?></p>
-    <p>
-     <?php echo "<script>setTimeout(\"location.href = 'view-user.php';\",1500);</script>"; ?>
-      <!-- <button class="button button--success" data-for="js_success-popup">Close</button> -->
-    </p>
-  </div>
+    <div class="popup__background"></div>
+    <div class="popup__content">
+        <h3 class="popup__content__title">
+            Success
+        </h1>
+        <p><?php echo $_SESSION['success']; ?></p>
+        <p>
+            <?php echo "<script>setTimeout(\"location.href = 'view-user-sa.php';\",1500);</script>"; ?>
+        </p>
+    </div>
 </div>
-<?php unset($_SESSION["success"]);
-} ?>
-<?php if(!empty($_SESSION['error'])) {  ?>
+<?php unset($_SESSION["success"]); } ?>
+<?php if (!empty($_SESSION['error'])) { ?>
 <div class="popup popup--icon -error js_error-popup popup--visible">
-  <div class="popup__background"></div>
-  <div class="popup__content">
-    <h3 class="popup__content__title">
-      Error
-    </h1>
-    <p><?php echo $_SESSION['error']; ?></p>
-    <p>
-     <?php echo "<script>setTimeout(\"location.href = 'view-user.php';\",1500);</script>"; ?>
-     <!--  <button class="button button--error" data-for="js_error-popup">Close</button> -->
-    </p>
-  </div>
+    <div class="popup__background"></div>
+    <div class="popup__content">
+        <h3 class="popup__content__title">
+            Error
+        </h1>
+        <p><?php echo $_SESSION['error']; ?></p>
+        <p>
+            <?php echo "<script>setTimeout(\"location.href = 'view-user-sa.php';\",1500);</script>"; ?>
+        </p>
+    </div>
 </div>
-<?php unset($_SESSION["error"]);  } ?>
-    <script>
-      var addButtonTrigger = function addButtonTrigger(el) {
-  el.addEventListener('click', function () {
-    var popupEl = document.querySelector('.' + el.dataset.for);
-    popupEl.classList.toggle('popup--visible');
-  });
-};
+<?php unset($_SESSION["error"]); } ?>
 
-Array.from(document.querySelectorAll('button[data-for]')).
-forEach(addButtonTrigger);
-    </script>
+<script>
+    var addButtonTrigger = function addButtonTrigger(el) {
+        el.addEventListener('click', function () {
+            var popupEl = document.querySelector('.' + el.dataset.for);
+            popupEl.classList.toggle('popup--visible');
+        });
+    };
+
+    Array.from(document.querySelectorAll('button[data-for]')).forEach(addButtonTrigger);
+</script>
