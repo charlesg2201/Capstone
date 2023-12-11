@@ -76,11 +76,6 @@ while ($row = mysqli_fetch_array($query)) {
                 </div>
                 <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
                   <li>
-                    <a href="profile.php">
-                      <i class="feather icon-user"></i> Profile
-                    </a>
-                  </li>
-                  <li>
                     <a href="changepassword.php">
                       <i class="feather icon-edit"></i> Change Password
                     </a>

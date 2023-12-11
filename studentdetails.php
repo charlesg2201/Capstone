@@ -26,28 +26,25 @@ $patient = mysqli_fetch_array($qsqlpatient);
 </div>
 </div>
 </div>
-<div class="col-lg-4">
-<div class="page-header-breadcrumb">
 
-</div>
-</div>
-</div>
-</div>
-
-
-<!-- <h5>DOM/Jquery</h5>
-<span>Events assigned to the table can be exceptionally useful for user interaction, however you must be aware that DataTables will add and remove rows from the DOM as they are needed (i.e. when paging only the visible elements are actually available in the DOM). As such, this can lead to the odd hiccup when working with events.</span> -->
 </div>
 <div class="card">
 <div class="card-block">
   <div class="row">
       <div class="col-lg-12">
                         <ul class="nav nav-tabs md-tabs b-none" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" href="studentdetails.php" role="tab">My Details</a>
-                                <div class="slide"></div>
-                            </li>
-                        </ul>
+                        <li class="active">About Me</li>
+            <!-- <li><a href="#">Family Background</a></li> -->
+        </ul>
+        <hr>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab_1">
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <div class="row text-xs">
+                        <legend><i class="fa fa-info-circle"></i> Personal Details</legend>
+                                <div class="col-md-6">
+</div>
 
                         <div class="tab-content card-block">
     <div class="tab-pane active" id="home3" role="tabpanel">
@@ -130,5 +127,6 @@ $patient = mysqli_fetch_array($qsqlpatient);
         </div>
     </div>
 </div>
+
 
 <?php include('footer.php'); ?>

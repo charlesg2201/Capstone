@@ -27,8 +27,8 @@
 
 <li class="pcoded-hasmenu">
     <a href="studentdetails.php ">
-        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
-        <span class="pcoded-mtext">Personal Details</span>
+        <span class="pcoded-micon"><i class="feather icon-user"></i></span>
+        <span class="pcoded-mtext">Profile</span>
     </a>
 </li>
 <li class="pcoded-hasmenu">
