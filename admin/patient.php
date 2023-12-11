@@ -286,8 +286,19 @@
             <div class="form-group row">
             <label class="col-sm-2 col-form-label">Section</label>
             <div class="col-sm-4">
-                <input class="form-control" type="text" name="section" id="section" 
-                value="<?php if(isset($_GET['editid'])) { echo $rsedit['section']; } ?>" />
+                <select name="section" id="section" class="form-control" required="">
+                    <option value="">-- Select One -- </option>
+                    <?php
+                    // Fetch strands from the database
+                    $sqlSections = "SELECT * FROM tbl_section WHERE delete_status='0'";
+                    $resultSections = mysqli_query($conn, $sqlSections);
+
+                    while ($rowSection = mysqli_fetch_assoc($resultSections)) {
+                        $selected = (isset($_GET['editid']) && $rsedit['section'] == $rowSection['sections']) ? 'selected' : '';
+                        echo "<option value='{$rowSection['sections']}' $selected>{$rowSection['sections']}</option>";
+                    }
+                    ?>
+                </select>
             </div>
             <label class="col-sm-2 col-form-label">Gender</label>
             <div class="col-sm-4">

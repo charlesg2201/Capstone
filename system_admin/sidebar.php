@@ -100,6 +100,16 @@ if ($_SESSION['user'] == 'tbl_admin') {
 
 <?php if($_SESSION['user'] == 'tbl_admin') { ?>
 <li class="pcoded-hasmenu">
+    <a href="section.php">
+        <span class="pcoded-micon"><i class="feather icon-plus"></i></span>
+        <span class="pcoded-mtext">Section</span>
+    </a>
+    
+    <?php }?>
+</li>
+
+<?php if($_SESSION['user'] == 'tbl_admin') { ?>
+<li class="pcoded-hasmenu">
     <a href="academic_year.php">
         <span class="pcoded-micon"><i class="feather icon-plus"></i></span>
         <span class="pcoded-mtext">Academic Year</span>
