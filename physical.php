@@ -1,46 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <style>
-        .question {
-            margin-bottom: 20px;
-        }
 
-        .choices-container {
-            display: flex;
-        }
-
-        .choice {
-            margin-right: 20px;
-        }
-        .box-header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 50px; /* Set your desired height */
-        background-color: #0a4b78;
-        color: white;
-        font-weight: bold;
-        }
-
-        .box-header h4 {
-        margin: 0;
-        }                  
-    </style>
-   
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            <?php if (isset($_POST['submit'])) { ?>
-                $(".js_success-popup").addClass("popup--visible");
-                setTimeout(function () {
-                    location.href = 'physical.php';
-                }, 1500);
-            <?php } ?>
-        });
-    </script>
-</head>
 
 <body>
     <?php
@@ -57,7 +18,7 @@
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Physical Assessment</h4></div>
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Physical Assessment</h4></div>
                         <div class="card-block">
                             <div class="questions-container">
                                 <form method='post' action=''>
@@ -125,7 +86,6 @@
                                         } else {
                                             $sql = "INSERT INTO tbl_physical_results (question_id, answer, lrn_number) VALUES ('$question_id', '$answer', '$lrn_number')";
                                             if ($qsql = mysqli_query($conn, $sql)) {
-                                                // Success popup logic
                                                 ?>
                                                 <div class="popup popup--icon -success js_success-popup popup--visible">
                                                     <div class="popup__background"></div>
@@ -135,7 +95,7 @@
                                                         </h3>
                                                         <p>Assessment Have Submitted!</p>
                                                         <p>
-                                                            <?php echo "<script>setTimeout(\"location.href = 'physical.php';\",1500);</script>"; ?>
+                                                            <?php echo "<script>setTimeout(\"location.href = 'physical_assessment.php';\",1500);</script>"; ?>
                                                         </p>
                                                     </div>
                                                 </div>
@@ -147,7 +107,6 @@
                                         }
                                     }
                                 }
-                            
                             ?>
                         </div>
                     </div>
@@ -156,7 +115,95 @@
         </div>
     </div>
 
+    <!-- Popup for already taken assessment -->
+    <div class="popup js_already-taken-popup">
+        <div class="popup__background"></div>
+        <div class="popup__content">
+            <h class="popup__content__title">
+                Assessment Already Taken
+            </h>
+            <p>You have already taken the assessment.</p>
+        </div>
+    </div>
+
     <?php include('footer.php'); ?>
 </body>
+
+<head>
+    <style>
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .choices-container {
+            display: flex;
+        }
+
+        .choice {
+            margin-right: 20px;
+        }
+        .box-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50px;
+            background-color: #0a4b78;
+            color: white;
+            font-weight: bold;
+        }
+
+        .box-header h4 {
+            margin: 0;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            <?php
+            if (isset($_POST['submit'])) {
+            ?>
+                $(".js_success-popup").addClass("popup--visible");
+                setTimeout(function () {
+                    <?php
+                    $patientid = $_SESSION['patientid'];
+                    $user_query = mysqli_query($conn, "SELECT lrn_number FROM patient WHERE patientid = '$patientid'");
+                    $user_data = mysqli_fetch_assoc($user_query);
+                    $lrn_number = $user_data['lrn_number'];
+
+                    $check_submission_sql = "SELECT * FROM tbl_physical_results WHERE lrn_number = '$lrn_number'";
+                    $check_submission_result = mysqli_query($conn, $check_submission_sql);
+
+                    if (mysqli_num_rows($check_submission_result) == 0) {
+                        // Redirect only if the assessment hasn't been taken
+                        echo "location.href = 'physical.php';";
+                    }
+                    ?>
+                }, 1500);
+            <?php } ?>
+        });
+
+        // Check if the assessment has already been taken
+        <?php
+        $patientid = $_SESSION['patientid'];
+        $user_query = mysqli_query($conn, "SELECT lrn_number FROM patient WHERE patientid = '$patientid'");
+        $user_data = mysqli_fetch_assoc($user_query);
+        $lrn_number = $user_data['lrn_number'];
+
+        $check_submission_sql = "SELECT * FROM tbl_physical_results WHERE lrn_number = '$lrn_number'";
+        $check_submission_result = mysqli_query($conn, $check_submission_sql);
+
+        if (mysqli_num_rows($check_submission_result) > 0 && !isset($_POST['submit'])) {
+        ?>
+            $(document).ready(function () {
+                $(".js_already-taken-popup").addClass("popup--visible");
+                // Disable form submission if the assessment has already been taken
+                $("form").submit(function (e) {
+                    e.preventDefault();
+                });
+            });
+        <?php } ?>
+    </script>
+</head>
+
 
 </html>
