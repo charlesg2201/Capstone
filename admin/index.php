@@ -39,7 +39,7 @@ $row_manage = mysqli_fetch_array($result_manage);
                             </div>
                         <div class="col-xl-4 col-md-6">
                                 <div class="card text-white mb-8" style="background-color: #135e96;">
-                                    <div class="card-body" style="font-size: 25px; font-weight: bold;">Physcial Assessment</div>
+                                    <div class="card-body" style="font-size: 25px; font-weight: bold;">Physical Assessment</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between" style="background-color: #0a4b78;">
                                     <a class="small stretched-link" href="viewall_p.php" style="color: #ffffff; font-size: 12px;">View Assessment</a>
                                         <div class="small text-white"><i class="feather icon-file-text" style="font-size: 24px;"></i></div>
@@ -51,7 +51,7 @@ $row_manage = mysqli_fetch_array($result_manage);
                                 <div class="card text-white mb-8" style="background-color: #135e96;">
                                     <div class="card-body" style="font-size: 25px; font-weight: bold;">Health Assessment</div>
                                     <div class="card-footer d-flex align-items-center justify-content-between" style="background-color: #0a4b78;">
-                                    <a class="small stretched-link" href="viewall_p.php" style="color: #ffffff; font-size: 12px;">View Assessment</a>
+                                    <a class="small stretched-link" href="viewall_h.php" style="color: #ffffff; font-size: 12px;">View Assessment</a>
                                         <div class="small text-white"><i class="feather icon-file-text" style="font-size: 24px;"></i></div>
                                     </div>
                                 </div>

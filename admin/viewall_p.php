@@ -2,16 +2,10 @@
 <html lang="en">
 
 <head>
+    <!-- Styling for the assessment form -->
     <style>
-        .question {
-            margin-bottom: 20px;
-        }
         body {
             font-family: Arial, sans-serif;
-        }
-
-        .choices-container {
-            display: flex;
         }
 
         .question {
@@ -21,15 +15,19 @@
         }
 
         .question strong {
-            display: bold;
+            display: block;
+            font-weight: bold;
             margin-bottom: 10px;
         }
 
-        
+        .choices-container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         .choice {
             margin-right: 20px;
             margin-bottom: 10px;
-            margin-right: 30px;
             font-size: 16px;
         }
 
@@ -40,6 +38,7 @@
             box-sizing: border-box;
             margin-top: 20px !important; /* Added !important to ensure the margin takes effect */
         }
+
         .box-header {
             display: flex;
             align-items: center;
@@ -51,9 +50,9 @@
         }
 
         .box-header h4 {
-             margin: 0;
-        }                  
-            </style>
+            margin: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -68,9 +67,13 @@
         <div class="pcoded-inner-content">
             <div class="main-body">
                 <div class="page-body">
+                    <!-- Card for the physical assessment -->
                     <div class="card">
-                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Physical Assessment</h4></div>
-                    <br>
+                        <!-- Header for the card -->
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;">
+                            <h4>Physical Assessment</h4>
+                        </div>
+                        <br>
                         <div class="card-block">
                             <div class="questions-container">
                                 <?php
@@ -101,7 +104,6 @@
                                 }
                                 ?>
                             </div>
-                            
                         </div>
                     </div>
                 </div>

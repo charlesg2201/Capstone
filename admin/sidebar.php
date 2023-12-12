@@ -95,7 +95,7 @@
 
 <li class="pcoded-hasmenu">
 <a href="javascript:void(0)">
-        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+        <span class="pcoded-micon"><i class="feather icon-file-text"></i></span>
         <span class="pcoded-mtext">Physical Assessment</span>
     </a>
     <ul class="pcoded-submenu">
@@ -115,7 +115,7 @@
 
 <li class="pcoded-hasmenu">
 <a href="javascript:void(0)">
-        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+        <span class="pcoded-micon"><i class="feather icon-file-text"></i></span>
         <span class="pcoded-mtext">Health Assessment</span>
     </a>
     <ul class="pcoded-submenu">
@@ -135,7 +135,7 @@
 
 <li class="pcoded-hasmenu">
 <a href="javascript:void(0)">
-        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
+        <span class="pcoded-micon"><i class="feather icon-printer"></i></span>
         <span class="pcoded-mtext">Print Report</span>
     </a>
     <ul class="pcoded-submenu">

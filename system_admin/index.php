@@ -24,48 +24,36 @@ $row_manage = mysqli_fetch_array($result_manage);
                 <div class="page-body">
                     <div class="row">
                         <?php if ($_SESSION['user'] == 'tbl_admin') { ?>
-                            <div class="col-xl-4 col-md-6">             
-                                <div class="card border-primary" style="border-width: 3px; padding: 5px;"> 
-                                    <div class="card-body">
-                                        <div class="row align-items-end">
-                                            <div class="col-8">
-                                                <h4 class="text-dark">
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card text-white mb-8" style="background-color: #135e96;">
+                                    <div class="card-body" style="font-size: 25px; font-weight: bold;">
                                                 <?php
                                                 $sql = "SELECT * FROM tbl_admin_user WHERE delete_status='0'";
                                                 $qsql = mysqli_query($conn, $sql);
                                                 echo mysqli_num_rows($qsql);
-                                                ?>
-                                            </h4>
-                                            <h6 class="text-dark-b-0">Total Clinic Coordinator</h6>
-                                        </div>
-                                            <div class="col-4 text-right">
-                                                <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-users"></i></span>
-                                            </div>
-                                        </div>
+                                                ?></div>
+                                        <div class="card-footer d-flex align-items-center justify-content-between" style="background-color: #0a4b78;">
+                                    <a class="small stretched-link" style="color: #ffffff; font-size: 15px;">Total Clinic Coordinator</a>
+                                        <div class="small text-white"><i class="feather icon-users" style="font-size: 24px;"></i></div>
                                     </div>
                                 </div>
                             </div>
-                        <div class="col-xl-4 col-md-6">             
-                            <div class="card border-primary" style="border-width: 3px; padding: 5px;"> 
-                                <div class="card-body">
-                                    <div class="row align-items-end">
-                                        <div class="col-8">
-                                            <h4 class="text-dark">
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card text-white mb-8" style="background-color: #135e96;">
+                                    <div class="card-body" style="font-size: 25px; font-weight: bold;">
+
                                             <?php
                                                 $sql = "SELECT * FROM tbl_admin WHERE delete_status='0'";
                                                 $qsql = mysqli_query($conn, $sql);
                                                 echo mysqli_num_rows($qsql);
-                                                ?>
-                                            </h4>
-                                            <h6 class="text-dark m-b-0">Performing System Admin</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <span class="pcoded-micon" style="font-size: 3rem;"><i class="feather icon-user"></i></span>
-                                        </div>
+                                                ?></div>
+                                        
+                                        <div class="card-footer d-flex align-items-center justify-content-between" style="background-color: #0a4b78;">
+                                    <a class="small stretched-link" style="color: #ffffff; font-size: 15px;">Performing System Admin</a>
+                                        <div class="small text-white"><i class="feather icon-users" style="font-size: 24px;"></i></div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
                         
                         <iframe src="graph.php" frameborder="0" width="100%" height="450"></iframe>
