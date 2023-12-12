@@ -7,13 +7,14 @@ include('connect.php');
 
 if (isset($_POST['submit'])) {
     $fname = $_POST['firstname'];
+    $middlename = $_POST['middlename'];
     $lname = $_POST['lastname'];
     $contact = $_POST['contact'];
-    $username = strtolower($fname . $lname);
+    $employee_number = $_POST['employee_number'];
+    $username = $employee_number;
     $password = strtolower($fname);
     $gender = $_POST['gender'];
     $address = $_POST['address'];
-    $employee_number = $_POST['employee_number'];
     $date = date("Y-m-d");
     // $security_question = $_POST['security_question'];
     // $security_answer = $_POST['security_answer'];
@@ -38,7 +39,7 @@ if (isset($_POST['submit'])) {
 
 
     if (isset($_GET['editid'])) {
-        $sql = "UPDATE tbl_admin_user SET firstname='$fname', lastname='$lname', contact='$contact', username='$username', gender='$gender', employee_number='$employee_number', address='$address' WHERE userid='$_GET[editid]'";
+        $sql = "UPDATE tbl_admin_user SET firstname='$fname', middlename='$middlename', lastname='$lname', contact='$contact', username='$username', gender='$gender', employee_number='$employee_number', address='$address' WHERE userid='$_GET[editid]'";
         if ($qsql = mysqli_query($conn, $sql)) {
             // Display success message 
             ?>
@@ -60,7 +61,7 @@ if (isset($_POST['submit'])) {
         }   
 
     } else {
-        $checkDuplicateQuery = "SELECT COUNT(*) FROM tbl_admin WHERE employee_number = '$employee_number'";
+        $checkDuplicateQuery = "SELECT COUNT(*) FROM tbl_admin_user WHERE employee_number = '$employee_number'";
         $result = mysqli_query($conn, $checkDuplicateQuery);
         $row = mysqli_fetch_row($result);
         $count = $row[0];
@@ -75,13 +76,13 @@ if (isset($_POST['submit'])) {
                     </h3>
                     <p>The details you are trying to add already exist.</p>
                     <p>
-                        <a href="users-sa.php"><button class="button button--error" data-for="js_error-popup">Close</button></a>
+                        <a href="users.php"><button class="button button--error" data-for="js_error-popup">Close</button></a>
                     </p>
                 </div>
             </div>
 <?php
     } else {
-        $sql = "INSERT INTO `tbl_admin_user` (`profile_photo`, `firstname`, `lastname`, `contact`, `username`, `gender`, `employee_number`, `address`) VALUES ('$profilePhoto', '$fname', '$lname', '$contact', '$username', '$gender', '$employee_number', '$address')";
+        $sql = "INSERT INTO `tbl_admin_user` (`firstname`, `middlename`, `lastname`, `contact`, `username`, `gender`, `employee_number`, `address`) VALUES ('$fname', '$middlename', '$lname', '$contact', '$username', '$gender', '$employee_number', '$address')";
             if ($qsql = mysqli_query($conn, $sql)) {
                 // Display success message
                 ?>
@@ -130,10 +131,10 @@ if (isset($_GET['editid'])) {
         
 
         <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Profile Photo</label>
+                        <!-- <label class="col-sm-2 col-form-label">Profile Photo</label>
                         <div class="col-sm-4">
                             <input type="file" id="photo-upload" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder=""   value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
-                        </div>
+                        </div> -->
                     
                     <label class="col-sm-2 col-form-label">Employee Number</label>
             <div class="col-sm-4">
@@ -141,7 +142,12 @@ if (isset($_GET['editid'])) {
                 value="<?php if(isset($_GET['editid'])) { echo $rsedit['employee_number']; } ?>" 
                 oninput="validateEmployeeNumber()" required />
         <span class="messages"></span>
-            </div>           
+            </div>  
+        <label class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['firstname']; } ?>" >
+            <span class="messages"></span>
+        </div>         
         </div>
         <script>
     function validateEmployeeNumber() {
@@ -160,9 +166,9 @@ if (isset($_GET['editid'])) {
 </script>
 
         <div class="form-group row">
-        <label class="col-sm-2 col-form-label">First Name</label>
+        <label class="col-sm-2 col-form-label">Middle Name</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['firstname']; } ?>" >
+            <input type="text" class="form-control" name="middlename" id="middlename" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['middlename']; } ?>" >
             <span class="messages"></span>
         </div>
         

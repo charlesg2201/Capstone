@@ -34,9 +34,9 @@ function getButtonText($delete_status) {
 <tr>
     <th>Employee Number</th>
     <th>First Name</th>
+    <th>Middle Name</th>
     <th>Last Name</th>
     <th>Contact</th>
-    <th>Username</th>
     <th>Gender</th>
     <th>Address</th>
     <th>Status</th>
@@ -63,9 +63,9 @@ if ($qsql) {
         echo "<tr>
                 <td>&nbsp;$rs[employee_number]</td>
                 <td>&nbsp;$rs[firstname]</td>
+                <td>&nbsp;$rs[middlename]</td>
                 <td>&nbsp;$rs[lastname]</td>
                 <td>&nbsp;$rs[contact]</td>
-                <td>&nbsp;$rs[username]</td>
                 <td>&nbsp;$rs[gender]</td>
                 <td>&nbsp;$rs[address]</td>
                 <td>&nbsp;$statusText</td>
