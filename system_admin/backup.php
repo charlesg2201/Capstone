@@ -24,18 +24,15 @@ if (isset($_POST['btn_backup'])) {
     fwrite($file, "-- phpMyAdmin SQL Dump\n");
     fwrite($file, "-- version 4.8.5\n");
     fwrite($file, "-- https://www.phpmyadmin.net/\n");
-    fwrite($file, "--\n");
     fwrite($file, "-- Host: $servername\n");
     fwrite($file, "-- Generation Time: " . date('M d, Y \a\t h:i A') . "\n");
     fwrite($file, "-- Server version: $server_info\n");
     fwrite($file, "-- PHP Version: $php_version\n");
     fwrite($file, "--\n");
-
     fwrite($file, "SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";\n");
     fwrite($file, "SET AUTOCOMMIT = 0;\n");
     fwrite($file, "START TRANSACTION;\n");
     fwrite($file, "SET time_zone = \"+00:00\";\n\n");
-
     fwrite($file, "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;\n");
     fwrite($file, "/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;\n");
     fwrite($file, "/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;\n");
@@ -62,8 +59,6 @@ if (isset($_POST['btn_backup'])) {
                 fwrite($file, "INSERT INTO `$table` (`$keys`) VALUES ('$values');\n");
             }
             fwrite($file, "\n");
-        } else {
-            echo "No data found in the table $table.<br>";
         }
     }
 
@@ -73,7 +68,6 @@ if (isset($_POST['btn_backup'])) {
     fwrite($file, "/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;\n");
     fwrite($file, "/*!40101 SET NAMES utf8mb4 */;\n");
 
-    $conn->close();
     fclose($file);
 
     $zipFilename = $database_name . '_backup_' . date('Y-m-d_H-i-s') . '.zip';
@@ -99,8 +93,11 @@ if (isset($_POST['btn_backup'])) {
     } else {
         echo "Failed to create the zip file";
     }
+
+    $conn->close();
 }
 ?>
+
 
 
 <!DOCTYPE html>
