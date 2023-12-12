@@ -35,6 +35,7 @@
                                                 
                                                 if(isset($_SESSION['id'])) {
                                                     echo "
+                                                        <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editsectionModal' data-id='$rs[id]' data-name='$rs[sections]'>Edit</a>
                                                         <a href='deletesection.php?deleteid=$rs[id]' class='btn btn-success'>Delete</a>";
                                                 }
                                                 
@@ -58,6 +59,27 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="editsectionModal" tabindex="-1" role="dialog" aria-labelledby="editsectionModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editsectionModalLabel">Edit Section</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+    <p id="currentsectionName" style="font-weight: bold;"></p>
+    <form id="editsectionForm" method="post" action="edit_section.php">
+        <input type="hidden" id="editsectionId" name="editsectionId">
+        <div class="form-group">
+            <label for="editsectionName">New Section Name:</label>
+            <input type="text" class="form-control" id="editsectionName" name="editsectionName" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </form>
+</div>
 
     <!-- Add section Modal -->
     <div class="modal fade" id="addsectionModal" tabindex="-1" role="dialog" aria-labelledby="addsectionModalLabel" aria-hidden="true">
@@ -90,6 +112,20 @@
             $("#addsectionButton").click(function() {
                 $("#addsectionModal").modal("show");
             });
+
+
+            $("#editsectionModal").on("show.bs.modal", function (event) {
+            var button = $(event.relatedTarget);
+            var sectionId = button.data("id");
+            var sectionName = button.data("name");
+            var modal = $(this);
+
+            modal.find("#editsectionId").val(sectionId);
+            modal.find("#editsectionName").val(sectionName);
+
+            // Display current value in the modal
+            modal.find("#currentsectionName").text("Current Value: " + sectionName);
+        });
         });
     </script>
 
