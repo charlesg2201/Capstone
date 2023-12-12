@@ -1,46 +1,41 @@
 <?php
 if (isset($_POST['btn_backup'])) {
+    // Database connection parameters
     $servername = "localhost";
     $username = "root";
     $password = "";
     $dbname = "capstone_db";
 
+    // Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
+    // Check connection
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $server_info = $conn->server_info;
-    $php_version = phpversion();
-
+    // Get the current database name
     $result_db = $conn->query("SELECT DATABASE()");
     $row_db = $result_db->fetch_row();
     $database_name = $row_db[0];
 
+    // Output SQL dump to a single file
     $filename = $database_name . '_backup_' . date('Y-m-d_H-i-s') . '.sql';
     $file = fopen($filename, 'w');
 
+    // Output header information
     fwrite($file, "-- phpMyAdmin SQL Dump\n");
     fwrite($file, "-- version 4.8.5\n");
     fwrite($file, "-- https://www.phpmyadmin.net/\n");
     fwrite($file, "--\n");
-    fwrite($file, "-- Host: $servername\n");
-    fwrite($file, "-- Generation Time: " . date('M d, Y \a\t h:i A') . "\n");
-    fwrite($file, "-- Server version: $server_info\n");
-    fwrite($file, "-- PHP Version: $php_version\n");
-    fwrite($file, "--\n");
+    // Add more header information as needed
 
-    fwrite($file, "SET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";\n");
+    fwrite($file, "\nSET SQL_MODE = \"NO_AUTO_VALUE_ON_ZERO\";\n");
     fwrite($file, "SET AUTOCOMMIT = 0;\n");
     fwrite($file, "START TRANSACTION;\n");
     fwrite($file, "SET time_zone = \"+00:00\";\n\n");
 
-    fwrite($file, "/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;\n");
-    fwrite($file, "/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;\n");
-    fwrite($file, "/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;\n");
-    fwrite($file, "/*!40101 SET NAMES utf8mb4 */;\n\n");
-
+    // Loop through all tables and backup each one
     $tables = array();
     $result = $conn->query("SHOW TABLES");
     while ($row = $result->fetch_row()) {
@@ -48,11 +43,13 @@ if (isset($_POST['btn_backup'])) {
     }
 
     foreach ($tables as $table) {
+        // Output table structure
         $result_structure = $conn->query("SHOW CREATE TABLE $table");
         $row_structure = $result_structure->fetch_assoc();
         fwrite($file, "--\n-- Table structure for table `$table`\n--\n\n");
         fwrite($file, $row_structure['Create Table'] . ";\n\n");
 
+        // Output table data
         $result_data = $conn->query("SELECT * FROM $table");
         if ($result_data->num_rows > 0) {
             fwrite($file, "--\n-- Dumping data for table `$table`\n--\n\n");
@@ -67,41 +64,35 @@ if (isset($_POST['btn_backup'])) {
         }
     }
 
+    // Output footer information
     fwrite($file, "COMMIT;\n");
     fwrite($file, "\n/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;\n");
     fwrite($file, "/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;\n");
     fwrite($file, "/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;\n");
     fwrite($file, "/*!40101 SET NAMES utf8mb4 */;\n");
 
+    // Close the connection and the file
     $conn->close();
     fclose($file);
 
-    $zipFilename = $database_name . '_backup_' . date('Y-m-d_H-i-s') . '.zip';
-    $zip = new ZipArchive();
-    if ($zip->open($zipFilename, ZipArchive::CREATE) === TRUE) {
-        $zip->addFile($filename, basename($filename));
-        $zip->close();
+    // Send appropriate headers for file download
+    header('Content-Description: File Transfer');
+    header('Content-Type: application/octet-stream');
+    header('Content-Disposition: attachment; filename=' . basename($filename));
+    header('Expires: 0');
+    header('Cache-Control: must-revalidate');
+    header('Pragma: public');
+    header('Content-Length: ' . filesize($filename));
 
-        header('Content-Description: File Transfer');
-        header('Content-Type: application/zip');
-        header('Content-Disposition: attachment; filename=' . basename($zipFilename));
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
-        header('Content-Length: ' . filesize($zipFilename));
+    // Output the file contents
+    readfile($filename);
 
-        readfile($zipFilename);
+    // Delete the file after sending
+    unlink($filename);
 
-        unlink($zipFilename);
-        unlink($filename);
-
-        exit;
-    } else {
-        echo "Failed to create the zip file";
-    }
+    exit; // Stop further execution
 }
 ?>
-
 
 <!DOCTYPE html>
 <title>System Admin</title>
