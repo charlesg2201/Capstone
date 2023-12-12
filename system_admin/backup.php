@@ -70,7 +70,7 @@ if (isset($_POST['btn_backup'])) {
 
     fclose($file);
 
-    $zipFilename = $database_name . '_backup_' . date('Y-m-d_H-i-s') . '.zip';
+    $zipFilename = $database_name. '.zip';
     $zip = new ZipArchive();
     if ($zip->open($zipFilename, ZipArchive::CREATE) === TRUE) {
         $zip->addFile($filename, basename($filename));
@@ -95,8 +95,67 @@ if (isset($_POST['btn_backup'])) {
     }
 
     $conn->close();
+}elseif (isset($_POST['btn_submit'])) {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "capstone_db";
+
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    if (isset($_FILES['backup_file'])) {
+        $backupFile = $_FILES['backup_file']['tmp_name'];
+
+        $zip = new ZipArchive;
+        if ($zip->open($backupFile) === TRUE) {
+            $extractPath = "./temp_extracted_folder/";
+
+            // Ensure the extraction directory exists
+            if (!is_dir($extractPath)) {
+                mkdir($extractPath, 0777, true);
+            }
+
+            // Extract the contents of the zip file to the temporary directory
+            $zip->extractTo($extractPath);
+            $zip->close();
+
+            // Assume the SQL dump is the first file in the extracted directory
+            $sqlDumpFile = glob($extractPath . "*.sql")[0];
+
+            if ($sqlDumpFile && is_readable($sqlDumpFile)) {
+                // Read the SQL dump
+                $sql = file_get_contents($sqlDumpFile);
+
+                if ($conn->multi_query($sql) === TRUE) {
+    $restoreMessage = "Database successfully restored";
+    
+    // Add additional success actions if needed
+} else {
+    $restoreMessage = "Error restoring database";
+}
+
+                
+
+                // Clean up extracted files
+                unlink($sqlDumpFile);
+            } else {
+                echo "No valid SQL dump found in the zip file.";
+            }
+
+            // Remove the temporary extraction directory
+            rmdir($extractPath);
+        } else {
+            echo "Failed to open the zip file";
+        }
+    }
 }
 ?>
+
+
 
 
 
@@ -166,18 +225,20 @@ if (isset($_POST['btn_backup'])) {
                 </div>
             </div>
             <div class="col-lg-6">
-                <div class="border p-3">
-                    <h5><span class="outlined-text">Restore</span></h5>
-                    <div class="form-group">
-                        <input type="hidden" value="<?=$logo?>" name="old_image">
-                        <input type="file" class="form-control mt-2" name="logo">
-                        <span class="messages"></span>
-                    </div>
-                    <div class="form-group mt-2">
-                        <button type="submit" name="btn_submit" class="btn btn-primary">Upload</button>
-                    </div>
-                </div>
-            </div>
+        <div class="border p-3">
+            <h5><span class="outlined-text">Restore</span></h5>
+            <form method="post" action="" enctype="multipart/form-data">
+    <div class="form-group">
+        <input type="file" class="form-control mt-2" name="backup_file" accept=".zip">
+        <span class="messages"></span>
+    </div>
+    <div class="form-group mt-2">
+        <button type="submit" name="btn_submit" class="btn btn-primary">Upload</button>
+    </div>
+</form>
+        </div>
+    </div>
+
         </div>
     </div>
 </div>
@@ -241,4 +302,13 @@ if (isset($_POST['btn_backup'])) {
 
 
 <?php include('footer.php');?>
-
+<script>
+// Use JavaScript to display the restore message
+document.addEventListener("DOMContentLoaded", function() {
+    var restoreMessage = <?php echo json_encode($restoreMessage); ?>;
+    
+    if (restoreMessage !== "") {
+        alert(restoreMessage); // You can customize this to display the message in a modal or another way
+    }
+});
+</script>
