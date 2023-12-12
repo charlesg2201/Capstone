@@ -157,14 +157,7 @@ if(isset($_GET['id']))
                           <th>Password :</th>
                           <td>&nbsp;<?php echo $rspatient['password']; ?></td>
                       </tr>
-                      <tr>
-                          <th>Security Question :</th>
-                          <td>&nbsp;<?php echo $rspatient['security_question']; ?></td>
-                      </tr>
-                      <tr>
-                          <th>Security Answer :</th>
-                          <td>&nbsp;<?php echo $rspatient['security_answer']; ?></td>
-                      </tr>
+                     
                       </tbody>
                     </table>
                   </div>

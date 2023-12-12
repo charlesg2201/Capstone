@@ -39,7 +39,7 @@
         //$password = substr($_POST['lname'], 0, 2) . mt_rand(111111, 999999);
         $date = date("Y-m-d");
         // Generate student ID
-        $studentid = strtolower($fname . $lname);
+        $studentid = $lrn_number;
 
         // Use the date of birth as the password
         $password = date("mdY", strtotime($dob));
