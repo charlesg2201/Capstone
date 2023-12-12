@@ -127,13 +127,13 @@ while($row=mysqli_fetch_array($query))
         <button type="submit" name="btn_login" class="btn btn-danger btn-md btn-block waves-effect text-center m-b-20">LOGIN</button>
       </div>
     </div>
-    <div class="row m-t-25 text-left">
+    <!-- <div class="row m-t-25 text-left">
       <div class="col-12">
         <div class="forgot-phone text-right f-right">
           <a href="forgot_password.php" class="text-right f-w-600"> Forgot Password?</a>
         </div>
       </div>
-    </div>
+    </div> -->
   </form>
 
 

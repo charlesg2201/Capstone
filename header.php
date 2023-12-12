@@ -75,11 +75,7 @@ while ($row = mysqli_fetch_array($query)) {
                   <i class="feather icon-chevron-down"></i>
                 </div>
                 <ul class="show-notification profile-notification dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
-                  <li>
-                    <a href="changepassword.php">
-                      <i class="feather icon-edit"></i> Change Password
-                    </a>
-                  </li>
+                  
                   <li>
                     <a href="logout.php">
                       <i class="feather icon-log-out"></i> Logout
