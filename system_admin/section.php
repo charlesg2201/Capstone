@@ -8,6 +8,7 @@
     <?php include('header.php');?>
     <?php include('sidebar.php');?>
     <?php include('connect.php');?>
+
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
             <div class="main-body">
@@ -34,7 +35,7 @@
                                                 
                                                 if(isset($_SESSION['id'])) {
                                                     echo "
-                                                        <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editsectionModal' data-id='$rs[id]' data-name='$rs[sections]'>Edit</a>
+                                                    <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editsectionModal' data-id='$rs[id]' data-name='$rs[sections]'>Edit</a>
                                                         <a href='deletesection.php?deleteid=$rs[id]' class='btn btn-success'>Delete</a>";
                                                 }
                                                 
@@ -48,7 +49,7 @@
                                 </table>
                                 <?php
                                     if (isset($_SESSION['id'])) {
-                                        echo "<button id='addsectionButton' class='btn btn-primary'>Add section</button>";
+                                        echo "<button id='addsectionButton' class='btn btn-primary'>Add Section</button>";
                                     }
                                 ?>
                             </div>
@@ -59,7 +60,8 @@
         </div>
     </div>
 
-    <div class="modal fade" id="editsectionModal" tabindex="-1" role="dialog" aria-labelledby="editsectionModalLabel" aria-hidden="true">
+    <!-- Edit Strand Modal -->
+<div class="modal fade" id="editsectionModal" tabindex="-1" role="dialog" aria-labelledby="editsectionModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -80,7 +82,10 @@
     </form>
 </div>
 
-    <!-- Add section Modal -->
+        </div>
+    </div>
+</div>
+    <!-- Add Strand Modal -->
     <div class="modal fade" id="addsectionModal" tabindex="-1" role="dialog" aria-labelledby="addsectionModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -107,13 +112,13 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            $("#addsectionButton").click(function() {
-                $("#addsectionModal").modal("show");
-            });
+    $(document).ready(function() {
+        $("#addsectionButton").click(function() {
+            $("#addsectionModal").modal("show");
+        });
 
-
-            $("#editsectionModal").on("show.bs.modal", function (event) {
+        // Edit Strand Modal
+        $("#editsectionModal").on("show.bs.modal", function (event) {
             var button = $(event.relatedTarget);
             var sectionId = button.data("id");
             var sectionName = button.data("name");
@@ -125,10 +130,9 @@
             // Display current value in the modal
             modal.find("#currentsectionName").text("Current Value: " + sectionName);
         });
-        });
+    });
     </script>
 
     <?php include('footer.php');?>
-
 </body>
 </html>
