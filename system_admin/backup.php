@@ -170,37 +170,18 @@ if (isset($_POST['btn_backup'])) {
 <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
 
- <div class="pcoded-content">
-<div class="pcoded-inner-content">
-
-<div class="main-body">
-<div class="page-wrapper">
-
-<div class="page-header">
-<div class="row align-items-end">
-<div class="col-lg-8">
-<div class="page-header-title">
-<div class="d-inline">
-<h2>Backup and Restore</h2>
-</div>
-</div>
-</div>
-<div class="col-lg-4">
-<div class="page-header-breadcrumb">
-
-</div>
-</div>
-</div>
-</div>
-
-<div class="page-body">
-    <div class="row">
-        <div class="col-sm-12">
+<div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Backup and Restore</h4></div>
+                        <div class="card-block">
 
         <style>
     .outlined-text {
         display: block;
-        background-color: #263238; /* Dark gray background color */
+        background-color: #0a4b78; /* Dark gray background color */
         color: white;
         text-align: left;
         padding: 5px 10px; /* Added left padding */
@@ -208,11 +189,7 @@ if (isset($_POST['btn_backup'])) {
     }
 </style>
 
-<div class="card">
-    <div class="card-header">
-       
-    </div>
-    <div class="card-body">
+
         <div class="row">
             <div class="col-lg-6">
                 <div class="border p-3">

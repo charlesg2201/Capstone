@@ -124,13 +124,11 @@ if (isset($_GET['editid'])) {
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><legend>Add Clinic Coordinator</legend></div>
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Clinic Coordinator Details</h4></div>
                         <div class="card-block">
 <form id="main" method="post" action="" enctype="multipart/form-data">
     
-    <h5>Personal Details</h5>
-        <hr>
-        
+<br>        
 
         <div class="form-group row">
                         <!-- <label class="col-sm-2 col-form-label">Profile Photo</label>

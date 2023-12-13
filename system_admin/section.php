@@ -8,13 +8,12 @@
     <?php include('header.php');?>
     <?php include('sidebar.php');?>
     <?php include('connect.php');?>
-
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><legend>Sections</legend></div>
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Sections</h4></div>
                         <div class="card-block">
                             <div class="table-responsive dt-responsive">
                                 <table id="dom-jqry" class="table table-striped table-bordered nowrap">

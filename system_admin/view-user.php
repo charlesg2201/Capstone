@@ -26,8 +26,11 @@ function getButtonText($delete_status) {
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="card-header"><legend>View User</legend></div>
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>View Users</h4></div>
                         <div class="card-block">
+<form id="main" method="post" action="" enctype="multipart/form-data">
+    
+<br>  
 <div class="table-responsive dt-responsive">
 <table id="dom-jqry" class="table table-striped table-bordered nowrap">
 <thead>

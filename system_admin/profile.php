@@ -74,17 +74,14 @@ if($_SESSION['user'] == 'tbl_admin'){
 ?>
 
 <div class="pcoded-content">
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
                 <div class="page-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header"></div>
-                                <div class="card-block">
+                    <div class="card">
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Profile</h4></div>
+                        <div class="card-block">
                                     <form id="main" method="post" enctype="multipart/form-data">
-                                        <div style="width: 150px; height: 150px; overflow: hidden; border-radius: 50%; margin-top: -30px; margin-right: 10px;">
+                                        <div style="width: 150px; height: 150px; overflow: hidden; border-radius: 50%; margin-top: 20px; margin-right: 10px;">
                                             <img class="profile-img" src="<?php echo $profilePhoto ?>" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" alt="Profile Image">
                                         </div>
                                         <div class="form-group row"></div>
