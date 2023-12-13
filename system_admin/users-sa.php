@@ -172,7 +172,7 @@ if (isset($_GET['editid'])) {
         <label class="col-sm-2 col-form-label">Date of Birth</label>
             <div class="col-sm-4">
                 <input class="form-control" type="date" name="dob" max="<?php echo date("m-d-Y"); ?>"
-                            id="dob" value="<?php echo $rsedit['dob']; ?>" />
+                            id="dob" value="<?php echo $rsedit['dob']; ?>" required=""/>
             </div>
     </div>
 
@@ -207,16 +207,16 @@ if (isset($_GET['editid'])) {
                     <select name="gender" id="gender" class="form-control" required="">
                         <option value="">-- Select One -- </option>
                         <option value="Male" <?php if(isset($_GET['editid']))
-                            { if($rsedit['gender'] == 'Male') { echo 'selected'; } } ?>>Male</option>
+                            { if($rsedit['gender'] == 'Male') { echo 'selected'; } } ?> required >Male</option>
                         <option value="Female" <?php if(isset($_GET['editid']))
-                            { if($rsedit['gender'] == 'Female') { echo 'selected'; } } ?>>Female</option>
+                            { if($rsedit['gender'] == 'Female') { echo 'selected'; } } ?> required >Female</option>
                     </select>
                 </div>
     </div>
     <div class="form-group row">
     <label class="col-sm-2 col-form-label">Address</label>
         <div class="col-sm-10">
-            <textarea name="addr" id="addr" class="form-control"><?php if(isset($_GET['editid'])) { echo $rsedit['addr']; } ?></textarea>
+            <textarea name="addr" id="addr" class="form-control" required=""><?php if(isset($_GET['editid'])) { echo $rsedit['addr']; } ?></textarea>
         </div>
     
     </div>

@@ -221,13 +221,13 @@ if (isset($_GET['editid'])) {
         <label class="col-sm-2 col-form-label">Date of Birth</label>
             <div class="col-sm-4">
                 <input class="form-control" type="date" name="dob" max="<?php echo date("m-d-Y"); ?>"
-                            id="dob" value="<?php echo $rsedit['dob']; ?>" />
+                            id="dob" value="<?php echo $rsedit['dob']; ?>" required="" />
             </div>
     </div>
     <div class="form-group row">
     <label class="col-sm-2 col-form-label">Address</label>
         <div class="col-sm-10">
-            <textarea name="address" id="address" class="form-control" required=""> <?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
+            <textarea name="address" id="address" class="form-control" required=""><?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
         </div>
     
     </div>
