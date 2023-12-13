@@ -49,19 +49,15 @@ if($_SESSION['user'] == 'tbl_admin_user'){
 ?>
 
 <div class="pcoded-content">
-    <div class="pcoded-inner-content">
-        <div class="main-body">
-            <div class="page-wrapper">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
                 <div class="page-body">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-header"></div>
-                                <div class="card-block">
+                    <div class="card">
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Security Details</h4></div>
+                        <div class="card-block">
                                     <form id="main" method="post" enctype="multipart/form-data">
-                                       
-    <h5>Security Details</h5>
-    <hr>
+      <br>
+      <br>
     <div class="form-group row">
     <label class="col-sm-2 col-form-label">Username</label>
     <div class="col-sm-4">
