@@ -56,8 +56,8 @@ $row_manage = mysqli_fetch_array($result_manage);
                             </div>
 
                         
-                        <iframe src="graph.php" frameborder="0" width="100%" height="450"></iframe>
-                        <iframe src="graph2.php" frameborder="0" width="100%" height="450"></iframe>
+                        <!-- <iframe src="graph.php" frameborder="0" width="100%" height="450"></iframe>
+                        <iframe src="graph2.php" frameborder="0" width="100%" height="450"></iframe> -->
 
                         <?php } else if ($_SESSION['user'] == 'patient') {
 

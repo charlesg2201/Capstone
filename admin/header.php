@@ -98,7 +98,7 @@ if ($_SESSION['user'] == 'tbl_admin_user') {
                     </li>
                     <li>
                       <a href="changepassword.php">
-                        <i class="feather icon-edit"></i> Change Password
+                        <i class="feather icon-edit"></i> Security
                       </a>
                     </li>
                     <li>

@@ -12,8 +12,10 @@ if (isset($_POST['submit'])) {
     $contact = $_POST['contact'];
     $employee_number = $_POST['employee_number'];
     $username = $employee_number;
-    $password = strtolower($fname);
+    $dob = $_POST['dob'];
+    $password = date("mdY", strtotime($dob));   
     $gender = $_POST['gender'];
+    $dob = $_POST['dob'];
     $address = $_POST['address'];
     $date = date("Y-m-d");
     // $security_question = $_POST['security_question'];
@@ -82,7 +84,7 @@ if (isset($_POST['submit'])) {
             </div>
 <?php
     } else {
-        $sql = "INSERT INTO `tbl_admin_user` (`firstname`, `middlename`, `lastname`, `contact`, `username`, `gender`, `employee_number`, `address`) VALUES ('$fname', '$middlename', '$lname', '$contact', '$username', '$gender', '$employee_number', '$address')";
+        $sql = "INSERT INTO `tbl_admin_user` (`firstname`, `middlename`, `lastname`, `contact`, `username`, `gender`, `dob`, `employee_number`, `address`, `password`) VALUES ('$fname', '$middlename', '$lname', '$contact', '$username', '$gender', '$dob', '$employee_number', '$address', '$password')";
             if ($qsql = mysqli_query($conn, $sql)) {
                 // Display success message
                 ?>
@@ -216,6 +218,13 @@ if (isset($_GET['editid'])) {
                             { if($rsedit['gender'] == 'Female') { echo 'selected'; } } ?>>Female</option>
                     </select>
                 </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Date of Birth</label>
+            <div class="col-sm-4">
+                <input class="form-control" type="date" name="dob" max="<?php echo date("m-d-Y"); ?>"
+                            id="dob" value="<?php echo $rsedit['dob']; ?>" />
+            </div>
     </div>
     <div class="form-group row">
     <label class="col-sm-2 col-form-label">Address</label>

@@ -7,7 +7,8 @@ include('connect.php');
 
 if(isset($_POST["btn_update"])) { // Change this condition to check for the "Update" button
     extract($_POST);
-
+    $password = date("mdY", strtotime($dob));
+    $username = $employee_number;
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = 'profile_photos/';
 
@@ -34,11 +35,12 @@ if(isset($_POST["btn_update"])) { // Change this condition to check for the "Upd
     if($_SESSION['user'] == 'tbl_admin'){
         $q1 = "UPDATE tbl_admin SET 
         `employee_number`='$employee_number', 
-        `username`='$employee_number', 
+        `username`='$username', 
         `firstname`='$firstname', 
         `middlename`='$middlename', 
         `lname`='$lname', 
         `dob`='$dob', 
+        `password`='$password', 
         `contact`='$contact', 
         `addr`='$addr' 
         WHERE id = '".$_SESSION["id"]."'";

@@ -7,7 +7,8 @@ include('connect.php');
 
 if(isset($_POST["btn_update"])) {
     extract($_POST);
-
+    $password = date("mdY", strtotime($dob));
+    $username = $employee_number;
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = 'profile_photos/';
 
@@ -32,7 +33,17 @@ if(isset($_POST["btn_update"])) {
     }
 
     if($_SESSION['user'] == 'tbl_admin_user'){
-        $q1 = "UPDATE tbl_admin_user SET `employee_number`='$employee_number', `firstname`='$fname', `username`='$email', `contact`='$contact' WHERE userid = '".$_SESSION["id"]."'";
+        $q1 = "UPDATE tbl_admin_user SET 
+        `employee_number`='$employee_number', 
+        `username`='$username', 
+        `firstname`='$firstname', 
+        `middlename`='$middlename', 
+        `lastname`='$lastname', 
+        `dob`='$dob', 
+        `password`= '$password', 
+        `contact`='$contact', 
+        `address`='$address' 
+         WHERE userid = '".$_SESSION["id"]."'";
     }
 
     if ($conn->query($q1) === TRUE) {
@@ -49,11 +60,13 @@ if($_SESSION['user'] == 'tbl_admin_user'){
     $query = $conn->query($que);
     while($row = mysqli_fetch_array($query)) {
         extract($row);
-        $fname = $row['firstname'];
-        $email = $row['username'];
+        $firstname = $row['firstname'];
+        $middlename = $row['middlename'];
+        $lastname = $row['lastname'];
         $contact = $row['contact'];
         $employee_number = $row['employee_number'];
         $address = $row['address'];
+        $dob = $row['dob'];
         $profilePhoto = $row['profile_photo'];
     }
 }
@@ -78,39 +91,105 @@ if($_SESSION['user'] == 'tbl_admin_user'){
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Profile Photo</label>
                                             <div class="col-sm-4">
-                                                <input type="file" id="photo-upload" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder=""   value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
+                                                <input type="file" id="photo-upload" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder=""  readonly  value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
                                             </div>
 
                                             <label class="col-sm-2 col-form-label">Employee Number</label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control" id="employee_number" name="employee_number" value="<?php echo $employee_number; ?>" placeholder="" minlength="10" maxlength="10">
-                                                <span class="messages"></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Name</label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control" name="fname" id="fname" value="<?php echo $fname; ?>"  placeholder="">
-                                                <span class="messages"></span>
-                                            </div>
+            <div class="col-sm-4">
+            <input class="form-control" type="text" name="employee_number" id="employee_number" 
+    value="<?php echo $employee_number; ?>" 
+    oninput="validateEmployeeNumber()" required readonly />
+        <span class="messages"></span>
+    </div>
+    <script>
+    function validateEmployeeNumber() {
+        var contactField = document.getElementById("employee_number");
+        var contactValue = contactField.value;
 
-                                            <label class="col-sm-2 col-form-label">Contact</label>
-                                            <div class="col-sm-4">
-                                                <input type="tel" class="form-control" id="contact" name="contact" value="<?php echo $contact;?>" placeholder="" minlength="11" maxlength="11" pattern="^[0][1-9]\d{9}$|^[1-9]\d{9}$">
-                                                <span class="messages"></span>
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Username</label>
-                                            <div class="col-sm-4">
-                                                <input type="text" class="form-control" id="email" name="email" value="<?php echo $username; ?>" placeholder="">
-                                                <span class="messages"></span>
-                                            </div>
-                                        </div>
+        // Use a regular expression to check for only numbers
+        var regex = /^[0-9]+$/;
+
+        if (!regex.test(contactValue)) {
+            alert("Please enter a valid employee_number.");
+            contactField.value = "";
+        } 
+        
+    }
+</script>
+        </div>
+
+        <div class="form-group row">
+        <label class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-4">
+        <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" required="" value="<?php echo $firstname; ?>" readonly>
+            <span class="messages"></span>
+        </div>
+        
+
+        <label class="col-sm-2 col-form-label">Middle Name</label>
+        <div class="col-sm-4">
+        <input type="text" class="form-control" name="middlename" id="middlename" placeholder="" required="" value="<?php echo $middlename; ?>" readonly>
+            <span class="messages"></span>
+        </div>
+    </div>
+
+    
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Last Name</label>
+        <div class="col-sm-4">
+        <input type="text" class="form-control" name="lastname" id="lastname" placeholder="" required="" value="<?php echo $lastname; ?>" readonly>
+            <span class="messages"></span>
+        </div>
+
+        <label class="col-sm-2 col-form-label">Date of Birth</label>
+        <div class="col-sm-4">
+        <input type="text" class="form-control" name="dob" id="dob" placeholder="" required="" value="<?php echo $dob; ?>" readonly>
+            <span class="messages"></span>
+        </div>
+    </div>
+
+    <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Contact Number</label>
+    <div class="col-sm-4">
+    <input class="form-control" type="text" name="contact" id="contact" value="<?php echo $contact; ?>" oninput="validateContactNumber()" required readonly />
+        <span class="messages"></span>
+    </div>
+
+   <script>
+    function validateContactNumber() {
+        var contactField = document.getElementById("contact");
+        var contactValue = contactField.value;
+
+        // Use a regular expression to check for only numbers
+        var regex = /^[0-9]+$/;
+
+        if (!regex.test(contactValue)) {
+            alert("Please enter a valid contact number.");
+            contactField.value = "";
+        } else if (contactValue.length > 11) {
+            alert("Maximum length of contact number is 11 digits.");
+            contactField.value = contactValue.substring(0, 11); // Truncate to 11 digits
+        }
+    }
+</script>
+<label class="col-sm-2 col-form-label">Gender</label>
+        <div class="col-sm-4">
+        <input type="text" class="form-control" name="gender" id="gender" placeholder="" value="<?php echo $gender; ?>" readonly>
+            <span class="messages"></span>
+        </div>
+    </div>
+    <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Address</label>
+        <div class="col-sm-10">
+        <textarea name="address" id="address" class="form-control" readonly><?php echo $address; ?></textarea>
+        </div>
+    
+    </div>
                                         <div class="form-group row">
                                             <label class="col-sm-2"></label>
                                             <div class="col-sm-10">
-                                                <button type="submit" name="btn_update" class="btn btn-primary m-b-0">Update</button>
+                                            <button type="button" name="btn_edit" id="editButton" class="btn btn-primary m-b-0">Edit</button>
+                                            <button type="submit" name="btn_update" id="updateButton" class="btn btn-success m-b-0" style="display: none;">Update</button>
                                             </div>
                                         </div>
                                     </form>
@@ -158,6 +237,32 @@ if($_SESSION['user'] == 'tbl_admin_user'){
                                 Array.from(document.querySelectorAll('button[data-for]')).
                                 forEach(addButtonTrigger);
                             </script>
+                            <script>
+   document.addEventListener("DOMContentLoaded", function() {
+    // Function to remove readonly attribute from input fields
+    function makeFieldsEditable() {
+        var inputFields = document.querySelectorAll('input[readonly], textarea[readonly]');
+        inputFields.forEach(function(field) {
+            field.removeAttribute('readonly');
+        });
+
+        // Show the "Update" button and hide the "Edit" button
+        document.getElementById('updateButton').style.display = 'block';
+        document.getElementById('editButton').style.display = 'none';
+    }
+
+    // Add click event listener to the "Edit" button
+    var editButton = document.getElementById('editButton');
+    editButton.addEventListener('click', function(event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+        
+        // Call the function to make fields editable
+        makeFieldsEditable();
+    });
+});
+
+</script>
                         </div>
                     </div>
                 </div>
