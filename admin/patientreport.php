@@ -52,31 +52,31 @@ if(isset($_GET['id']))
                                 <table class="table table-hover">
                                     <tr>
                                         <th>LRN Number :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['lrn_number']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['lrn_number']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>First Name :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['fname']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['fname']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Last Name :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['lname']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['lname']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Middle Name :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['mname']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['mname']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Contact Number:</th>
-                                        <td><input type="text" value="<?php echo $rspatient['contact_number']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['contact_number']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Email Address :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['email']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['email']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Date of Birth:</th>
-                                        <td><input type="text" value="<?php echo $rspatient['dob']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['dob']; ?>" readonly></td>
                                     </tr>
                                 </table>
                             </div>
@@ -84,37 +84,38 @@ if(isset($_GET['id']))
                                 <table class="table table-hover">
                                     <tr>
                                         <th>Gender :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['gender']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['gender']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Strand :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['strand']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['strand']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Grade Level:</th>
-                                        <td><input type="text" value="<?php echo $rspatient['grade_level']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['grade_level']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Section :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['section']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['section']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Address :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['address']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['address']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Guardian :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['guardian_name']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['guardian_name']; ?>" readonly></td>
                                     </tr>
                                     <tr>
                                         <th>Guardian's Contact Number :</th>
-                                        <td><input type="text" value="<?php echo $rspatient['contact']; ?>" disabled></td>
+                                        <td><input type="text" class="form-control" value="<?php echo $rspatient['contact']; ?>" readonly></td>
                                     </tr>
                                 </table>
                             </div>
                         </div>
-</div>
-</div>
+                    </div>
+                </div>
+      
 
              <div class="card">
                         <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Security Details</h4></div>
@@ -133,11 +134,11 @@ if(isset($_GET['id']))
                       <tbody>
                       <tr>
                           <th>Username :</th>
-                          <td><input type="text" value="<?php echo $rspatient['studentid']; ?>" disabled></td>
+                          <td><input type="text" class="form-control" value="<?php echo $rspatient['studentid']; ?>" readonly></td>
                       </tr>
                       <tr>
                           <th>Password :</th>
-                          <td><input type="text" value="<?php echo $rspatient['password']; ?>" disabled></td>
+                          <td><input type="text" class="form-control" value="<?php echo $rspatient['password']; ?>" readonly></td>
                       </tr>
                      
                       </tbody>
