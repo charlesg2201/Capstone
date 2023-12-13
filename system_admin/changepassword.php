@@ -5,45 +5,37 @@ include('header.php');
 include('sidebar.php');
 include('connect.php');
 
-if(isset($_POST["btn_update"])) { // Change this condition to check for the "Update" button
-    extract($_POST);
+// if(isset($_POST["btn_update"])) { // Change this condition to check for the "Update" button
+//     extract($_POST);
 
-    if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
-        $uploadDir = 'profile_photos/';
 
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
+//     if($_SESSION['user'] == 'tbl_admin'){
+//         $q1 = "UPDATE tbl_admin SET `password`='$password'WHERE id = '".$_SESSION["id"]."'";
 
-        $uploadedFileName = $uploadDir . uniqid() . '_' . $_FILES['profile_photo']['name'];
+//     }
 
-        if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $uploadedFileName)) {
-            $profilePhoto = mysqli_real_escape_string($conn, $uploadedFileName);
-
-            $q1 = "UPDATE tbl_admin SET `profile_photo`='$profilePhoto' WHERE id = '".$_SESSION["id"]."'";
-            if ($conn->query($q1) !== TRUE) {
-                echo "Failed to update the profile photo in the database.";
-                exit;
-            }
-        } else {
-            echo "Failed to upload the profile photo.";
-            exit;
-        }
-    }
-
-    if($_SESSION['user'] == 'tbl_admin'){
-        $q1 = "UPDATE tbl_admin SET `password`='$password', `security_question` = '$security_question', `security_answer` = '$security_answer'WHERE id = '".$_SESSION["id"]."'";
-
-    }
-
-    if ($conn->query($q1) === TRUE) {
-        $_SESSION['success'] = 'Record Successfully Updated';
-    } else {
-        $_SESSION['error'] = 'Something Went Wrong';
-    }
-}
+//     if ($conn->query($q1) === TRUE) {
+//         $_SESSION['success'] = 'Record Successfully Updated';
+//     } else {
+//         $_SESSION['error'] = 'Something Went Wrong';
+//     }
+// }
 ?>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-##############" crossorigin="anonymous" />
 
+<style>
+    
+    .toggle-password {
+    cursor: pointer;
+    font-size: 20px; /* Adjust the font size */
+    position: absolute; /* Use absolute positioning */
+   margin-top: 10px;
+   margin-left: 3px;
+}
+
+</style>
+</head>
 <?php
 if($_SESSION['user'] == 'tbl_admin'){
     $que = "select * from  tbl_admin where id = '".$_SESSION["id"]."'";
@@ -52,8 +44,6 @@ if($_SESSION['user'] == 'tbl_admin'){
         extract($row);
         $username = $row['username'];
         $password = $row['password'];
-        $security_question = $row['security_question'];
-        $security_answer = $row['security_answer'];
     }
 }
 ?>
@@ -78,22 +68,27 @@ if($_SESSION['user'] == 'tbl_admin'){
         <input class="form-control" type="text" name="username" id="username" value="<?php echo $employee_number; ?>" readonly  />
         <span class="messages"></span>
     </div>
-</div>
-    <div class="form-group row">
         <label class="col-sm-2 col-form-label">Password</label>
         <div class="col-sm-4">
+        <div class="input-group">
         <input class="form-control" type="password" name="password" id="password" value="<?php echo $password ?>" readonly />
-            <span class="messages"></span>
+        <div class="input-group-append">
+            <span class="input-group-text">
+                <i class="toggle-password fas fa-eye" onclick="togglePasswordVisibility()"></i>
+            </span>
+        </div>
+    </div>
+    <span class="messages"></span>
         </div>
 
-        <label class="col-sm-2 col-form-label">Confirm Password</label>
+        <!-- <label class="col-sm-2 col-form-label">Confirm Password</label>
         <div class="col-sm-4">
         <input class="form-control" type="password" name="cnfirmpassword" id="cnfirmpassword" value="<?php echo $password ?>" readonly />
             <span class="messages" id="confirm-pw" style="color: red;"></span>
-        </div>
+        </div> -->
     </div>
 
-    <div class="form-group row">
+    <!-- <div class="form-group row">
             <label class="col-sm-2 col-form-label">Security Question</label>
                 <div class="col-sm-4">
                 <input class="form-control" type="text" name="security_question" id="security_question" value="<?php echo $security_question; ?>" readonly />
@@ -104,17 +99,15 @@ if($_SESSION['user'] == 'tbl_admin'){
                 <div class="col-sm-4">
                 <input class="form-control" type="text" name="security_answer" id="security_answer" value="<?php echo $security_answer; ?>" readonly />
                 </div>
-        </div> 
+        </div>  -->
 <?php  ?>
-
+<!-- 
                                         <div class="form-group row">
                                             <label class="col-sm-2"></label>
                                             <div class="col-sm-10">
-                                           <!-- Edit Button -->
 <button type="button" name="btn_edit" id="editButton" class="btn btn-primary m-b-0">Edit</button>
 
-<!-- Update Button (Initially hidden) -->
-<button type="submit" name="btn_update" id="updateButton" class="btn btn-success m-b-0" style="display: none;">Update</button>
+<button type="submit" name="btn_update" id="updateButton" class="btn btn-success m-b-0" style="display: none;">Update</button> -->
 
                                             </div>
                                         </div>
@@ -123,7 +116,24 @@ if($_SESSION['user'] == 'tbl_admin'){
                             </div>
                             <?php include('footer.php'); ?>
                             <link rel="stylesheet" href="popup_style.css">
-                            <?php if(!empty($_SESSION['success'])) {  ?>
+                            <script>
+                                function togglePasswordVisibility() {
+    var passwordField = document.getElementById('password');
+    var icon = document.querySelector('.toggle-password');
+
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordField.type = 'password';
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}
+
+                            </script>
+                            <!-- <?php if(!empty($_SESSION['success'])) {  ?>
                                 <div class="popup popup--icon -success js_success-popup popup--visible">
                                     <div class="popup__background"></div>
                                     <div class="popup__content">
@@ -229,7 +239,7 @@ if($_SESSION['user'] == 'tbl_admin'){
             $('#confirm-pw').html('Password Not Match');
         }
     });
-</script>
+</script> -->
 
 
                         </div>
