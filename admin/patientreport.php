@@ -42,7 +42,6 @@ if(isset($_GET['id']))
                         <h4>Student Details</h4>
                     </div>
                     <div class="card-block">
-
                         <div class="row justify-content-center">
                             <div class="col-md-6">
                                 <?php
@@ -50,76 +49,73 @@ if(isset($_GET['id']))
                                 $qsqlpatient = mysqli_query($conn, $sqlpatient);
                                 $rspatient = mysqli_fetch_array($qsqlpatient);
                                 ?>
-
-                <table class="table table-hover">
-                    <tr>
-                        <th>LRN Number :</th>
-                        <td>&nbsp;<?php echo $rspatient['lrn_number']; ?></td>
-                    </tr>
-                    <tr>
-                        <th>First Name :</th>
-                        <td>&nbsp;<?php echo $rspatient['fname']; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Last Name :</th>
-                        <td>&nbsp;<?php echo $rspatient['lname']; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Middle Name :</th>
-                        <td>&nbsp;<?php echo $rspatient['mname']; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Contact Number:</th>
-                        <td>&nbsp;<?php echo $rspatient['contact_number']; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Email Address :</th>
-                        <td>&nbsp;<?php echo $rspatient['email']; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Date of Birth:</th>
-                        <td>&nbsp;<?php echo $rspatient['dob']; ?></td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-6">
                                 <table class="table table-hover">
-                    <tr>
-                        <th>Gender :</th>
-                        <td>&nbsp;<?php echo $rspatient['gender'];?></td>
-                    </tr>
-                        <tr>
-                        <th>Strand :</th>
-                        <td>&nbsp;<?php echo $rspatient['strand']; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Grade Level:</th>
-                        <td>&nbsp;<?php echo $rspatient['grade_level']; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Section :</th>
-                        <td>&nbsp;<?php echo $rspatient['section']; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Address :</th>
-                        <td>&nbsp;<?php echo $rspatient['address']; ?></td>
-                    </tr>
-                    <tr>
-                        <th>Guardian :</th>
-                        <td>&nbsp;<?php echo $rspatient['guardian_name']; ?></td>
-                    </tr>
-                        <tr>
-                        <th>Guardian's Contact Number :</th>
-                        <td>&nbsp;<?php echo $rspatient['contact']; ?></td>
-                    </tr>
-                    
-                </table>
+                                    <tr>
+                                        <th>LRN Number :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['lrn_number']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>First Name :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['fname']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Last Name :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['lname']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Middle Name :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['mname']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Contact Number:</th>
+                                        <td><input type="text" value="<?php echo $rspatient['contact_number']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Email Address :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['email']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Date of Birth:</th>
+                                        <td><input type="text" value="<?php echo $rspatient['dob']; ?>" disabled></td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-md-6">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <th>Gender :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['gender']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Strand :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['strand']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Grade Level:</th>
+                                        <td><input type="text" value="<?php echo $rspatient['grade_level']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Section :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['section']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Address :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['address']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Guardian :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['guardian_name']; ?>" disabled></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Guardian's Contact Number :</th>
+                                        <td><input type="text" value="<?php echo $rspatient['contact']; ?>" disabled></td>
+                                    </tr>
+                                </table>
+                            </div>
                         </div>
-                     </div>
-                     </div>
-                </div>
-            </div>
-        </div>
+</div>
+</div>
+
              <div class="card">
                         <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Security Details</h4></div>
                         <div class="card-block">
@@ -137,11 +133,11 @@ if(isset($_GET['id']))
                       <tbody>
                       <tr>
                           <th>Username :</th>
-                          <td>&nbsp;<?php echo $rspatient['studentid']; ?></td>
+                          <td><input type="text" value="<?php echo $rspatient['studentid']; ?>" disabled></td>
                       </tr>
                       <tr>
                           <th>Password :</th>
-                          <td>&nbsp;<?php echo $rspatient['password']; ?></td>
+                          <td><input type="text" value="<?php echo $rspatient['password']; ?>" disabled></td>
                       </tr>
                      
                       </tbody>
