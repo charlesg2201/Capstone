@@ -32,16 +32,13 @@
                                                 echo "<tr>
                                                     <td>$rs[academic_year]</td>
                                                     <td align=''>";
-                                                   
-                                                    if(isset($_SESSION['id'])) {
-                                                        echo "
-                                                        <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editacademicyearModal' data-id='$rs[id]' data-name='$rs[academic_year]'>Edit</a>";
-                                                    }
-                                                    
-                                                    echo "</td></tr>";
-                                               
                                                 
-                                               
+                                                if(isset($_SESSION['id'])) {
+                                                    echo "
+                                                    <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editacademicyearModal' data-id='$rs[id]' data-name='$rs[academic_year]'>Edit</a>";
+                                                }
+                                                
+                                                echo "</td></tr>";
                                             }
                                         ?>
                                     </tbody>
@@ -51,7 +48,7 @@
                                 </table>
                                 <?php
                                     if (isset($_SESSION['id'])) {
-                                        echo "<button id='addAcademicYear' class='btn btn-primary'>Add Academic Year</button>";
+                                        echo "<button id='addacademicyearButton' class='btn btn-primary'>Add Academic Year</button>";
                                     }
                                 ?>
                             </div>
@@ -62,8 +59,8 @@
         </div>
     </div>
 
-
-    <div class="modal fade" id="editacademicyearModal" tabindex="-1" role="dialog" aria-labelledby="editacademicyearModalLabel" aria-hidden="true">
+    <!-- Edit Strand Modal -->
+<div class="modal fade" id="editacademicyearModal" tabindex="-1" role="dialog" aria-labelledby="editacademicyearModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -83,24 +80,30 @@
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </form>
 </div>
-    <!-- Add academicyear Modal -->
-    <div class="modal fade" id="addAcademicYeadModal" tabindex="-1" role="dialog" aria-labelledby="addAcademicYeadModalLabel" aria-hidden="true">
+
+        </div>
+    </div>
+</div>
+    <!-- Add Strand Modal -->
+    <div class="modal fade" id="addacademicyearModal" tabindex="-1" role="dialog" aria-labelledby="addacademicyearModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addAcademicYeadModalLabel">Add Academic Year</h5>
+                    <h5 class="modal-title" id="addacademicyearModalLabel">Add Academic Year</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="addStrandForm" method="post" action="save_academicyear.php">
-                        <div class="form-group">
-                            <label for="academicYear">Academic Year:</label>
-                            <input type="text" class="form-control" id="academicYear" name="academicYear" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Save Academic Year</button>
-                    </form>
+                <form id="addacademicyearForm" method="post" action="save_academicyear.php">
+    <div class="form-group">
+        <label for="academic_year">Academic Year Name:</label>
+        <input type="text" class="form-control" id="academicyearName" name="academic_year" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Save Academic Year</button>
+</form>
+
+                    
                 </div>
             </div>
         </div>
@@ -110,12 +113,13 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 
     <script>
-        $(document).ready(function() {
-            $("#addAcademicYear").click(function() {
-                $("#addAcademicYeadModal").modal("show");
-            });
+    $(document).ready(function() {
+        $("#addacademicyearButton").click(function() {
+            $("#addacademicyearModal").modal("show");
+        });
 
-            $("#editacademicyearModal").on("show.bs.modal", function (event) {
+        // Edit Strand Modal
+        $("#editacademicyearModal").on("show.bs.modal", function (event) {
             var button = $(event.relatedTarget);
             var academicyearId = button.data("id");
             var academicyearName = button.data("name");
@@ -127,10 +131,9 @@
             // Display current value in the modal
             modal.find("#currentacademicyearName").text("Current Value: " + academicyearName);
         });
-        });
-    </script>
+    });
+</script>
+
+    
 
     <?php include('footer.php');?>
-
-</body>
-</html>
