@@ -95,7 +95,7 @@ if(isset($_GET['editid']))
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Reasons</label>
         <div class="col-sm-4">
-            <select class="form-control show-tick" name="reasons" id="reasons">
+            <select class="form-control show-tick" name="reasons" id="reasons" required="">
                 <option value="">Select</option>
                 <?php
             $arr = array("Fever","Cough","Cold","Sorethroat","Headache","Asthma","Others");
