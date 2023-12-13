@@ -1,3 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+      .box-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px; /* Set your desired height */
+  background-color: #0a4b78;
+  color: white;
+  font-weight: bold;
+}
+
+.box-header h4 {
+  margin: 0;
+}                  
+</style>
 <?php date_default_timezone_set("Asia/Manila"); ?>
 <?php require_once('check_login.php');?>
 <?php include('head.php');?>
@@ -16,61 +34,22 @@ if(isset($_GET['id']))
 <?php } ?>
 
 <div class="pcoded-content">
-<div class="pcoded-inner-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-body">
+                <div class="card">
+                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold">
+                        <h4>Student Details</h4>
+                    </div>
+                    <div class="card-block">
 
-<div class="main-body">
-<div class="">
-
-<div class="page-header">
-<div class="row align-items-end">
-<div class="col-lg-10">
-<div class="page-header-title">
-<div class="d-inline">
-
-</div>
-</div>
-</div>
-<div class="col-lg-4">
-<div class="page-header-breadcrumb">
-
-</div>
-</div>
-</div>
-</div>
-
-
-<!-- <h5>DOM/Jquery</h5>
-<span>Events assigned to the table can be exceptionally useful for user interaction, however you must be aware that DataTables will add and remove rows from the DOM as they are needed (i.e. when paging only the visible elements are actually available in the DOM). As such, this can lead to the odd hiccup when working with events.</span> -->
-</div>
-<div class="card">
-<div class="card-block">
-  <div class="row">
-      <div class="col-lg-12">
-                        <ul class="nav nav-tabs md-tabs b-none" role="tablist">
-                        <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#profile" role="tab">Patient Profile</a>
-                  <div class="slide"></div>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#security" role="tab">Security Details</a>
-                  <div class="slide"></div>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#appointment" role="tab">Admission Record</a>
-                  <div class="slide"></div>
-              </li>
-                        </ul>
-
-                        <div class="tab-content card-block">
-    <div class="tab-pane active" id="profile" role="tabpanel">
-        <div class="row">
-            <div class="col-md-6">
-			 <p class="m-0">
-                  <?php
-                    $sqlpatient = "SELECT * FROM patient where patientid='$_GET[patientid]'";
-                    $qsqlpatient = mysqli_query($conn,$sqlpatient);
-                    $rspatient=mysqli_fetch_array($qsqlpatient);
-                  ?>
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <?php
+                                $sqlpatient = "SELECT * FROM patient where patientid='$_GET[patientid]'";
+                                $qsqlpatient = mysqli_query($conn, $sqlpatient);
+                                $rspatient = mysqli_fetch_array($qsqlpatient);
+                                ?>
 
                 <table class="table table-hover">
                     <tr>
@@ -103,8 +82,8 @@ if(isset($_GET['id']))
                     </tr>
                 </table>
             </div>
-            <div class="col-md-6 justify-content-md-end">
-                <table class="table table-hover">
+            <div class="col-md-6">
+                                <table class="table table-hover">
                     <tr>
                         <th>Gender :</th>
                         <td>&nbsp;<?php echo $rspatient['gender'];?></td>
@@ -137,9 +116,16 @@ if(isset($_GET['id']))
                 </table>
                         </div>
                      </div>
-                 </div>
-                <div class="tab-pane col-4" id="security" role="tabpanel">
-                  <p class="m-0">
+                     </div>
+                </div>
+            </div>
+        </div>
+             <div class="card">
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Security Details</h4></div>
+                        <div class="card-block">
+                        <form id="main" method="post" action="" enctype="multipart/form-data">
+                            <table id="dom-jqry" class="table table-striped table-bordered nowrap">
+    <div class="form-group row">
                   <?php
                     $sqlpatient = "SELECT * FROM patient where patientid='$_GET[patientid]'";
                     $qsqlpatient = mysqli_query($conn,$sqlpatient);
@@ -163,9 +149,12 @@ if(isset($_GET['id']))
                   </div>
                   </p>
               </div>
-             
-              <div class="tab-pane" id="appointment" role="tabpanel">
-                  <p class="m-0">
+              <div class="card">
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Admission Record</h4></div>
+                        <div class="card-block">
+                        <form id="main" method="post" action="" enctype="multipart/form-data">
+                            <table id="dom-jqry" class="table table-striped table-bordered nowrap">
+    <div class="form-group row">
                     <div class="table-responsive dt-responsive">
                     <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                       <thead>
@@ -205,6 +194,8 @@ if(isset($_GET['id']))
                     
                   </p>
               </div>
+                        </div>
+                        </div>
 
 <div id="#">
 </div>
@@ -213,21 +204,6 @@ if(isset($_GET['id']))
 </div>
 </div>
 </div>
-</div>
-<?php include('footer.php');?>
-            </div>
-        </div>
-    </div>
-</div>
-
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
+         
+</html>
 <?php include('footer.php'); ?>
