@@ -53,6 +53,14 @@
     </a>
 </li>
 
+<li class="pcoded-hasmenu">
+    <a href="messages.php?patientid=<?php echo $_SESSION["patientid"]; ?>">
+        <span class="pcoded-micon"><i class="feather icon-file-text"></i></span>
+        <span class="pcoded-mtext">Message</span>
+    </a>
+</li>
+
+
 
 <?php } ?>
 
