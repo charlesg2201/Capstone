@@ -122,7 +122,8 @@ if (isset($_POST['btn_submit'])) {
                     </h3>
                     <p>Message Inserted Successfully</p>
                     <p>
-                        <?php echo "<script>setTimeout(\"location.href = 'messages.php';\",1500);</script>"; ?>
+                    <?php echo "<script>setTimeout(\"location.href = 'messages.php?patientid=" . $_SESSION["patientid"] . "';\", 1500);</script>"; ?>
+
                     </p>
                 </div>
             </div>
