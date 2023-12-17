@@ -88,53 +88,52 @@
 <div class="inbox-container">
 <?php
 $patientid = isset($_GET['patientid']) ? $_GET['patientid'] : null;
+function getPatientName($conn, $patientid) {
+    $sql = "SELECT fname FROM patient WHERE patientid = '$patientid'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+        return $row['fname'];
+    } else {
+        // Debugging information
+        echo '<div class="debug-info">Debug: Unable to fetch patient name for ID ' . $patientid . '</div>';
+        echo '<div class="debug-info">Debug: SQL Query: ' . $sql . '</div>';
+        return 'Unknown Patient';
+    }
+}
+
 // Handle form submission and message insertion
 if (isset($_POST['btn_submit'])) {
     $message = $_POST['message'];
 
-    // Fetch all users from tbl_admin_user
-    $sqlFetchUsers = "SELECT username FROM tbl_admin_user";
-    $resultFetchUsers = mysqli_query($conn, $sqlFetchUsers);
+    // Hard-code the clinic coordinator as the sender
+    $sender = 'Clinic Coordinator';
 
-    // Check if users were fetched successfully
-    if ($resultFetchUsers) {
-        $receivers = array();
+    // Insert the message into the database with the clinic coordinator as the sender and the patient as the receiver
+    $sql = "INSERT INTO tbl_messages (patientid, message, sender, receiver) VALUES ('$patientid', '$message', '$sender', '$patientid')";
 
-        // Collect all receivers
-        while ($userRow = mysqli_fetch_assoc($resultFetchUsers)) {
-            $receivers[] = $userRow['username'];
-        }
-
-        // Convert receivers array to a comma-separated string
-        $receiversString = implode(",", $receivers);
-
-        // Insert the message into the database for all receivers
-        $sql = "INSERT INTO tbl_messages (patientid, message, sender, receiver) VALUES ('$patientid', '$message', 'You', '$receiversString')";
-
-        if (mysqli_query($conn, $sql)) {
-            // Display success message or redirect to messages.php
-            ?>
-            <div class="popup popup--icon -success js_success-popup popup--visible">
-                <div class="popup__background"></div>
-                <div class="popup__content">
-                    <h3 class="popup__content__title">
-                        Success
-                    </h3>
-                    <p>Message Inserted Successfully</p>
-                    <p>
-                    <?php echo "<script>setTimeout(\"location.href = 'messages.php?patientid=" . $_SESSION["patientid"] . "';\", 1500);</script>"; ?>
-
-                    </p>
-                </div>
+    if (mysqli_query($conn, $sql)) {
+        // Display success message or redirect to messages.php
+        ?>
+        <div class="popup popup--icon -success js_success-popup popup--visible">
+            <div class="popup__background"></div>
+            <div class="popup__content">
+                <h3 class="popup__content__title">
+                    Success
+                </h3>
+                <p>Message Inserted Successfully</p>
+                <p>
+                <?php echo "<script>setTimeout(\"location.href = 'messages.php?patientid=" . $patientid . "';\", 1500);</script>"; ?>
+                </p>
             </div>
-            <?php
-        } else {
-            echo mysqli_error($conn);
-        }
+        </div>
+        <?php
     } else {
         echo mysqli_error($conn);
     }
 }
+
 
 // Fetch and display messages from the database (in ascending order)
 $sqlFetchMessages = "SELECT * FROM tbl_messages WHERE patientid = '$patientid' ORDER BY timestamp ASC";
@@ -142,17 +141,27 @@ $resultFetchMessages = mysqli_query($conn, $sqlFetchMessages);
 $messages = mysqli_fetch_all($resultFetchMessages, MYSQLI_ASSOC);
 
 // Display conversation
+// Display conversation
 if (empty($messages)) {
     echo '<div class="no-messages">Start a conversation with the Clinic Coordinator.</div>';
 } else {
     foreach ($messages as $msg) {
+        $senderName = ($msg['sender'] == 'Clinic Coordinator') ? 'Clinic Coordinator' : getPatientName($conn, $msg['patientid']);
         echo '<div class="message">';
-        echo '<div class="sender">' . ($msg['sender'] == 'You' ? 'You' : 'Clinic Coordinator') . '</div>';
+        echo '<div class="sender">' . $senderName . '</div>';
         echo '<div class="message-body">' . $msg['message'] . '</div>';
         echo '<div class="timestamp">Sent on: ' . $msg['timestamp'] . '</div>';
         echo '</div>';
     }
+    
+    
+    
+    
 }
+
+// Function to get patient name by patientid
+
+
 ?>
 <!-- Compose form -->
 <div class="compose-form">

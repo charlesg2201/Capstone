@@ -153,15 +153,15 @@
     </ul>
 </li>
 
-
-<?php } ?>
-<?php if($_SESSION['user'] == 'patient') { ?>
 <li class="pcoded-hasmenu">
-    <a href="takeassessment.php ">
-        <span class="pcoded-micon"><i class="feather icon-menu"></i></span>
-        <span class="pcoded-mtext">Assessment</span>
+    <a href="inbox.php">
+    <span class="pcoded-micon"><i class="feather icon-printer"></i></span>
+        <span class="pcoded-mtext">Inbox</span>
     </a>
 </li>
+
+
+
 
 
 
