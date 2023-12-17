@@ -54,6 +54,29 @@
         // $fullname = $studentid . str_replace(' ', '', $_POST['lname']);
         // $studentid = strtolower(mysqli_real_escape_string($conn, $fullname));
 
+        if(isset($_GET['editid']))
+            {
+                $sql ="UPDATE patient SET lrn_number='$_POST[lrn_number]',fname='$_POST[fname]',lname='$_POST[lname]',mname='$_POST[mname]',contact_number='$_POST[contact_number]',email='$_POST[email]',strand='$_POST[strand]',guardian_name='$_POST[guardian_name]',address='$_POST[address]',contact='$_POST[contact]',gender='$_POST[gender]',dob='$_POST[dateofbirth]',grade_level='$_POST[grade_level]',section='$_POST[section]' WHERE patientid='$_GET[editid]'";
+                if($qsql = mysqli_query($conn,$sql))
+                {
+        ?>
+                    <div class="popup popup--icon -success js_success-popup popup--visible">
+                    <div class="popup__background"></div>
+                    <div class="popup__content">
+                        <h3 class="popup__content__title">
+                        Success
+                        </h3>
+                        <p>Patient Record Updated Successfully</p>
+                        <p>
+                        <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
+                        <?php echo "<script>setTimeout(\"location.href = 'view-patient.php';\",1500);</script>"; ?>
+                        </p>
+                    </div>
+                    </div>
+        <?php
+                }
+            }else{
+                
         $checkDuplicateQuery = "SELECT COUNT(*) FROM patient WHERE lrn_number = '$lrn_number'";
         $result = mysqli_query($conn, $checkDuplicateQuery);
         $row = mysqli_fetch_row($result);
@@ -75,35 +98,6 @@
                 </div>
             <?php
         }else{
-            if(isset($_GET['editid']))
-            {
-                $sql ="UPDATE patient SET lrn_number='$_POST[lrn_number]',fname='$_POST[fname]',lname='$_POST[lname]',mname='$_POST[mname]',contact_number='$_POST[contact_number]',email='$_POST[email]',strand='$_POST[strand]',guardian_name='$_POST[guardian_name]',address='$_POST[address]',contact='$_POST[contact]',gender='$_POST[gender]',dob='$_POST[dateofbirth]',grade_level='$_POST[grade_level]',section='$_POST[section]' WHERE patientid='$_GET[editid]'";
-                if($qsql = mysqli_query($conn,$sql))
-                {
-        ?>
-                    <div class="popup popup--icon -success js_success-popup popup--visible">
-                    <div class="popup__background"></div>
-                    <div class="popup__content">
-                        <h3 class="popup__content__title">
-                        Success
-                        </h3>
-                        <p>Patient Record Updated Successfully</p>
-                        <p>
-                        <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
-                        <?php echo "<script>setTimeout(\"location.href = 'view-patient.php';\",1500);</script>"; ?>
-                        </p>
-                    </div>
-                    </div>
-        <?php
-                }
-                else
-                {
-                    echo mysqli_error($conn);
-                }
-            }
-            else
-            {
-                
                 $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,grade_level,strand,section,guardian_name,address,contact,studentid,password,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[mname]','$_POST[lrn_number]','$_POST[contact_number]','$_POST[email]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[gender]','$_POST[dateofbirth]')";
 
                 if($qsql = mysqli_query($conn,$sql))
@@ -130,7 +124,10 @@
                 }
             }
         }
-     }
+
+            }
+
+     
     if(isset($_GET['editid']))
     {
         $sql="SELECT * FROM patient WHERE patientid='$_GET[editid]' ";
