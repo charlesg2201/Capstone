@@ -7,7 +7,6 @@
     require '..\phpmailer/src/SMTP.php';
 
     if(isset($_POST['send'])) {
-        
         $mail = new PHPMailer(true);
         
         // Set CA file and SSL options
@@ -35,6 +34,24 @@
         $mail->Body = 'Body of your email';
 
 
-      
+        if ($mail->send()) {
+            // Email sent successfully, show success popup
+            echo '
+            <div class="popup popup--icon -success js_success-popup popup--visible">
+                <div class="popup__background"></div>
+                <div class="popup__content">
+                    <h3 class="popup__content__title">
+                        Success 
+                    </h3>
+                    <p>Password is sent to your email address</p>
+                    <p>
+                        <script>setTimeout("location.href = \'login_admin.php\';", 1500);</script>
+                    </p>
+                </div>
+            </div>';
+        } else {
+            // Handle email sending failure here
+            echo 'Email sending failed';
+        }
     }
 ?>
