@@ -153,7 +153,7 @@ while($row=mysqli_fetch_array($query))
     <div class="row m-t-25 text-left">
       <div class="col-12">
         <div class="forgot-phone text-right f-right">
-          <a href="forgot_password.php" class="text-right f-w-600"> Forgot Password?</a>
+          <a href="forgotpass.php" class="text-right f-w-600"> Forgot Password?</a>
         </div>
       </div>
     </div>
