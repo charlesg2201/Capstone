@@ -1,5 +1,7 @@
 
-<?php include('head.php');?>
+<?php include('head.php');
+include('connect.php');
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,58 +29,7 @@
 </head>
 <body class="fix-menu">
 
-<?php
-  include('connect.php');
-  extract($_POST);
-if(isset($_POST['btn_forgot']))
-{
-    $sql = "SELECT * FROM tbl_admin_user WHERE username='".$username."'";
-    $result = mysqli_query($conn,$sql);
-    $row  = mysqli_fetch_array($result);
-    
-     $_SESSION["userid"] = $row['userid'];
-     $_SESSION["password"] = $row['password'];
-     $_SESSION["email"] = $row['username'];
-     $_SESSION["firstname"] = $row['firstname'];
 
-     $count=mysqli_num_rows($result);
-     if($count==1 && isset($_SESSION["email"])) {
-    {       
-        ?>
-         <div class="popup popup--icon -success js_success-popup popup--visible">
-          <div class="popup__background"></div>
-            <div class="popup__content">
-             <h3 class="popup__content__title">
-              Success 
-            </h3>
-            <p>Login Successfully</p>
-            <p>
-             <?php echo "<script>setTimeout(\"location.href = 'resetpass.php?userid=$row[userid]';\",1500);</script>"; ?>
-            </p>
-          </div>
-        </div>
-     <?php
-    }
-}
-else {?>
-     <div class="popup popup--icon -error js_error-popup popup--visible">
-      <div class="popup__background"></div>
-      <div class="popup__content">
-        <h3 class="popup__content__title">
-          Error 
-        </h3>
-        <p>Invalid Username</p>
-        <p>
-          <a href="forgot_password.php"><button class="button button--error" data-for="js_error-popup">Close</button></a>
-        </p>
-      </div>
-    </div>
-
-<?php
-      }
-    
-   }
-?>
 
 <section class="login-block">
 
@@ -86,7 +37,7 @@ else {?>
 <div class="row">
 <div class="col-sm-12">
 
-<form method="POST" class="md-float-material form-material">
+<form class="" action="sendpass.php" method="post" class="md-float-material form-material">
 
 <div class="auth-box card">
   <br>
@@ -100,12 +51,12 @@ else {?>
 </div>
 </div>
 <div class="form-group form-primary">
-<input type="text" name="username" class="form-control" required="" placeholder="Enter your username">
+<input type="email" name="email" class="form-control" required="" placeholder="Enter your active email address">
 <span class="form-bar"></span>
 </div>
 <div class="row">
 <div class="col-md-12">
-<button type="submit" name="btn_forgot" class="btn btn-danger btn-md btn-block waves-effect text-center m-b-20">Reset Password</button>
+<button type="submit" name="send" class="btn btn-danger btn-md btn-block waves-effect text-center m-b-20">Submit</button>
 </div>
  </div>
 <br>
