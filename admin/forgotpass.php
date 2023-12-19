@@ -40,8 +40,9 @@ if (isset($_POST['send'])) {
 
         if ($row) {
             $password = $row['password'];
+            $firstname = $row['firstname'];
             $mail->Subject = 'Your Password Recovery';
-            $mail->Body = 'Your password is: ' . $password;
+            $mail->Body = 'Hi ' .$firstname .',' . ' ' . 'your password is: ' . $password;
 
             if ($mail->send()) {
                 echo '
