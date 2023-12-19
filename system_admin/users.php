@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
 
 
     if (isset($_GET['editid'])) {
-        $sql = "UPDATE tbl_admin_user SET firstname='$fname', middlename='$middlename', lastname='$lname', contact='$contact', username='$username', gender='$gender', employee_number='$employee_number', address='$address' WHERE userid='$_GET[editid]'";
+        $sql = "UPDATE tbl_admin_user SET firstname='$fname', middlename='$middlename', lastname='$lname', contact='$contact', username='$username', gender='$gender', employee_number='$employee_number', address='$address', password='$password', dob='$dob' WHERE userid='$_GET[editid]'";
         if ($qsql = mysqli_query($conn, $sql)) {
             // Display success message 
             ?>
