@@ -155,7 +155,7 @@
 
 <li class="pcoded-hasmenu">
     <a href="inbox.php">
-    <span class="pcoded-micon"><i class="feather icon-printer"></i></span>
+    <span class="pcoded-micon"><i class="feather icon-mail"></i></span>
         <span class="pcoded-mtext">Inbox</span>
     </a>
 </li>
