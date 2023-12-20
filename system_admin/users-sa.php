@@ -1,3 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<style>
+      .box-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px; /* Set your desired height */
+  background-color: #0a4b78;
+  color: white;
+  font-weight: bold;
+}
+
+.box-header h4 {
+  margin: 0;
+}                  
+</style>
 <?php
 require_once('check_login.php');
 include('head.php');
