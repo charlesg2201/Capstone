@@ -11,15 +11,8 @@
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            // Success popup
-            echo "<div class='popup popup--icon -success js_success-popup popup--visible'>
-                    <div class='popup__background'></div>
-                    <div class='popup__content'>
-                        <h3 class='popup__content__title'>Success</h3>
-                        <p>Strand added successfully.</p>
-                        <script>setTimeout(\"location.href = 'strands.php';\", 1500);</script>
-                    </div>
-                </div>";
+            // Set success state
+            $_POST['success'] = 1;
         } else {
             // Error message
             echo "Error adding strand: " . mysqli_error($conn);
@@ -29,3 +22,16 @@
         mysqli_close($conn);
     }
 ?>
+
+<!-- Add this JavaScript script to show the success popup -->
+<script>
+    // Check if the success state is set
+    if (<?php echo isset($_POST['success']) ? $_POST['success'] : '0'; ?>) {
+        // Display success popup
+        alert('Strand added successfully.'); // You can replace this with your custom popup logic
+        // Redirect after a delay
+        setTimeout(function() {
+            window.location.href = 'strands.php';
+        }, 1500);
+    }
+</script>

@@ -6,26 +6,32 @@
         // Validate and sanitize the input
         $sectionName = mysqli_real_escape_string($conn, $_POST['sectionName']);
 
-        // Insert the strand into the database
+        // Insert the section into the database
         $sql = "INSERT INTO tbl_section (sections) VALUES ('$sectionName')";
         $result = mysqli_query($conn, $sql);
 
         if ($result) {
-            // Success popup
-            echo "<div class='popup popup--icon -success js_success-popup popup--visible'>
-                    <div class='popup__background'></div>
-                    <div class='popup__content'>
-                        <h3 class='popup__content__title'>Success</h3>
-                        <p>Section added successfully.</p>
-                        <script>setTimeout(\"location.href = 'section.php';\", 1500);</script>
-                    </div>
-                </div>";
+            // Set success state
+            $_POST['success'] = 1;
         } else {
             // Error message
-            echo "Error adding section: " . mysqli_error($conn);
+            echo "Error adding strand: " . mysqli_error($conn);
         }
 
         // Close the database connection
         mysqli_close($conn);
     }
 ?>
+
+<!-- Add this JavaScript script to show the success popup -->
+<script>
+    // Check if the success state is set
+    if (<?php echo isset($_POST['success']) ? $_POST['success'] : '0'; ?>) {
+        // Display success popup
+        alert('Section added successfully.'); // You can replace this with your custom popup logic
+        // Redirect after a delay
+        setTimeout(function() {
+            window.location.href = 'section.php';
+        }, 1500);
+    }
+</script>

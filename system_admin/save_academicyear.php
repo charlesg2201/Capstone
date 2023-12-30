@@ -1,31 +1,37 @@
 <?php
-// Connect to the database (you may need to update this part)
-require_once('connect.php');
+    // Connect to the database (you may need to update this part)
+    require_once('connect.php');
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate and sanitize the input
-    $academicYear = mysqli_real_escape_string($conn, $_POST['academic_year']);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        // Validate and sanitize the input
+        $academicYear = mysqli_real_escape_string($conn, $_POST['academic_year']);
 
-    // Insert the academic year into the database
-    $sql = "INSERT INTO tbl_academicyear (academic_year) VALUES ('$academicYear')";
-    $result = mysqli_query($conn, $sql);
+        // Insert the strand into the database
+        $sql = "INSERT INTO tbl_academicyear (academic_year) VALUES ('$academicYear')";
+        $result = mysqli_query($conn, $sql);
 
-    if ($result) {
-        // Success popup
-        echo "<div class='popup popup--icon -success js_success-popup popup--visible'>
-                <div class='popup__background'></div>
-                <div class='popup__content'>
-                    <h3 class='popup__content__title'>Success</h3>
-                    <p>Academic Year added successfully.</p>
-                    <script>setTimeout(\"location.href = 'academic_year.php';\", 1500);</script>
-                </div>
-            </div>";
-    } else {
-        // Error message
-        echo "Error adding Academic Year: " . mysqli_error($conn);
+        if ($result) {
+            // Set success state
+            $_POST['success'] = 1;
+        } else {
+            // Error message
+            echo "Error adding strand: " . mysqli_error($conn);
+        }
+
+        // Close the database connection
+        mysqli_close($conn);
     }
-
-    // Close the database connection
-    mysqli_close($conn);
-}
 ?>
+
+<!-- Add this JavaScript script to show the success popup -->
+<script>
+    // Check if the success state is set
+    if (<?php echo isset($_POST['success']) ? $_POST['success'] : '0'; ?>) {
+        // Display success popup
+        alert('Academic Year added successfully.'); // You can replace this with your custom popup logic
+        // Redirect after a delay
+        setTimeout(function() {
+            window.location.href = 'strands.php';
+        }, 1500);
+    }
+</script>
