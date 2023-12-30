@@ -14,14 +14,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($conn, $updateQuery);
 
     if ($result) {
-        echo "Strand updated successfully!
-        <script>setTimeout(\"location.href = 'strands.php';\", 1500);</script>";
-        // You can also return any additional information if needed
+        // Set success state
+        $_POST['success'] = 1;
     } else {
-        echo "Error updating strand: " . mysqli_error($conn);
+        // Error message
+        echo "Error adding strand: " . mysqli_error($conn);
     }
 
-    // Close the database connection after use
+    // Close the database connection
     mysqli_close($conn);
 }
 ?>
+<!-- Add this JavaScript script to show the success popup -->
+<script>
+    // Check if the success state is set
+    if (<?php echo isset($_POST['success']) ? $_POST['success'] : '0'; ?>) {
+        // Display success popup
+        alert('Strand updated successfully.'); // You can replace this with your custom popup logic
+        // Redirect after a delay
+        setTimeout(function() {
+            window.location.href = 'strands.php';
+        }, 1500);
+    }
+</script>
