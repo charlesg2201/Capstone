@@ -43,6 +43,7 @@
 
         // Use the date of birth as the password
         $password = date("mdY", strtotime($dob));
+        $academic_year = $_POST['academic_year'];
 
 
         // $studentid = "";
@@ -56,7 +57,7 @@
 
         if(isset($_GET['editid']))
             {
-                $sql ="UPDATE patient SET lrn_number='$_POST[lrn_number]',fname='$_POST[fname]',lname='$_POST[lname]',mname='$_POST[mname]',contact_number='$_POST[contact_number]',email='$_POST[email]',strand='$_POST[strand]',guardian_name='$_POST[guardian_name]',address='$_POST[address]',contact='$_POST[contact]',gender='$_POST[gender]',dob='$_POST[dateofbirth]',grade_level='$_POST[grade_level]',section='$_POST[section]' WHERE patientid='$_GET[editid]'";
+                $sql ="UPDATE patient SET lrn_number='$_POST[lrn_number]',fname='$_POST[fname]',lname='$_POST[lname]',mname='$_POST[mname]',contact_number='$_POST[contact_number]',email='$_POST[email]',strand='$_POST[strand]',guardian_name='$_POST[guardian_name]',address='$_POST[address]',contact='$_POST[contact]',gender='$_POST[gender]',dob='$_POST[dateofbirth]',grade_level='$_POST[grade_level]',section='$_POST[section]',academic_year='$_POST[academic_year]' WHERE patientid='$_GET[editid]'";
                 if($qsql = mysqli_query($conn,$sql))
                 {
         ?>
@@ -98,7 +99,7 @@
                 </div>
             <?php
         }else{
-                $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,grade_level,strand,section,guardian_name,address,contact,studentid,password,gender,dob) values('$date','$_POST[fname]','$_POST[lname]','$_POST[mname]','$_POST[lrn_number]','$_POST[contact_number]','$_POST[email]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[gender]','$_POST[dateofbirth]')";
+                $sql = "INSERT INTO patient(date,fname,lname,mname,lrn_number,contact_number,email,grade_level,strand,section,guardian_name,address,contact,studentid,password,gender,dob,academic_year) values('$date','$_POST[fname]','$_POST[lname]','$_POST[mname]','$_POST[lrn_number]','$_POST[contact_number]','$_POST[email]','$_POST[grade_level]','$_POST[strand]','$_POST[section]','$_POST[guardian_name]','$_POST[address]','$_POST[contact]','$studentid','$password','$_POST[gender]','$_POST[dateofbirth]','$_POST[academic_year]')";
 
                 if($qsql = mysqli_query($conn,$sql))
                 {
