@@ -313,18 +313,18 @@
             <label class="col-sm-2 col-form-label">Date of Birth</label>
             <div class="col-sm-4">
                 <input class="form-control" type="date" name="dateofbirth" max="<?php echo date("m-d-Y"); ?>"
-                            id="dateofbirth" value="<?php echo $rsedit['dob']; ?>" />
+                            id="dateofbirth" value="<?php echo $rsedit['dob']; ?>" required />
             </div>
             <label class="col-sm-2 col-form-label">Address</label>
                 <div class="col-sm-4">
-                    <textarea name="address" id="address" class="form-control"><?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
+                    <textarea name="address" id="address" class="form-control" required=""><?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
                 </div>
 </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Guardian</label>
                 <div class="col-sm-4">
                     <input class="form-control" type="text" name="guardian_name" id="guardian_name"
-                                value="<?php if(isset($_GET['editid'])){ echo $rsedit['guardian_name']; } ?>" />
+                                value="<?php if(isset($_GET['editid'])){ echo $rsedit['guardian_name']; } ?>" required />
                     <span class="messages"></span>
                 </div>
 

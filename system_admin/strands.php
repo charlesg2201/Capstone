@@ -40,21 +40,23 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $sql = "SELECT * FROM tbl_strands where delete_status='0'";
+                                            $sql = "SELECT * FROM tbl_strands";
                                             $qsql = mysqli_query($conn, $sql);
                                             while($rs = mysqli_fetch_array($qsql)) {
-                                                echo "<tr>
-                                                    <td>$rs[strands]</td>
-                                                    <td align=''>";
-                                                
-                                                if(isset($_SESSION['id'])) {
-                                                    echo "
-                                                    <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editStrandModal' data-id='$rs[id]' data-name='$rs[strands]'>Edit</a>
-                                                        <a href='deletestrand.php?deleteid=$rs[id]' class='btn btn-success'>Delete</a>";
-                                                }
-                                                
-                                                echo "</td></tr>";
-                                            }
+                                                $buttonText = $rs['delete_status'] ? 'Unarchive' : 'Archive';
+    $buttonClass = $rs['delete_status'] ? 'btn-success' : 'btn-warning';
+
+    echo "<tr>
+    <td>&nbsp;$rs[strands]</td>
+    <td align=''>
+        <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editStrandModal' data-id='$rs[id]' data-name='$rs[strands]'>Update</a>
+
+        <button class='btn $buttonClass archive-btn' data-id='$rs[id]' data-status='$rs[delete_status]'>
+            $buttonText
+        </button>
+    </td>
+  </tr>";
+}
                                         ?>
                                     </tbody>
                                     <tfoot>
@@ -79,7 +81,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editStrandModalLabel">Edit Strand</h5>
+                <h5 class="modal-title" id="editStrandModalLabel">Update Strand</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -144,6 +146,41 @@
             // Display current value in the modal
             modal.find("#currentStrandName").text("Current Value: " + strandName);
         });
+
+        
+        $(".archive-btn").click(function() {
+            var strandId = $(this).data("id");
+            var currentStatus = $(this).data("status");
+
+            // Send an AJAX request to update the delete_status in the database
+            $.ajax({
+                url: "update_status.php", // replace with your server-side script for updating status
+                method: "POST",
+                data: {
+                    strandId: strandId,
+                    currentStatus: currentStatus
+                },
+                success: function(response) {
+                    // Update button text and class based on the new status
+                    var buttonText = response == 1 ? 'Unarchive' : 'Archive';
+                    var buttonClass = response == 1 ? 'btn-success' : 'btn-warning';
+
+                    // Update button text and class
+                    $(".archive-btn[data-id='" + strandId + "']")
+                        .text(buttonText)
+                        .removeClass('btn-success btn-warning')
+                        .addClass(buttonClass);
+
+                    // Update data-status attribute
+                    $(".archive-btn[data-id='" + strandId + "']").data("status", response);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error updating status:", error);
+                }
+            });
+        });
+
+        // ...
     });
 </script>
 

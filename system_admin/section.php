@@ -40,21 +40,24 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $sql = "SELECT * FROM tbl_section where delete_status='0'";
+                                            $sql = "SELECT * FROM tbl_section";
                                             $qsql = mysqli_query($conn, $sql);
                                             while($rs = mysqli_fetch_array($qsql)) {
-                                                echo "<tr>
-                                                    <td>$rs[sections]</td>
-                                                    <td align=''>";
+                                                $buttonText = $rs['delete_status'] ? 'Unarchive' : 'Archive';
+    $buttonClass = $rs['delete_status'] ? 'btn-success' : 'btn-warning';
+
+                                                    echo "<tr>
+                                                    <td>&nbsp;$rs[sections]</td>
+                                                    <td align=''>
+                                                    <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editsectionModal' data-id='$rs[id]' data-name='$rs[sections]'>Update</a>
                                                 
-                                                if(isset($_SESSION['id'])) {
-                                                    echo "
-                                                    <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editsectionModal' data-id='$rs[id]' data-name='$rs[sections]'>Edit</a>
-                                                        <a href='deletesection.php?deleteid=$rs[id]' class='btn btn-success'>Delete</a>";
+                                                        <button class='btn $buttonClass archive-btn' data-id='$rs[id]' data-status='$rs[delete_status]'>
+                                                            $buttonText
+                                                        </button>
+                                                    </td>
+                                                  </tr>";
                                                 }
-                                                
-                                                echo "</td></tr>";
-                                            }
+                                            
                                         ?>
                                     </tbody>
                                     <tfoot>
@@ -79,7 +82,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editsectionModalLabel">Edit Section</h5>
+                <h5 class="modal-title" id="editsectionModalLabel">Update Section</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -144,6 +147,40 @@
             // Display current value in the modal
             modal.find("#currentsectionName").text("Current Value: " + sectionName);
         });
+
+        $(".archive-btn").click(function() {
+            var sectionId = $(this).data("id"); // Change variable name from strandId to sectionId
+            var currentStatus = $(this).data("status");
+
+            // Send an AJAX request to update the delete_status in the database
+            $.ajax({
+                url: "update_status2.php", // replace with your server-side script for updating status
+                method: "POST",
+                data: {
+                    sectionId: sectionId, // Change variable name from strandId to sectionId
+                    currentStatus: currentStatus
+                },
+                success: function(response) {
+                    // Update button text and class based on the new status
+                    var buttonText = response == 1 ? 'Unarchive' : 'Archive';
+                    var buttonClass = response == 1 ? 'btn-success' : 'btn-warning';
+
+                    // Update button text and class
+                    $(".archive-btn[data-id='" + sectionId + "']")
+                        .text(buttonText)
+                        .removeClass('btn-success btn-warning')
+                        .addClass(buttonClass);
+
+                    // Update data-status attribute
+                    $(".archive-btn[data-id='" + sectionId + "']").data("status", response);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error updating status:", error);
+                }
+            });
+        });
+
+        // ...
     });
     </script>
 

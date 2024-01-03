@@ -49,7 +49,7 @@
                                                 
                                                 if(isset($_SESSION['id'])) {
                                                     echo "
-                                                    <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editacademicyearModal' data-id='$rs[id]' data-name='$rs[academic_year]'>Edit</a>";
+                                                    <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editacademicyearModal' data-id='$rs[id]' data-name='$rs[academic_year]'>Update</a>";
                                                 }
                                                 
                                                 echo "</td></tr>";
@@ -78,7 +78,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editacademicyearModalLabel">Edit Academic Year</h5>
+                <h5 class="modal-title" id="editacademicyearModalLabel">Update Academic Year</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
