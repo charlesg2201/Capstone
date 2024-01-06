@@ -5,21 +5,28 @@ include('header.php');
 include('sidebar.php');
 include('connect.php');
 
-// if(isset($_POST["btn_update"])) { // Change this condition to check for the "Update" button
-//     extract($_POST);
+if(isset($_POST["btn_update"])) {
+    extract($_POST);
 
+    // Check if the password field is empty or contains only spaces
+    if(empty($password) || trim($password) === "") {
+        $_SESSION['error'] = 'Password cannot be blank.';
+    } elseif ($password !== trim($password)) {
+        $_SESSION['error'] = 'Password should not start or end with spaces.';
+    } else {
+        // Continue with the update logic if the password is not blank and doesn't start or end with spaces
 
-//     if($_SESSION['user'] == 'tbl_admin'){
-//         $q1 = "UPDATE tbl_admin SET `password`='$password'WHERE id = '".$_SESSION["id"]."'";
+        if($_SESSION['user'] == 'tbl_admin') {
+            $q1 = "UPDATE tbl_admin SET `password`='$password' WHERE id = '".$_SESSION["id"]."'";
 
-//     }
-
-//     if ($conn->query($q1) === TRUE) {
-//         $_SESSION['success'] = 'Record Successfully Updated';
-//     } else {
-//         $_SESSION['error'] = 'Something Went Wrong';
-//     }
-// }
+            if ($conn->query($q1) === TRUE) {
+                $_SESSION['success'] = 'Record Successfully Updated';
+            } else {
+                $_SESSION['error'] = 'Something Went Wrong';
+            }
+        }
+    }
+}
 ?>
 <head>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-##############" crossorigin="anonymous" />
@@ -67,7 +74,7 @@ if($_SESSION['user'] == 'tbl_admin'){
         <label class="col-sm-2 col-form-label">Password</label>
         <div class="col-sm-4">
         <div class="input-group">
-        <input class="form-control" type="password" name="password" id="password" value="<?php echo $password ?>" readonly />
+        <input class="form-control" type="password" name="password" id="password" value="<?php echo $password ?>" readonly/>
         <div class="input-group-append">
             <span class="input-group-text">
                 <i class="toggle-password fas fa-eye" onclick="togglePasswordVisibility()"></i>
@@ -77,33 +84,18 @@ if($_SESSION['user'] == 'tbl_admin'){
     <span class="messages"></span>
         </div>
 
-        <!-- <label class="col-sm-2 col-form-label">Confirm Password</label>
-        <div class="col-sm-4">
-        <input class="form-control" type="password" name="cnfirmpassword" id="cnfirmpassword" value="<?php echo $password ?>" readonly />
-            <span class="messages" id="confirm-pw" style="color: red;"></span>
-        </div> -->
+        
     </div>
 
-    <!-- <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Security Question</label>
-                <div class="col-sm-4">
-                <input class="form-control" type="text" name="security_question" id="security_question" value="<?php echo $security_question; ?>" readonly />
-            <span class="messages"></span>
     
-                </div>
-            <label class="col-sm-2 col-form-label">Security Answer</label>
-                <div class="col-sm-4">
-                <input class="form-control" type="text" name="security_answer" id="security_answer" value="<?php echo $security_answer; ?>" readonly />
-                </div>
-        </div>  -->
 <?php  ?>
-<!-- 
+
                                         <div class="form-group row">
                                             <label class="col-sm-2"></label>
                                             <div class="col-sm-10">
 <button type="button" name="btn_edit" id="editButton" class="btn btn-primary m-b-0">Edit</button>
 
-<button type="submit" name="btn_update" id="updateButton" class="btn btn-success m-b-0" style="display: none;">Update</button> -->
+<button type="submit" name="btn_update" id="updateButton" class="btn btn-success m-b-0" style="display: none;">Update</button>
 
                                             </div>
                                         </div>
@@ -129,7 +121,7 @@ if($_SESSION['user'] == 'tbl_admin'){
 }
 
                             </script>
-                            <!-- <?php if(!empty($_SESSION['success'])) {  ?>
+                             <?php if(!empty($_SESSION['success'])) {  ?>
                                 <div class="popup popup--icon -success js_success-popup popup--visible">
                                     <div class="popup__background"></div>
                                     <div class="popup__content">
@@ -138,7 +130,7 @@ if($_SESSION['user'] == 'tbl_admin'){
                                         </h3>
                                         <p><?php echo $_SESSION['success']; ?></p>
                                         <p>
-                                            <?php echo "<script>setTimeout(\"location.href = 'profile.php';\",1500);</script>"; ?>
+                                            <?php echo "<script>setTimeout(\"location.href = 'changepassword.php';\",1500);</script>"; ?>
                                         </p>
                                     </div>
                                 </div>
@@ -216,28 +208,7 @@ if($_SESSION['user'] == 'tbl_admin'){
     });
 
 });
-
 </script>
-
-<script type="text/javascript">
-    $('#main').keyup(function () {
-        $('#confirm-pw').html('');
-    });
-
-    $('#cnfirmpassword').change(function () {
-        if ($('#cnfirmpassword').val() != $('#password').val()) {
-            $('#confirm-pw').html('Password Not Match');
-        }
-    });
-
-    $('#password').change(function () {
-        if ($('#cnfirmpassword').val() != $('#password').val()) {
-            $('#confirm-pw').html('Password Not Match');
-        }
-    });
-</script> -->
-
-
                         </div>
                     </div>
                 </div>

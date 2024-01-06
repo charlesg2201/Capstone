@@ -5,19 +5,26 @@ include('header.php');
 include('sidebar.php');
 include('connect.php');
 
-if(isset($_POST["btn_update"])) { // Change this condition to check for the "Update" button
+if(isset($_POST["btn_update"])) {
     extract($_POST);
 
-
-    if($_SESSION['user'] == 'tbl_admin_user'){
-        $q1 = "UPDATE tbl_admin_user SET `password`='$password'WHERE userid = '".$_SESSION["userid"]."'";
-
-    }
-
-    if ($conn->query($q1) === TRUE) {
-        $_SESSION['success'] = 'Record Successfully Updated';
+    // Check if the password field is empty or contains only spaces
+    if(empty($password) || trim($password) === "") {
+        $_SESSION['error'] = 'Password cannot be blank.';
+    } elseif ($password !== trim($password)) {
+        $_SESSION['error'] = 'Password should not start or end with spaces.';
     } else {
-        $_SESSION['error'] = 'Something Went Wrong';
+        // Continue with the update logic if the password is not blank and doesn't start or end with spaces
+
+        if($_SESSION['user'] == 'tbl_admin_user') {
+            $q1 = "UPDATE tbl_admin_user SET `password`='$password' WHERE userid = '".$_SESSION["userid"]."'";
+
+            if ($conn->query($q1) === TRUE) {
+                $_SESSION['success'] = 'Record Successfully Updated';
+            } else {
+                $_SESSION['error'] = 'Something Went Wrong';
+            }
+        }
     }
 }
  ?>
@@ -77,7 +84,7 @@ if($_SESSION['user'] == 'tbl_admin_user'){
     </div>
     <span class="messages"></span>
 
-     
+    </div>
     </div>
 
  
@@ -85,7 +92,7 @@ if($_SESSION['user'] == 'tbl_admin_user'){
 
     <div class="form-group row">
         <label class="col-sm-2 ">                                                               </label>
-            <div class="col-sm-4">                                                                           
+            <div class="col-sm-10">                                                                           
                 <button type="button" name="btn_edit" id="editButton" class="btn btn-primary m-b-0">Edit</button>
                 <button type="submit" name="btn_update" id="updateButton" class="btn btn-success m-b-0" style="display: none;">Update</button>
             </div>
