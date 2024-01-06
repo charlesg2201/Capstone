@@ -7,7 +7,6 @@ include('connect.php');
 
 if(isset($_POST["btn_update"])) {
     extract($_POST);
-    $password = date("mdY", strtotime($dob));
     $username = $employee_number;
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = 'profile_photos/';
@@ -40,7 +39,6 @@ if(isset($_POST["btn_update"])) {
         `middlename`='$middlename', 
         `lastname`='$lastname', 
         `dob`='$dob', 
-        `password`= '$password', 
         `contact`='$contact', 
         `address`='$address' 
          WHERE userid = '".$_SESSION["id"]."'";
