@@ -70,7 +70,21 @@ if($_SESSION['user'] == 'tbl_admin'){
     }
 }
 ?>
+<style>
+      .box-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px; /* Set your desired height */
+  background-color: #0a4b78;
+  color: white;
+  font-weight: bold;
+}
 
+.box-header h4 {
+  margin: 0;
+}                  
+</style>
 <div class="pcoded-content">
         <div class="pcoded-inner-content">
             <div class="main-body">

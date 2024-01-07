@@ -32,14 +32,27 @@ if(isset($_POST["btn_update"])) {
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-##############" crossorigin="anonymous" />
 
 <style>
-    
-    .toggle-password {
-    cursor: pointer;
-    font-size: 20px; /* Adjust the font size */
-    position: absolute; /* Use absolute positioning */
-   margin-top: 10px;
-   margin-left: 3px;
-}
+      .box-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px; /* Set your desired height */
+        background-color: #0a4b78;
+        color: white;
+        font-weight: bold;
+        }
+
+        .box-header h4 {
+        margin: 0;
+        }                  
+
+        .toggle-password {
+        cursor: pointer;
+        font-size: 20px; /* Adjust the font size */
+        position: absolute; /* Use absolute positioning */
+        margin-top: 10px;
+        margin-left: 3px;
+        }
 
 </style>
 </head>
@@ -67,13 +80,13 @@ if($_SESSION['user'] == 'tbl_admin_user'){
       <br>
     <div class="form-group row">
     <label class="col-sm-2 col-form-label">Username</label>
-    <div class="col-sm-4">
+    <div class="col-sm-3">
         <input class="form-control" type="text" name="username" id="username" value="<?php echo $employee_number; ?>" readonly  />
         <span class="messages"></span>
     </div>
 
     <label class="col-sm-2 col-form-label">Password</label>
-        <div class="col-sm-4">
+        <div class="col-sm-3">
         <div class="input-group">
         <input class="form-control" type="password" name="password" id="password" value="<?php echo $password ?>" readonly />
         <div class="input-group-append">
