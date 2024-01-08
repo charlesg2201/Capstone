@@ -249,7 +249,7 @@
 
             <label class="col-sm-2 col-form-label">Active Email Address</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="email" id="email" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['email']; } ?>" >
+                <input type="email" class="form-control" name="email" id="email" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['email']; } ?>" >
                 <span class="messages"></span>
             </div>
         </div>

@@ -117,35 +117,7 @@ if(isset($_GET['id']))
                 </div>
       
 
-             <div class="card">
-                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Security Details</h4></div>
-                        <div class="card-block">
-                        <form id="main" method="post" action="" enctype="multipart/form-data">
-                            <table id="dom-jqry" class="table table-striped table-bordered nowrap">
-    <div class="form-group row">
-                  <?php
-                    $sqlpatient = "SELECT * FROM patient where patientid='$_GET[patientid]'";
-                    $qsqlpatient = mysqli_query($conn,$sqlpatient);
-                    $rspatient=mysqli_fetch_array($qsqlpatient);
-                  ?>
-
-                  <div class="table-responsive dt-responsive">
-                    <table id="dom-jqry" class="table table-hover">
-                      <tbody>
-                      <tr>
-                          <th>Username :</th>
-                          <td><input type="text" class="form-control" value="<?php echo $rspatient['studentid']; ?>" readonly></td>
-                      </tr>
-                      <tr>
-                          <th>Password :</th>
-                          <td><input type="text" class="form-control" value="<?php echo $rspatient['password']; ?>" readonly></td>
-                      </tr>
-                     
-                      </tbody>
-                    </table>
-                  </div>
-                  </p>
-              </div>
+             
               <div class="card">
                         <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Admission Record</h4></div>
                         <div class="card-block">

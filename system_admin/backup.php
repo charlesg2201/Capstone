@@ -220,7 +220,7 @@ if (isset($_POST['btn_backup'])) {
             <h5><span class="outlined-text">Restore</span></h5>
             <form method="post" action="" enctype="multipart/form-data">
     <div class="form-group">
-        <input type="file" class="form-control mt-2" name="backup_file" accept=".zip">
+        <input type="file" class="form-control mt-2" name="backup_file" accept=".zip" required="">
         <span class="messages"></span>
     </div>
     <div class="form-group mt-2">

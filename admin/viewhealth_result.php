@@ -52,15 +52,34 @@
                     <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Health Assessment Results</h4></div>
                         <div class="card-block">
                         <div class="lrn-number">
-                                <?php
-                                // Check if 'lrn_number' is set in the URL
-                                if (isset($_GET['lrn_number'])) {
-                                    $lrn_number = $_GET['lrn_number'];
-                                    echo "LRN Number: $lrn_number";
-                                } else {
-                                    echo "LRN number not provided in the URL.";
-                                }
-                                ?>
+                        <?php
+    if (isset($_GET['lrn_number'])) {
+        $lrn_number = $_GET['lrn_number'];
+
+        // Fetch the student's information from your database
+        // Adjust the query according to your database structure
+        $sql_student_info = "SELECT fname, mname, lname, grade_level, section FROM patient WHERE lrn_number = $lrn_number";
+        $result_student_info = $conn->query($sql_student_info);
+
+        if ($result_student_info->num_rows > 0) {
+            $row_student_info = $result_student_info->fetch_assoc();
+            $fname = $row_student_info['fname'];
+            $mname = $row_student_info['mname'];
+            $lname = $row_student_info['lname'];
+            $grade_level = $row_student_info['grade_level'];
+            $section = $row_student_info['section'];
+
+            // Now you can display the student's information
+            echo "LRN Number: $lrn_number<br>"; 
+            echo "Name: $fname $mname $lname<br>";
+            echo "Grade/Section: $grade_level/$section";
+        } else {
+            echo "Student information not found for the provided LRN number.";
+        }
+    } else {
+        echo "LRN number not provided in the URL.";
+    }
+?>
                             </div>
                         <div class="card-block">
                             <div class="questions-container">
