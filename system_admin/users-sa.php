@@ -29,7 +29,7 @@ if (isset($_POST['submit'])) {
     $dob = $_POST['dob'];
     $contact = $_POST['contact'];
     $employee_number = $_POST['employee_number'];
-    $username = $employee_number;
+    $username = strtolower($lname.$employee_number);
     $gender = $_POST['gender'];
     $addr = $_POST['addr'];
     $date = date("Y-m-d");

@@ -81,7 +81,7 @@ if($_SESSION['user'] == 'tbl_admin'){
     <div class="form-group row">
     <label class="col-sm-2 col-form-label">Username</label>
     <div class="col-sm-3">
-        <input class="form-control" type="text" name="username" id="username" value="<?php echo $employee_number; ?>" readonly  />
+        <input class="form-control" type="text" name="username" id="username" value="<?php echo strtolower($lname.$employee_number); ?>" readonly  />
         <span class="messages"></span>
     </div>
         <label class="col-sm-2 col-form-label">Password</label>

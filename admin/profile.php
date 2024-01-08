@@ -7,7 +7,7 @@ include('connect.php');
 
 if(isset($_POST["btn_update"])) {
     extract($_POST);
-    $username = $employee_number;
+    $username = strtolower($lastname.$employee_number);
     if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] === UPLOAD_ERR_OK) {
         $uploadDir = 'profile_photos/';
 

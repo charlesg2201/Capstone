@@ -28,7 +28,7 @@ if (isset($_POST['submit'])) {
     $lname = $_POST['lastname'];
     $contact = $_POST['contact'];
     $employee_number = $_POST['employee_number'];
-    $username = $employee_number;
+    $username = strtolower($lname.$employee_number);
     $dob = $_POST['dob'];
     $password = date("mdY", strtotime($dob));   
     $gender = $_POST['gender'];
