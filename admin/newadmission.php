@@ -41,38 +41,30 @@ if(isset($_GET['editid']))
 }
 
 ?>
+<style>
+      .box-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px; /* Set your desired height */
+  background-color: #0a4b78;
+  color: white;
+  font-weight: bold;
+}
+
+.box-header h4 {
+  margin: 0;
+}                  
+</style>
 <script src="https://cdn.ckeditor.com/4.12.1/standard/ckeditor.js"></script>
 
 <div class="pcoded-content">
-<div class="pcoded-inner-content">
-
-<div class="main-body">
-<div class="page-wrapper">
-
-<div class="page-header">
-<div class="row align-items-end">
-<div class="col-lg-8">
-<div class="page-header-title">
-<div class="d-inline">
-<h4>New Admission</h4>
-
-</div>
-</div>
-</div>
-
-</div>
-</div>
-
-
-<div class="page-body">
-<div class="row">
-<div class="col-sm-12">
-
-<div class="card">
-<div class="card-header">
-<!-- <h5>Basic Inputs Validation</h5>
-<span>Add class of <code>.form-control</code> with <code>&lt;input&gt;</code> tag</span> -->
-</div>
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-body">
+                    <div class="card">
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>New Admission</h4></div>
+                        <div class="card-block">
 
 <div class="card-block">
     <h5>Admission Details</h5>
@@ -85,7 +77,14 @@ if(isset($_GET['editid']))
             <input type="date" class="form-control" name="admissiondate" id="admissiondate" placeholder="Enter admissiondate...." required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['admissiondate']; } ?>" >
             <span class="messages"></span>
         </div>
+        <script>
+    // Get the current date in the format "YYYY-MM-DD"
+    var currentDate = new Date().toISOString().split('T')[0];
 
+    // Set the min and max attributes of the date input to the current date
+    document.getElementById('admissiondate').setAttribute('min', currentDate);
+    document.getElementById('admissiondate').setAttribute('max', currentDate);
+</script>
         <label class="col-sm-2 col-form-label">Admission Time</label>
         <div class="col-sm-4">
             <input type="time" class="form-control" name="admissiontime" id="admissiontime" placeholder="Enter admissiontime...." required="" value="<?php echo $rsedit['admissiontime']; ?>">
