@@ -23,7 +23,6 @@
         align-items: center;
         justify-content: center;
         height: 50px; /* Set your desired height */
-        background-color: #0a4b78;
         color: white;
         font-weight: bold;
         }
@@ -31,7 +30,26 @@
         .box-header h4 {
         margin: 0;
         }        
-        
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #0a4b78; 
+            color: white;
+            border: none;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker color on hover */
+        }
+
+        .print-icon::before {
+            content: '\1F5B6'; /* Unicode character for printer icon */
+            font-size: 20px;
+            margin-right: 5px;
+        }
         @media print {
             /* Hide elements you don't want to print */
             head, sidebar {
@@ -57,7 +75,7 @@
                 <div class="page-body">
                     <div class="card">
                     <div id="printable-content">
-                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Physical Assessment Results</h4></div>
+                    <div class="box-header" style="text-align: center; color: black; font-weight: bold;"><h4>Physical Assessment Results</h4></div>
                     
                         <div class="card-block">
                         <div class="lrn-number">
@@ -79,9 +97,10 @@
             $section = $row_student_info['section'];
 
             // Now you can display the student's information
-            echo "LRN Number: $lrn_number<br>"; 
-            echo "Name: $fname $mname $lname<br>";
-            echo "Grade/Section: $grade_level/$section";
+            echo "<b>LRN Number:</b> $lrn_number<br>"; 
+            echo "<b>Name:</b> $fname $mname $lname<br>";
+            echo "<b>Grade & Section:</b> $grade_level & $section";
+
         } else {
             echo "Student information not found for the provided LRN number.";
         }
@@ -89,7 +108,7 @@
         echo "LRN number not provided in the URL.";
     }
 ?>
-
+<hr>
                             </div>
                         <div class="card-block">
                             <div class="questions-container">
@@ -131,14 +150,16 @@
             </div>
         </div>
     </div>
-        <button onClick="printContent()">Print</button>
+    <button onClick="printContent()">Print</button>
 
 <script type="text/javascript">
     function printContent() {
         var printWindow = window.open('', '_blank');
-        printWindow.document.write('<html><head><title>Print</title>');
+        printWindow.document.write('<html><head><title>Report</title>');
+        // Include the styles for the print preview
+        printWindow.document.write('<style>body{font-family:Arial,sans-serif;margin:20px;}#printable-content{/* Add your specific styles for the content you want to print */}</style>');
         printWindow.document.write('</head><body>');
-        
+
         // Copy the content you want to print
         var contentToPrint = document.getElementById('printable-content').innerHTML;
         printWindow.document.write(contentToPrint);

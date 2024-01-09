@@ -15,7 +15,6 @@
             margin-right: 20px;
         }
 
-
         .lrn-number {
             font-size: 18px;
         }
@@ -24,16 +23,40 @@
         align-items: center;
         justify-content: center;
         height: 50px; /* Set your desired height */
-        background-color: #0a4b78;
         color: white;
         font-weight: bold;
         }
 
         .box-header h4 {
         margin: 0;
-        }                  
-        </style>
-    
+        }        
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #0a4b78; 
+            color: white;
+            border: none;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Darker color on hover */
+        }
+
+        .print-icon::before {
+            content: '\1F5B6'; /* Unicode character for printer icon */
+            font-size: 20px;
+            margin-right: 5px;
+        }
+        @media print {
+            /* Hide elements you don't want to print */
+            head, sidebar {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -44,12 +67,16 @@
     <?php include('sidebar.php');?>
     <?php include('connect.php');?>
 
+    
+
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                    <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold;"><h4>Health Assessment Results</h4></div>
+                    <div id="printable-content">
+                    <div class="box-header" style="text-align: center; color: black; font-weight: bold;"><h4>Health Assessment Results</h4></div>
+                    
                         <div class="card-block">
                         <div class="lrn-number">
                         <?php
@@ -70,9 +97,10 @@
             $section = $row_student_info['section'];
 
             // Now you can display the student's information
-            echo "LRN Number: $lrn_number<br>"; 
-            echo "Name: $fname $mname $lname<br>";
-            echo "Grade/Section: $grade_level/$section";
+            echo "<b>LRN Number:</b> $lrn_number<br>"; 
+            echo "<b>Name:</b> $fname $mname $lname<br>";
+            echo "<b>Grade & Section:</b> $grade_level & $section";
+
         } else {
             echo "Student information not found for the provided LRN number.";
         }
@@ -80,6 +108,7 @@
         echo "LRN number not provided in the URL.";
     }
 ?>
+<hr>
                             </div>
                         <div class="card-block">
                             <div class="questions-container">
@@ -88,7 +117,7 @@
                                 if (isset($_GET['lrn_number'])) {
                                     $lrn_number = $_GET['lrn_number'];
 
-                                    // Fetch questions and answers from tbl_physical_results based on lrn_number
+                                    // Fetch questions and answers from tbl_health_results based on lrn_number
                                     $sql = "SELECT pr.*, p.questions
                                             FROM tbl_health_results pr
                                             JOIN tbl_health p ON pr.question_id = p.question_id
@@ -113,6 +142,7 @@
                                     echo "LRN number not provided in the URL.";
                                 }
                                 ?>
+
                             </div>
                         </div>
                     </div>
@@ -120,6 +150,29 @@
             </div>
         </div>
     </div>
+    <button onClick="printContent()">Print</button>
+
+<script type="text/javascript">
+    function printContent() {
+        var printWindow = window.open('', '_blank');
+        printWindow.document.write('<html><head><title>Report</title>');
+        // Include the styles for the print preview
+        printWindow.document.write('<style>body{font-family:Arial,sans-serif;margin:20px;}#printable-content{/* Add your specific styles for the content you want to print */}</style>');
+        printWindow.document.write('</head><body>');
+
+        // Copy the content you want to print
+        var contentToPrint = document.getElementById('printable-content').innerHTML;
+        printWindow.document.write(contentToPrint);
+
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
+    </div>
+    
+
+   
 
     <?php include('footer.php');?>
 
