@@ -78,7 +78,6 @@ if(isset($_GET['editid']))
             <span class="messages"></span>
         </div>
         <script>
-    // Get the current date in the format "YYYY-MM-DD"
     var currentDate = new Date().toISOString().split('T')[0];
 
     // Set the min and max attributes of the date input to the current date
