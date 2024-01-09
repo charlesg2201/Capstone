@@ -52,7 +52,6 @@ function getButtonText($delete_status) {
 <table id="dom-jqry" class="table table-striped table-bordered nowrap">
 <thead>
 <tr>
-    <th>Employee Number</th>
     <th>First Name</th>
     <th>Middle Name</th>
     <th>Last Name</th>
@@ -72,6 +71,11 @@ function getStatusText($delete_status) {
     return $delete_status ? 'Not Active' : 'Active';
 }
 
+// Determine button class based on status
+function getButtonClass($delete_status) {
+    return $delete_status ? 'btn btn-success' : 'btn btn-danger';
+}
+
 // Ensure that $qsql is initialized before using it
 $qsql = mysqli_query($conn, "SELECT * FROM tbl_admin_user");
 
@@ -79,9 +83,9 @@ if ($qsql) {
     while ($rs = mysqli_fetch_array($qsql)) {
         $buttonText = getButtonText($rs['delete_status']);
         $statusText = getStatusText($rs['delete_status']);
+        $buttonClass = getButtonClass($rs['delete_status']);
 
         echo "<tr>
-                <td>&nbsp;$rs[employee_number]</td>
                 <td>&nbsp;$rs[firstname]</td>
                 <td>&nbsp;$rs[middlename]</td>
                 <td>&nbsp;$rs[lastname]</td>
@@ -91,7 +95,7 @@ if ($qsql) {
                 <td>&nbsp;$statusText</td>
                 <td>&nbsp;
                     <a href='users.php?editid=$rs[userid]' class='btn btn-primary'>Update</a>
-                    <a href='view-user.php?id=$rs[userid]' class='btn btn-danger'>$buttonText</a>
+                    <a href='view-user.php?id=$rs[userid]' class='$buttonClass'>$buttonText</a>
                 </td>
             </tr>";
     }
@@ -102,6 +106,7 @@ if ($qsql) {
 
 // ...
 ?>
+
 </tbody>
 <tfoot>
 <tr>

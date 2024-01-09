@@ -54,11 +54,14 @@ while ($row = mysqli_fetch_array($query)) {
     <nav class="navbar header-navbar pcoded-header" style="background-color: #f5f5f5; color: #404e67">
       <div class="navbar-wrapper">
         <div class="navbar-logo" style="background-color: #0a4b78;">
+        
+        <ul class="nav-left">
         <li class="mobile-options">
     <a href="logout.php">
         <i class="feather icon-log-out"></i> Logout
     </a>
 </li>
+</ul>
 
         </div>
         <div class="navbar-container container-fluid">

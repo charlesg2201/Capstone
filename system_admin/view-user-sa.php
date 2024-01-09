@@ -54,7 +54,6 @@ function getButtonText($delete_status) {
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
                                 <thead>
                                     <tr>
-                                        <th>Employee Number</th>
                                         <th>First Name</th>
                                         <th>Middle Name</th>
                                         <th>Last Name</th>
@@ -67,11 +66,12 @@ function getButtonText($delete_status) {
                                 </thead>
                                 <tbody>
                                 <?php
-// ...
-
-// Display text for the Status column
 function getStatusText($delete_status) {
     return $delete_status ? 'Not Active' : 'Active';
+}
+
+function getButtonClass($delete_status) {
+    return $delete_status ? 'btn btn-success' : 'btn btn-danger';
 }
 
 // Ensure that $qsql is initialized before using it
@@ -81,9 +81,9 @@ if ($qsql) {
     while ($rs = mysqli_fetch_array($qsql)) {
         $buttonText = getButtonText($rs['delete_status']);
         $statusText = getStatusText($rs['delete_status']);
+        $buttonClass = getButtonClass($rs['delete_status']);
 
         echo "<tr>
-                <td>&nbsp;$rs[employee_number]</td>
                 <td>&nbsp;$rs[firstname]</td>
                 <td>&nbsp;$rs[middlename]</td>
                 <td>&nbsp;$rs[lname]</td>
@@ -92,7 +92,7 @@ if ($qsql) {
                 <td>&nbsp;$rs[addr]</td>
                 <td>&nbsp;$statusText</td>
                 <td>&nbsp;
-                    <a href='view-user-sa.php?id=$rs[id]' class='btn btn-danger'>$buttonText</a>
+                    <a href='view-user-sa.php?id=$rs[id]' class='$buttonClass' onclick='toggleStatus($rs[id])'>$buttonText</a>
                 </td>
             </tr>";
     }
@@ -100,9 +100,16 @@ if ($qsql) {
     // Handle the case where the query fails
     echo "Error executing query: " . mysqli_error($conn);
 }
-
-// ...
 ?>
+
+<script>
+    function toggleStatus(userId) {
+        // You can add your JavaScript logic here to handle button clicks
+        // For example, you can make an AJAX request to update the status in the database
+        console.log("Button clicked for user ID: " + userId);
+    }
+</script>
+
 
 
 </tbody>

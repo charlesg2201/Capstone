@@ -124,7 +124,7 @@ while($row=mysqli_fetch_array($query))
 <div class="card-block" >
 <div class="row m-b-20">
 <div class="col-md-12">
-<h5 class="text-center txt-primary"><b>Senior High School Clinic</b></h5>
+<h5 class="text-center txt-primary"><b>Physical and Health Assessment</b></h5>
 </div>
 </div>
   <form method="POST" >
