@@ -81,29 +81,31 @@
 
                                     while ($rs = mysqli_fetch_array($qsql)) {
                                         echo "<div class='question'>
-                                                <strong>Question $questionNumber:</strong> $rs[questions]<br>";
-
+                                            <strong>Question $questionNumber:</strong> $rs[questions]<br>";
+                                    
                                         if (!empty($rs['choices'])) {
                                             $choices = explode(",", $rs['choices']);
                                             echo "<div class='choices-container'>";
                                             foreach ($choices as $choice) {
                                                 echo "<div class='choice'>
-                                                        <input type='radio' name='question_$rs[question_id]' value='$choice'> $choice
-                                                      </div>";
+                                                    <input type='radio' name='question_$rs[question_id]' value='$choice'> $choice
+                                                </div>";
                                             }
                                             echo "</div>";
                                         } else {
                                             echo "<textarea class='form-control' name='essay_question_$rs[question_id]' placeholder='Enter your essay response'></textarea>";
                                         }
-
+                                    
                                         echo "<input type='hidden' name='question_id_$questionNumber' value='$rs[question_id]'>";
                                         $questionNumber++;
-                                        echo "</div>";
+                                        echo "<br>"; // Add a line break between questions
                                     }
                                     ?>
+                                    <br>
                                     <button type='submit' name='submit' class='btn btn-primary'>Submit</button>
-                                </form>
-                            </div>
+                                    </form>
+                                    </div>
+                                    
 
                             <?php
                             if (isset($_POST['submit'])) {

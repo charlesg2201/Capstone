@@ -20,7 +20,21 @@
  }
 
  ?>
- 
+  <style>
+        .notification-badge {
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: red;
+            color: white;
+            border-radius: 50%;
+            padding: 5px 8px;
+        }
+    </style>
 <div class="pcoded-main-container">
     <div class="pcoded-wrapper">
         <nav class="pcoded-navbar" >
@@ -153,14 +167,35 @@
     </ul>
 </li>
 
-<li class="pcoded-hasmenu">
-    <a href="inbox.php">
-    <span class="pcoded-micon"><i class="feather icon-mail"></i></span>
-        <span class="pcoded-mtext">Inbox</span>
-    </a>
-</li>
+<li class="pcoded-hasmenu notification-badge">
+        <a href="inbox.php">
+            <span class="pcoded-micon"><i class="feather icon-mail"></i></span>
+            <span class="pcoded-mtext">Inbox</span>
+            <span class="badge" id="messageNotification">0</span>
+        </a>
+    </li>
+</ul>
 
+<script>
+    // Assuming you have a variable to track the number of new messages
+    let newMessagesCount = 0; // You can set this dynamically based on your actual data
 
+    // Function to update the notification badge
+    function updateNotificationBadge() {
+        const badgeElement = document.getElementById('messageNotification');
+
+        // Update the badge content and visibility based on newMessagesCount
+        if (newMessagesCount > 0) {
+            badgeElement.textContent = newMessagesCount;
+            badgeElement.style.display = 'block';
+        } else {
+            badgeElement.style.display = 'none';
+        }
+    }
+
+    // Call the function to update the badge when the page loads
+    updateNotificationBadge();
+</script>
 
 
 
