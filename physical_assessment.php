@@ -35,7 +35,7 @@
 <?php include('sidebar.php');?>
 <?php include('connect.php');
 
-$userid = $_SESSION[ "id" ];
+$userid = $_SESSION[ "patientid" ];
 $fname = $_SESSION[ "firstname" ];
 ?> 
 

@@ -8,7 +8,7 @@ include('header.php');
 include('sidebar.php');
 include('connect.php');
 
-$sql = "select * from tbl_admin where id = '".$_SESSION["id"]."'";
+$sql = "select * from tbl_admin where id = '".$_SESSION["patientid"]."'";
 $result = $conn->query($sql);
 $row1 = mysqli_fetch_array($result);
 

@@ -15,7 +15,7 @@ if(isset($_POST["btn_update"]))
     }else if($_SESSION['user'] == 'users'){
       $q1="UPDATE users SET `firstname`='$fname',`username`='$email',`contact`='$contact' where doctorid = '".$_SESSION["id"]."'";
     }else if($_SESSION['user'] == 'patient'){
-      $q1="UPDATE patient SET `patientname`='$fname',`loginid`='$email',`contact`='$contact' where patientid = '".$_SESSION["id"]."'";
+      $q1="UPDATE patient SET `patientname`='$fname',`loginid`='$email',`contact`='$contact' where patientid = '".$_SESSION["patientid"]."'";
     }
 
     if ($conn->query($q1) === TRUE) {
@@ -61,7 +61,7 @@ if(isset($_POST["btn_update"]))
         $contact = $row['contact'];
       }
     }else if($_SESSION['user'] == 'patient'){
-      $que="select * from patient where patientid = '".$_SESSION["id"]."'";
+      $que="select * from patient where patientid = '".$_SESSION["patientid"]."'";
       $query=$conn->query($que);
       while($row=mysqli_fetch_array($query))
       {
