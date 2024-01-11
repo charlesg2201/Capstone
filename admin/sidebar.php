@@ -1,6 +1,8 @@
 
 <?php
  include('connect.php');
+ 
+
  $sql = "SELECT * FROM tbl_admin_user WHERE userid = '".$_SESSION["userid"]."'";
  $result = $conn->query($sql);
  $ro = mysqli_fetch_array($result);
@@ -166,35 +168,69 @@
         
     </ul>
 </li>
+<?php
 
+        $sql = "SELECT COUNT(DISTINCT m.patientid) AS record_count
+                FROM tbl_messages m
+                JOIN patient p ON m.patientid = p.patientid
+                WHERE m.opened = 0;";
+
+        $qsql = mysqli_query($conn, $sql);
+        $newMessageCount = 0;         
+        while ($rs = mysqli_fetch_array($qsql)) {
+            $newMessageCount = $rs['record_count'];
+        }
+?>
 <li class="pcoded-hasmenu notification-badge">
         <a href="inbox.php">
             <span class="pcoded-micon"><i class="feather icon-mail"></i></span>
             <span class="pcoded-mtext">Inbox</span>
-            <span class="badge" id="messageNotification">0</span>
+            <span class="badge" id="messageNotification"><?php echo $newMessageCount ?></span>
         </a>
     </li>
 </ul>
-
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script>
     // Assuming you have a variable to track the number of new messages
-    let newMessagesCount = 0; // You can set this dynamically based on your actual data
-
+     // You can set this dynamically based on your actual data
+     
     // Function to update the notification badge
     function updateNotificationBadge() {
         const badgeElement = document.getElementById('messageNotification');
-
+        let newMessagesCount =  parseInt(document.getElementById('messageNotification').innerHTML);
         // Update the badge content and visibility based on newMessagesCount
+        
         if (newMessagesCount > 0) {
             badgeElement.textContent = newMessagesCount;
-            badgeElement.style.display = 'block';
+            $("#messageNotification").css('visibility', 'visible');
         } else {
-            badgeElement.style.display = 'none';
+            $("#messageNotification").css('visibility', 'hidden');
         }
     }
 
     // Call the function to update the badge when the page loads
     updateNotificationBadge();
+
+    // Function to update the table
+    function updateTable() {
+        const badgeElement = document.getElementById('messageNotification');
+        $.ajax({
+            url: 'fetchmessage.php', // Your PHP file to fetch data
+            type: 'GET',
+            dataType: 'json',
+            success: function(data) {
+                badgeElement.textContent = data;
+                updateNotificationBadge();
+                console.log(data);
+            },
+            error: function(error) {
+                console.log('Error fetching data:', error);
+            }
+        });
+    }
+
+    updateTable();
+    setInterval(updateTable, 1000);
 </script>
 
 

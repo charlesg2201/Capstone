@@ -167,6 +167,12 @@ $sqlFetchMessages = "SELECT * FROM tbl_messages WHERE patientid = '$patientid' O
 $resultFetchMessages = mysqli_query($conn, $sqlFetchMessages);
 $messages = mysqli_fetch_all($resultFetchMessages, MYSQLI_ASSOC);
 
+$updateSql = "UPDATE tbl_messages SET opened = 1 WHERE patientid = '$patientid'";
+
+if (!mysqli_query($conn, $updateSql)) {
+    echo mysqli_error($conn);
+}
+
 // Display conversation
 // Display conversation
 if (empty($messages)) {

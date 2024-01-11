@@ -41,10 +41,19 @@
                   </thead>
                   <tbody>
                     <?php
-                     $sql = "SELECT DISTINCT m.patientid, p.lrn_number, CONCAT(p.fname, ' ', p.mname, ' ', p.lname) AS full_name
-                     FROM tbl_messages m
-                     JOIN patient p ON m.patientid = p.patientid
-                     WHERE m.select_all = 0";
+                     $sql = "SELECT
+                          m.patientid,
+                          p.lrn_number,
+                          CONCAT(p.fname, ' ', p.mname, ' ', p.lname) AS full_name,
+                          SUM(CASE WHEN m.opened = 0 THEN 1 ELSE 0 END) AS new_message_count
+                      FROM
+                          tbl_messages m
+                      JOIN
+                          patient p ON m.patientid = p.patientid
+                      WHERE
+                          m.sender = 'You'
+                      GROUP BY
+                          m.patientid, p.lrn_number, full_name;";
              
              $qsql = mysqli_query($conn, $sql);
              
@@ -55,10 +64,15 @@
                      <td align='center'>";
               
                   if (isset($_SESSION['userid'])) {
-                      echo "<a href='messages.php?patientid={$rs['patientid']}' class='btn btn-success'>View Messages</a>";
-                  }
-              
-                  echo "</td></tr>";
+                      echo "<div class='pcoded-hasmenu notification-badge'>" .
+                      "<a href='messages.php?patientid={$rs['patientid']}'>" .
+                          "<span class='pcoded-mtext'>View Message</span>" .
+                          ($rs['new_message_count'] != 0 ? "<span class='badge' id='messageNotification'>{$rs['new_message_count']}</span>" : "") .
+                      "</a></div>" . "</td></tr>";
+                  
+                      // echo "<div class='notification-badge'><a href='messages.php?patientid={$rs['patientid']}' class='btn btn-success'><span class='pcoded-mtext'>View Messages</span><span class='badge' id='messageNotification'>0</span></a></div>";
+                  }   
+                  
               }
               
                     ?>
