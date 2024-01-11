@@ -81,7 +81,7 @@ if(isset($_GET['editid']))
     var currentDate = new Date().toISOString().split('T')[0];
 
     // Set the min and max attributes of the date input to the current date
-    document.getElementById('admissiondate').setAttribute('min', currentDate);
+  
     document.getElementById('admissiondate').setAttribute('max', currentDate);
 </script>
         <label class="col-sm-2 col-form-label">Admission Time</label>
