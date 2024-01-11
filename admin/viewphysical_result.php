@@ -144,11 +144,11 @@
         ?>
     </div>
 </div>
-<button onclick="printContent()">Print</button>
-<button onclick="redirectToRemarks()">Remarks</button>
+<button onclick="printContent()" class="no-print">Print</button>
+<button onclick="redirectToRemarks()" class="no-print">Remarks</button>
 
 
-<script type="text/javascript">
+<script>
     function redirectToRemarks() {
         // Redirect to remarks.php
         window.location.href = 'remarks.php';
@@ -158,7 +158,9 @@
         var printWindow = window.open('', '_blank');
         printWindow.document.write('<html><head><title>Report</title>');
         // Include the styles for the print preview
-        printWindow.document.write('<style>body{font-family:Arial,sans-serif;margin:20px;}#printable-content{/* Add your specific styles for the content you want to print */}</style>');
+        printWindow.document.write('<style>body{font-family:Arial,sans-serif;margin:20px;}#printable-content{/* Add your specific styles for the content you want to print */}');
+        // Add style to hide buttons in print preview
+        printWindow.document.write('.no-print{display:none;}</style>');
         printWindow.document.write('</head><body>');
 
         // Copy the content you want to print
@@ -170,6 +172,7 @@
         printWindow.print();
     }
 </script>
+
     </div>
     
 

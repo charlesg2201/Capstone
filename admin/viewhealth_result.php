@@ -110,54 +110,57 @@
 ?>
 <hr>
                             </div>
-                        <div class="card-block">
-                            <div class="questions-container">
-                                <?php
-                                // Check if 'lrn_number' is set in the URL
-                                if (isset($_GET['lrn_number'])) {
-                                    $lrn_number = $_GET['lrn_number'];
+                            <div class="card-block">
+    <div class="questions-container">
+        <?php
+        // Check if 'lrn_number' is set in the URL
+        if (isset($_GET['lrn_number'])) {
+            $lrn_number = $_GET['lrn_number'];
 
-                                    // Fetch questions and answers from tbl_health_results based on lrn_number
-                                    $sql = "SELECT pr.*, p.questions
-                                            FROM tbl_health_results pr
-                                            JOIN tbl_health p ON pr.question_id = p.question_id
-                                            WHERE pr.lrn_number = $lrn_number";
+            // Fetch questions and answers from tbl_health_results based on lrn_number
+            $sql = "SELECT pr.*, p.questions
+                    FROM tbl_health_results pr
+                    JOIN tbl_health p ON pr.question_id = p.question_id
+                    WHERE pr.lrn_number = $lrn_number";
 
-                                    $result = $conn->query($sql);
+            $result = $conn->query($sql);
 
-                                    if ($result) { // Check if the query was successful
-                                        if ($result->num_rows > 0) {
-                                            while ($row = $result->fetch_assoc()) {
-                                                echo "<b>Question: </b>" . $row['questions'] . "<br>";
-                                                echo "<b>Answer: </b>" . $row['answer'] . "<br>";
-                                                echo "<hr>";
-                                            }
-                                        } else {
-                                            echo "No questions found for the provided LRN number.<br>";
-                                        }
-                                    } else {
-                                        echo "Error in the SQL query: " . $conn->error;
-                                    }
-                                } else {
-                                    echo "LRN number not provided in the URL.";
-                                }
-                                ?>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            if ($result) { // Check if the query was successful
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        echo "<b>Question: </b>" . $row['questions'] . "<br>";
+                        echo "<b>Answer: </b>" . $row['answer'] . "<br>";
+                        echo "<hr>";
+                    }
+                } else {
+                    echo "No questions found for the provided LRN number.<br>";
+                }
+            } else {
+                echo "Error in the SQL query: " . $conn->error;
+            }
+        } else {
+            echo "LRN number not provided in the URL.";
+        }
+        ?>
     </div>
-    <button onClick="printContent()">Print</button>
+</div>
+<button onclick="printContent()" class="no-print">Print</button>
+<button onclick="redirectToRemarks()" class="no-print">Remarks</button>
 
-<script type="text/javascript">
+
+<script>
+    function redirectToRemarks() {
+        // Redirect to remarks.php
+        window.location.href = 'remarks.php';
+    }
+
     function printContent() {
         var printWindow = window.open('', '_blank');
         printWindow.document.write('<html><head><title>Report</title>');
         // Include the styles for the print preview
-        printWindow.document.write('<style>body{font-family:Arial,sans-serif;margin:20px;}#printable-content{/* Add your specific styles for the content you want to print */}</style>');
+        printWindow.document.write('<style>body{font-family:Arial,sans-serif;margin:20px;}#printable-content{/* Add your specific styles for the content you want to print */}');
+        // Add style to hide buttons in print preview
+        printWindow.document.write('.no-print{display:none;}</style>');
         printWindow.document.write('</head><body>');
 
         // Copy the content you want to print
@@ -169,6 +172,7 @@
         printWindow.print();
     }
 </script>
+
     </div>
     
 
