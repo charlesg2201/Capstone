@@ -130,9 +130,19 @@ if (isset($_POST['btn_backup'])) {
                 // Read the SQL dump
                 $sql = file_get_contents($sqlDumpFile);
 
+                // Drop existing tables
+                $tables = $conn->query("SHOW TABLES");
+                while ($row = $tables->fetch_row()) {
+                    $table = $row[0];
+                    $conn->query("DROP TABLE IF EXISTS $table");
+                }
+
                 if ($conn->multi_query($sql) === TRUE) {
+                    rmdir($extractPath);
+                    header("Location: logout.php");
+                   
     $restoreMessage = "Database successfully restored";
-    
+    exit;
     // Add additional success actions if needed
 } else {
     $restoreMessage = "Error restoring database";
