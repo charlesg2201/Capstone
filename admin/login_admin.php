@@ -119,7 +119,7 @@ while($row=mysqli_fetch_array($query))
 
 <div class="auth-box card" >
   <div class="text-center">
-<image class="profile-img" src="uploadImage/Logo/<?php echo $logo; ?>" style="width:30%; margin-top: 20px;"></image>
+<image class="profile-img" src="uploadImage/Logo/shslogo.png" style="width:30%; margin-top: 20px;"></image>
     </div> 
 <div class="card-block" >
 <div class="row m-b-20">
