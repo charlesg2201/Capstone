@@ -31,6 +31,7 @@ if(isset($_POST['btn_login']))
     $row  = mysqli_fetch_array($result);
     //print_r($row);    
     $_SESSION["patientid"] = $row['patientid'];
+     $_SESSION["id"] = $row['patientid'];
      $_SESSION["password"] = $row['password'];
      $_SESSION["email"] = $row['studentid'];
      $_SESSION["firstname"] = $row['fname'];
