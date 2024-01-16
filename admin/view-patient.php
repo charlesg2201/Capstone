@@ -80,6 +80,7 @@ if(isset($_GET['delid']))
                     <tr>
                       <th>LRN Number</th>
                       <th>Name</th>
+                      <th>Academic Year</th>
                       <!-- <th>Contact Number</th> -->
                       <!-- <th>Email Address</th> -->
                       <th>Strand</th>
@@ -101,6 +102,7 @@ if(isset($_GET['delid']))
                         echo "<tr>
                           <td>$rs[lrn_number]</td> 
                           <td>$rs[fname] $rs[mname] $rs[lname]<br></td>
+                          <td>$rs[academic_year]</td> 
                           <td>$rs[strand]</td> 
                           <td>$rs[grade_level]</td> 
                           <td>$rs[section]</td> 
