@@ -143,15 +143,46 @@
         }
         ?>
     </div>
+    <?php 
+     $sql_remarks = "SELECT remarks FROM tbl_physical_remarks WHERE lrn_number = $lrn_number";
+     $result_remarks = $conn->query($sql_remarks);
+ 
+     if ($result_remarks) {
+         if ($result_remarks->num_rows > 0) {
+             echo "<div><b>Remarks:</b></div>";
+             while ($row_remarks = $result_remarks->fetch_assoc()) {
+                 echo "<p>" . $row_remarks['remarks'] . "</p>";
+             }
+         } else {
+             echo "<div>No remarks available.</div>";
+         }
+     } else {
+         echo "Error in the SQL query: " . $conn->error;
+     }
+    ?>
 </div>
 <button onclick="printContent()" class="no-print">Print</button>
-<button onclick="redirectToRemarks()" class="no-print">Remarks</button>
+<button onclick="showRemarksModal()">Add Remarks</button>
 
 
 <script>
-    function redirectToRemarks() {
-        // Redirect to remarks.php
-        window.location.href = 'remarks.php';
+     function showRemarksModal() {
+        var remarks = prompt("Enter your remarks:");
+        if (remarks !== null) {
+            // Send the remarks to the server using AJAX
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    alert("Remarks submitted successfully!");
+                    location.reload();
+                } else if (xhr.readyState === 4 && xhr.status !== 200) {
+                    alert("Error submitting remarks. Please try again.");
+                }
+            };
+            xhr.open("POST", "physical_remarks.php", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send("lrn_number=<?php echo $lrn_number; ?>&remarks=" + encodeURIComponent(remarks));
+        }
     }
 
     function printContent() {
