@@ -140,6 +140,7 @@ if (isset($_POST['btn_backup'])) {
                 if ($conn->multi_query($sql) === TRUE) {
                     rmdir($extractPath);
                     header("Location: logout.php");
+                    unlink($sqlDumpFile);
                    
     $restoreMessage = "Database successfully restored";
     exit;
