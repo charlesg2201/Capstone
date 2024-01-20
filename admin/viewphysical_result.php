@@ -162,7 +162,7 @@
     ?>
 </div>
 <button onclick="printContent()" class="no-print">Print</button>
-<button onclick="showRemarksModal()">Add Remarks</button>
+<button onclick="showRemarksModal()" class="no-print">Add Remarks</button>
 
 
 <script>
