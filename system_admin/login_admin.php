@@ -116,14 +116,14 @@ while($row=mysqli_fetch_array($query))
 
 
 
-<div class="auth-box card" >
+<div class="auth-box card" style="background-color: rgba(255, 255, 255, 0.5);">
   <div class="text-center">
-<image class="profile-img" src="uploadImage/Logo/shslogo.png" style="width: 30%; margin-top: 20px;"></image>
+<image class="profile-img" src="uploadImage/Logo/<?php echo $logo; ?>" style="width: 30%; margin-top: 20px; border-radius: 50%;"></image>
     </div> 
 <div class="card-block" >
 <div class="row m-b-20">
 <div class="col-md-12">
-<h5 class="text-center txt-primary"><b>Physical and Health Assessment</b></h5>
+<h5 class="text-center txt-primary" style="font-weight: bold; color: black;">Physical and Health Assessment</h5>
 </div>
 </div>
   <form method="POST" >
