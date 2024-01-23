@@ -113,15 +113,16 @@
                             <div class="card-block">
     <div class="questions-container">
         <?php
+        
         // Check if 'lrn_number' is set in the URL
-        if (isset($_GET['lrn_number'])) {
-            $lrn_number = $_GET['lrn_number'];
+        if (isset($_GET['admission_id'])) {
+            $admission_id = $_GET['admission_id'];
 
             // Fetch questions and answers from tbl_physical_results based on lrn_number
             $sql = "SELECT pr.*, p.questions
                     FROM tbl_physical_results pr
                     JOIN tbl_physical p ON pr.question_id = p.question_id
-                    WHERE pr.lrn_number = $lrn_number";
+                    WHERE pr.admission_id = $admission_id";
 
             $result = $conn->query($sql);
 
@@ -144,22 +145,23 @@
         ?>
     </div>
     <?php 
-     $sql_remarks = "SELECT remarks FROM tbl_physical_remarks WHERE lrn_number = $lrn_number";
-     $result_remarks = $conn->query($sql_remarks);
- 
-     if ($result_remarks) {
-         if ($result_remarks->num_rows > 0) {
-             echo "<div><b>Remarks:</b></div>";
-             while ($row_remarks = $result_remarks->fetch_assoc()) {
-                 echo "<p>" . $row_remarks['remarks'] . "</p>";
-             }
-         } else {
-             echo "<div>No remarks available.</div>";
-         }
-     } else {
-         echo "Error in the SQL query: " . $conn->error;
-     }
-    ?>
+$sql_remarks = "SELECT remarks FROM tbl_physical_remarks WHERE lrn_number = $lrn_number AND admission_id = $admission_id";
+$result_remarks = $conn->query($sql_remarks);
+
+if ($result_remarks) {
+    if ($result_remarks->num_rows > 0) {
+        echo "<div><b>Remarks:</b></div>";
+        while ($row_remarks = $result_remarks->fetch_assoc()) {
+            echo "<p>" . $row_remarks['remarks'] . "</p>";
+        }
+    } else {
+        echo "<div>No remarks available.</div>";
+    }
+} else {
+    echo "Error in the SQL query: " . $conn->error;
+}
+?>
+
 </div>
 <button onclick="printContent()" class="no-print">Print</button>
 <button onclick="showRemarksModal()" class="no-print">Add Remarks</button>
@@ -167,23 +169,24 @@
 
 <script>
      function showRemarksModal() {
-        var remarks = prompt("Enter your remarks:");
-        if (remarks !== null) {
-            // Send the remarks to the server using AJAX
-            var xhr = new XMLHttpRequest();
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    alert("Remarks submitted successfully!");
-                    location.reload();
-                } else if (xhr.readyState === 4 && xhr.status !== 200) {
-                    alert("Error submitting remarks. Please try again.");
-                }
-            };
-            xhr.open("POST", "physical_remarks.php", true);
-            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-            xhr.send("lrn_number=<?php echo $lrn_number; ?>&remarks=" + encodeURIComponent(remarks));
-        }
+    var remarks = prompt("Enter your remarks:");
+    if (remarks !== null) {
+        // Send the remarks to the server using AJAX
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                alert("Remarks submitted successfully!");
+                location.reload();
+            } else if (xhr.readyState === 4 && xhr.status !== 200) {
+                alert("Error submitting remarks. Please try again.");
+            }
+        };
+        xhr.open("POST", "physical_remarks.php", true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send("lrn_number=<?php echo $lrn_number; ?>&admission_id=<?php echo $admission_id; ?>&remarks=" + encodeURIComponent(remarks));
     }
+}
+
 
     function printContent() {
         var printWindow = window.open('', '_blank');
