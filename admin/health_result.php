@@ -41,9 +41,10 @@
                         <div class="card-block">
                             <div class="table-responsive dt-responsive">
                             <table id="dom-jqry" class="table table-striped table-bordered nowrap">
-        <thead>
+                            <thead>
           <tr>
             <th>LRN Number</th>
+            <th>Admission ID</th>
             <th>Name</th>
             <th>Action</th>
           </tr>
@@ -51,20 +52,23 @@
         </thead>
                   <tbody>
                     <?php
-                      $sql = "SELECT DISTINCT pr.lrn_number, u.fname, u.lname 
+                      $sql = "SELECT DISTINCT pr.admission_id, pr.lrn_number, u.fname, u.lname 
                       FROM tbl_health_results pr
                       JOIN patient u ON pr.lrn_number = u.lrn_number
                       WHERE pr.delete_status = '0'";
+              
                       $qsql = mysqli_query($conn, $sql);
                       while($rs = mysqli_fetch_array($qsql))
                       {
                         echo "<tr>
                           <td>$rs[lrn_number]</td> 
+                          <td>$rs[admission_id]</td> 
                           <td>$rs[fname] $rs[lname]<br>
                          
                           <td >";
                         
-                          echo "<a href='viewhealth_result.php?lrn_number=$rs[lrn_number]' class='btn btn-primary'>View</a>";
+                          echo "<a href='viewhealth_result.php?lrn_number={$rs['lrn_number']}&admission_id={$rs['admission_id']}' class='btn btn-primary'>View</a>";
+
                         
 
                         echo "</td></tr>";
