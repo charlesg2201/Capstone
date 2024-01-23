@@ -109,60 +109,53 @@
 
                             <?php
                             if (isset($_POST['submit'])) {
-                                for ($i = 1; $i <= $questionNumber; $i++) {
-                                    $question_id_key = "question_id_$i";
-
-                                    if (isset($_POST[$question_id_key]) && $_POST[$question_id_key] != 0) {
-                                        $question_id = mysqli_real_escape_string($conn, $_POST[$question_id_key]);
-
-                                        if (isset($_POST["question_$question_id"])) {
-                                            $answer = mysqli_real_escape_string($conn, $_POST["question_$question_id"]);
-                                        } elseif (isset($_POST["essay_question_$question_id"])) {
-                                            $answer = mysqli_real_escape_string($conn, $_POST["essay_question_$question_id"]);
-                                        } else {
-                                            $answer = "";
-                                        }
-
-                                        $patientid = $_SESSION['patientid'];
-                                        $user_query = mysqli_query($conn, "SELECT lrn_number FROM patient WHERE patientid = '$patientid'");
-                                        $user_data = mysqli_fetch_assoc($user_query);
-                                        $lrn_number = $user_data['lrn_number'];
-
-                                        $check_sql = "SELECT * FROM tbl_health_results WHERE question_id = '$question_id' AND lrn_number = '$lrn_number'";
-                                        $check_result = mysqli_query($conn, $check_sql);
-
-                                        if (mysqli_num_rows($check_result) > 0) {
-                                            $update_sql = "UPDATE tbl_health_results SET answer = '$answer' WHERE question_id = '$question_id' AND lrn_number = '$lrn_number'";
-                                            if (!mysqli_query($conn, $update_sql)) {
-                                                echo mysqli_error($conn);
+                                $patientid = $_SESSION['patientid'];
+                            
+                                // Get the latest admission_id for the given LRN number
+                                $user_query = mysqli_query($conn, "SELECT MAX(admission_id) as max_admission_id, lrn_number FROM tbl_admission WHERE patientid = '$patientid'");
+                                $user_data = mysqli_fetch_assoc($user_query);
+                                $lrn_number = $user_data['lrn_number'];
+                                $admission_id = $user_data['max_admission_id'];
+                            
+                                // Check if assessment has already been taken for the current admission
+                                $check_sql = "SELECT * FROM tbl_health_results WHERE lrn_number = '$lrn_number' AND admission_id = '$admission_id'";
+                                $check_result = mysqli_query($conn, $check_sql);
+                            
+                                if (mysqli_num_rows($check_result) > 0) {
+                                    // Display a message or perform any action if assessment has already been taken for the current admission
+                                    echo "Assessment has already been taken for this admission.";
+                                    echo "<script>showAlreadyTakenPopup();</script>";
+                                } else {
+                                    // User hasn't taken the assessment for the current admission, proceed with processing the assessment
+                            
+                                    for ($i = 1; $i <= $questionNumber; $i++) {
+                                        $question_id_key = "question_id_$i";
+                            
+                                        if (isset($_POST[$question_id_key]) && $_POST[$question_id_key] != 0) {
+                                            $question_id = mysqli_real_escape_string($conn, $_POST[$question_id_key]);
+                                            $answer = '';
+                            
+                                            if (isset($_POST["question_$question_id"])) {
+                                                $answer = mysqli_real_escape_string($conn, $_POST["question_$question_id"]);
+                                            } elseif (isset($_POST["essay_question_$question_id"])) {
+                                                $answer = mysqli_real_escape_string($conn, $_POST["essay_question_$question_id"]);
                                             }
-                                        } else {
-                                            $sql = "INSERT INTO tbl_health_results (question_id, answer, lrn_number) VALUES ('$question_id', '$answer', '$lrn_number')";
+                            
+                                            // Debug: Output question_id, answer, lrn_number, and admission_id for verification
+                                            echo "Question ID: $question_id, Answer: $answer, lrn_number: $lrn_number, admission_id: $admission_id<br>";
+                            
+                                            // Insert the assessment record
+                                            $sql = "INSERT INTO tbl_health_results (question_id, answer, lrn_number, admission_id) VALUES ('$question_id', '$answer', '$lrn_number', '$admission_id')";
                                             if ($qsql = mysqli_query($conn, $sql)) {
-                                                // Success popup logic
-                                                ?>
-                                                <div class="popup popup--icon -success js_success-popup popup--visible">
-                                                    <div class="popup__background"></div>
-                                                    <div class="popup__content">
-                                                        <h3 class="popup__content__title">
-                                                            Success
-                                                        </h3>
-                                                        <p>Assessment has been submitted.</p>
-                                                            <p>You will be redirected to the home page.
-                                                        </p>
-                                                        <p>
-                                                            <?php echo "<script>setTimeout(\"location.href = 'index.php';\",1500);</script>"; ?>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            <?php
-                                                     } else {
-                                                     echo mysqli_error($conn);
-                                                 }
+                                                // Insertion success message or redirect
+                                                echo "Assessment record inserted successfully!<br>";
+                                            } else {
+                                                echo "Error inserting assessment record: " . mysqli_error($conn) . "<br>";
                                             }
                                         }
                                     }
                                 }
+                            }
                             
                             ?>
                         </div>
@@ -182,51 +175,6 @@
     </div>
     <?php include('footer.php'); ?>
 </body>
-<script>
-        $(document).ready(function () {
-            <?php
-            if (isset($_POST['submit'])) {
-            ?>
-                $(".js_success-popup").addClass("popup--visible");
-                setTimeout(function () {
-                    <?php
-                    $patientid = $_SESSION['patientid'];
-                    $user_query = mysqli_query($conn, "SELECT lrn_number FROM patient WHERE patientid = '$patientid'");
-                    $user_data = mysqli_fetch_assoc($user_query);
-                    $lrn_number = $user_data['lrn_number'];
 
-                    $check_submission_sql = "SELECT * FROM tbl_health_results WHERE lrn_number = '$lrn_number'";
-                    $check_submission_result = mysqli_query($conn, $check_submission_sql);
-
-                    if (mysqli_num_rows($check_submission_result) == 0) {
-                        // Redirect only if the assessment hasn't been taken
-                        echo "location.href = 'health.php';";
-                    }
-                    ?>
-                }, 1500);
-            <?php } ?>
-        });
-
-        // Check if the assessment has already been taken
-        <?php
-        $patientid = $_SESSION['patientid'];
-        $user_query = mysqli_query($conn, "SELECT lrn_number FROM patient WHERE patientid = '$patientid'");
-        $user_data = mysqli_fetch_assoc($user_query);
-        $lrn_number = $user_data['lrn_number'];
-
-        $check_submission_sql = "SELECT * FROM tbl_health_results WHERE lrn_number = '$lrn_number'";
-        $check_submission_result = mysqli_query($conn, $check_submission_sql);
-
-        if (mysqli_num_rows($check_submission_result) > 0 && !isset($_POST['submit'])) {
-        ?>
-            $(document).ready(function () {
-                $(".js_already-taken-popup").addClass("popup--visible");
-                // Disable form submission if the assessment has already been taken
-                $("form").submit(function (e) {
-                    e.preventDefault();
-                });
-            });
-        <?php } ?>
-    </script>
 </html>
 
