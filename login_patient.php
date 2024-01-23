@@ -78,17 +78,6 @@ else {?>
 ?>
 
 
-<?php
-$que="select * from manage_website";
-$query=$conn->query($que);
-while($row=mysqli_fetch_array($query))
-{
-  //print_r($row);
-  extract($row);
-  
-  $logo = $row['logo'];
-}
-?>
 
 
 <section class="login-block">
@@ -101,7 +90,7 @@ while($row=mysqli_fetch_array($query))
 
 <div class="auth-box card" style="background-color: rgba(255, 255, 255, 0.5);">
   <div class="text-center">
-<image class="profile-img" src="uploadImage/Logo/<?php echo $logo; ?>" style="width: 30%; margin-top: 20px; border-radius: 50%;"></image>
+<image class="profile-img" src="uploadImage/Logo/shslogo.png" style="width: 30%; margin-top: 20px; border-radius: 50%;"></image>
     </div> 
 <div class="card-block" >
 <div class="row m-b-20">
