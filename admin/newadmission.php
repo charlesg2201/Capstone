@@ -7,7 +7,12 @@ if(isset($_POST['btn_submit']))
 {
     if(isset($_GET['editid']))
     {
-        $sql ="INSERT  into tbl_admission (patientid,admission_date,admission_time,reasons,remarks) values ('$_GET[editid]','$_POST[admissiondate]','$_POST[admissiontime]','$_POST[reasons]','$_POST[remarks]')";
+        $lrn_query = mysqli_query($conn, "SELECT lrn_number FROM patient WHERE patientid = '$_GET[editid]'");
+        $lrn_data = mysqli_fetch_assoc($lrn_query);
+        $lrn_number = $lrn_data['lrn_number'];
+
+        $sql = "INSERT INTO tbl_admission (patientid, lrn_number, admission_date, admission_time, reasons, remarks) VALUES ('$_GET[editid]', '$lrn_number', '$_POST[admissiondate]', '$_POST[admissiontime]', '$_POST[reasons]', '$_POST[remarks]')";
+        
         if($qsql = mysqli_query($conn,$sql))     
         {
 ?>
@@ -39,6 +44,7 @@ if(isset($_GET['editid']))
     $rsedit = mysqli_fetch_array($qsql);
 
 }
+
 
 ?>
 <style>
