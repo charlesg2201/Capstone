@@ -18,7 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $inputPassword = isset($_POST['bpassword']) ? $_POST['bpassword'] : "";
         if (!validatePassword($inputPassword, $correctPassword)) {
-            die("Invalid password for backup operation");
+            echo "<script>alert('Invalid password for backup operation'); window.history.back();</script>";
+            die("");
         }
 
         $server_info = $conn->server_info;
@@ -120,11 +121,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Connection failed: " . $conn->connect_error);
         }
 
-        
-       $inputPassword = isset($_POST['rpassword']) ? $_POST['rpassword'] : "";
-       if (!validatePassword($inputPassword, $correctPassword)) {
-           die("Invalid password for restore operation");
-       }
+        $inputPassword = isset($_POST['rpassword']) ? $_POST['rpassword'] : "";
+        if (!validatePassword($inputPassword, $correctPassword)) {
+         echo "<script>alert('Invalid password for restore operation'); window.history.back();</script>";
+         die("");
+        }
+      
 
         if (isset($_FILES['backup_file'])) {
             $backupFile = $_FILES['backup_file']['tmp_name'];
