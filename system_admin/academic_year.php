@@ -43,16 +43,19 @@
                                             $sql = "SELECT * FROM tbl_academicyear where delete_status='0'";
                                             $qsql = mysqli_query($conn, $sql);
                                             while($rs = mysqli_fetch_array($qsql)) {
+                                                $buttonText = $rs['delete_status'] ? 'Unarchive' : 'Archive';
+                                                $buttonClass = $rs['delete_status'] ? 'btn-success' : 'btn-warning';
                                                 echo "<tr>
                                                     <td>$rs[academic_year]</td>
-                                                    <td align=''>";
+                                                    <td align=''>
                                                 
-                                                if(isset($_SESSION['id'])) {
-                                                    echo "
-                                                    <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editacademicyearModal' data-id='$rs[id]' data-name='$rs[academic_year]'>Update</a>";
-                                                }
+                                               
+                                                    <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editacademicyearModal' data-id='$rs[id]' data-name='$rs[academic_year]'>Update</a>
+                                                    <button class='btn $buttonClass archive-btn' data-id='$rs[id]' data-status='$rs[delete_status]'>
+                                                            $buttonText
+                                                        </button>
                                                 
-                                                echo "</td></tr>";
+                                                </td></tr>";
                                             }
                                         ?>
                                     </tbody>
@@ -146,6 +149,38 @@
             modal.find("#currentacademicyearName").text("Current Value: " + academicyearName);
         });
     });
+
+    $(".archive-btn").click(function() {
+            var academicyearId = $(this).data("id"); // Change variable name from strandId to academicyearId
+            var currentStatus = $(this).data("status");
+
+            // Send an AJAX request to update the delete_status in the database
+            $.ajax({
+                url: "update_status3.php", // replace with your server-side script for updating status
+                method: "POST",
+                data: {
+                    academicyearId: academicyearId, // Change variable name from strandId to academicyearId
+                    currentStatus: currentStatus
+                },
+                success: function(response) {
+                    // Update button text and class based on the new status
+                    var buttonText = response == 1 ? 'Unarchive' : 'Archive';
+                    var buttonClass = response == 1 ? 'btn-success' : 'btn-warning';
+
+                    // Update button text and class
+                    $(".archive-btn[data-id='" + academicyearId + "']")
+                        .text(buttonText)
+                        .removeClass('btn-success btn-warning')
+                        .addClass(buttonClass);
+
+                    // Update data-status attribute
+                    $(".archive-btn[data-id='" + academicyearId + "']").data("status", response);
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error updating status:", error);
+                }
+            });
+        });
 </script>
 
     
