@@ -146,7 +146,7 @@
             modal.find("#editacademicyearName").val(academicyearName);
 
             // Display current value in the modal
-            modal.find("#currentacademicyearName").text("Current Value: " + academicyearName);
+            modal.find("#currentacademicyearName").text("Academic Year: " + academicyearName);
         });
     });
 

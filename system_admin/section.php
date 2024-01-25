@@ -145,7 +145,7 @@
             modal.find("#editsectionName").val(sectionName);
 
             // Display current value in the modal
-            modal.find("#currentsectionName").text("Current Value: " + sectionName);
+            modal.find("#currentsectionName").text("Section Name: " + sectionName);
         });
 
         $(".archive-btn").click(function() {

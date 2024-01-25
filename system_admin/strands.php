@@ -144,7 +144,7 @@
             modal.find("#editStrandName").val(strandName);
 
             // Display current value in the modal
-            modal.find("#currentStrandName").text("Current Value: " + strandName);
+            modal.find("#currentStrandName").text("Strand Name: " + strandName);
         });
 
         
