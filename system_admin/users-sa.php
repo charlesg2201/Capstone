@@ -47,6 +47,12 @@ if (isset($_POST['submit'])) {
             exit;
         }
     }
+    
+    if (empty($profilePhoto)) {
+        $defaultImagePath = '../uploadImage/Profile/user1.jpg'; // Replace with your default image path
+        $profilePhoto = mysqli_real_escape_string($conn, $defaultImagePath);
+    }
+    
 
     if (isset($_GET['editid'])) {
         $sql = "UPDATE tbl_admin SET profile_photo='$profilePhoto', firstname='$fname', middlename='$middlename', lname='$lname', dob='$dob', contact='$contact', gender='$gender', employee_number='$employee_number', addr='$addr' WHERE id='$_GET[editid]'";

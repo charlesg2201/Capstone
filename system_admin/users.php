@@ -35,6 +35,7 @@ if (isset($_POST['submit'])) {
     $dob = $_POST['dob'];
     $address = $_POST['address'];
     $date = date("Y-m-d");
+    $profilePhoto = '';
     // $security_question = $_POST['security_question'];
     // $security_answer = $_POST['security_answer'];
 
@@ -54,6 +55,11 @@ if (isset($_POST['submit'])) {
             echo "Failed to upload the profile photo.";
             exit;
         }
+    }
+
+    if (empty($profilePhoto)) {
+        $defaultImagePath = '../uploadImage/Profile/user1.jpg';  // Replace with your default image path
+        $profilePhoto = mysqli_real_escape_string($conn, $defaultImagePath);
     }
 
 
@@ -101,7 +107,7 @@ if (isset($_POST['submit'])) {
             </div>
 <?php
     } else {
-        $sql = "INSERT INTO `tbl_admin_user` (`firstname`, `middlename`, `lastname`, `contact`, `username`, `gender`, `dob`, `employee_number`, `address`, `password`) VALUES ('$fname', '$middlename', '$lname', '$contact', '$username', '$gender', '$dob', '$employee_number', '$address', '$password')";
+        $sql = "INSERT INTO `tbl_admin_user` (`profile_photo`, `firstname`, `middlename`, `lastname`, `contact`, `username`, `gender`, `dob`, `employee_number`, `address`, `password`) VALUES ('$profilePhoto', '$fname', '$middlename', '$lname', '$contact', '$username', '$gender', '$dob', '$employee_number', '$address', '$password')";
             if ($qsql = mysqli_query($conn, $sql)) {
                 // Display success message
                 ?>
