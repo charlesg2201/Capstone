@@ -40,7 +40,7 @@
                                     </thead>
                                     <tbody>
                                         <?php
-                                            $sql = "SELECT * FROM tbl_academicyear where delete_status='0'";
+                                            $sql = "SELECT * FROM tbl_academicyear";
                                             $qsql = mysqli_query($conn, $sql);
                                             while($rs = mysqli_fetch_array($qsql)) {
                                                 $buttonText = $rs['delete_status'] ? 'Unarchive' : 'Archive';
