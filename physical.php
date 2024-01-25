@@ -60,7 +60,7 @@
                                             echo "<div class='choices-container'>";
                                             foreach ($choices as $choice) {
                                                 echo "<div class='choice'>
-                                                    <input type='radio' name='question_$rs[question_id]' value='$choice'> $choice
+                                                    <input type='radio' name='question_$rs[question_id]' value='$choice' required=''> $choice
                                                 </div>";
                                             }
                                             echo "</div>";
