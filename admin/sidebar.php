@@ -156,13 +156,18 @@
     </a>
     <ul class="pcoded-submenu">
         <li class="">
-            <a href="studentrecords.php">
+            <a href="studentlist.php">
                 <span class="pcoded-mtext">Student List</span>
             </a>
         </li>
         <li class="">
         <a href="admissionrecord.php?delete_status=0">
                 <span class="pcoded-mtext">Admission Record</span>
+            </a>
+        </li>
+        <li class="">
+        <a href="studentrecords.php">
+                <span class="pcoded-mtext">Student Records</span>
             </a>
         </li>
         
