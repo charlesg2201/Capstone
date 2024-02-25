@@ -18,12 +18,15 @@
             .print-only {
                     display: block !important;
                     }
+           
             
         }
         @media screen {
                 .print-only {
                 display: none;
                 }
+
+                
             }
         
     .box-header {
@@ -45,6 +48,8 @@
         margin: 0;
         padding: 0;
     }
+
+   
 </style>
 
 <?php
@@ -95,7 +100,7 @@
                         <br>
                     <div class="card-block">
                         <div class="row justify-content-center">
-                            <div class="col-md-6">
+                            <div class="gitna col-md-6">
                                 <table class="table table-hover">
                                     <tr>
                                         <th>LRN Number :</th>
@@ -253,8 +258,10 @@
     <div class="pcoded-content">
         <div class="pcoded-inner-content">
         <div id="printable-content" class="content-container">
-                <div class="main-body">
+                <div class="main-body" style="margin-left:-240px">
+
                     <div class="page-body">
+                   
                         <?php
                         // Fetch all students and their assessment results including reasons from your database
                         $sql_students_results = "SELECT p.lrn_number, p.fname, p.mname, p.lname, p.grade_level, p.section, pr.admission_id, pr.answer, pr.reasons, h.questions
@@ -333,27 +340,30 @@
     });
 
     function printContent() {
-            var printWindow = window.open('https://example.com', 'myWindow');
-            // Include the styles for the print preview
-            printWindow.document.write('<style>body{font-family:Arial,sans-serif;margin:20px;}#printable-content{/* Add your specific styles for the content you want to print */}');
-            // Add style to hide buttons in print preview
-            printWindow.document.write('.no-print{display:none;}</style>');
-            printWindow.document.write('</head><body>');
+    var selectedCategory = document.getElementById('categorySelect').value;
+    var printWindow = window.open('', '_blank');
+    printWindow.document.write('<html><head><title>Print</title>');
+    printWindow.document.write('</head><body>');
 
-            // Copy the content you want to print
-            printWindow.document.write('<div id="page1" class="printable-content">');
-            printWindow.document.write(document.getElementById('studentinformation').innerHTML);
-            printWindow.document.write('</div>');
+    if (selectedCategory === 'studentinfo') {
+        printWindow.document.write('<div id="page1">');
+        printWindow.document.write(document.getElementById('studentinformation').innerHTML);
+        printWindow.document.write('</div>');
+    } else if (selectedCategory === 'admissionrecord') {
+        printWindow.document.write('<div id="page1">');
+        printWindow.document.write(document.getElementById('admrecord').innerHTML);
+        printWindow.document.write('</div>');
+    } else if (selectedCategory === 'category3') {
+        printWindow.document.write('<div id="page1">');
+        printWindow.document.write(document.getElementById('category3Content').innerHTML);
+        printWindow.document.write('</div>');
+    }
 
-            // Print the second page
-            // printWindow.document.write('<div id="page2" class="printable-content">');
-            // printWindow.document.write(document.getElementById('admrecord').innerHTML);
-            // printWindow.document.write('</div>');
+    printWindow.document.write('</body></html>');
+    printWindow.document.close();
+    printWindow.print();
+}
 
-            printWindow.document.write('</body></html>');
-            printWindow.document.close();
-            printWindow.print();
-        }
     
 </script>
 
