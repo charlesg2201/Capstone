@@ -99,8 +99,8 @@
                         <div class="print-only" style="text-align: center; color: #0a4b78; font-weight: bold;"><h4><strong> S T U D E N T &nbsp; R E C O R D </strong></h4></div>
                         <br>
                     <div class="card-block">
-                        <div class="row justify-content-center">
-                            <div class="gitna col-md-6">
+                        <div class="row justify-content-center" style="padding-left: 130px;">
+                            <div class="gitna col-md-7">
                                 <table class="table table-hover">
                                     <tr>
                                         <th>LRN Number :</th>
@@ -164,10 +164,29 @@
                                 <br>
                                 <br>
                                 <br>
-                        <p class="print-only" style="color: #0a4b78";><strong>Printed by: </strong></p>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+                                <br>
+
+                        
 
                             </div>
                         </div>
+                        <p class="print-only" style="color: #0a4b78";><strong>Printed by: </strong></p>
+
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        
                     </div>
                 </div>
 </div>
@@ -255,12 +274,13 @@
     </div>
     </div>
     <div id="category3Content" style="display: none;">
-    <div class="pcoded-content">
-        <div class="pcoded-inner-content">
+    <div class="pcoded-content" style="margin-left: 0;">
+        <div class="pcoded-inner-content" >
         <div id="printable-content" class="content-container">
-                <div class="main-body" style="margin-left:-240px">
+                <div class="main-body" >
 
                     <div class="page-body">
+                        
                    
                         <?php
                         // Fetch all students and their assessment results including reasons from your database
