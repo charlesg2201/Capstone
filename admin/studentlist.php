@@ -14,57 +14,6 @@
 .box-header h4 {
   margin: 0;
 }                  
-
-.print-logo, .text-between-logos {
-            display: none;
-        }
-        img{
-                width: 180px;
-                height: 180px;
-            }
-
-            .logo-container {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 100px;
-            }
-            
-         
-
-        @media print {
-            .print-logo {
-                display: block;
-                position: absolute;
-                top: 0;
-                left: 0;
-    
-            
-            }
-            .text-between-logos{
-                display: block;
-                text-align: center;
-                font-size: 25px;
-            
-            }
-            .logo-container {
-                display: flex;
-                justify-content: space-between;
-                margin-bottom: 100px;
-            }
-
-            .logo-container img {
-                margin-right: 20px; /* Adjust as needed */
-            }
-            img{
-                width: 180px;
-                height: 180px;
-            }
-            
-            #dom-jqry_wrapper {
-                margin-top: 100px; /* Adjust as needed */
-            }
-        }
-
 </style>
 <head>
     <meta charset="UTF-8">
@@ -105,6 +54,9 @@
                                         <tr>
                                             <th>LRN Number</th>
                                             <th>Name</th>
+                                            <th>Contact Number</th>
+                                            <th>Email Address</th>
+                                            <th>Strand</th>
                                             <th>Grade Level</th>
                                             <th>Section</th>
                                             <th>Gender</th>
@@ -123,6 +75,9 @@
                                             echo "<tr>
                                                 <td>$rs[lrn_number]</td> 
                                                 <td>$rs[fname] $rs[mname] $rs[lname]</td>
+                                                <td>$rs[contact_number]</td> 
+                                                <td>$rs[email]</td> 
+                                                <td>$rs[strand]</td> 
                                                 <td>$rs[grade_level]</td> 
                                                 <td>$rs[section]</td> 
                                                 <td>$rs[gender]</td> 
@@ -147,17 +102,7 @@
     </div>
 
     <?php include('footer.php');?>
-    <div class="logo-container">
-        <img src="uploadImage/Logo/shslogo.png" class="print-logo">
-        <p class="text-between-logos">
-                                <strong>City of Tagaytay <br>
-                                CITY COLLEGE OF TAGAYTAY <br>
-                                Akle St., Kaybagal South, Tagaytay City <br>
-                                Telephone No: (046) 482-6840</strong>
-                            </p>
-        <img src="uploadImage/Logo/Seal_of_Tagaytay_City.svg.png" class="print-logo">
-    </div>
-    
+
     <script type="text/javascript" charset="utf8" src="..\Datatables\Buttons-2.4.2\js\dataTables.buttons.js"></script>
     <script type="text/javascript" charset="utf8" src="..\Datatables\Buttons-2.4.2\js\buttons.html5.js"></script>
     <script type="text/javascript" charset="utf8" src="..\Datatables\Buttons-2.4.2\js\buttons.print.js"></script>
@@ -170,15 +115,8 @@
                 $('#dom-jqry').DataTable({
                     "dom": 'Bfrtip',
                     "buttons": [
-                    {
-                        extend: 'print',
-                        customize: function(win) {
-                          
-                            $(win.document.body).prepend('<div class="logo-container"><img src="uploadImage/Logo/shslogo.png" /><p class="text-between-logos"><strong>City of Tagaytay <br>CITY COLLEGE OF TAGAYTAY <br>Akle St., Kaybagal South, Tagaytay City <br>Telephone No: (046) 482-6840</strong></p><img src="uploadImage/Logo/Seal_of_Tagaytay_City.svg.png" /></div>');
-                        }
-                    },
-                    
-                ]
+                        'copy', 'excel', 'pdf', 'print'
+                    ]
                 });
             }
         });
