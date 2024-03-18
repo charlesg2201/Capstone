@@ -28,10 +28,16 @@
                 justify-content: space-between;
                 margin-bottom: 100px;
             }
-            
+            body {
+                background-image: none !important;
+            }
          
 
         @media print {
+            body {
+                background-image: none !important;
+            }
+            
             .print-logo {
                 display: block;
                 position: absolute;

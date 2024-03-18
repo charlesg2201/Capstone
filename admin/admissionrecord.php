@@ -34,7 +34,9 @@ title{
                 margin-bottom: 100px;
             }
             
-         
+            body {
+                background-image: none !important;
+            }
 
         @media print {
             .print-logo {
@@ -68,8 +70,11 @@ title{
             #dom-jqry_wrapper {
                 margin-top: 100px; /* Adjust as needed */
             }
-        }
 
+            body {
+                background-image: none !important;
+            }
+        }
 </style>
 <head>
     <meta charset="UTF-8">
