@@ -5,26 +5,51 @@ include('header.php');
 include('sidebar.php');
 include('connect.php');
 
-if(isset($_POST["btn_update"])) {
-    extract($_POST);
+if(isset($_POST["btn_changepass"])) {
+    // Extracting values from the form
+    $new_password = $_POST['newpassword'];
+    $confirm_password = $_POST['confirm_password'];
 
-    // Check if the password field is empty or contains only spaces
-    if(empty($password) || trim($password) === "") {
-        $_SESSION['error'] = 'Password cannot be blank.';
-    } elseif ($password !== trim($password)) {
-        $_SESSION['error'] = 'Password should not start or end with spaces.';
-    } else {
-        // Continue with the update logic if the password is not blank and doesn't start or end with spaces
+    // Check if new password and confirm password match
+    if ($new_password == $confirm_password) {
+        // Fetch the old password from the database
+        $stmt = $conn->prepare("SELECT password FROM tbl_admin WHERE id = ?");
+        $stmt->bind_param("i", $_SESSION["id"]);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $old_password = $row['password'];
 
-        if($_SESSION['user'] == 'tbl_admin') {
-            $q1 = "UPDATE tbl_admin SET `password`='$password' WHERE id = '".$_SESSION["id"]."'";
-
-            if ($conn->query($q1) === TRUE) {
-                $_SESSION['success'] = 'Record Successfully Updated';
+        // Check if the new password is different from the old one
+        if ($new_password != $old_password) {
+            // Validate password strength
+            if (preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])[\w\W]{8,}$/', $new_password)) {
+                // Password meets complexity requirements
+                // Update password in the database (plaintext)
+                $update_query = "UPDATE tbl_admin SET password = '$new_password' WHERE id = '".$_SESSION["id"]."'";
+                if ($conn->query($update_query) === TRUE) {
+                    $_SESSION['success'] = "Password changed successfully!";
+                } else {
+                    $_SESSION['error'] = "Error updating password: " . $conn->error;
+                }
             } else {
-                $_SESSION['error'] = 'Something Went Wrong';
+                // Password complexity requirements not met
+                // Check for specific conditions and set separate error messages
+                if (strlen($new_password) < 8) {
+                    $_SESSION['error'] = "Password should be at least 8 characters long.";
+                }
+                if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])[\w\W]*$/', $new_password)) {
+                    $_SESSION['error'] = "Password should contain at least one capital letter, one number, and one special character.";
+                }
+                if (preg_match('/\s/', $new_password)) {
+                    $_SESSION['error'] = "Spaces are not allowed in the password.";
+                }
             }
+        } else {
+            $_SESSION['error'] = "New password cannot be the same as the old password.";
         }
+    } else {
+        $_SESSION['error'] = "Passwords do not match. Please try again.";
     }
 }
 ?>
@@ -46,13 +71,6 @@ if(isset($_POST["btn_update"])) {
         margin: 0;
         }                  
 
-        .toggle-password {
-        cursor: pointer;
-        font-size: 20px; /* Adjust the font size */
-        position: absolute; /* Use absolute positioning */
-        margin-top: 10px;
-        margin-left: 3px;
-        }
 
 </style>
 </head>
@@ -62,7 +80,7 @@ if($_SESSION['user'] == 'tbl_admin'){
     $query = $conn->query($que);
     while($row = mysqli_fetch_array($query)) {
         extract($row);
-        $username = $row['username'];
+
         $password = $row['password'];
     }
 }
@@ -79,20 +97,15 @@ if($_SESSION['user'] == 'tbl_admin'){
                                         <br>
                                         <br>
     <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Username</label>
+    <label class="col-sm-2 col-form-label">New Password</label>
     <div class="col-sm-3">
-        <input class="form-control" type="text" name="username" id="username" value="<?php echo strtolower($lname.$employee_number); ?>" readonly  />
+        <input class="form-control" type="password" name="newpassword" id="newpassword" required/>
         <span class="messages"></span>
     </div>
-        <label class="col-sm-2 col-form-label">Password</label>
+        <label class="col-sm-2 col-form-label">Confirm Password</label>
         <div class="col-sm-3">
         <div class="input-group">
-        <input class="form-control" type="password" name="password" id="password" value="<?php echo $password ?>" readonly/>
-        <div class="input-group-append">
-            <span class="input-group-text">
-                <i class="toggle-password fas fa-eye" onclick="togglePasswordVisibility()"></i>
-            </span>
-        </div>
+        <input class="form-control" type="password" name="confirm_password" id="confirm_password" required/>
     </div>
     <span class="messages"></span>
         </div>
@@ -106,9 +119,7 @@ if($_SESSION['user'] == 'tbl_admin'){
                                         <div class="form-group row">
                                             <label class="col-sm-2"></label>
                                             <div class="col-sm-10">
-<button type="button" name="btn_edit" id="editButton" class="btn btn-primary m-b-0">Edit</button>
-
-<button type="submit" name="btn_update" id="updateButton" class="btn btn-success m-b-0" style="display: none;">Update</button>
+<button type="submit" name="btn_changepass" id="editButton" class="btn btn-primary m-b-0">Change Password</button>
 
                                             </div>
                                         </div>
@@ -117,23 +128,7 @@ if($_SESSION['user'] == 'tbl_admin'){
                             </div>
                             <?php include('footer.php'); ?>
                             <link rel="stylesheet" href="popup_style.css">
-                            <script>
-                                function togglePasswordVisibility() {
-    var passwordField = document.getElementById('password');
-    var icon = document.querySelector('.toggle-password');
-
-    if (passwordField.type === 'password') {
-        passwordField.type = 'text';
-        icon.classList.remove('fa-eye');
-        icon.classList.add('fa-eye-slash');
-    } else {
-        passwordField.type = 'password';
-        icon.classList.remove('fa-eye-slash');
-        icon.classList.add('fa-eye');
-    }
-}
-
-                            </script>
+                           
                              <?php if(!empty($_SESSION['success'])) {  ?>
                                 <div class="popup popup--icon -success js_success-popup popup--visible">
                                     <div class="popup__background"></div>
@@ -158,70 +153,14 @@ if($_SESSION['user'] == 'tbl_admin'){
                                         </h3>
                                         <p><?php echo $_SESSION['error']; ?></p>
                                         <p>
-                                            <button class="button button--error" data-for="js_error-popup">Close</button>
+                                            <?php echo "<script>setTimeout(\"location.href = 'changepassword.php';\",2500);</script>"; ?>
+                        
+                                            
                                         </p>
                                     </div>
                                 </div>
                                 <?php unset($_SESSION["error"]);  } ?>
-                            <script>
-                                var addButtonTrigger = function addButtonTrigger(el) {
-                                    el.addEventListener('click', function () {
-                                        var popupEl = document.querySelector('.' + el.dataset.for);
-                                        popupEl.classList.toggle('popup--visible');
-                                    });
-                                };
-
-                                Array.from(document.querySelectorAll('button[data-for]')).
-                                forEach(addButtonTrigger);
-                            </script>
-                            <script>
-   document.addEventListener("DOMContentLoaded", function() {
-    // Function to remove readonly attribute from input fields
-    function makeFieldsEditable() {
-        var inputFields = document.querySelectorAll('input[readonly], textarea[readonly]');
-        inputFields.forEach(function(field) {
-            field.removeAttribute('readonly');
-        });
-
-        // Show the "Update" button and hide the "Edit" button
-        document.getElementById('updateButton').style.display = 'block';
-        document.getElementById('editButton').style.display = 'none';
-    }
-
-    // Add click event listener to the "Edit" button
-    var editButton = document.getElementById('editButton');
-    editButton.addEventListener('click', function(event) {
-        // Prevent the default form submission behavior
-        event.preventDefault();
-        
-        // Call the function to make fields editable
-        makeFieldsEditable();
-    });
-
-    function toggleUsernameField() {
-        var usernameField = document.getElementById('username');
-        
-        if (usernameField.hasAttribute('disabled')) {
-            // Enable the username field
-            usernameField.removeAttribute('disabled');
-        } else {
-            // Disable the username field
-            usernameField.setAttribute('disabled', 'true');
-        }
-    }
-
-    // Add click event listener to the "Edit" button
-    var editButton = document.getElementById('editButton');
-    editButton.addEventListener('click', function(event) {
-        // Prevent the default form submission behavior
-        event.preventDefault();
-        
-        // Call the function to toggle the disabled attribute on the username field
-        toggleUsernameField();
-    });
-
-});
-</script>
+                           
                         </div>
                     </div>
                 </div>
@@ -229,5 +168,3 @@ if($_SESSION['user'] == 'tbl_admin'){
         </div>
     </div>
 </div>
-
-
