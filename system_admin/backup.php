@@ -102,7 +102,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             exit;
         } else {
-            echo "Failed to create the zip file";
+            $restoreMessage = "Failed to create the zip file";
         }
         
 
@@ -175,13 +175,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     // Clean up extracted files
                     unlink($sqlDumpFile);
                 } else {
-                    echo "No valid SQL dump found in the zip file.";
+                    $restoreMessage = "No valid SQL dump found in the zip file.";
                 }
 
                 // Remove the temporary extraction directory
                 rmdir($extractPath);
             } else {
-                echo "Failed to open the zip file";
+                $restoreMessage = "Failed to open the zip file";
             }
         }
     }
@@ -269,6 +269,9 @@ function validatePassword($inputPassword, $correctPassword) {
      <div class="form-group form-primary">
                         <input type="password" name="rpassword" class="form-control" required="" placeholder="Password">
                         <span class="form-bar"></span>
+                    </div>
+                    <div class="form-group form-primary">
+                        <p>Note: Once you upload you will be automatically logout.</p>
                     </div>
     <div class="form-group mt-2">
         <button type="submit" name="btn_submit" class="btn btn-primary">Upload</button>
