@@ -46,32 +46,30 @@
             <th>LRN Number</th>
             <th>Admission ID</th>
             <th>Name</th>
+            <th>Reason</th>
             <th>Action</th>
           </tr>
 				
         </thead>
                   <tbody>
-                    <?php
-                      $sql = "SELECT DISTINCT pr.admission_id, pr.lrn_number, u.fname, u.lname 
-                      FROM tbl_health_results pr
-                      JOIN patient u ON pr.lrn_number = u.lrn_number
-                      WHERE pr.delete_status = '0'";
-              
-                      $qsql = mysqli_query($conn, $sql);
-                      while($rs = mysqli_fetch_array($qsql))
-                      {
-                        echo "<tr>
-                          <td>$rs[lrn_number]</td> 
-                          <td>$rs[admission_id]</td> 
-                          <td>$rs[fname] $rs[lname]<br>
-                         
-                          <td >";
-                        
-                          echo "<a href='viewhealth_result.php?lrn_number={$rs['lrn_number']}&admission_id={$rs['admission_id']}' class='btn btn-primary'>View</a>";
+                  <?php
+$sql = "SELECT DISTINCT hr.admission_id, hr.lrn_number, u.fname, u.lname, hr.reasons
+        FROM tbl_health_results hr
+        INNER JOIN tbl_admission u ON hr.admission_id = u.admission_id
+        WHERE hr.delete_status = '0'";
 
-                        
+$qsql = mysqli_query($conn, $sql);
 
-                        echo "</td></tr>";
+while ($rs = mysqli_fetch_array($qsql)) {
+    echo "<tr>
+              <td>$rs[lrn_number]</td> 
+              <td>$rs[admission_id]</td> 
+              <td>$rs[fname] $rs[lname]</td>
+              <td>$rs[reasons]</td>
+              <td>
+                  <a href='viewhealth_result.php?lrn_number={$rs['lrn_number']}&admission_id={$rs['admission_id']}' class='btn btn-primary'>View</a>
+              </td>
+          </tr>";
                       }
                     ?>
                   </tbody>

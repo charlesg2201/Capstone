@@ -46,34 +46,33 @@
             <th>LRN Number</th>
             <th>Admission ID</th>
             <th>Name</th>
+            <th>Reason</th>
             <th>Action</th>
           </tr>
 				
         </thead>
                   <tbody>
-                    <?php
-                      $sql = "SELECT DISTINCT pr.admission_id, pr.lrn_number, u.fname, u.lname 
-                      FROM tbl_physical_results pr
-                      JOIN patient u ON pr.lrn_number = u.lrn_number
-                      WHERE pr.delete_status = '0'";
-              
-                      $qsql = mysqli_query($conn, $sql);
-                      while($rs = mysqli_fetch_array($qsql))
-                      {
-                        echo "<tr>
-                          <td>$rs[lrn_number]</td> 
-                          <td>$rs[admission_id]</td> 
-                          <td>$rs[fname] $rs[lname]<br>
-                         
-                          <td >";
-                        
-                          echo "<a href='viewphysical_result.php?lrn_number={$rs['lrn_number']}&admission_id={$rs['admission_id']}' class='btn btn-primary'>View</a>";
+                  <?php
+$sql = "SELECT DISTINCT pr.admission_id, pr.lrn_number, u.fname, u.lname, pr.reasons
+        FROM tbl_physical_results pr
+        INNER JOIN tbl_admission u ON pr.admission_id = u.admission_id
+        WHERE pr.delete_status = '0'";
 
-                        
+$qsql = mysqli_query($conn, $sql);
 
-                        echo "</td></tr>";
-                      }
-                    ?>
+while ($rs = mysqli_fetch_array($qsql)) {
+    echo "<tr>
+              <td>$rs[lrn_number]</td> 
+              <td>$rs[admission_id]</td> 
+              <td>$rs[fname] $rs[lname]</td>
+              <td>$rs[reasons]</td>
+              <td>
+                  <a href='viewphysical_result.php?lrn_number={$rs['lrn_number']}&admission_id={$rs['admission_id']}' class='btn btn-primary'>View</a>
+              </td>
+          </tr>";
+}
+?>
+
                   </tbody>
 			                </table>
                             </div>
