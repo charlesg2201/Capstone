@@ -154,10 +154,10 @@ if (isset($_GET['editid'])) {
 <br>        
 
         <div class="form-group row">
-                        <!-- <label class="col-sm-2 col-form-label">Profile Photo</label>
+                        <label class="col-sm-2 col-form-label">Profile Photo</label>
                         <div class="col-sm-4">
                             <input type="file" id="photo-upload" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder=""   value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
-                        </div> -->
+                        </div>
                     
                     <label class="col-sm-2 col-form-label">Employee Number</label>
             <div class="col-sm-4">
@@ -166,11 +166,8 @@ if (isset($_GET['editid'])) {
                 oninput="validateEmployeeNumber()" required />
         <span class="messages"></span>
             </div>  
-        <label class="col-sm-2 col-form-label">First Name</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['firstname']; } ?>" >
-            <span class="messages"></span>
-        </div>         
+
+         
         </div>
         <script>
     function validateEmployeeNumber() {
@@ -189,6 +186,13 @@ if (isset($_GET['editid'])) {
 </script>
 
         <div class="form-group row">
+
+        <label class="col-sm-2 col-form-label">First Name</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['firstname']; } ?>" >
+            <span class="messages"></span>
+        </div>        
+
         <label class="col-sm-2 col-form-label">Middle Name</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" name="middlename" id="middlename" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['middlename']; } ?>" >
@@ -196,14 +200,17 @@ if (isset($_GET['editid'])) {
         </div>
         
 
-        <label class="col-sm-2 col-form-label">Last Name</label>
+        
+    </div>
+
+    <div class="form-group row">
+
+    <label class="col-sm-2 col-form-label">Last Name</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" name="lastname" id="lastname" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['lastname']; } ?>" >
             <span class="messages"></span>
         </div>
-    </div>
 
-    <div class="form-group row">
     <label class="col-sm-2 col-form-label">Contact Number</label>
     <div class="col-sm-4">
         <input class="form-control" type="text" name="contact" id="contact"
@@ -229,6 +236,9 @@ if (isset($_GET['editid'])) {
         }
     }
 </script>
+   
+    </div>
+    <div class="form-group row">
     <label class="col-sm-2 col-form-label">Gender</label>
                 <div class="col-sm-4">
                     <select name="gender" id="gender" class="form-control" required="">
@@ -239,8 +249,7 @@ if (isset($_GET['editid'])) {
                             { if($rsedit['gender'] == 'Female') { echo 'selected'; } } ?>>Female</option>
                     </select>
                 </div>
-    </div>
-    <div class="form-group row">
+
         <label class="col-sm-2 col-form-label">Date of Birth</label>
             <div class="col-sm-4">
                 <input class="form-control" type="date" name="dob" max="<?php echo date("m-d-Y"); ?>"
