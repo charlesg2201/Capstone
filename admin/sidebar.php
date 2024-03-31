@@ -165,11 +165,7 @@
                 <span class="pcoded-mtext">Admission Record</span>
             </a>
         </li>
-        <li class="">
-        <a href="studentrecords.php">
-                <span class="pcoded-mtext">Student Records</span>
-            </a>
-        </li>
+        
         
     </ul>
 </li>

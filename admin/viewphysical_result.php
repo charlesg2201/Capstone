@@ -275,9 +275,25 @@ if (isset($_GET['lrn_number']) && isset($_GET['admission_id'])) {
         }
         ?>
     </div>
+    <?php
+$firstname = ""; // Initialize the variables to avoid "undefined variable" notices
+$lastname = "";
+
+if(isset($_SESSION['firstname'])) {
+    $firstname = $_SESSION['firstname'];
+}
+
+if(isset($_SESSION['lastname'])) {
+    $lastname = $_SESSION['lastname'];
+}
 
 
-    <p class="print-only" style="color: #0a4b78";><strong>Printed by: </strong></p>
+
+?>
+
+<p class="print-only" style="color: #0a4b78;"><strong>Printed by: <?php echo $firstname . ' ' . $lastname; ?></strong></p>
+
+
 
     </div>
     <button onclick="printContent()" class="no-print">Print</button>
