@@ -54,6 +54,13 @@
 </li>
 
 <li class="pcoded-hasmenu">
+    <a href="assessment_remarks.php ">
+        <span class="pcoded-micon"><i class="feather icon-file-text"></i></span>
+        <span class="pcoded-mtext">Assessment Remarks</span>
+    </a>
+</li>
+
+<li class="pcoded-hasmenu">
     <a href="messages.php?patientid=<?php echo $_SESSION["patientid"]; ?>">
         <span class="pcoded-micon"><i class="feather icon-mail"></i></span>
         <span class="pcoded-mtext">Message</span>
