@@ -63,15 +63,11 @@
                      <td>{$rs['full_name']}</td>
                      <td align='center'>";
               
-                  if (isset($_SESSION['userid'])) {
-                      echo "<div class='pcoded-hasmenu notification-badge'>" .
-                      "<a href='messages.php?patientid={$rs['patientid']}'>" .
-                          "<span class='pcoded-mtext'>View Message</span>" .
-                          ($rs['new_message_count'] != 0 ? "<span class='badge' id='messageNotification'>{$rs['new_message_count']}</span>" : "") .
-                      "</a></div>" . "</td></tr>";
+                     if (isset($_SESSION['userid'])) {
+                      echo "<div class='notification-badge'><a href='messages.php?patientid={$rs['patientid']}' class='btn btn-success'><span class='pcoded-mtext'>View Messages</span>" . 
+                      ($rs['new_message_count'] != 0 ? "<span class='badge' id='messageNotification'>{$rs['new_message_count']}</span>" : "") . "</a></div>";
+                  }
                   
-                      // echo "<div class='notification-badge'><a href='messages.php?patientid={$rs['patientid']}' class='btn btn-success'><span class='pcoded-mtext'>View Messages</span><span class='badge' id='messageNotification'>0</span></a></div>";
-                  }   
                   
               }
               

@@ -22,7 +22,7 @@ if(isset($_POST['btn_submit']))
                 <h3 class="popup__content__title">
                   Success
                 </h3>
-                <p>Patient Record Updated Successfully</p>
+                <p>Admission record added Successfully</p>
                 <p>
                  <!--  <a href="index.php"><button class="button button--success" data-for="js_success-popup"></button></a> -->
                  <?php echo "<script>setTimeout(\"location.href = 'patientreport.php?patientid=$_GET[editid]';\",1500);</script>"; ?>
