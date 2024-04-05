@@ -24,13 +24,9 @@
 <div class="col-lg-4">
 <div class="page-header-breadcrumb">
 <ul class="breadcrumb-title">
-<li class="breadcrumb-item">
- <i class="feather icon-home"></i>
-</li>
-<li class="breadcrumb-item"><a href="index.php">Home</a>
-</li>
-<li class="breadcrumb-item"><a href="messages.php">Message</a>
-</li>
+
+<li class="breadcrumb-item"><a href="index.php"><i class="feather icon-home"></i> Home</a></li>
+
 </ul>
 </div>
 </div>

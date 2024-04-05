@@ -48,13 +48,10 @@ if(isset($_GET['id']))
 <div class="col-lg-4">
 <div class="page-header-breadcrumb">
 <ul class="breadcrumb-title">
-<li class="breadcrumb-item">
- <i class="feather icon-home"></i>
-</li>
-<li class="breadcrumb-item"><a href="index.php">Home</a>
-</li>
-<li class="breadcrumb-item"><a href="studentdetails.php">Profile</a>
-</li>
+
+<li class="breadcrumb-item"><a href="index.php"><i class="feather icon-home"></i> Home</a></li>
+<li class="breadcrumb-item"><a href="studentdetails.php"><i class="feather icon-user"></i> Profile</a></li>
+
 </ul>
 </div>
 </div>
@@ -205,7 +202,7 @@ if($_SESSION['user'] == 'patient'){
 
          
 
-                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Security Details</h4></div>
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Change Password</h4></div>
                         <div class="card-block">
                                     <form id="main" method="post" enctype="multipart/form-data">
                                         <br>

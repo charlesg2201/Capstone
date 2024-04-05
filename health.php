@@ -56,13 +56,9 @@
 <div class="col-lg-4">
 <div class="page-header-breadcrumb">
 <ul class="breadcrumb-title">
-<li class="breadcrumb-item">
- <i class="feather icon-home"></i>
-</li>
-<li class="breadcrumb-item"><a href="index.php">Home</a>
-</li>
-<li class="breadcrumb-item"><a href="health.php">Health Assessment</a>
-</li>
+<li class="breadcrumb-item"><a href="index.php"><i class="feather icon-home"></i> Home</a></li>
+<li class="breadcrumb-item"><a href="health.php"><i class="feather icon-file-text"></i> Health Assessment</a></li>
+
 </ul>
 </div>
 </div>

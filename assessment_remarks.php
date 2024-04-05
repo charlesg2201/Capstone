@@ -58,7 +58,7 @@ $fname = $_SESSION[ "firstname" ];
 				echo "<table class='table table-striped' style='width:100%'>
 				<tr>
 				<th>Assessment Type</th>
-				<th>View</th>					
+				<th>Action</th>					
 				</tr>";
 				while($row=mysqli_fetch_array($rs))
 				{

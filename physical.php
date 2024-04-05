@@ -28,13 +28,10 @@
 <div class="col-lg-4">
 <div class="page-header-breadcrumb">
 <ul class="breadcrumb-title">
-<li class="breadcrumb-item">
- <i class="feather icon-home"></i>
-</li>
-<li class="breadcrumb-item"><a href="index.php">Home</a>
-</li>
-<li class="breadcrumb-item"><a href="physical.php">Physical Assessment</a>
-</li>
+
+<li class="breadcrumb-item"><a href="index.php"><i class="feather icon-home"></i> Home</a></li>
+<li class="breadcrumb-item"><a href="physical.php"><i class="feather icon-file-text"></i> Physical Assessment</a></li>
+
 </ul>
 </div>
 </div>
