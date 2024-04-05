@@ -32,7 +32,7 @@ $row_manage = mysqli_fetch_array($result_manage);
                                                     echo mysqli_num_rows($qsql);
                                                     ?></div>
                                     <div class="card-footer d-flex align-items-center justify-content-between" style="background-color: #0a4b78;">
-                                    <a class="small stretched-link" style="color: #ffffff; font-size: 15px;">Total Patients</a>
+                                    <a class="small stretched-link" href="view-patient.php" style="color: #ffffff; font-size: 12px;">Total Patients</a>
                                         <div class="small text-white"><i class="feather icon-users" style="font-size: 24px;"></i></div>
                                     </div>
                                 </div>

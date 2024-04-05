@@ -91,7 +91,7 @@ if($_SESSION['user'] == 'tbl_admin_user'){
             <div class="main-body">
                 <div class="page-body">
                     <div class="card">
-                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Security Details</h4></div>
+                        <div class="box-header" style="text-align: center; background-color: #0a4b78; color: white; font-weight: bold"><h4>Change Password</h4></div>
                         <div class="card-block">
                                     <form id="main" method="post" enctype="multipart/form-data">
                                         <br>
