@@ -110,7 +110,7 @@
 
 <div class="inbox-container">
 <?php
-$patientid = isset($_GET['patientid']) ? $_GET['patientid'] : null;
+$patientid = $_SESSION['patientid'];
 // Handle form submission and message insertion
 if (isset($_POST['btn_submit'])) {
     $message = $_POST['message'];
@@ -163,6 +163,12 @@ if (isset($_POST['btn_submit'])) {
 $sqlFetchMessages = "SELECT * FROM tbl_messages WHERE patientid = '$patientid' ORDER BY timestamp ASC";
 $resultFetchMessages = mysqli_query($conn, $sqlFetchMessages);
 $messages = mysqli_fetch_all($resultFetchMessages, MYSQLI_ASSOC);
+
+$updateSql = "UPDATE tbl_messages SET opened = 1 WHERE patientid = '$patientid' and sender = 'Clinic Coordinator'";
+
+if (!mysqli_query($conn, $updateSql)) {
+    echo mysqli_error($conn);
+}
 
 // Display conversation
 if (empty($messages)) {
