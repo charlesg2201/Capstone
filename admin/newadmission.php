@@ -3,18 +3,28 @@
 <?php include('header.php');?>
 <?php include('sidebar.php');?>
 <?php include('connect.php');
-if(isset($_POST['btn_submit']))
-{
-    if(isset($_GET['editid']))
-    {
-        $lrn_query = mysqli_query($conn, "SELECT lrn_number FROM patient WHERE patientid = '$_GET[editid]'");
+if (isset($_POST['btn_submit'])) {
+    if (isset($_GET['editid'])) {
+        $lrn_query = mysqli_query($conn, "SELECT lrn_number, fname, lname, mname FROM patient WHERE patientid = '$_GET[editid]'");
         $lrn_data = mysqli_fetch_assoc($lrn_query);
         $lrn_number = $lrn_data['lrn_number'];
+        $fname = $lrn_data['fname'];
+        $lname = $lrn_data['lname'];
+        $mname = $lrn_data['mname'];
 
-        $sql = "INSERT INTO tbl_admission (patientid, lrn_number, admission_date, admission_time, reasons, remarks) VALUES ('$_GET[editid]', '$lrn_number', '$_POST[admissiondate]', '$_POST[admissiontime]', '$_POST[reasons]', '$_POST[remarks]')";
+        $reason = $_POST['reasons'];
         
-        if($qsql = mysqli_query($conn,$sql))     
-        {
+
+        if ($reason == 'Others') {
+            // If "Others" is selected, save the custom reason from the input field
+            $reason = $_POST['other_reason'];
+        }
+
+        $sql = "INSERT INTO tbl_admission (patientid, fname, lname, mname, lrn_number, admission_date, admission_time, reasons, remarks) 
+                VALUES ('$_GET[editid]', '$fname', '$lname', '$mname', '$lrn_number', '$_POST[admissiondate]', '$_POST[admissiontime]', '$reason', '$_POST[remarks]')";
+
+
+        if ($qsql = mysqli_query($conn, $sql)) {
 ?>
             <div class="popup popup--icon -success js_success-popup popup--visible">
               <div class="popup__background"></div>
@@ -96,7 +106,7 @@ if(isset($_GET['editid']))
             <span class="messages"></span>
         </div>
     </div>
-  <div class="form-group row">
+    <div class="form-group row">
     <label class="col-sm-2 col-form-label">Reasons</label>
     <div class="col-sm-4">
         <select class="form-control show-tick" name="reasons" id="reasons" required="">
@@ -114,61 +124,21 @@ if(isset($_GET['editid']))
         </select>
         <span class="messages"></span>
     </div>
-</div>
 
-<div id="otherReasonInput" style="display: none;">
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Other Reason</label>
-        <div class="col-sm-4">
-            <input type="text" class="form-control" id="otherReason" name="otherReason">
-        </div>
-    </div>
-</div>
+   
 
-<div id="dynamicReason"></div> <!-- Placeholder for dynamic reason -->
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function () {
-        $('#reasons').change(function () {
-            if ($(this).val() === 'Others') {
-                $('#otherReasonInput').show();
-            } else {
-                $('#otherReasonInput').hide();
-            }
-            // Automatically update dynamic reason when Others is selected
-            updateDynamicReason();
-        });
-
-        $('#otherReason').keyup(function () {
-            // Update dynamic reason as user types in the input field
-            updateDynamicReason();
-        });
-
-        function updateDynamicReason() {
-            let selectedReason = $('#reasons').val();
-            if (selectedReason === 'Others') {
-                let otherReason = $('#otherReason').val();
-                if (otherReason.trim() !== '') {
-                    $('#dynamicReason').text(otherReason);
-                } else {
-                    $('#dynamicReason').text('');
-                }
-            } else {
-                $('#dynamicReason').text(selectedReason);
-            }
-        }
-    });
-</script>
-<div class="form-group row">
         <label class="col-sm-2 col-form-label">Remarks</label>
         <div class="col-sm-4">
                 <input type="text" class="form-control" name="remarks" id="remarks" required=""  value="" >
                 <span class="messages"></span>
         </div>
-
-        
     </div>
+    <div class="form-group row">
+    <div class="col-sm-6" style="padding-left: 283px">
+        <input type="text" class="form-control" name="other_reason" id="other_reason" placeholder="Enter Other Reason" style="display: none;">
+    </div>
+    </div>
+
     <div class="form-group row">
         <label class="col-sm-2"></label>
         <div class="col-sm-10">
@@ -177,6 +147,20 @@ if(isset($_GET['editid']))
     </div>
 
 </form>
+
+<script>
+    document.getElementById('reasons').addEventListener('change', function() {
+        var otherReasonInput = document.getElementById('other_reason');
+        if (this.value === 'Others') {
+            otherReasonInput.style.display = 'block';
+            otherReasonInput.required = true; // Make the other reason input field required
+        } else {
+            otherReasonInput.style.display = 'none';
+            otherReasonInput.required = false; // Remove the required attribute if "Others" is not selected
+        }
+    });
+</script>
+
 </div>
 </div>
 </div>

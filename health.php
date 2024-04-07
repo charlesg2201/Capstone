@@ -119,8 +119,7 @@
                             
                                 if (mysqli_num_rows($check_result) > 0) {
                                     // Display a message or perform any action if assessment has already been taken for the current admission
-                                    echo "Assessment has already been taken for this admission.";
-                                    echo "<script>showAlreadyTakenPopup();</script>";
+                                    echo "Assessment for this admission is already taken";
                                 } else {
                                     // User hasn't taken the assessment for the current admission, proceed with processing the assessment
                             
@@ -173,15 +172,7 @@
             </div>
         </div>
     </div>
-    <div class="popup js_already-taken-popup">
-        <div class="popup__background"></div>
-        <div class="popup__content">
-            <h class="popup__content__title">
-                Assessment Already Taken
-            </h>
-            <p>You have already taken the assessment.</p>
-        </div>
-    </div>
+    
     <?php include('footer.php'); ?>
 </body>
 

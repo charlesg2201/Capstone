@@ -53,18 +53,10 @@
         </thead>
                   <tbody>
                   <?php
-$sql = "SELECT distinct
-    u.admission_id,
-    pr.lrn_number,
-    u.fname,
-    u.lname,
-    COALESCE(pr.reasons, u.reasons) AS reasons
-FROM 
-    tbl_admission u
-LEFT JOIN 
-    tbl_physical_results pr ON pr.admission_id = u.admission_id
-WHERE 
-    COALESCE(pr.delete_status, '0') = '0'";
+$sql = "SELECT DISTINCT pr.admission_id, pr.lrn_number, u.fname, u.lname, pr.reasons
+FROM tbl_physical_results pr
+INNER JOIN tbl_admission u ON pr.admission_id = u.admission_id
+WHERE pr.delete_status = '0'";
 
 
 
