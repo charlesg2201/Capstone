@@ -119,7 +119,18 @@
                             
                                 if (mysqli_num_rows($check_result) > 0) {
                                     // Display a message or perform any action if assessment has already been taken for the current admission
-                                    echo "Assessment for this admission is already taken";
+                                    echo '<div class="popup popup--icon -error js_error-popup popup--visible">';
+echo '    <div class="popup__background"></div>';
+echo '    <div class="popup__content">';
+echo '        <h3 class="popup__content__title">';
+echo '            Error';
+echo '        </h3>';
+echo '        <p>Assessment have been already taken for this admission!</p>';
+echo '        <p>';
+echo "            <script>setTimeout(\"location.href = 'physical.php';\",2500);</script>";
+echo '        </p>';
+echo '    </div>';
+echo '</div>';
                                 } else {
                                     // User hasn't taken the assessment for the current admission, proceed with processing the assessment
                             
@@ -150,7 +161,7 @@
                                                         <h3 class="popup__content__title">
                                                             Success
                                                         </h3>
-                                                        <p>Assessment Have Submitted!</p>
+                                                        <p>Assessment have been Submitted!</p>
                                                         <p>
                                                             <?php echo "<script>setTimeout(\"location.href = 'physical.php';\",1500);</script>"; ?>
                                                         </p>
