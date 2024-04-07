@@ -2,10 +2,10 @@
 
 include('connect.php');
 
-$sql = "SELECT COUNT(DISTINCT m.patientid) AS record_count
-        FROM tbl_messages m
-        JOIN patient p ON m.patientid = p.patientid
-        WHERE (m.opened = 0 and m.userid = 0);";
+$sql = "SELECT COUNT(DISTINCT m.userid) AS record_count
+FROM tbl_messages m
+JOIN tbl_admin_user p ON m.userid = p.userid
+WHERE (m.opened = 0 and sender = 'Clinic Coordinator');";
 
 $qsql = mysqli_query($conn, $sql);
 $newMessageCount = 0;         

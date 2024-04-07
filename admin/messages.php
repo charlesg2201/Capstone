@@ -136,9 +136,11 @@ if (isset($_POST['btn_submit'])) {
 
     // Hard-code the clinic coordinator as the sender
     $sender = 'Clinic Coordinator';
+    $senderUserId = $_SESSION['userid'];
+
 
     // Insert the message into the database with the clinic coordinator as the sender and the patient as the receiver
-    $sql = "INSERT INTO tbl_messages (patientid, message, sender, receiver) VALUES ('$patientid', '$message', '$sender', '$patientid')";
+    $sql = "INSERT INTO tbl_messages (patientid, message, sender, receiver, userid) VALUES ('$patientid', '$message', '$sender', '$patientid', '$senderUserId')";
 
     if (mysqli_query($conn, $sql)) {
         // Display success message or redirect to messages.php
@@ -156,6 +158,7 @@ if (isset($_POST['btn_submit'])) {
             </div>
         </div>
         <?php
+        
     } else {
         echo mysqli_error($conn);
     }
@@ -167,7 +170,7 @@ $sqlFetchMessages = "SELECT * FROM tbl_messages WHERE patientid = '$patientid' O
 $resultFetchMessages = mysqli_query($conn, $sqlFetchMessages);
 $messages = mysqli_fetch_all($resultFetchMessages, MYSQLI_ASSOC);
 
-$updateSql = "UPDATE tbl_messages SET opened = 1 WHERE patientid = '$patientid'";
+$updateSql = "UPDATE tbl_messages SET opened = 1 WHERE patientid = '$patientid' AND userid = '0'";
 
 if (!mysqli_query($conn, $updateSql)) {
     echo mysqli_error($conn);
