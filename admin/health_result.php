@@ -46,7 +46,7 @@
             <th>LRN Number</th>
             <th>Admission ID</th>
             <th>Name</th>
-            <th>Reason</th>
+            <!-- <th>Reason</th> -->
             <th>Action</th>
           </tr>
 				
@@ -65,7 +65,6 @@ while ($rs = mysqli_fetch_array($qsql)) {
               <td>$rs[lrn_number]</td> 
               <td>$rs[admission_id]</td> 
               <td>$rs[fname] $rs[lname]</td>
-              <td>$rs[reasons]</td>
               <td>
                   <a href='viewhealth_result.php?lrn_number={$rs['lrn_number']}&admission_id={$rs['admission_id']}' class='btn btn-primary'>View</a>
               </td>

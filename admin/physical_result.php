@@ -46,17 +46,28 @@
             <th>LRN Number</th>
             <th>Admission ID</th>
             <th>Name</th>
-            <th>Reason</th>
+            <!-- <th>Reason</th> -->
             <th>Action</th>
           </tr>
 				
         </thead>
                   <tbody>
                   <?php
-$sql = "SELECT DISTINCT pr.admission_id, pr.lrn_number, u.fname, u.lname, pr.reasons
-        FROM tbl_physical_results pr
-        INNER JOIN tbl_admission u ON pr.admission_id = u.admission_id
-        WHERE pr.delete_status = '0'";
+$sql = "SELECT distinct
+    u.admission_id,
+    pr.lrn_number,
+    u.fname,
+    u.lname,
+    COALESCE(pr.reasons, u.reasons) AS reasons
+FROM 
+    tbl_admission u
+LEFT JOIN 
+    tbl_physical_results pr ON pr.admission_id = u.admission_id
+WHERE 
+    COALESCE(pr.delete_status, '0') = '0'";
+
+
+
 
 $qsql = mysqli_query($conn, $sql);
 
@@ -65,7 +76,7 @@ while ($rs = mysqli_fetch_array($qsql)) {
               <td>$rs[lrn_number]</td> 
               <td>$rs[admission_id]</td> 
               <td>$rs[fname] $rs[lname]</td>
-              <td>$rs[reasons]</td>
+           
               <td>
                   <a href='viewphysical_result.php?lrn_number={$rs['lrn_number']}&admission_id={$rs['admission_id']}' class='btn btn-primary'>View</a>
               </td>
