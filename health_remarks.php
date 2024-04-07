@@ -49,22 +49,22 @@
                                     </thead>
                                     <tbody>
                                     <?php
-$sql = "SELECT pr.admission_id, pr.reasons, GROUP_CONCAT(DISTINCT rm.remarks SEPARATOR ', ') AS combined_remarks
-FROM tbl_health_results pr
-INNER JOIN tbl_health_remarks rm ON pr.admission_id = rm.admission_id
-GROUP BY pr.admission_id";
+$sql = "SELECT a.admission_id, a.reasons, GROUP_CONCAT(DISTINCT rm.remarks SEPARATOR ', ') AS combined_remarks
+FROM tbl_admission a
+INNER JOIN tbl_health_results hr ON a.admission_id = hr.admission_id
+INNER JOIN tbl_health_remarks rm ON hr.admission_id = rm.admission_id
+GROUP BY a.admission_id";
 
+$qsql = mysqli_query($conn, $sql);
 
+while ($rs = mysqli_fetch_array($qsql)) {
+echo "<tr>
+      <td>$rs[admission_id]</td> 
+      <td>$rs[reasons]</td>
+      <td>$rs[combined_remarks]</td>
+  </tr>";
+}
 
-                                        $qsql = mysqli_query($conn, $sql);
-
-                                        while ($rs = mysqli_fetch_array($qsql)) {
-                                            echo "<tr>
-                                                      <td>$rs[admission_id]</td> 
-                                                      <td>$rs[reasons]</td>
-                                                      <td>$rs[combined_remarks]</td>
-                                                  </tr>";
-                                        }
                                         ?>
                                     </tbody>
                                 </table>
