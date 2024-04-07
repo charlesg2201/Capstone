@@ -96,29 +96,71 @@ if(isset($_GET['editid']))
             <span class="messages"></span>
         </div>
     </div>
-    <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Reasons</label>
-        <div class="col-sm-4">
-            <select class="form-control show-tick" name="reasons" id="reasons" required="">
-                <option value="">Select</option>
-                <?php
-            $arr = array("Fever","Cough","Cold","Sorethroat","Headache","Asthma","Others");
-            foreach($arr as $val)
-            {
-                if($val == $rsedit['reasons'])
-                {
+  <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Reasons</label>
+    <div class="col-sm-4">
+        <select class="form-control show-tick" name="reasons" id="reasons" required="">
+            <option value="">Select</option>
+            <?php
+            $arr = array("Fever", "Cough", "Cold", "Sorethroat", "Headache", "Asthma", "Others");
+            foreach ($arr as $val) {
+                if ($val == $rsedit['reasons']) {
                     echo "<option value='$val' selected>$val</option>";
-                }
-                else
-                {
+                } else {
                     echo "<option value='$val'>$val</option>";
                 }
             }
             ?>
-            </select>
-            <span class="messages"></span>
-        </div>
+        </select>
+        <span class="messages"></span>
+    </div>
+</div>
 
+<div id="otherReasonInput" style="display: none;">
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Other Reason</label>
+        <div class="col-sm-4">
+            <input type="text" class="form-control" id="otherReason" name="otherReason">
+        </div>
+    </div>
+</div>
+
+<div id="dynamicReason"></div> <!-- Placeholder for dynamic reason -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#reasons').change(function () {
+            if ($(this).val() === 'Others') {
+                $('#otherReasonInput').show();
+            } else {
+                $('#otherReasonInput').hide();
+            }
+            // Automatically update dynamic reason when Others is selected
+            updateDynamicReason();
+        });
+
+        $('#otherReason').keyup(function () {
+            // Update dynamic reason as user types in the input field
+            updateDynamicReason();
+        });
+
+        function updateDynamicReason() {
+            let selectedReason = $('#reasons').val();
+            if (selectedReason === 'Others') {
+                let otherReason = $('#otherReason').val();
+                if (otherReason.trim() !== '') {
+                    $('#dynamicReason').text(otherReason);
+                } else {
+                    $('#dynamicReason').text('');
+                }
+            } else {
+                $('#dynamicReason').text(selectedReason);
+            }
+        }
+    });
+</script>
+<div class="form-group row">
         <label class="col-sm-2 col-form-label">Remarks</label>
         <div class="col-sm-4">
                 <input type="text" class="form-control" name="remarks" id="remarks" required=""  value="" >

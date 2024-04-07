@@ -143,11 +143,24 @@
                                             // Insert the assessment record
                                             $sql = "INSERT INTO tbl_health_results (question_id, answer, lrn_number, admission_id) VALUES ('$question_id', '$answer', '$lrn_number', '$admission_id')";
                                             if ($qsql = mysqli_query($conn, $sql)) {
-                                                // Insertion success message or redirect
-                                                echo "Assessment record inserted successfully!<br>";
-                                            } else {
-                                                echo "Error inserting assessment record: " . mysqli_error($conn) . "<br>";
-                                            }
+                                                // Success popup logic
+                                                ?>
+                                                <div class="popup popup--icon -success js_success-popup popup--visible">
+                                                    <div class="popup__background"></div>
+                                                    <div class="popup__content">
+                                                        <h3 class="popup__content__title">
+                                                            Success
+                                                        </h3>
+                                                        <p>Assessment Have Submitted!</p>
+                                                        <p>
+                                                            <?php echo "<script>setTimeout(\"location.href = 'physical.php';\",1500);</script>"; ?>
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            <?php
+                                                     } else {
+                                                     echo mysqli_error($conn);
+                                                 }
                                         }
                                     }
                                 }
