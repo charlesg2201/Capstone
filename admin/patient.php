@@ -178,7 +178,9 @@
         </div>
 <hr>
         <div class="form-group row">
-        <label class="col-sm-2 col-form-label">LRN Number</label>
+        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> LRN Number </label>
+
+
             <div class="col-sm-4">
                 <input class="form-control" type="text" name="lrn_number" id="lrn_number" 
                 value="<?php if(isset($_GET['editid'])) { echo $rsedit['lrn_number']; } ?>"  oninput="validatelrnNumber()" required />
@@ -199,7 +201,7 @@
         
     }
 </script>
-            <label class="col-sm-2 col-form-label">First Name</label>
+            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> First Name</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="fname" id="fname" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['fname']; } ?>" >
                 <span class="messages"></span>
@@ -209,19 +211,19 @@
         </div>
 
         <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Middle Name</label>
+        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Middle Name</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="mname" id="mname" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['lname']; } ?>" >
                 <span class="messages"></span>
             </div>
-            <label class="col-sm-2 col-form-label">Last Name</label>
+            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Last Name</label>
             <div class="col-sm-4">
                 <input type="text" class="form-control" name="lname" id="lname" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['lname']; } ?>" >
                 <span class="messages"></span>
             </div>
         </div>
         <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Contact Number</label>
+        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Contact Number</label>
         <div class="col-sm-4">
         <input class="form-control" type="text" name="contact_number" id="contact_number"
     value="<?php if(isset($_GET['editid'])) { echo $rsedit['contact_number']; } ?>"
@@ -247,14 +249,14 @@
 </script>
                         
 
-            <label class="col-sm-2 col-form-label">Active Email Address</label>
+            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Active Email Address</label>
             <div class="col-sm-4">
                 <input type="email" class="form-control" name="email" id="email" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['email']; } ?>" >
                 <span class="messages"></span>
             </div>
         </div>
         <div class="form-group row">
-        <label class="col-sm-2 col-form-label">Strand</label>
+        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Strand</label>
             <div class="col-sm-4">
                 <select name="strand" id="strand" class="form-control" required="">
                     <option value="">-- Select One -- </option>
@@ -270,7 +272,7 @@
                     ?>
                 </select>
             </div>
-            <label class="col-sm-2 col-form-label">Grade Level</label>
+            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Grade Level</label>
             <div class="col-sm-4">
                 <select name="grade_level" id="grade_level" class="form-control" required="">
                     <option value="">-- Select One -- </option>
@@ -282,7 +284,7 @@
             </div>
 </div>
             <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Section</label>
+            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Section</label>
             <div class="col-sm-4">
                 <select name="section" id="section" class="form-control" required="">
                     <option value="">-- Select One -- </option>
@@ -298,7 +300,7 @@
                     ?>
                 </select>
             </div>
-            <label class="col-sm-2 col-form-label">Gender</label>
+            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Gender</label>
             <div class="col-sm-4">
                 <select name="gender" id="gender" class="form-control" required="">
                     <option value="">-- Select One -- </option>
@@ -310,25 +312,25 @@
             </div>
 </div>
             <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Date of Birth</label>
+            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Date of Birth</label>
             <div class="col-sm-4">
                 <input class="form-control" type="date" name="dateofbirth" max="<?php echo date("m-d-Y"); ?>"
                             id="dateofbirth" value="<?php echo $rsedit['dob']; ?>" required />
             </div>
-            <label class="col-sm-2 col-form-label">Address</label>
+            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Address</label>
                 <div class="col-sm-4">
                     <textarea name="address" id="address" class="form-control" required=""><?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
                 </div>
 </div>
         <div class="form-group row">
-            <label class="col-sm-2 col-form-label">Guardian</label>
+            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Guardian</label>
                 <div class="col-sm-4">
                     <input class="form-control" type="text" name="guardian_name" id="guardian_name"
                                 value="<?php if(isset($_GET['editid'])){ echo $rsedit['guardian_name']; } ?>" required />
                     <span class="messages"></span>
                 </div>
 
-            <label class="col-sm-2 col-form-label">Guardian's Contact Number</label>
+            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Guardian's Contact Number</label>
                 <div class="col-sm-4">
                     <input class="form-control" type="text" name="contact" id="contact"
                         value="<?php if(isset($_GET['editid'])) { echo $rsedit['contact']; } ?>"

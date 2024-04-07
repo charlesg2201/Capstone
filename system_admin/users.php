@@ -154,12 +154,12 @@ if (isset($_GET['editid'])) {
 <br>        
 
         <div class="form-group row">
-                        <label class="col-sm-2 col-form-label">Profile Photo</label>
+                        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Profile Photo</label>
                         <div class="col-sm-4">
                             <input type="file" id="photo-upload" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder=""   value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
                         </div>
                     
-                    <label class="col-sm-2 col-form-label">Employee Number</label>
+                    <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Employee Number</label>
             <div class="col-sm-4">
             <input class="form-control" type="text" name="employee_number" id="employee_number" 
                 value="<?php if(isset($_GET['editid'])) { echo $rsedit['employee_number']; } ?>" 
@@ -187,13 +187,13 @@ if (isset($_GET['editid'])) {
 
         <div class="form-group row">
 
-        <label class="col-sm-2 col-form-label">First Name</label>
+        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> First Name</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" name="firstname" id="firstname" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['firstname']; } ?>" >
             <span class="messages"></span>
         </div>        
 
-        <label class="col-sm-2 col-form-label">Middle Name</label>
+        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Middle Name</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" name="middlename" id="middlename" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['middlename']; } ?>" >
             <span class="messages"></span>
@@ -205,13 +205,13 @@ if (isset($_GET['editid'])) {
 
     <div class="form-group row">
 
-    <label class="col-sm-2 col-form-label">Last Name</label>
+    <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Last Name</label>
         <div class="col-sm-4">
             <input type="text" class="form-control" name="lastname" id="lastname" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['lastname']; } ?>" >
             <span class="messages"></span>
         </div>
 
-    <label class="col-sm-2 col-form-label">Contact Number</label>
+    <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Contact Number</label>
     <div class="col-sm-4">
         <input class="form-control" type="text" name="contact" id="contact"
                value="<?php if(isset($_GET['editid'])) { echo $rsedit['contact']; } ?>"
@@ -239,7 +239,7 @@ if (isset($_GET['editid'])) {
    
     </div>
     <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Gender</label>
+    <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Gender</label>
                 <div class="col-sm-4">
                     <select name="gender" id="gender" class="form-control" required="">
                         <option value="">-- Select One -- </option>
@@ -250,14 +250,14 @@ if (isset($_GET['editid'])) {
                     </select>
                 </div>
 
-        <label class="col-sm-2 col-form-label">Date of Birth</label>
+        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Date of Birth</label>
             <div class="col-sm-4">
                 <input class="form-control" type="date" name="dob" max="<?php echo date("m-d-Y"); ?>"
                             id="dob" value="<?php echo $rsedit['dob']; ?>" required="" />
             </div>
     </div>
     <div class="form-group row">
-    <label class="col-sm-2 col-form-label">Address</label>
+    <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Address</label>
         <div class="col-sm-10">
             <textarea name="address" id="address" class="form-control" required=""><?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
         </div>
