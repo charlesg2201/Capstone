@@ -143,7 +143,7 @@ if (isset($_POST['btn_submit'])) {
                     <h3 class="popup__content__title">
                         Success
                     </h3>
-                    <p>Message Inserted Successfully</p>
+                    <p>Message sent Successfully</p>
                     <p>
                     <?php echo "<script>setTimeout(\"location.href = 'messages.php?patientid=" . $_SESSION["patientid"] . "';\", 1500);</script>"; ?>
 
