@@ -49,8 +49,9 @@
                                                     <td>$rs[academic_year]</td>
                                                     <td align=''>
                                                 
-                                               
+                                                    <!--
                                                     <a href='#' class='btn btn-primary' data-toggle='modal' data-target='#editacademicyearModal' data-id='$rs[id]' data-name='$rs[academic_year]'>Update</a>
+                                                    -->
                                                     <button class='btn $buttonClass archive-btn' data-id='$rs[id]' data-status='$rs[delete_status]'>
                                                             $buttonText
                                                         </button>
