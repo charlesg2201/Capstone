@@ -290,7 +290,7 @@ if(isset($_SESSION['lastname'])) {
 
 
 ?>
-
+<p class="print-only" style="color: #0a4b78; padding-left: 80px; margin-top: 100px;"><strong>__________________</strong></p>
 <p class="print-only" style="color: #0a4b78;"><strong>Printed by: <?php echo $firstname . ' ' . $lastname; ?></strong></p>
 
 
