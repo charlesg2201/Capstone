@@ -49,7 +49,7 @@
                                                     echo "<tr>
                                                     <td>&nbsp;$rs[sections]</td>
                                                     <td align=''>
-                                                    <a href='#' class='btn btn-success' data-toggle='modal' data-target='#editsectionModal' data-id='$rs[id]' data-name='$rs[sections]'>Update</a>
+                                                    <a href='#' class='btn btn-primary' data-toggle='modal' data-target='#editsectionModal' data-id='$rs[id]' data-name='$rs[sections]'>Update</a>
                                                 
                                                         <button class='btn $buttonClass archive-btn' data-id='$rs[id]' data-status='$rs[delete_status]'>
                                                             $buttonText
