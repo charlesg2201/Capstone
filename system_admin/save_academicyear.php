@@ -15,7 +15,7 @@
             $_POST['success'] = 1;
         } else {
             // Error message
-            echo "Error adding strand: " . mysqli_error($conn);
+            echo "Error adding academic year: " . mysqli_error($conn);
         }
 
         // Close the database connection
@@ -31,7 +31,7 @@
         alert('Academic Year added successfully.'); // You can replace this with your custom popup logic
         // Redirect after a delay
         setTimeout(function() {
-            window.location.href = 'strands.php';
+            window.location.href = 'academic_year.php';
         }, 1500);
     }
 </script>
