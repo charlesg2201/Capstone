@@ -15,12 +15,16 @@
   margin: 0;
 }                  
 
+.print-only{
+    display: none;
+}
 .print-logo, .text-between-logos {
             display: none;
         }
         img{
-                width: 180px;
-                height: 180px;
+            width: 10%;
+                max-height: 100px;
+                
             }
 
             .logo-container {
@@ -37,14 +41,15 @@
             body {
                 background-image: none !important;
             }
-            
+            .print-only{
+                display: block;
+            }
             .print-logo {
                 display: block;
                 position: absolute;
                 top: 0;
                 left: 0;
     
-            
             }
             .text-between-logos{
                 display: block;
@@ -59,11 +64,12 @@
             }
 
             .logo-container img {
+                margin-top: 30px;
                 margin-right: 20px; /* Adjust as needed */
             }
             img{
-                width: 180px;
-                height: 180px;
+                width: 10%;
+                max-height: 100px;
             }
             
             #dom-jqry_wrapper {
@@ -154,40 +160,56 @@
 
     <?php include('footer.php');?>
     <div class="logo-container">
-        <img src="uploadImage/Logo/shslogo.png" class="print-logo">
+        <img src="uploadImage/Logo/Seal_of_Tagaytay_City.svg.png" class="print-logo">
         <p class="text-between-logos">
                                 <strong>City of Tagaytay <br>
                                 CITY COLLEGE OF TAGAYTAY <br>
                                 Akle St., Kaybagal South, Tagaytay City <br>
                                 Telephone No: (046) 482-6840</strong>
                             </p>
-        <img src="uploadImage/Logo/Seal_of_Tagaytay_City.svg.png" class="print-logo">
+        <img src="uploadImage/Logo/shslogo.png" class="print-logo">
     </div>
-    
+    <?php
+$firstname = ""; // Initialize the variables to avoid "undefined variable" notices
+$lastname = "";
+
+if(isset($_SESSION['firstname'])) {
+    $firstname = $_SESSION['firstname'];
+}
+
+if(isset($_SESSION['lastname'])) {
+    $lastname = $_SESSION['lastname'];
+}
+
+
+
+?>
+<p class="print-only" style="color: #0a4b78; padding-left: 80px; margin-top: 100px;"><strong>______________________________________</strong></p>
+<p class="print-only" style="color: #0a4b78;"><strong>Printed by: <?php echo $firstname . ' ' . $lastname; ?></strong></p>
+
     <script type="text/javascript" charset="utf8" src="..\Datatables\Buttons-2.4.2\js\dataTables.buttons.js"></script>
     <script type="text/javascript" charset="utf8" src="..\Datatables\Buttons-2.4.2\js\buttons.html5.js"></script>
     <script type="text/javascript" charset="utf8" src="..\Datatables\Buttons-2.4.2\js\buttons.print.js"></script>
 
     <script>
         $(window).on('load', function() {
-            // Check if DataTable is already initializedasdsa
-            if (!$.fn.DataTable.isDataTable('#dom-jqry')) {
-                // If not initialized, initialize DataTable
-                $('#dom-jqry').DataTable({
-                    "dom": 'Bfrtip',
-                    "buttons": [
-                    {
-                        extend: 'print',
-                        customize: function(win) {
-                          
-                            $(win.document.body).prepend('<div class="logo-container"><img src="uploadImage/Logo/shslogo.png" /><p class="text-between-logos"><strong>City of Tagaytay <br>CITY COLLEGE OF TAGAYTAY <br>Akle St., Kaybagal South, Tagaytay City <br>Telephone No: (046) 482-6840</strong></p><img src="uploadImage/Logo/Seal_of_Tagaytay_City.svg.png" /></div>');
-                        }
-                    },
-                    
-                ]
-                });
-            }
+    // Check if DataTable is already initialized
+    if (!$.fn.DataTable.isDataTable('#dom-jqry')) {
+        // If not initialized, initialize DataTable
+        $('#dom-jqry').DataTable({
+            "dom": 'Bfrtip',
+            "buttons": [{
+                extend: 'print',
+                customize: function(win) {
+                    $(win.document.body).prepend('<div class="logo-container"><img src="uploadImage/Logo/Seal_of_Tagaytay_City.svg.png" /><p class="text-between-logos"><strong>City of Tagaytay <br>CITY COLLEGE OF TAGAYTAY <br>Akle St., Kaybagal South, Tagaytay City <br>Telephone No: (046) 482-6840</strong></p><img src="uploadImage/Logo/shslogo.png" /></div>');
+                    $(win.document.body).append('<p class="print-only" style=" padding-left: 90px; margin-top: 100px;"><strong>______________________________________</strong></p>');
+                    $(win.document.body).append('<p class="print-only" style=" font-size: 20px;"><strong>Printed by: <?php echo $firstname . ' ' . $lastname; ?></strong></p>');
+                }
+            }]
         });
+    }
+});
+
     </script>
 </body>
 </html>
