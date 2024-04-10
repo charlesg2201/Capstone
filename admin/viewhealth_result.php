@@ -295,9 +295,14 @@ if(isset($_SESSION['lastname'])) {
 
 <p class="print-only" style="color: #0a4b78;"><strong>Printed by: <?php echo $firstname . ' ' . $lastname; ?></strong></p>
 
-    </div>
+</div>
+    <div class="form-group row">
+            <label class="col-sm-1"></label>
+            <div class="col-sm-10">
     <button onclick="printContent()" class="no-print">Print</button>
     <button onclick="showRemarksModal()" class="no-print">Add Remarks</button>
+    </div>
+        </div>
 
 
     <script>
