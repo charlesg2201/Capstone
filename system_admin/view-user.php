@@ -94,7 +94,7 @@ if ($qsql) {
                 <td>&nbsp;$rs[address]</td>
                 <td>&nbsp;$statusText</td>
                 <td>&nbsp;
-                    <a href='users.php?editid=$rs[userid]' class='btn btn-primary'>Update</a>
+                    <a href='update.php?editid=$rs[userid]' class='btn btn-primary'>Update</a>
                     <a href='view-user.php?id=$rs[userid]' class='$buttonClass'>$buttonText</a>
                 </td>
             </tr>";

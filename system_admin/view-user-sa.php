@@ -92,6 +92,7 @@ if ($qsql) {
                 <td>&nbsp;$rs[addr]</td>
                 <td>&nbsp;$statusText</td>
                 <td>&nbsp;
+                    <a href='update_sa.php?editid=$rs[id]' class='btn btn-primary'>Update</a>
                     <a href='view-user-sa.php?id=$rs[id]' class='$buttonClass' onclick='toggleStatus($rs[id])'>$buttonText</a>
                 </td>
             </tr>";
