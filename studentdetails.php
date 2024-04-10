@@ -50,7 +50,7 @@ if(isset($_GET['id']))
 <ul class="breadcrumb-title">
 
 <li class="breadcrumb-item"><a href="index.php"><i class="feather icon-home"></i> Home</a></li>
-<li class="breadcrumb-item"><a href="studentdetails.php"><i class="feather icon-user"></i> Profile</a></li>
+<li class="breadcrumb-item">Profile</a></li>
 
 </ul>
 </div>

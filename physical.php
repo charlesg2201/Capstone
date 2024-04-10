@@ -30,7 +30,7 @@
 <ul class="breadcrumb-title">
 
 <li class="breadcrumb-item"><a href="index.php"><i class="feather icon-home"></i> Home</a></li>
-<li class="breadcrumb-item"><a href="physical.php"><i class="feather icon-file-text"></i> Physical Assessment</a></li>
+<li class="breadcrumb-item">Physical Assessment</a></li>
 
 </ul>
 </div>
