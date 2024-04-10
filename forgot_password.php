@@ -115,21 +115,20 @@ if (isset($_POST['send'])) {
             <div class="row">
                 <div class="col-sm-12">
                     <form class="" method="post" class="md-float-material form-material">
-                        <div class="auth-box card">
-                            <br>
-                            <div class="text-center">
-                                <image class="profile-img" src="uploadImage/Logo/<?php echo $logo; ?>" style="width: 30%; border-radius: 50%"></image>
-                            </div>
+                    <div class="auth-box card" style="background-color: rgba(255, 255, 255, 0.5);">
+                    <div class="text-center">
+                    <image class="profile-img" src="uploadImage/Logo/shslogo.png" style="width: 30%; margin-top: 20px; border-radius: 50%;"></image>
+                     </div> 
                             <div class="card-block">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-center">Recover your password</h3>
+                                    <h4 class="text-center txt-primary" style="color: black;">Recover your password</h4>
                                     </div>
                                 </div>
                                 <div class="form-group form-primary">
-            <input type="text" name="studentid" class="form-control" required="" placeholder="Enter your username">
-            <span class="form-bar"></span>
-        </div>
+                            <input type="text" name="studentid" class="form-control" required="" placeholder="Enter your username">
+                            <span class="form-bar"></span>
+                        </div>
                                 <div class="form-group form-primary">
                                     <input type="email" name="email" class="form-control" required="" placeholder="Enter your active email address">
                                     <span class="form-bar"></span>
