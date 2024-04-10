@@ -20,6 +20,11 @@ include('connect.php');
 <div class="pcoded-content">
     <div class="pcoded-inner-content">
         <div class="main-body">
+        <div class="content-wrapper">
+     <section class="content-header">
+                    <h2>
+                        Dashboard
+                    </h2>
                 <div class="page-body">
                     <div class="row">
                         <?php if ($_SESSION['user'] == 'tbl_admin_user') { ?>
