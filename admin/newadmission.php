@@ -106,6 +106,32 @@ if(isset($_GET['editid']))
             <span class="messages"></span>
         </div>
     </div>
+<script>
+    // Get the current time
+    var currentTime = new Date();
+    var hours = currentTime.getHours();
+    var minutes = currentTime.getMinutes();
+
+    // Format current time in HH:MM format
+    var currentTimeString = (hours < 10 ? '0' : '') + hours + ':' + (minutes < 10 ? '0' : '') + minutes;
+
+    // Set the value of the input field to the current time
+    document.getElementById("admissiontime").value = currentTimeString;
+
+    // Function to prevent selection of future hours
+    document.getElementById("admissiontime").addEventListener('input', function() {
+        var selectedTime = this.value.split(":");
+        var selectedHour = parseInt(selectedTime[0]);
+        var selectedMinute = parseInt(selectedTime[1]);
+        
+        if (selectedHour > hours || (selectedHour === hours && selectedMinute > minutes)) {
+            // If future time is selected, reset to current time
+            this.value = currentTimeString;
+        }
+    });
+</script>
+
+
     <div class="form-group row">
     <label class="col-sm-2 col-form-label">Reasons</label>
     <div class="col-sm-4">
