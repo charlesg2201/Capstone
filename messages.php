@@ -26,6 +26,7 @@
 <ul class="breadcrumb-title">
 
 <li class="breadcrumb-item"><a href="index.php"><i class="feather icon-home"></i> Home</a></li>
+<li class="breadcrumb-item">Inbox</a></li>
 
 </ul>
 </div>
