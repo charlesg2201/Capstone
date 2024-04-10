@@ -19,7 +19,9 @@ title{
     text-align: center;
     margin-left: 100px;
 }
-
+.print-only{
+                display: none;
+            }
 .print-logo, .text-between-logos {
             display: none;
         }

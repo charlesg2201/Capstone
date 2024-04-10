@@ -65,7 +65,7 @@ if (isset($_POST['btn_submit'])) {
                     <div class="popup__background"></div>
                     <div class="popup__content">
                         <h3 class="popup__content__title">Success</h3>
-                        <p>Record Inserted Successfully</p>
+                        <p>Question added Successfully</p>
                         <?php echo "<script>setTimeout(\"location.href = 'manage_health.php';\",1500);</script>"; ?>
                     </div>
                 </div>
