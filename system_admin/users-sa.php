@@ -141,7 +141,7 @@ if (isset($_GET['editid'])) {
         
         
         <div class="form-group row">
-                        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Profile Photo</label>
+                        <label class="col-sm-2 col-form-label"> Profile Photo</label>
                         <div class="col-sm-4">
                             <input type="file" id="profile_photo" accept="image/*" class="form-control" name="profile_photo" id="profile_photo" placeholder="" `required`=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['profile_photo']; } ?>" >
                         </div>
