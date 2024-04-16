@@ -5,20 +5,28 @@
 include('connect.php');
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Perform your database update here using the provided form data
-    $editsectionId = $_POST["editsectionId"];
-    $editsectionName = $_POST["editsectionName"];
+    // Validate and sanitize the input
+    $editsectionId = mysqli_real_escape_string($conn, $_POST["editsectionId"]);
+    $editsectionName = mysqli_real_escape_string($conn, $_POST["editsectionName"]);
 
-    // Perform the update query (modify this based on your database structure)
-    $updateQuery = "UPDATE tbl_section SET sections='$editsectionName' WHERE id='$editsectionId'";
-    $result = mysqli_query($conn, $updateQuery);
-
-    if ($result) {
-        // Set success state
-        $_POST['success'] = 1;
+    // Check if the new section name already exists
+    $checkQuery = "SELECT * FROM tbl_section WHERE sections = '$editsectionName' AND id != '$editsectionId'";
+    $checkResult = mysqli_query($conn, $checkQuery);
+    if (mysqli_num_rows($checkResult) > 0) {
+        // If duplicate, display error message
+        echo "<script>alert('Error: Section name already exists!');setTimeout(function() {window.location.href = 'section.php';}, 1500);</script>";
     } else {
-        // Error message
-        echo "Error adding strand: " . mysqli_error($conn);
+        // If not duplicate, perform the update query
+        $updateQuery = "UPDATE tbl_section SET sections='$editsectionName' WHERE id='$editsectionId'";
+        $result = mysqli_query($conn, $updateQuery);
+
+        if ($result) {
+            // Set success state
+            $_POST['success'] = 1;
+        } else {
+            // Error message
+            echo "Error updating section: " . mysqli_error($conn);
+        }
     }
 
     // Close the database connection

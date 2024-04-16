@@ -6,16 +6,24 @@
         // Validate and sanitize the input
         $sectionName = mysqli_real_escape_string($conn, $_POST['sectionName']);
 
-        // Insert the section into the database
-        $sql = "INSERT INTO tbl_section (sections) VALUES ('$sectionName')";
-        $result = mysqli_query($conn, $sql);
-
-        if ($result) {
-            // Set success state
-            $_POST['success'] = 1;
-        } else {
+        // Check if the section already exists
+        $checkQuery = "SELECT * FROM tbl_section WHERE sections = '$sectionName'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+        if (mysqli_num_rows($checkResult) > 0) {
             // Error message
-            echo "Error adding strand: " . mysqli_error($conn);
+            echo "<script>alert('Error: Section already exists!');setTimeout(function() {window.location.href = 'section.php';}, 1500);</script>";
+        } else {
+            // Insert the section into the database
+            $sql = "INSERT INTO tbl_section (sections) VALUES ('$sectionName')";
+            $result = mysqli_query($conn, $sql);
+
+            if ($result) {
+                // Set success state
+                $_POST['success'] = 1;
+            } else {
+                // Error message
+                echo "Error adding section: " . mysqli_error($conn);
+            }
         }
 
         // Close the database connection

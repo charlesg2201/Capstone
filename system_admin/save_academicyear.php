@@ -6,16 +6,24 @@
         // Validate and sanitize the input
         $academicYear = mysqli_real_escape_string($conn, $_POST['academic_year']);
 
-        // Insert the strand into the database
-        $sql = "INSERT INTO tbl_academicyear (academic_year) VALUES ('$academicYear')";
-        $result = mysqli_query($conn, $sql);
-
-        if ($result) {
-            // Set success state
-            $_POST['success'] = 1;
-        } else {
+        // Check if the academic year already exists
+        $checkQuery = "SELECT * FROM tbl_academicyear WHERE academic_year = '$academicYear'";
+        $checkResult = mysqli_query($conn, $checkQuery);
+        if (mysqli_num_rows($checkResult) > 0) {
             // Error message
-            echo "Error adding academic year: " . mysqli_error($conn);
+            echo "<script>alert('Error: Academic Year already exists!');setTimeout(function() {window.location.href = 'academic_year.php';}, 1500);</script>";
+        } else {
+            // Insert the academic year into the database
+            $sql = "INSERT INTO tbl_academicyear (academic_year) VALUES ('$academicYear')";
+            $result = mysqli_query($conn, $sql);
+
+            if ($result) {
+                // Set success state
+                $_POST['success'] = 1;
+            } else {
+                // Error message
+                echo "Error adding academic year: " . mysqli_error($conn);
+            }
         }
 
         // Close the database connection
