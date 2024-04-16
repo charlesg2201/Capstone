@@ -57,7 +57,7 @@
 
         if(isset($_GET['editid']))
             {
-                $sql ="UPDATE patient SET lrn_number='$_POST[lrn_number]',fname='$_POST[fname]',lname='$_POST[lname]',mname='$_POST[mname]',contact_number='$_POST[contact_number]',email='$_POST[email]',strand='$_POST[strand]',guardian_name='$_POST[guardian_name]',address='$_POST[address]',contact='$_POST[contact]',gender='$_POST[gender]',dob='$_POST[dateofbirth]',grade_level='$_POST[grade_level]',section='$_POST[section]',academic_year='$_POST[academic_year]' WHERE patientid='$_GET[editid]'";
+                $sql ="UPDATE patient SET lrn_number='$_POST[lrn_number]',fname='$_POST[fname]',lname='$_POST[lname]',mname='$_POST[mname]',contact_number='$_POST[contact_number]',email='$_POST[email]',strand='$_POST[strand]',guardian_name='$_POST[guardian_name]',address='$_POST[address]',contact='$_POST[contact]',gender='$_POST[gender]',dob='$_POST[dateofbirth]',grade_level='$_POST[grade_level]',section='$_POST[section]',academic_year='$_POST[academic_year]',studentid='$studentid' WHERE patientid='$_GET[editid]'";
                 if($qsql = mysqli_query($conn,$sql))
                 {
         ?>
@@ -211,9 +211,9 @@
         </div>
 
         <div class="form-group row">
-        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Middle Name</label>
+        <label class="col-sm-2 col-form-label"> Middle Name</label>
             <div class="col-sm-4">
-                <input type="text" class="form-control" name="mname" id="mname" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['lname']; } ?>" >
+                <input type="text" class="form-control" name="mname" id="mname"  value="<?php if(isset($_GET['editid'])) { echo $rsedit['mname']; } ?>" >
                 <span class="messages"></span>
             </div>
             <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Last Name</label>

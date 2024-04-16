@@ -168,9 +168,9 @@ if (isset($_GET['editid'])) {
             <span class="messages"></span>
         </div>        
 
-        <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Middle Name</label>
+        <label class="col-sm-2 col-form-label"> Middle Name</label>
         <div class="col-sm-4">
-            <input type="text" class="form-control" name="middlename" id="middlename" placeholder="" required=""  value="<?php if(isset($_GET['editid'])) { echo $rsedit['middlename']; } ?>" >
+            <input type="text" class="form-control" name="middlename" id="middlename" placeholder=""   value="<?php if(isset($_GET['editid'])) { echo $rsedit['middlename']; } ?>" >
             <span class="messages"></span>
         </div>
         
