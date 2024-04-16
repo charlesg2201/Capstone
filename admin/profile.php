@@ -137,7 +137,7 @@ if($_SESSION['user'] == 'tbl_admin_user'){
 
         <label class="col-sm-2 col-form-label">Middle Name</label>
         <div class="col-sm-4">
-        <input type="text" class="form-control" name="middlename" id="middlename" placeholder="" required="" value="<?php echo $middlename; ?>" readonly>
+        <input type="text" class="form-control" name="middlename" id="middlename" placeholder=""  value="<?php echo $middlename; ?>" readonly>
             <span class="messages"></span>
         </div>
     </div>
