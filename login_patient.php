@@ -95,7 +95,7 @@ else {?>
 <div class="card-block" >
 <div class="row m-b-20">
 <div class="col-md-12">
-<h5 class="text-center txt-primary" style="font-weight: bold; color: black;">Physical and Health Assessment</h5>
+<h5 class="text-center txt-primary" style="font-weight: bold; color: black;">Physical and Health Assessment System in Senior High School Clinic of City College of Tagaytay</h5>
 
 </div>
 </div>
