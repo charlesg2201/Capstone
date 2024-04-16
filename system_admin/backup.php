@@ -247,7 +247,7 @@ function validatePassword($inputPassword, $correctPassword) {
                     <h5><span class="outlined-text">Backup</span></h5>
                     <br>
                     <div class="form-group form-primary">
-                        <input type="password" name="bpassword" class="form-control" required="" placeholder="Password">
+                        <input type="password" name="bpassword" class="form-control" required="" placeholder="Input your account password">
                         <span class="form-bar"></span>
                     </div>
                    
@@ -267,8 +267,11 @@ function validatePassword($inputPassword, $correctPassword) {
         <span class="messages"></span>
     </div>
      <div class="form-group form-primary">
-                        <input type="password" name="rpassword" class="form-control" required="" placeholder="Password">
+                        <input type="password" name="rpassword" class="form-control" required="" placeholder="Input your account password">
                         <span class="form-bar"></span>
+                    </div>
+                    <div class="form-group form-primary">
+                        <p>Note: Once you upload you will be automatically logout.</p>
                     </div>
     <div class="form-group mt-2">
         <button type="submit" name="btn_submit" class="btn btn-primary">Upload</button>
