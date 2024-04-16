@@ -140,49 +140,60 @@ if(isset($_GET['id']))
                     <?php
                     if(isset($_POST["btn_changepass"])) {
     // Extracting values from the form
+    $old_password = $_POST['old_password'];
     $new_password = $_POST['newpassword'];
     $confirm_password = $_POST['confirm_password'];
 
+    $stmt = $conn->prepare("SELECT password FROM patient WHERE patientid = ?");
+    $stmt->bind_param("i", $_SESSION["patientid"]);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $old_password_db = $row['password'];
     // Check if new password and confirm password match
-    if ($new_password == $confirm_password) {
-        // Fetch the old password from the database
-        $stmt = $conn->prepare("SELECT password FROM patient WHERE patientid = ?");
-        $stmt->bind_param("i", $_SESSION["patientid"]);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $old_password = $row['password'];
+    if ($old_password == $old_password_db) {
+        if ($new_password == $confirm_password) {
+            // Fetch the old password from the database
+            $stmt = $conn->prepare("SELECT password FROM patient WHERE patientid = ?");
+            $stmt->bind_param("i", $_SESSION["patientid"]);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            $row = $result->fetch_assoc();
+            $old_password = $row['password'];
 
-        // Check if the new password is different from the old one
-        if ($new_password != $old_password) {
-            // Validate password strength
-            if (preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])[\w\W]{8,}$/', $new_password)) {
-                // Password meets complexity requirements
-                // Update password in the database (plaintext)
-                $update_query = "UPDATE patient SET password = '$new_password' WHERE patientid = '".$_SESSION["patientid"]."'";
-                if ($conn->query($update_query) === TRUE) {
-                    $_SESSION['success'] = "Password changed successfully!";
+            // Check if the new password is different from the old one
+            if ($new_password != $old_password) {
+                // Validate password strength
+                if (preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])[\w\W]{8,}$/', $new_password)) {
+                    // Password meets complexity requirements
+                    // Update password in the database (plaintext)
+                    $update_query = "UPDATE patient SET password = '$new_password' WHERE patientid = '".$_SESSION["patientid"]."'";
+                    if ($conn->query($update_query) === TRUE) {
+                        $_SESSION['success'] = "Password changed successfully!";
+                    } else {
+                        $_SESSION['error'] = "Error updating password: " . $conn->error;
+                    }
                 } else {
-                    $_SESSION['error'] = "Error updating password: " . $conn->error;
+                    // Password complexity requirements not met
+                    // Check for specific conditions and set separate error messages
+                    if (strlen($new_password) < 8) {
+                        $_SESSION['error'] = "Password should be at least 8 characters long.";
+                    }
+                    if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])[\w\W]*$/', $new_password)) {
+                        $_SESSION['error'] = "Password should contain at least one capital letter, one number, and one special character.";
+                    }
+                    if (preg_match('/\s/', $new_password)) {
+                        $_SESSION['error'] = "Spaces are not allowed in the password.";
+                    }
                 }
             } else {
-                // Password complexity requirements not met
-                // Check for specific conditions and set separate error messages
-                if (strlen($new_password) < 8) {
-                    $_SESSION['error'] = "Password should be at least 8 characters long.";
-                }
-                if (!preg_match('/^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z0-9\s])[\w\W]*$/', $new_password)) {
-                    $_SESSION['error'] = "Password should contain at least one capital letter, one number, and one special character.";
-                }
-                if (preg_match('/\s/', $new_password)) {
-                    $_SESSION['error'] = "Spaces are not allowed in the password.";
-                }
+                $_SESSION['error'] = "New password cannot be the same as the old password. Please try again.";
             }
         } else {
-            $_SESSION['error'] = "New password cannot be the same as the old password.";
+            $_SESSION['error'] = "New Password do not match. Please try again.";
         }
     } else {
-        $_SESSION['error'] = "Passwords do not match. Please try again.";
+        $_SESSION['error'] = "Old password is wrong. Please try again.";
     }
 }
 ?>
@@ -207,6 +218,13 @@ if($_SESSION['user'] == 'patient'){
                                     <form id="main" method="post" enctype="multipart/form-data">
                                         <br>
                                         <br>
+                                        <div class="form-group row">
+    <label class="col-sm-2 col-form-label">Old Password</label>
+    <div class="col-sm-3">
+        <input class="form-control" type="password" name="old_password" id="old_password" required/>
+        <span class="messages"></span>
+    </div>
+    </div>
     <div class="form-group row">
     <label class="col-sm-2 col-form-label">New Password</label>
     <div class="col-sm-3">
