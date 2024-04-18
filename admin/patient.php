@@ -311,12 +311,20 @@
                 </select>
             </div>
 </div>
-            <div class="form-group row">
-            <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Date of Birth</label>
-            <div class="col-sm-4">
-                <input class="form-control" type="date" name="dateofbirth" max="<?php echo date("m-d-Y"); ?>"
-                            id="dateofbirth" value="<?php echo $rsedit['dob']; ?>" required />
-            </div>
+<?php
+// Calculate the date 16 years ago from today
+$minDate = date('Y-m-d', strtotime('-16 years'));
+
+// Set the maximum date as 2007-12-31 (for those born in 2007 or earlier)
+$maxDate = '2007-12-31';
+?>
+
+<div class="form-group row">
+    <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Date of Birth</label>
+    <div class="col-sm-4">
+        <!-- Set the max attribute dynamically -->
+        <input class="form-control" type="date" name="dateofbirth" max="<?php echo $minDate; ?>" id="dateofbirth" value="<?php echo $rsedit['dob']; ?>" required />
+    </div>
             <label class="col-sm-2 col-form-label"><span style="color: red;"> *</span> Address</label>
                 <div class="col-sm-4">
                     <textarea name="address" id="address" class="form-control" required=""><?php if(isset($_GET['editid'])) { echo $rsedit['address']; } ?></textarea>
