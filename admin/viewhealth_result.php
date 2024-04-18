@@ -105,6 +105,17 @@
                                 Akle St., Kaybagal South, Tagaytay City <br>
                                 Telephone No: (046) 482-6840</strong>
                             </p>
+                            <script>
+    // Generate current date
+    var currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    // Update paragraph text with current date
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('currentDateParagraph').textContent = "As of today " + currentDate;
+    });
+</script>
+
+<!-- HTML paragraph element to display current date -->
+<p id="currentDateParagraph" style="display: block; font-size:30px; color: #0a4b78"></p>
                         </div>
 
 

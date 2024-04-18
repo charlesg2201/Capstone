@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <style>
+    
       .box-header {
   display: flex;
   align-items: center;
@@ -23,7 +24,7 @@
         }
         img{
             width: 10%;
-                max-height: 100px;
+                max-height: 200px;
                 
             }
 
@@ -55,6 +56,7 @@
                 display: block;
                 text-align: center;
                 font-size: 25px;
+                
             
             }
             .logo-container {
@@ -184,6 +186,7 @@ if(isset($_SESSION['lastname'])) {
 
 
 ?>
+<p class="print-only" id="date" style="display:block">Another paragraph here.</p>
 <p class="print-only" style="color: #0a4b78; padding-left: 80px; margin-top: 100px;"><strong>______________________________________</strong></p>
 <p class="print-only" style="color: #0a4b78;"><strong>Printed by: <?php echo $firstname . ' ' . $lastname; ?></strong></p>
 
@@ -201,14 +204,17 @@ if(isset($_SESSION['lastname'])) {
             "buttons": [{
                 extend: 'print',
                 customize: function(win) {
+                    var currentDate = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+                    $(win.document.body).prepend('<p style="font-size:40px;">As of today ' + currentDate + '</p>');  // Use prepend instead of append
                     $(win.document.body).prepend('<div class="logo-container"><img src="uploadImage/Logo/Seal_of_Tagaytay_City.svg.png" /><p class="text-between-logos"><strong>City of Tagaytay <br>CITY COLLEGE OF TAGAYTAY <br>Akle St., Kaybagal South, Tagaytay City <br>Telephone No: (046) 482-6840</strong></p><img src="uploadImage/Logo/shslogo.png" /></div>');
-                    $(win.document.body).append('<p class="print-only" style=" padding-left: 90px; margin-top: 100px;"><strong>______________________________________</strong></p>');
-                    $(win.document.body).append('<p class="print-only" style=" font-size: 20px;"><strong>Printed by: <?php echo $firstname . ' ' . $lastname; ?></strong></p>');
+                    $(win.document.body).append('<p class="print-only" style="padding-left: 90px; margin-top: 100px;"><strong>______________________________________</strong></p>');
+                    $(win.document.body).append('<p class="print-only" style="font-size: 20px;"><strong>Printed by: <?php echo $firstname . ' ' . $lastname; ?></strong></p>');
                 }
             }]
         });
     }
 });
+
 
     </script>
 </body>
